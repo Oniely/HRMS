@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Southland College</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <!-- Scripts -->
+    <script src="script/burger.js" defer></script>
+    <script src="script/dropdown.js" defer></script>
+    <!-- CDN's -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="side-bar" id="side-bar">
+        <div class="logo">
+            <h2>Logo</h2>
+        </div>
+
+        <div class="side-link">
+            <div class="profile" id="profile">
+                <div class="profile-img-container">
+                    <img src="images/1.svg" alt="icon" />
+                </div>
+                <div class="profile-info">
+                    <h1>Alejandro Evanhilo</h1>
+                    <h3>Administrator</h3>
+                </div>
+            </div>
+            <ul class="links">
+                <li>
+                    <a href="#"><img class="icon" src="images/2.svg" alt="icon" />
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <button class="dropdown-btn" href="#">
+                        <img class="icon" src="images/3.svg" alt="icon" />
+                        <span class="link-name">Staff</span>
+                        <img class="arrow" src="images/arrow.svg" alt="" />
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#">All Staff</a>
+                        <a href="#">Add Staff</a>
+                        <a href="#">Edit Staff</a>
+                        <a href="#">Status</a>
+                        <a href="#">About Staff</a>
+                    </div>
+                </li>
+                <li>
+                    <button class="dropdown-btn" href="#">
+                        <img class="icon" src="images/4.svg" alt="icon" />
+                        <span class="link-name">Faculty</span>
+                        <img class="arrow" src="images/arrow.svg" alt="" />
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#">Add Faculty</a>
+                        <a href="#">All Faculty</a>
+                        <a href="#">Edit Faculty</a>
+                        <a href="#">Status</a>
+                        <a href="#">About Faculty</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#"><img class="icon" src="images/5.svg" alt="icon" />
+                        <span class="link-name">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="left-nav">
+            <button id="burger" class="burger">
+                <img src="images/burger.svg" alt="" />
+            </button>
+            <div class="search-container">
+                <input type="text" placeholder="Search..." />
+                <button>
+                    <img src="images/search.svg" alt="" />
+                </button>
+            </div>
+        </div>
+        <div class="right-nav">
+            <button class="profile-btn">
+                <div class="profile-img-container">
+                    <img src="images/profile.svg" alt="" />
+                </div>
+                <span>Alejandro</span>
+                <div class="profile-menu">
+                    <a href="#">
+                        <div>
+                            <img src="images/profile.svg" alt="">
+                            <span>Profile</span>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div>
+                            <img src="images/5.svg" alt="">
+                            <span>Profile</span>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div>
+                            <img src="images/3.svg" alt="">
+                            <span>Help</span>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div>
+                            <img src="images/arrow.svg" alt="">
+                            <span>Logout</span>
+                        </div>
+                    </a>
+                </div>
+            </button>
+        </div>
+    </nav>
+    <!-- Dashboard -->
+    <section class="dashboard-container">
+        <div class="content-title">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="dasboard-boxes">
+
+            <div class="dashboard-row">
+
+                <div class="dashboard-box">
+
+                    <div class="box-content">
+                        <div class="image">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="description">
+                            <h4 class="description-title">Total Employee</h4>
+                            <div class="description-content">
+                                <h4>500</h4>
+                                <span>________________________________</span>
+                                <h4>20% Increase in 1 year</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-box">
+                    <div class="box-content">
+                        <div class="image">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="description">
+                            <h4 class="description-title">Total Staff</h4>
+                            <div class="description-content">
+                                <h4>500</h4>
+                                <span>________________________________</span>
+                                <h4>20% Increase in 1 year</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-row">
+                <div class="dashboard-box">
+                    <div class="box-content">
+                        <div class="image">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="description">
+                            <h4 class="description-title">Total Faculty</h4>
+                            <div class="description-content">
+                                <h4>500</h4>
+                                <span>________________________________</span>
+                                <h4>20% Increase in 1 year</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-box">
+                    <div class="box-content">
+                        <div class="image">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="description">
+                            <h4 class="description-title">Total Full-time</h4>
+                            <div class="description-content">
+                                <h4>500</h4>
+                                <span>________________________________</span>
+                                <h4>20% Increase in 1 year</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-out">
+            <div class="dashboard-content">
+                <table class="dashboard">
+                    <div class="dashboard-title">
+                        <h3>Faculty List</h3>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Class Name</th>
+                            <th>Subject</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>..</td>
+                            <td>Al Horfor Garote</td>
+                            <td>SECSA</td>
+                            <td>libraryman.com</td>
+                            <td>Computer LAB A</td>
+                            <td>Artificial Intelligence</td>
+                            <td>60%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
