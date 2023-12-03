@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic);
 
 *,
 *::after,
@@ -6,12 +6,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'Open Sans', Arial, sans-serif;
 }
 
 :root {
-    --primary-color: #f5f5f5;
+    --primary-color: #e6f1ff;
     --secondary-color: #101010;
+    --sidebar-open-width: 18rem;
+    --navbar-height: 4rem;
+    --sidebar-close-width: 5rem;
+    --percentage-height: 3px;
 }
 
 body {
@@ -51,6 +55,10 @@ button {
     border: none;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .container {
     width: 100%;
 }
@@ -60,21 +68,25 @@ button {
         max-width: 640px;
     }
 }
+
 @media screen and (max-width: 768px) {
     .container {
         max-width: 768px;
     }
 }
+
 @media screen and (max-width: 1024px) {
     .container {
         max-width: 1024px;
     }
 }
+
 @media screen and (max-width: 1280px) {
     .container {
         max-width: 1280px;
     }
 }
+
 @media screen and (max-width: 1536px) {
     .container {
         max-width: 1536px;
