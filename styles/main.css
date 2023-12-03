@@ -57,6 +57,60 @@ button {
 
 ::-webkit-scrollbar {
     display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.section {
+    width: 100%;
+    padding: 0 2rem;
+    padding-top: var(--navbar-height);
+    padding-bottom: 2rem;
+}
+
+.section-title {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.2rem 0;
+}
+
+.section-title h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.section-title .breadcrumbs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-title .breadcrumbs a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+
+    padding: 10px;
+    color: #303030;
+}
+
+.section-title .breadcrumbs> :not(:last-child) {
+    position: relative;
+    padding-right: 1.5rem;
+    color: #767a7f;
+}
+
+.section-title .breadcrumbs> :not(:last-child)::after {
+    content: ">";
+    position: absolute;
+    right: 2px;
+    font-size: 1.5rem;
 }
 
 .container {

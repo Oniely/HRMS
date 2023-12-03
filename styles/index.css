@@ -4,62 +4,11 @@ body {
     display: flex;
 }
 
-.dashboard {
-    width: 100%;
-    padding-top: var(--navbar-height);
-}
-
-.dashboard-title {
-    width: 100%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2.2rem 2rem;
-}
-
-.dashboard-title h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-.dashboard-title .tracking {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.dashboard-title .tracking a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 500;
-
-    padding: 10px;
-    color: #303030;
-}
-
-.dashboard-title .tracking> :not(:last-child) {
-    position: relative;
-    padding-right: 1.5rem;
-    color: #767a7f;
-}
-
-.dashboard-title .tracking> :not(:last-child)::after {
-    content: ">";
-    position: absolute;
-    right: 2px;
-    font-size: 1.5rem;
-}
-
 .dashboard-boxes {
     display: grid;
     grid-template-columns: repeat(2, minmax(400px, 1fr));
     grid-template-rows: repeat(2, minmax(200px, 1fr));
     gap: 2.5rem;
-    padding: 0 2rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -172,7 +121,7 @@ body {
 
 .dashboard-table {
     width: 100%;
-    padding: 2.5rem 2rem;
+    padding: 2.5rem 0;
 }
 
 .table-title {

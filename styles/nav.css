@@ -152,6 +152,10 @@
     color: #6d85db;
 }
 
+.link-name.active {
+    color: #6d85db;
+}
+
 .links a:hover,
 .links button:hover {
     background: rgba(0, 0, 0, 0.1);
@@ -261,7 +265,7 @@
     gap: 1.5rem;
 }
 
-.left-nav .search-container {
+.search-container {
     display: flex;
     justify-content: center;
     align-items: center;
