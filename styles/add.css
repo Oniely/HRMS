@@ -1,0 +1,85 @@
+@import url("./main.css");
+
+body {
+    display: flex;
+}
+
+.dashboard-container {
+    position: relative;
+    width: calc(100% - var(--sidebar-close-width));
+    min-height: calc(100% - var(--navbar-height));
+    margin-top: 4rem;
+    bottom: 0;
+    background-color: #e6f1ff;
+}
+
+.content-title {
+    padding-left: 20px;
+    font-size: 30px;
+
+}
+
+.content-title h3 {
+    color: #252525;
+    padding: 30px 0 10px 30px;
+}
+
+.form-container {
+    padding: 40px;
+    min-height: 100vh;
+}
+
+.form {
+    background-color: white;
+    min-height: 100vh;
+    border-radius: 30px;
+    padding: 30px;
+    width: 100%;
+}
+
+.form-title {
+    padding: 20px 0 10px 40px;
+    border-bottom: 1px solid #9d9d9d;
+}
+
+.form-title h5 {
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #303030;
+    padding-bottom: 20px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+    padding-top: 30px;
+}
+
+label {
+    position: relative;
+    width: 100%;
+    padding: 20px 20px;
+    font-weight: bold;
+}
+
+.form input {
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    font-size: 1rem;
+    border: 0;
+    border-bottom: 1px solid #9d9d9d;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+
+    .flex {
+        flex-direction: column;
+    }
+}
