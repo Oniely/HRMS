@@ -1,4 +1,4 @@
-@import url('../main.css');
+@import url('./main.css');
 
 body {
     display: flex;
@@ -202,7 +202,7 @@ body {
 
     text-align: start;
 
-    overflow-x: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 

@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-require_once "./includes/auth.php";
+require_once "includes/auth.php";
+include 'includes/connection.php';
 
 ?>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@ require_once "./includes/auth.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles/login.css">
 </head>
 
@@ -28,9 +29,9 @@ require_once "./includes/auth.php";
                 if (isset($_POST['submit'])) {
                     $username = $_POST['username'];
                     $passw = $_POST['password'];
-
+                    
                     if (loginAuth($username, $passw)) {
-                        header('location: index.html');
+                        header('location: index.php');
                     } else {
                         echo "<span class='err'>Credentials Incorrect.</span>";
                     }
