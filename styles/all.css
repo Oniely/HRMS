@@ -202,7 +202,7 @@ body {
 
     text-align: start;
 
-    overflow-x: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 

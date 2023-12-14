@@ -1,14 +1,22 @@
 <?php
 
 include('includes/connection.php');
-// session_start();
-// if (!isset($_SESSION['id']) || (trim ($_SESSION['id']) == '')) {
-//     header('location:../index.php');
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
+    exit();
+}
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
+
 $faculty_id = $_GET["id"];
 $query = mysqli_query($conn, "select * from `faculty_tbl` where faculty_id='$faculty_id'");
 $row = mysqli_fetch_array($query);
+
+$active = "edit faculty";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +84,7 @@ $row = mysqli_fetch_array($query);
                         <input type="text" placeholder="Civil Status" name="civilstatus" value="<?php echo $row['civil_status'] ?>">
                     </label>
                     <label>Tin ID
-                        <input type="number" placeholder="Tin ID" name="tinid" value="<?php echo $row['tin_id'] ?>">
+                        <input type="text" placeholder="Tin ID" name="tinid" value="<?php echo $row['tin_id'] ?>">
                     </label>
                 </div>
                 <div class="flex">
@@ -84,23 +92,23 @@ $row = mysqli_fetch_array($query);
                         <input type="text" placeholder="Citizenship" name="citizenship" value="<?php echo $row['citizenship'] ?>">
                     </label>
                     <label>SSS No.
-                        <input type="number" placeholder="SSS No." name="sssno" value="<?php echo $row['sss_no'] ?>">
+                        <input type="text" placeholder="SSS No." name="sssno" value="<?php echo $row['sss_no'] ?>">
                     </label>
                 </div>
                 <div class="flex">
                     <label>Pag-ibig No.
-                        <input type="number" placeholder="Pag-ibig No." name="pag-ibigno" value="<?php echo $row['pag-ibig_no'] ?>">
+                        <input type="text" placeholder="Pag-ibig No." name="pag-ibigno" value="<?php echo $row['pag-ibig_no'] ?>">
                     </label>
                     <label>PhilHealth No.
-                        <input type="number" placeholder="PhilHealth No." name="philhealthno" value="<?php echo $row['philhealth_no'] ?>">
+                        <input type="text" placeholder="PhilHealth No." name="philhealthno" value="<?php echo $row['philhealth_no'] ?>">
                     </label>
                 </div>
                 <div class="flex">
                     <label>Height
-                        <input type="decimal" placeholder="Height" name="height" value="<?php echo $row['height'] ?>">
+                        <input type="float" placeholder="Height" name="height" value="<?php echo $row['height'] ?>">
                     </label>
                     <label>Weight
-                        <input type="decimal" placeholder="Weight" name="weight" value="<?php echo $row['weight'] ?>">
+                        <input type="float" placeholder="Weight" name="weight" value="<?php echo $row['weight'] ?>">
                     </label>
                 </div>
                 <div class="flex">
@@ -116,13 +124,16 @@ $row = mysqli_fetch_array($query);
                         <input type="email" placeholder="Email Address" name="email" value="<?php echo $row['email'] ?>">
                     </label>
                     <label>Contact Number
-                        <input type="number" placeholder="Contact Number" name="contactnumber" value="<?php echo $row['contact_number'] ?>">
+                        <input type="text" placeholder="Contact Number" name="contactnumber" value="<?php echo $row['contact_number'] ?>">
                     </label>
                     <label>Family Background
                         <input type="number" placeholder="Family Background" name="familybackground" value="<?php echo $row['family_background'] ?>">
                     </label>
                 </div>
-                <input type="submit" name="update" value="Update Faculty">
+                <div class="btns">
+                    <input type="submit" name="add" value="Update">
+                    <a href="javascript:history.back()">Cancel</a>
+                </div>
             </form>
         </div>
     </section>

@@ -1,10 +1,17 @@
 <?php
-require 'includes/connection.php';
-// session_start();
-// if (!isset($_SESSION['id']) || (trim ($_SESSION['id']) == '')) {
-//     header('location:../index.php');
-//     exit();
-// }
+
+include('includes/connection.php');
+session_start();
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
+    exit();
+}
+    if (isset($_SESSION['admin_id'])) {
+        $admin_id = $_SESSION['admin_id'];
+        $admin_fname = $_SESSION['fname'];
+        $admin_lname = $_SESSION['lname'];
+    }
+
 if (isset($_POST['add'])) {
     $fname = $_POST['firstname'];
     $mname = $_POST['middlename'];
@@ -38,6 +45,8 @@ if (isset($_POST['add'])) {
     }
     $conn->close();
 }
+
+$active = "add staff";
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +74,7 @@ if (isset($_POST['add'])) {
     <!-- Dashboard -->
     <section class="dashboard-container">
         <div class="content-title">
-            <h3>Add Faculty</h3>
+            <h3>Add Staff</h3>
         </div>
         <div class="form-container">
             <form class="form" method="post">
@@ -105,7 +114,7 @@ if (isset($_POST['add'])) {
                         <input type="text" placeholder="Civil Status" name="civilstatus">
                     </label>
                     <label>
-                        <input type="number" placeholder="Tin ID" name="tinid">
+                        <input type="text" placeholder="Tin ID" name="tinid">
                     </label>
                 </div>
                 <div class="flex">
@@ -113,23 +122,23 @@ if (isset($_POST['add'])) {
                         <input type="text" placeholder="Citizenship" name="citizenship">
                     </label>
                     <label>
-                        <input type="number" placeholder="SSS No." name="sssno">
+                        <input type="text" placeholder="SSS No." name="sssno">
                     </label>
                 </div>
                 <div class="flex">
                     <label>
-                        <input type="number" placeholder="Pag-ibig No." name="pag-ibigno">
+                        <input type="text" placeholder="Pag-ibig No." name="pag-ibigno">
                     </label>
                     <label>
-                        <input type="number" placeholder="PhilHealth No." name="philhealthno">
+                        <input type="text" placeholder="PhilHealth No." name="philhealthno">
                     </label>
                 </div>
                 <div class="flex">
                     <label>
-                        <input type="decimal" placeholder="Height" name="height">
+                        <input type="float" placeholder="Height" name="height">
                     </label>
                     <label>
-                        <input type="decimal" placeholder="Weight" name="weight">
+                        <input type="float" placeholder="Weight" name="weight">
                     </label>
                 </div>
                 <div class="flex">
@@ -145,13 +154,16 @@ if (isset($_POST['add'])) {
                         <input type="email" placeholder="Email Address" name="email">
                     </label>
                     <label>
-                        <input type="number" placeholder="Contact Number" name="contactnumber">
+                        <input type="text" placeholder="Contact Number" name="contactnumber">
                     </label>
                     <label>
                         <input type="number" placeholder="Family Background" name="familybackground">
                     </label>
                 </div>
-                <input type="submit" name="add" value="Add Faculty">
+                <div class="btns">
+                    <input type="submit" name="add" value="Add">
+                    <a href="javascript:history.back()">Cancel</a>
+                </div>
             </form>
         </div>
     </section>

@@ -1,11 +1,18 @@
 <?php
 
 include('includes/connection.php');
-// session_start();
-// if (!isset($_SESSION['id']) || (trim ($_SESSION['id']) == '')) {
-//     header('location:../index.php');
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
+    exit();
+}
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
+
+$active = "dashboard"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,76 +132,30 @@ include('includes/connection.php');
                         <th>#</th>
                         <th>Name</th>
                         <th>Department</th>
+                        <th>Contact no.</th>
                         <th>Email</th>
-                        <th>Class Name</th>
-                        <th>Subject</th>
-                        <th>Rating</th>
+                        <th>Address</th>
+                        <th>Joining Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Al Horfor Garote</td>
-                        <td>SECSA</td>
-                        <td>libraryman.com</td>
-                        <td>Computer LAB A</td>
-                        <td>Artificial Intelligence</td>
-                        <td>60%</td>
-                    </tr>
+                    <?php
+                    $query = mysqli_query($conn, "select * from `faculty_tbl`");
+                    while ($row = mysqli_fetch_array($query)) {
+                    ?>
+                        <tr>
+                            <td><label><?php echo $row['faculty_id']; ?></label></td>
+                            <td><label><?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?></label></td>
+                            <td><label><?php echo $row['lname']; ?></label></td>
+                            <td><label><?php echo $row['contact_number']; ?></label></td>
+                            <td><label><?php echo $row['email']; ?></label></td>
+                            <td><label><?php echo $row['permanent_address']; ?></label></td>
+                            <td><label><?php echo $row['date_of_birth']; ?></label></td>
+
+                        </tr>
+                    <?php }
+                    ?>
+
                 </tbody>
             </table>
     </section>

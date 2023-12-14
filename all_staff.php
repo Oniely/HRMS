@@ -1,10 +1,18 @@
 <?php
+
 include('includes/connection.php');
-// session_start();
-// if (!isset($_SESSION['id']) || (trim ($_SESSION['id']) == '')) {
-//     header('location:../index.php');
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
+    exit();
+}
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
+
+$active = "all staff";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +114,9 @@ include('includes/connection.php');
                                     <td><label><?php echo $row['permanent_address']; ?></label></td>
                                     <td><label><?php echo $row['date_of_birth']; ?></label></td>
                                     <td class='action'>
+                                        <a href="about_staff.php?id=<?php echo $row['employee_id'] ?>">
+                                            View
+                                        </a>
                                         <a class='update-btn' href='edit_staff.php?id=<?php echo $row['employee_id']; ?>'>
                                             <div>
                                                 <img src="images/update-btn.svg" alt="update">

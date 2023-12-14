@@ -1,10 +1,18 @@
 <?php
+
 include('includes/connection.php');
-// session_start();
-// if (!isset($_SESSION['id']) || (trim ($_SESSION['id']) == '')) {
-//     header('location:../index.php');
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
+    exit();
+}
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
+
+$active = "all faculty";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,33 +101,36 @@ include('includes/connection.php');
                             <th>Action</th>
                         </thead>
                         <tbody>
-                        <?php
-                        $query = mysqli_query($conn, "select * from `faculty_tbl`");
-                        while ($row = mysqli_fetch_array($query)) {
+                            <?php
+                            $query = mysqli_query($conn, "select * from `faculty_tbl`");
+                            while ($row = mysqli_fetch_array($query)) {
                             ?>
-                            <tr>
-                                <td><label><?php echo $row['faculty_id']; ?></label></td>
-                                <td><label><?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?></label></td>
-                                <td><label><?php echo $row['lname']; ?></label></td>
-                                <td><label><?php echo $row['contact_number']; ?></label></td>
-                                <td><label><?php echo $row['email']; ?></label></td>
-                                <td><label><?php echo $row['permanent_address']; ?></label></td>
-                                <td><label><?php echo $row['date_of_birth']; ?></label></td>
-                                <td class='action'>
-                                    <a class='update-btn' href='edit_faculty.php?id=<?php echo $row['faculty_id']; ?>'>
-                                        <div>
-                                            <img src="images/update-btn.svg" alt="update">
-                                        </div>
-                                    </a>
-                                    <a class="delete-btn" href="functions/faculty/delete.php?id=<?php echo $row['faculty_id']; ?>">
-                                        <div>
-                                            <img src="images/delete-btn.svg" alt="update">
-                                        </div>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><label><?php echo $row['faculty_id']; ?></label></td>
+                                    <td><label><?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?></label></td>
+                                    <td><label><?php echo $row['lname']; ?></label></td>
+                                    <td><label><?php echo $row['contact_number']; ?></label></td>
+                                    <td><label><?php echo $row['email']; ?></label></td>
+                                    <td><label><?php echo $row['permanent_address']; ?></label></td>
+                                    <td><label><?php echo $row['date_of_birth']; ?></label></td>
+                                    <td class='action'>
+                                        <a href="about_staff.php?faculty_id=<?php echo $row['faculty_id'] ?>">
+                                            View
+                                        </a>
+                                        <a class='update-btn' href='edit_faculty.php?id=<?php echo $row['faculty_id']; ?>'>
+                                            <div>
+                                                <img src="images/update-btn.svg" alt="update">
+                                            </div>
+                                        </a>
+                                        <a class="delete-btn" href="functions/faculty/delete.php?id=<?php echo $row['faculty_id']; ?>">
+                                            <div>
+                                                <img src="images/delete-btn.svg" alt="update">
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
                             <?php }
-                        ?>
+                            ?>
 
                         </tbody>
                     </table>
