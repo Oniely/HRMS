@@ -1,6 +1,7 @@
 <aside class="side-bar" id="side-bar">
     <div class="logo" id="logo">
-        <img id="logo-img" src="images/sc-logo.svg" alt="sc-logo" />
+        <img id="sc-logo" src="images/sc-logo.svg" alt="sc-logo" />
+        <img id="sc" src="images/sc.svg" alt="sc-logo" />
     </div>
 
     <div class="side-link">
@@ -49,9 +50,9 @@
                 <div class="dropdown-menu">
                     <a class="<?= $active == "all staff" ? "active" : "" ?>" href="all_staff.php">All Staff</a>
                     <a class="<?= $active == "add staff" ? "active" : "" ?>" href="add_staff.php">Add Staff</a>
-                    <a class="<?= $active == "edit staff" ? "active" : "" ?>" href="javascript:void(0)" disabled>Edit Staff</a>
-                    <a class="<?= $active == "status staff" ? "active" : "" ?>" href="javascript:void(0)" disabled>Status</a>
-                    <a class="<?= $active == "about staff" ? "active" : "" ?>" href="javascript:void(0)" disabled>About Staff</a>
+                    <a class="<?= $active == "edit staff" ? "active" : "disabled" ?>" href="javascript:void(0)">Edit Staff</a>
+                    <a class="<?= $active == "status staff" ? "active" : "disabled" ?>" href="javascript:void(0)">Status</a>
+                    <a class="<?= $active == "about staff" ? "active" : "disabled" ?>" href="javascript:void(0)">About Staff</a>
                 </div>
             </li>
             <li>
@@ -72,9 +73,9 @@
                 <div class="dropdown-menu">
                     <a class="<?= $active == "all faculty" ? "active" : "" ?>" href="all_faculty.php">All Faculty</a>
                     <a class="<?= $active == "add faculty" ? "active" : "" ?>" href="add_faculty.php">Add Faculty</a>
-                    <a class="<?= $active == "edit faculty" ? "active" : "" ?>" href="javascript:void(0)" disabled>Edit Faculty</a>
-                    <a class="<?= $active == "status faculty" ? "active" : "" ?>" href="javascript:void(0)" disabled>Status</a>
-                    <a class="<?= $active == "about faculty" ? "active" : "" ?>" href="javascript:void(0)" disabled>About Faculty</a>
+                    <a class="<?= $active == "edit faculty" ? "active" : "disabled" ?>" href="javascript:void(0)" disabled>Edit Faculty</a>
+                    <a class="<?= $active == "status faculty" ? "active" : "disabled" ?>" href="javascript:void(0)" disabled>Status</a>
+                    <a class="<?= $active == "about faculty" ? "active" : "disabled" ?>" href="javascript:void(0)" disabled>About Faculty</a>
                 </div>
             </li>
             <li>
