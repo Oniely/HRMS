@@ -221,11 +221,20 @@ body {
     height: 100%;
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 
     border: 0;
     gap: 10px;
+}
+
+.table table .action .view-btn div {
+    background: #086099;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 8px;
 }
 
 .table table .action .update-btn div {

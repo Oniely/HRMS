@@ -114,8 +114,10 @@ $active = "all faculty";
                                     <td><label><?php echo $row['permanent_address']; ?></label></td>
                                     <td><label><?php echo $row['date_of_birth']; ?></label></td>
                                     <td class='action'>
-                                        <a href="about_staff.php?faculty_id=<?php echo $row['faculty_id'] ?>">
-                                            View
+                                        <a class="view-btn" href="about_staff.php?faculty_id=<?php echo $row['faculty_id'] ?>">
+                                            <div>
+                                                <img src="images/eyes.svg" alt="View">
+                                            </div>
                                         </a>
                                         <a class='update-btn' href='edit_faculty.php?id=<?php echo $row['faculty_id']; ?>'>
                                             <div>

@@ -33,13 +33,18 @@
     align-items: center;
 
     background: #4763ca;
-    transition: none;
+    transition: none !important;
 }
 
 .side-bar .logo img {
     padding: 5px;
     object-fit: cover;
-    transition: none;
+    transition: none !important;
+}
+
+.side-bar #sc {
+    display: none;
+    padding: 4rem;
 }
 
 .side-link {
@@ -191,8 +196,9 @@
     transition: 0.3s ease-in-out;
 }
 
-.dropdown-menu a:disabled {
+.dropdown-menu a.disabled {
     background: #eee;
+    cursor: not-allowed;
 }
 
 .dropdown-menu a:nth-child(1) {

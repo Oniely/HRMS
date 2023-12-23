@@ -1,4 +1,3 @@
-
 <nav class="navbar" id="navbar">
     <div class="left-nav">
         <button id="burger" class="burger">
