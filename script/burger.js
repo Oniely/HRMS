@@ -10,6 +10,17 @@ $("#burger").on("click", () => {
 	$("#sc").toggle();
 });
 
+$("#m-burger").on("click", () => {
+	$("#m-burger-btn").toggle();
+	$("#m-x-burger-btn").toggle();
+
+	$(".m-burger-menu").toggleClass("open");
+	$("body").toggleClass("no-overflow");
+
+	$(".dropdown-menu").removeClass("open");
+	$(".arrow").removeClass("open");
+});
+
 $(window).on("resize", () => {
 	if ($(window).width() <= 768) {
 		$("#side-bar, #navbar").removeClass("open");
