@@ -177,3 +177,9 @@ body {
     overflow-x: auto;
     text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 950px) {
+    body {
+        flex-direction: column;
+    }
+}
