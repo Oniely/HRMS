@@ -56,7 +56,6 @@ body {
     gap: 30px;
     padding-top: 30px;
 }
-
 label {
     position: relative;
     width: 100%;
@@ -111,7 +110,9 @@ label {
 .form .btns a:hover {
     background: #eee;
 }
-
+.educational-background h2  {
+    padding: 20px;
+}
 @media screen and (max-width: 768px) {
     .container {
         max-width: 768px;

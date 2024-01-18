@@ -38,7 +38,7 @@ include 'includes/connection.php';
                 }
 
                 ?>
-                <input type="text" name="username" id="username" placeholder="Username">
+                <input type="text" name="username" id="username" placeholder="Username" autofocus>
                 <input type="password" name="password" id="password" placeholder="Password">
 
                 <div class="remember"><input type="checkbox"> Remember me</div>

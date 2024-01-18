@@ -19,16 +19,22 @@ if (isset($_GET['id'])) {
     while ($row = mysqli_fetch_assoc($query_res)) {
         $fname = $row['fname'];
         $lname = $row['lname'];
+        $email = $row['email'];
+        $sex = $row['sex'];
         $contact = $row['contact_number'];
+        $permanent_address = $row['permanent_address'];
     }
-} elseif(isset($_GET['faculty_id'])) {
+} elseif (isset($_GET['faculty_id'])) {
     $id = $_GET['faculty_id'];
     $query = "SELECT * from faculty_tbl WHERE faculty_id = '$id'";
     $query_res = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($query_res)) {
         $fname = $row['fname'];
         $lname = $row['lname'];
+        $sex = $row['sex'];
         $contact = $row['contact_number'];
+        $email = $row['email'];
+        $permanent_address = $row['permanent_address'];
     }
 }
 $active = "about staff";
@@ -84,7 +90,7 @@ $active = "about staff";
                     </div>
                     <div class="bordered-info">
                         <h3>Gender</h3>
-                        <span>Male</span>
+                        <?php echo "<p>$sex</p>"; ?>
                     </div>
                     <div class="bordered-info">
                         <h3>Degree</h3>
@@ -111,11 +117,11 @@ $active = "about staff";
                     </div>
                     <div>
                         <h3>Email</h3>
-                        <p>bornex@example.com</p>
+                        <?php echo "<p>$email</p>"; ?>
                     </div>
                     <div>
                         <h3>Location</h3>
-                        <p>Kabankalan City</p>
+                        <?php echo "<p>$permanent_address</p>"; ?>
                     </div>
                 </div>
                 <div class="desc">
