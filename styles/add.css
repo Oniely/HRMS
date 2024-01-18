@@ -113,6 +113,13 @@ label {
 .educational-background h2  {
     padding: 20px;
 }
+
+@media screen and (max-width: 950px) {
+    body {
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .container {
         max-width: 768px;
