@@ -12,11 +12,15 @@ if (isset($_SESSION['admin_id'])) {
 
 require 'includes/connection.php';
 if (isset($_POST['add'])) {
+    $faculty_id = $_POST['faculty_id'];
     $fname = $_POST['firstname'];
     $mname = $_POST['middlename'];
     $lname = $_POST['lastname'];
     $birthdate = $_POST['birthdate'];
-    $birthplace = $_POST['birthplace'];
+    $pob_barangay = $_POST['pob_barangay'];
+    $pob_city = $_POST['pob_city'];
+    $pob_province = $_POST['pob_province'];
+    $birthplace = $pob_barangay . ", " . $pob_city . ", " . $pob_province;
     $sex = $_POST['sex'];
     $bloodtype = $_POST['bloodtype'];
     $civilstatus = $_POST['civilstatus'];
@@ -27,20 +31,61 @@ if (isset($_POST['add'])) {
     $philhealth_no = $_POST['philhealthno'];
     $height = $_POST['height'];
     $weight = $_POST['weight'];
-    $residential_address = $_POST['residentialaddress'];
-    $permanent_address = $_POST['permanentaddress'];
+    $res_barangay = $_POST['res_barangay'];
+    $res_city = $_POST['res_city'];
+    $res_province = $_POST['res_province'];
+    $residential_address = $res_barangay . ", " . $res_city . ", " . $res_province;
+    $per_barangay = $_POST['per_barangay'];
+    $per_city = $_POST['per_city'];
+    $per_province = $_POST['per_province'];
+    $permanent_address = $per_barangay . ", " . $per_city . ", " . $per_province;
     $email = $_POST['email'];
     $contact_number = $_POST['contactnumber'];
     $family_background = $_POST['familybackground'];
+    $father_fname = $_POST['father_fname'];
+    $father_mname = $_POST['father_mname'];
+    $father_lname = $_POST['father_lname'];
+    $father_name = $father_fname . ", " . $father_mname . ", " . $father_lname;
+    $mother_fname = $_POST['mother_fname'];
+    $mother_mname = $_POST['mother_mname'];
+    $mother_lname = $_POST['mother_lname'];
+    $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
 
-    $sql = "INSERT INTO faculty_tbl VALUES (default, '$fname', '$mname', '$lname', '$birthdate', '$birthplace', 
-    '$sex','$bloodtype','$civilstatus','$tin_id','$citizenship','$sss_no','$pagibig_no','$philhealth_no'
-    ,'$height','$weight','$residential_address','$permanent_address','$email','$contact_number','$family_background')";
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('ADDED')</script>";
-        echo "<script>window.open('all_faculty.php','_self')</script>";
+
+    $sql_check = "SELECT * FROM faculty_tbl WHERE faculty_id = '$faculty_id'";
+    $result = $conn->query($sql_check);
+
+    if ($result->num_rows > 0) {
+        echo '<script>alert("The employee ID already exists. Please use a different ID.")</script>';
     } else {
-        echo "Error " . $sql . "<br>" . $conn->error;
+        $sql = "INSERT INTO faculty_tbl VALUES ('$faculty_id', '$fname', '$mname', '$lname', '$birthdate', '$birthplace', 
+    '$sex','$bloodtype','$civilstatus','$tin_id','$citizenship','$sss_no','$pagibig_no','$philhealth_no'
+    ,'$height','$weight','$residential_address','$permanent_address','$email','$contact_number','$family_background','$father_name', '$mother_name')";
+        $notif = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+        $sql_insert = "INSERT INTO resedential_address_tbl (employee_id, barangay, municipality_city, province) VALUES
+    ('$faculty_id','$res_barangay', '$res_city', '$res_province')";
+        $notifRes = mysqli_query($conn, $sql_insert) or die(mysqli_error($conn));
+
+        $sql_insertper = "INSERT INTO permanent_address_tbl (employee_id, barangay, municipality_city, province) VALUES
+    ('$faculty_id','$per_barangay', '$per_city', '$per_province')";
+        $notifPer = mysqli_query($conn, $sql_insertper) or die(mysqli_error($conn));
+
+
+        $sql_insertpob = "INSERT INTO place_of_birth_tbl (employee_id, barangay, municipality_city, province) VALUES
+    ('$faculty_id','$pob_barangay', '$pob_city', '$pob_province')";
+        $notifPob = mysqli_query($conn, $sql_insertpob) or die(mysqli_error($conn));
+
+
+        $sql_insert_father = "INSERT INTO fathers_name (employee_id, fname, mname, lname) VALUES
+    ('$faculty_id','$father_fname', '$father_mname', '$father_lname')";
+        $notifFath = mysqli_query($conn, $sql_insert_father) or die(mysqli_error($conn));
+
+        $sql_insert_mother = "INSERT INTO mothers_name (employee_id, fname, mname, lname) VALUES
+    ('$faculty_id','$mother_fname', '$mother_mname', '$mother_lname')";
+        $notifMoth = mysqli_query($conn, $sql_insert_mother) or die(mysqli_error($conn));
+
+        echo '<script>alert("Employee Added")</script>';
     }
     $conn->close();
 }
@@ -81,83 +126,198 @@ $active = "add faculty";
                     <h5>Basic Information</h5>
                 </div>
                 <div class="flex">
-                    <label>
+                    <label>First name
                         <input type="text" placeholder="Firstname" name="firstname">
                     </label>
-                    <label>
+                    <label>Middle name
                         <input type="text" placeholder="Middlename" name="middlename">
                     </label>
-                    <label>
+                    <label>Last name
                         <input type="text" placeholder="Lastname" name="lastname">
                     </label>
                 </div>
                 <div class="flex">
-
-                    <label>
-                        <input type="date" placeholder="Date of Birth" name="birthdate">
+                    <label>Email Address
+                        <input type="email" placeholder="Email Address" name="email">
                     </label>
-                    <label>
-                        <input type="text" placeholder="Place of Birth" name="birthplace">
+                    <label>Faculty ID
+                        <input type="text" placeholder="faculty ID" name="faculty_id">
                     </label>
                 </div>
                 <div class="flex">
-                    <label>
+                    <label>Joining Date
+                        <input type="date" placeholder="Joining Date" name="birthdate">
+                    </label>
+                    <label>Sex
                         <input type="text" placeholder="Sex" name="sex">
                     </label>
-                    <label>
+                    <label>Bloodtype
                         <input type="text" placeholder="Blood Type" name="bloodtype">
                     </label>
                 </div>
                 <div class="flex">
-                    <label>
+                    <label>Civil status
                         <input type="text" placeholder="Civil Status" name="civilstatus">
                     </label>
-                    <label>
-                        <input type="text" placeholder="Tin ID" name="tinid">
+                    <label>Citizenship
+                        <input type="text" placeholder="Citizenship" name="citizenship">
                     </label>
                 </div>
                 <div class="flex">
+                    <label>Height
+                        <input type="float" placeholder="Height" name="height">
+                    </label>
+                    <label>Weight
+                        <input type="float" placeholder="Weight" name="weight">
+                    </label>
+                </div>
+                <label for="birthplace" id="birthplace">Place of Birth</label>
+                <div class="flex">
                     <label>
-                        <input type="text" placeholder="Citizenship" name="citizenship">
+                        <input type="text" placeholder="Barangay" name="pob_barangay">
                     </label>
                     <label>
+                        <input type="text" placeholder="City" name="pob_city">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Province" name="pob_province">
+                    </label>
+                </div>
+                <label for="residentialaddress" id="residentialaddress
+                ">Residential Address</label>
+                <div class="flex">
+                    <label>
+                        <input type="text" placeholder="Barangay" name="res_barangay">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="City" name="res_city">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Province" name="res_province">
+                    </label>
+                </div>
+                <label for="permanentaddress">Permanent Address</label>
+                <div class="flex">
+                    <label>
+                        <input type="text" placeholder="Barangay" name="per_barangay">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="City" name="per_city">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Province" name="per_province">
+                    </label>
+                </div>
+                <label for="residentialaddress" id="residentialaddress
+                ">Father's Name</label>
+                <div class="flex">
+                    <label>
+                        <input type="text" placeholder="Firstname" name="father_fname">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Middlename" name="father_mname">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Lastname" name="father_lname">
+                    </label>
+                </div>
+                <label for="residentialaddress" id="residentialaddress
+                ">Mother's Name</label>
+                <div class="flex">
+                    <label>
+                        <input type="text" placeholder="Firstname" name="mother_fname">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Middlename" name="mother_mname">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Lastname" name="mother_lname">
+                    </label>
+                </div>
+                <div class="flex">
+                    <label>Contact Number
+                        <input type="text" placeholder="Contact Number" name="contactnumber">
+                    </label>
+                    <label>Family Background
+                        <input type="number" placeholder="Family Background" name="familybackground">
+                    </label>
+                </div>
+                <div class="flex">
+                    <label>Tin ID
+                        <input type="text" placeholder="Tin ID" name="tinid">
+                    </label>
+                    <label>SSS no.
                         <input type="text" placeholder="SSS No." name="sssno">
                     </label>
                 </div>
                 <div class="flex">
-                    <label>
+                    <label>Pag-ibig no.
                         <input type="text" placeholder="Pag-ibig No." name="pag-ibigno">
                     </label>
-                    <label>
+                    <label>PhilHealth no.
                         <input type="text" placeholder="PhilHealth No." name="philhealthno">
                     </label>
                 </div>
-                <div class="flex">
-                    <label>
-                        <input type="float" placeholder="Height" name="height">
-                    </label>
-                    <label>
-                        <input type="float" placeholder="Weight" name="weight">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Residential Address" name="residentialaddress">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Permanent Address" name="permanentaddress">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>
-                        <input type="email" placeholder="Email Address" name="email">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Contact Number" name="contactnumber">
-                    </label>
-                    <label>
-                        <input type="number" placeholder="Family Background" name="familybackground">
-                    </label>
+
+                <div class="educational-background">
+                    <h2 class="text-title">Educational Background</h2>
+                    <label for="permanentaddress">Elementary Background</label>
+                    <div class="flex">
+                        <label>School name
+                            <input type="text" placeholder="School name" name="elem_school">
+                        </label>
+                        <label>Address
+                            <input type="text" placeholder="Addres" name="elem_address">
+                        </label>
+                        <label>Year Graduate
+                            <input type="date" placeholder="Province" name="elem_graduate">
+                        </label>
+                    </div>
+                    <label for="permanentaddress">Highschool Background</label>
+                    <div class="flex">
+                        <label>School name
+                            <input type="text" placeholder="School name" name="hs_school">
+                        </label>
+                        <label>Address
+                            <input type="text" placeholder="Addres" name="hs_address">
+                        </label>
+                        <label>Course
+                            <input type="date" placeholder="Province" name="hs_course">
+                        </label>
+                        <label>Year Graduate
+                            <input type="date" placeholder="Province" name="hs_graduate">
+                        </label>
+                    </div>
+                    <label for="permanentaddress">Vocational Background</label>
+                    <div class="flex">
+                        <label>School name
+                            <input type="text" placeholder="School name" name="v_school">
+                        </label>
+                        <label>Address
+                            <input type="text" placeholder="Addres" name="v_address">
+                        </label>
+                        <label>Course
+                            <input type="date" placeholder="Province" name="v_course">
+                        </label>
+                        <label>Year Graduate
+                            <input type="date" placeholder="Province" name="v_graduate">
+                        </label>
+                    </div>
+                    <label for="permanentaddress">College Background</label>
+                    <div class="flex">
+                        <label>School name
+                            <input type="text" placeholder="School name" name="college_school">
+                        </label>
+                        <label>Address
+                            <input type="text" placeholder="Addres" name="college_address">
+                        </label>
+                        <label>Course
+                            <input type="date" placeholder="Province" name="college_course">
+                        </label>
+                        <label>Year Graduate
+                            <input type="date" placeholder="Province" name="college_graduate">
+                        </label>
+                    </div>
                 </div>
                 <div class="btns">
                     <input type="submit" name="add" value="Add">
