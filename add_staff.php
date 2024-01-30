@@ -119,150 +119,31 @@ $active = "add staff";
         <div class="content-title">
             <h3>Add Staff</h3>
         </div>
-        <div class="form-container">
-            <form class="form" method="post">
-                <div class="form-title">
-                    <h5>Basic Information</h5>
+        <form class="f-container">
+            <div class="f-section">
+                <div class="f-title">
+                    <h1>Basic Information</h1>
+                    <hr>
                 </div>
-                <div class="flex">
-                    <label>First name
-                        <input type="text" placeholder="Firstname" name="firstname">
-                    </label>
-                    <label>Middle name
-                        <input type="text" placeholder="Middlename" name="middlename">
-                    </label>
-                    <label>Last name
-                        <input type="text" placeholder="Lastname" name="lastname">
-                    </label>
+                <div class="f-inputs">
+                    <input class="input" type="text" placeholder="First Name">
+                    <input class="input" type="text" placeholder="Last Name">
+                    <input class="input" type="email" placeholder="Email">
+                    <input class="input" type="text" placeholder="Joining Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                    <input class=" input" type="text" placeholder="Designation">
+                    <input class="input" type="text" placeholder="Department">
+                    <select class="input" name="gender" id="gender">
+                        <option value="" disabled selected style="color: #9d9d9d">Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <input class="input" type="number" placeholder="Mobile Number">
+                    <input class="input" type="text" placeholder="Address">
+                    <input class="input" type="text" placeholder="Blood Type">
                 </div>
-                <div class="flex">
-                    <label>Email Address
-                        <input type="email" placeholder="Email Address" name="email">
-                    </label>
-                    <label>Employee ID
-                        <input type="text" placeholder="Employee ID" name="employee_id">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Joining Date
-                        <input type="date" placeholder="Joining Date" name="birthdate">
-                    </label>
-                    <label>Sex
-                        <input type="text" placeholder="Sex" name="sex">
-                    </label>
-                    <label>Bloodtype
-                        <input type="text" placeholder="Blood Type" name="bloodtype">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Civil status
-                        <input type="text" placeholder="Civil Status" name="civilstatus">
-                    </label>
-                    <label>Citizenship
-                        <input type="text" placeholder="Citizenship" name="citizenship">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Height
-                        <input type="float" placeholder="Height" name="height">
-                    </label>
-                    <label>Weight
-                        <input type="float" placeholder="Weight" name="weight">
-                    </label>
-                </div>
-                <label for="birthplace" id="birthplace">Place of Birth</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Barangay" name="pob_barangay">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="City" name="pob_city">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Province" name="pob_province">
-                    </label>
-                </div>
-                <label for="residentialaddress" id="residentialaddress
-                ">Residential Address</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Barangay" name="res_barangay">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="City" name="res_city">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Province" name="res_province">
-                    </label>
-                </div>
-                <label for="permanentaddress">Permanent Address</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Barangay" name="per_barangay">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="City" name="per_city">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Province" name="per_province">
-                    </label>
-                </div>
-                <label for="residentialaddress" id="residentialaddress
-                ">Father's Name</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Firstname" name="father_fname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Middlename" name="father_mname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Lastname" name="father_lname">
-                    </label>
-                </div>
-                <label for="residentialaddress" id="residentialaddress
-                ">Mother's Name</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Firstname" name="mother_fname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Middlename" name="mother_mname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Lastname" name="mother_lname">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Contact Number
-                        <input type="text" placeholder="Contact Number" name="contactnumber">
-                    </label>
-                    <label>Family Background
-                        <input type="number" placeholder="Family Background" name="familybackground">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Tin ID
-                        <input type="text" placeholder="Tin ID" name="tinid">
-                    </label>
-                    <label>SSS no.
-                        <input type="text" placeholder="SSS No." name="sssno">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Pag-ibig no.
-                        <input type="text" placeholder="Pag-ibig No." name="pag-ibigno">
-                    </label>
-                    <label>PhilHealth no.
-                        <input type="text" placeholder="PhilHealth No." name="philhealthno">
-                    </label>
-                </div>
-                <div class="btns">
-                    <input type="submit" name="add" value="Add">
-                    <a href="javascript:history.back()">Cancel</a>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </section>
 </body>
 
