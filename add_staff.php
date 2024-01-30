@@ -107,6 +107,7 @@ $active = "add staff";
     <script src="script/dropdown.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -123,24 +124,33 @@ $active = "add staff";
             <div class="f-section">
                 <div class="f-title">
                     <h1>Basic Information</h1>
-                    <hr>
+                    <div class="hr"></div>
                 </div>
                 <div class="f-inputs">
-                    <input class="input" type="text" placeholder="First Name">
+                    <div class="relative z-0">
+                        <input type="text" id="fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">First Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" id="lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Last Name</label>
+                    </div>
+
+                    <!-- <input class="input" type="text" placeholder="First Name">
                     <input class="input" type="text" placeholder="Last Name">
                     <input class="input" type="email" placeholder="Email">
                     <input class="input" type="text" placeholder="Joining Date" onfocus="(this.type='date')" onblur="(this.type='text')">
                     <input class=" input" type="text" placeholder="Designation">
                     <input class="input" type="text" placeholder="Department">
                     <select class="input" name="gender" id="gender">
-                        <option value="" disabled selected style="color: #9d9d9d">Gender</option>
+                        <option value="" disabled selected hidden>Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                     </select>
                     <input class="input" type="number" placeholder="Mobile Number">
                     <input class="input" type="text" placeholder="Address">
-                    <input class="input" type="text" placeholder="Blood Type">
+                    <input class="input" type="text" placeholder="Blood Type"> -->
                 </div>
             </div>
         </form>
