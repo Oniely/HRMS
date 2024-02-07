@@ -56,6 +56,7 @@ body {
     gap: 30px;
     padding-top: 30px;
 }
+
 label {
     position: relative;
     width: 100%;
@@ -110,13 +111,46 @@ label {
 .form .btns a:hover {
     background: #eee;
 }
-.educational-background h2  {
+
+.educational-background h2 {
     padding: 20px;
+}
+
+.f-container {
+    background: white;
+    margin: 1rem 3rem;
+    padding: 2rem 2rem 3rem 2rem;
+    border-radius: 2rem;
+    margin-bottom: 3rem;
+}
+
+.f-title h1 {
+    padding: 0.5rem 1rem;
+    color: #303030;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.f-title .hr {
+    border-bottom: 1px solid #9d9d9d;
+}
+
+.f-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2.5rem;
+    row-gap: 2rem;
+
+    padding: 1.5rem 2rem 0;
 }
 
 @media screen and (max-width: 950px) {
     body {
         flex-direction: column;
+    }
+
+    .dashboard-container .content-title {
+        margin-top: -4rem;
     }
 }
 
