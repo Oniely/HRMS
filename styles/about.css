@@ -67,6 +67,7 @@ body {
 .profile-desc .profile-name h1 {
     font-size: 1.1rem;
 }
+
 .profile-desc .profile-name p {
     font-size: 0.9rem;
 }
@@ -183,5 +184,27 @@ body {
 @media screen and (max-width: 950px) {
     body {
         flex-direction: column;
+    }
+
+    .about-container {
+        flex-direction: column;
+    }
+
+    .about-profile {
+        width: 100%;
+        padding: 2.5rem 3rem;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .about .info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .about .info {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
