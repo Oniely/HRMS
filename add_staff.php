@@ -108,6 +108,7 @@ $active = "add staff";
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
+    <script src="script/form_autosave.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -376,5 +377,6 @@ $active = "add staff";
         </form>
     </section>
 </body>
+<?php include "includes/form_reset.php" ?>
 
 </html>

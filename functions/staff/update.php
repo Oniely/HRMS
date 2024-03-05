@@ -75,26 +75,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
-    // $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id='$employee_id'";
-    // if (!mysqli_query($conn, $sql)) {
-    //     echo "Error updating record in resedential_address_tbl: " . mysqli_error($conn);
-    // }
-    // $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$employee_id'";
-    // if (!mysqli_query($conn, $sql)) {
-    //     echo "Error updating record in permanent_address_tbl: " . mysqli_error($conn);
-    // }
-    // $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id=$employee_id";
-    // if (!mysqli_query($conn, $sql)) {
-    //     echo "Error updating record in employee_tbl: " . mysqli_error($conn);
-    // }
-    // $sql = "UPDATE fathers_name SET fname = '$father_fname', mname = '$father_mname', lname = '$father_lname' WHERE employee_id='$employee_id'";
-    // if (!mysqli_query($conn, $sql)) {
-    //     echo "Error updating record in fathers_name :" . mysqli_error($conn);
-    // }
-    // $sql = "UPDATE mothers_name SET fname = '$mother_fname', mname = '$mother_mname', lname = '$mother_lname' WHERE employee_id='$employee_id'";
-    // if (!mysqli_query($conn, $sql)) {
-    //     echo "Error updating record in fathers_name :" . mysqli_error($conn);
-    // }
+    $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id='$employee_id'";
+    if (!mysqli_query($conn, $sql)) {
+        echo "Error updating record in resedential_address_tbl: " . mysqli_error($conn);
+    }
+    $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$employee_id'";
+    if (!mysqli_query($conn, $sql)) {
+        echo "Error updating record in permanent_address_tbl: " . mysqli_error($conn);
+    }
+    $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id=$employee_id";
+    if (!mysqli_query($conn, $sql)) {
+        echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+    }
+    $sql = "UPDATE fathers_name SET fname = '$father_fname', mname = '$father_mname', lname = '$father_lname' WHERE employee_id='$employee_id'";
+    if (!mysqli_query($conn, $sql)) {
+        echo "Error updating record in fathers_name :" . mysqli_error($conn);
+    }
+    $sql = "UPDATE mothers_name SET fname = '$mother_fname', mname = '$mother_mname', lname = '$mother_lname' WHERE employee_id='$employee_id'";
+    if (!mysqli_query($conn, $sql)) {
+        echo "Error updating record in fathers_name :" . mysqli_error($conn);
+    }
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data Updated Successfully")</script>';
         echo '<script>window.open("../../all_staff.php","_self")</script>';

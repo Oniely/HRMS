@@ -11,7 +11,6 @@ if (isset($_SESSION['admin_id'])) {
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
 }
-
 if (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $query = "SELECT * from admin_tbl WHERE admin_id = '$admin_id'";
@@ -21,6 +20,31 @@ if (isset($_SESSION['admin_id'])) {
         $lname = $row['lname'];
         $position = $row['position'];
         $contact = $row['contact'];
+    }
+}
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = "SELECT * from faculty_tbl WHERE faculty_id = '$id'";
+    $query_res = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_assoc($query_res)) {
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $email = $row['email'];
+        $sex = $row['sex'];
+        $contact = $row['contact_number'];
+        $permanent_address = $row['permanent_address'];
+    }
+} elseif (isset($_GET['faculty_id'])) {
+    $id = $_GET['faculty_id'];
+    $query = "SELECT * from faculty_tbl WHERE faculty_id = '$id'";
+    $query_res = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_assoc($query_res)) {
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $sex = $row['sex'];
+        $contact = $row['contact_number'];
+        $email = $row['email'];
+        $permanent_address = $row['permanent_address'];
     }
 }
 
@@ -104,13 +128,28 @@ $active = "about faculty";
                         <?php echo "<p>$contact</p>"; ?>
                     </div>
                     <div>
+                    <?php 
+                     if(isset($_GET["admin_id"])) {
+                        echo "<h3>Position</h3>";
+                        echo "<p>$position</p>";
+                     } else {
+                        ?>
                         <h3>Email</h3>
-                        <p>bornex@example.com</p>
-                    </div>
-                    <div>
-                        <h3>Location</h3>
-                        <p>Kabankalan City</p>
-                    </div>
+                        <p><?= $email ?></p>
+                        <?php
+                     }
+                     ?>
+                     </div>
+                    <?php 
+                        if(isset($permanent_address)) {
+                            ?>
+                            <div>
+                                <h3>Location</h3>
+                                <p><?php echo $permanent_address ?></p>
+                            </div>
+                            <?php      
+                        }
+                    ?>
                 </div>
                 <div class="desc">
                     <!-- prettier-ignore -->

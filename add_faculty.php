@@ -45,7 +45,6 @@ if (isset($_POST['add'])) {
     $permanent_address = $per_barangay . ", " . $per_city . ", " . $per_province;
     $email = $_POST['email'];
     $contact_number = $_POST['contactnumber'];
-    $family_background = $_POST['familybackground'];
     $father_fname = $_POST['father_fname'];
     $father_mname = $_POST['father_mname'];
     $father_lname = $_POST['father_lname'];
@@ -62,7 +61,7 @@ if (isset($_POST['add'])) {
     if ($result->num_rows > 0) {
         echo '<script>alert("The employee ID already exists. Please use a different ID.")</script>';
     } else {
-        $sql = "INSERT INTO faculty_tbl VALUES ('$employee_id', '$fname', '$mname', '$lname', '$birthdate', '$birthplace', 
+        $sql = "INSERT INTO faculty_tbl VALUES ('$faculty_id', '$fname', '$mname', '$lname', '$birthdate', '$birthplace', 
         '$sex','$bloodtype','$civilstatus','$tin_id','$citizenship','$sss_no','$pagibig_no','$philhealth_no'
         ,'$height','$weight','$residential_address','$permanent_address','$email','$contact_number')";
         $notif = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -110,6 +109,7 @@ $active = "add faculty";
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
+    <script src="script/form_autosave.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -133,7 +133,7 @@ $active = "add faculty";
                 </div>
                 <div class="f-inputs px-0">
                        <div class="relative z-0">
-                        <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <input type="text" name="faculty_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                         <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Employee ID</label>
                     </div>
                     <div class="relative z-0">
@@ -307,5 +307,6 @@ $active = "add faculty";
         </form>
     </section>
 </body>
+<?php include "includes/form_reset.php" ?>
 
 </html>
