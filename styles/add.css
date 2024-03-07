@@ -73,16 +73,16 @@ label {
     border-bottom: 1px solid #9d9d9d;
 }
 
-.form .btns {
+.btns {
     display: flex;
     gap: 2rem;
 
-    padding: 0 1.2rem;
+    padding: 0;
     margin-top: 1.5rem;
 }
 
-.form .btns input,
-.form .btns a {
+.btns input,
+.btns a {
     width: 50%;
     display: flex;
     justify-content: center;
@@ -98,17 +98,17 @@ label {
     transition: 0.1s ease-in-out;
 }
 
-.form .btns input:hover {
+ .btns input:hover {
     background: #6d85db;
 }
 
-.form .btns a {
+ .btns a {
     background: #f7f7f7;
     color: black;
     border: 1px solid #000;
 }
 
-.form .btns a:hover {
+ .btns a:hover {
     background: #eee;
 }
 
@@ -161,5 +161,11 @@ label {
 
     .flex {
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .f-inputs {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

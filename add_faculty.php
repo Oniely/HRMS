@@ -31,6 +31,10 @@ if (isset($_POST['add'])) {
     $philhealth_no = $_POST['philhealthno'];
     $height = $_POST['height'];
     $weight = $_POST['weight'];
+    $pob_barangay = $_POST['pob_barangay'];
+    $pob_city = $_POST['pob_city'];
+    $pob_province = $_POST['pob_province'];
+    $birthplace = $pob_barangay . ", " . $pob_city . ", " . $pob_province;
     $res_barangay = $_POST['res_barangay'];
     $res_city = $_POST['res_city'];
     $res_province = $_POST['res_province'];
@@ -41,7 +45,6 @@ if (isset($_POST['add'])) {
     $permanent_address = $per_barangay . ", " . $per_city . ", " . $per_province;
     $email = $_POST['email'];
     $contact_number = $_POST['contactnumber'];
-    $family_background = $_POST['familybackground'];
     $father_fname = $_POST['father_fname'];
     $father_mname = $_POST['father_mname'];
     $father_lname = $_POST['father_lname'];
@@ -59,8 +62,8 @@ if (isset($_POST['add'])) {
         echo '<script>alert("The employee ID already exists. Please use a different ID.")</script>';
     } else {
         $sql = "INSERT INTO faculty_tbl VALUES ('$faculty_id', '$fname', '$mname', '$lname', '$birthdate', '$birthplace', 
-    '$sex','$bloodtype','$civilstatus','$tin_id','$citizenship','$sss_no','$pagibig_no','$philhealth_no'
-    ,'$height','$weight','$residential_address','$permanent_address','$email','$contact_number','$family_background','$father_name', '$mother_name')";
+        '$sex','$bloodtype','$civilstatus','$tin_id','$citizenship','$sss_no','$pagibig_no','$philhealth_no'
+        ,'$height','$weight','$residential_address','$permanent_address','$email','$contact_number')";
         $notif = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         $sql_insert = "INSERT INTO resedential_address_tbl (employee_id, barangay, municipality_city, province) VALUES
@@ -106,8 +109,10 @@ $active = "add faculty";
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
+    <script src="script/form_autosave.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -118,214 +123,190 @@ $active = "add faculty";
     <!-- Dashboard -->
     <section class="dashboard-container">
         <div class="content-title">
-            <h3>Add Faculty</h3>
+            <h3>Add Staff</h3>
         </div>
-        <div class="form-container">
-            <form class="form" method="post">
-                <div class="form-title">
-                    <h5>Basic Information</h5>
+        <form class="f-container" method="post">
+            <div class="f-section">
+                <div class="f-title">
+                    <h1>Personal Information</h1>
+                    <div class="hr"></div>
                 </div>
-                <div class="flex">
-                    <label>First name
-                        <input type="text" placeholder="Firstname" name="firstname">
-                    </label>
-                    <label>Middle name
-                        <input type="text" placeholder="Middlename" name="middlename">
-                    </label>
-                    <label>Last name
-                        <input type="text" placeholder="Lastname" name="lastname">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Email Address
-                        <input type="email" placeholder="Email Address" name="email">
-                    </label>
-                    <label>Faculty ID
-                        <input type="text" placeholder="faculty ID" name="faculty_id">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Joining Date
-                        <input type="date" placeholder="Joining Date" name="birthdate">
-                    </label>
-                    <label>Sex
-                        <input type="text" placeholder="Sex" name="sex">
-                    </label>
-                    <label>Bloodtype
-                        <input type="text" placeholder="Blood Type" name="bloodtype">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Civil status
-                        <input type="text" placeholder="Civil Status" name="civilstatus">
-                    </label>
-                    <label>Citizenship
-                        <input type="text" placeholder="Citizenship" name="citizenship">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Height
-                        <input type="float" placeholder="Height" name="height">
-                    </label>
-                    <label>Weight
-                        <input type="float" placeholder="Weight" name="weight">
-                    </label>
-                </div>
-                <label for="birthplace" id="birthplace">Place of Birth</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Barangay" name="pob_barangay">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="City" name="pob_city">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Province" name="pob_province">
-                    </label>
-                </div>
-                <label for="residentialaddress" id="residentialaddress
-                ">Residential Address</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Barangay" name="res_barangay">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="City" name="res_city">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Province" name="res_province">
-                    </label>
-                </div>
-                <label for="permanentaddress">Permanent Address</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Barangay" name="per_barangay">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="City" name="per_city">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Province" name="per_province">
-                    </label>
-                </div>
-                <label for="residentialaddress" id="residentialaddress
-                ">Father's Name</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Firstname" name="father_fname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Middlename" name="father_mname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Lastname" name="father_lname">
-                    </label>
-                </div>
-                <label for="residentialaddress" id="residentialaddress
-                ">Mother's Name</label>
-                <div class="flex">
-                    <label>
-                        <input type="text" placeholder="Firstname" name="mother_fname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Middlename" name="mother_mname">
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Lastname" name="mother_lname">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Contact Number
-                        <input type="text" placeholder="Contact Number" name="contactnumber">
-                    </label>
-                    <label>Family Background
-                        <input type="number" placeholder="Family Background" name="familybackground">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Tin ID
-                        <input type="text" placeholder="Tin ID" name="tinid">
-                    </label>
-                    <label>SSS no.
-                        <input type="text" placeholder="SSS No." name="sssno">
-                    </label>
-                </div>
-                <div class="flex">
-                    <label>Pag-ibig no.
-                        <input type="text" placeholder="Pag-ibig No." name="pag-ibigno">
-                    </label>
-                    <label>PhilHealth no.
-                        <input type="text" placeholder="PhilHealth No." name="philhealthno">
-                    </label>
-                </div>
+                <div class="f-inputs px-0">
+                       <div class="relative z-0">
+                        <input type="text" name="faculty_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Employee ID</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="firstname" id="fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">First Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="middlename" id="mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Middle Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="lastname" id="lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Last Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="email" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Email Address</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="number" name="contactnumber" id="phoneNum" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="phoneNum" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone Number</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="date" name="birthdate" id="dob" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="dob" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Date of Birth</label>
+                    </div>
+                    <div class="relative z-0">
+                        <select type="text"name="sex" id="sex" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
+                            <option value="" selected hidden>Select sex</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <label for="sex" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Sex</label>
+                    </div>
+                    <div class="relative z-0">
+                        <select type="text" name="civilstatus" id="civilStatus" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
+                            <option value="" selected hidden>Select status</option>
+                            <option value="Male">Single</option>
+                            <option value="Female">Married</option>
+                            <option value="Seperated">Seperated</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
+                        <label for="civilStatus" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Civil Status</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="citizenship" id="citizenship" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="citizenship" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Citizenship</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="height" id="height" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="height" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Height (cm)</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="weight" id="weight" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="weight" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Weight (kg)</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="bloodtype" id="bloodtype" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="bloodtype" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Bloodtype</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="tinid" id="tinid" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="tinid" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Tin ID</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="sssno" id="sssno" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="sssno" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">SSS No.</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="philhealthno" id="philhealthno" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="philhealthno" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">PhilHealth No.</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="pag-ibigno" id="pag-ibigno" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="pag-ibigno" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Pag-ibig No.</label>
+                    </div>
+                    <div class="text-xl col-span-2">
+                        Place of Birth :
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="pob_barangay" id="pob_brgy" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="pob_brgy" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Barangay</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="pob_city" id="pob_city" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="pob_city" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">City</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="pob_province" id="pob_province" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="pob_province" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Province</label>
+                    </div>
 
-                <div class="educational-background">
-                    <h2 class="text-title">Educational Background</h2>
-                    <label for="permanentaddress">Elementary Background</label>
-                    <div class="flex">
-                        <label>School name
-                            <input type="text" placeholder="School name" name="elem_school">
-                        </label>
-                        <label>Address
-                            <input type="text" placeholder="Addres" name="elem_address">
-                        </label>
-                        <label>Year Graduate
-                            <input type="date" placeholder="Province" name="elem_graduate">
-                        </label>
+                    <div class="text-xl col-span-2">
+                        Residential Address :
                     </div>
-                    <label for="permanentaddress">Highschool Background</label>
-                    <div class="flex">
-                        <label>School name
-                            <input type="text" placeholder="School name" name="hs_school">
-                        </label>
-                        <label>Address
-                            <input type="text" placeholder="Addres" name="hs_address">
-                        </label>
-                        <label>Course
-                            <input type="date" placeholder="Province" name="hs_course">
-                        </label>
-                        <label>Year Graduate
-                            <input type="date" placeholder="Province" name="hs_graduate">
-                        </label>
+                    <div class="relative z-0">
+                        <input type="text" name="res_barangay" id="res_brgy" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="res_brgy" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Street/Barangay</label>
                     </div>
-                    <label for="permanentaddress">Vocational Background</label>
-                    <div class="flex">
-                        <label>School name
-                            <input type="text" placeholder="School name" name="v_school">
-                        </label>
-                        <label>Address
-                            <input type="text" placeholder="Addres" name="v_address">
-                        </label>
-                        <label>Course
-                            <input type="date" placeholder="Province" name="v_course">
-                        </label>
-                        <label>Year Graduate
-                            <input type="date" placeholder="Province" name="v_graduate">
-                        </label>
+                    <div class="relative z-0">
+                        <input type="text" name="res_city" id="res_city" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="res_city" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Municipality/City</label>
                     </div>
-                    <label for="permanentaddress">College Background</label>
-                    <div class="flex">
-                        <label>School name
-                            <input type="text" placeholder="School name" name="college_school">
-                        </label>
-                        <label>Address
-                            <input type="text" placeholder="Addres" name="college_address">
-                        </label>
-                        <label>Course
-                            <input type="date" placeholder="Province" name="college_course">
-                        </label>
-                        <label>Year Graduate
-                            <input type="date" placeholder="Province" name="college_graduate">
-                        </label>
+                    <div class="relative z-0">
+                        <input type="text" name="res_province" id="res_province" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="res_province" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Province</label>
+                    </div>
+
+                    <div class="text-xl col-span-2">
+                        Permanent Address :
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="per_barangay" id="perma_brgy" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="perma_brgy" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Street/Barangay</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="per_city" id="perma_city" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="perma_city" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Municipality/City</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="per_province" id="perma_province" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="perma_province" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Province</label>
                     </div>
                 </div>
-                <div class="btns">
+            </div>
+            <div class="f-section mt-20">
+                <div class="f-title">
+                    <h1>Family Background</h1>
+                    <div class="hr"></div>
+                </div>
+                <div class="f-inputs px-0">
+                    <div class="text-xl col-span-2">
+                        Spouse Information :
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="father_fname" id="spouse_fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Father's First Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="father_mname" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Father's Middle Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="father_lname" id="spouse_lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Father's Last Name</label>
+                    </div>
+                </div>
+                <hr class="mb-2 mt-14 border-t border-[#9d9d9d]">
+
+                <div class="f-inputs px-0">
+                <div class="relative z-0">
+                        <input type="text" name="mother_fname" id="spouse_fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Mother's First Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="mother_mname" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Mother's Middle Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="mother_lname" id="spouse_lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Mother's Last Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
                     <input type="submit" name="add" value="Add">
                     <a href="javascript:history.back()">Cancel</a>
                 </div>
-            </form>
-        </div>
+        </form>
     </section>
 </body>
+<?php include "includes/form_reset.php" ?>
 
 </html>

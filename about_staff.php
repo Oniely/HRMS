@@ -11,7 +11,6 @@ if (isset($_SESSION['admin_id'])) {
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
 }
-
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * from employee_tbl WHERE employee_id = '$id'";

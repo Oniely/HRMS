@@ -29,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
         $permanent_address = $row['permanent_address'];
         $email = $row['email'];
         $contact_number = $row['contact_number'];
-        $family_background = $row['family_background'];
     } else {
         echo "No data found for the provided employee ID.";
     }
@@ -63,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $permanent_address = $per_barangay . ", " . $per_city . ", " . $per_province;
     $email = $_POST['email'];
     $contact_number = $_POST['contactnumber'];
-    $family_background = $_POST['familybackground'];
     $father_fname = $_POST['father_fname'];
     $father_mname = $_POST['father_mname'];
     $father_lname = $_POST['father_lname'];
@@ -73,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $mother_lname = $_POST['mother_lname'];
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
 
-    $sql = "UPDATE employee_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pag-ibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', family_background='$family_background', father_name = '$father_name', mother_name='$mother_name' WHERE employee_id='$employee_id'";
+    $sql = "UPDATE employee_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pag-ibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number' WHERE employee_id='$employee_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
@@ -99,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     }
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data Updated Successfully")</script>';
-        echo '<script>window.open("../../all_faculty.php","_self")</script>';
+        echo '<script>window.open("../../all_staff.php","_self")</script>';
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
