@@ -54,6 +54,25 @@ if (isset($_POST['add'])) {
     $mother_mname = $_POST['mother_mname'];
     $mother_lname = $_POST['mother_lname'];
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
+    $elem_school = $_POST['elem_school'];
+    $elem_address = $_POST['elem_address'];
+    $elem_year = $_POST['elem_year'];
+    $hs_school = $_POST['hs_school'];
+    $hs_address = $_POST['hs_address'];
+    $hs_course = $_POST['hs_course'];
+    $hs_year = $_POST['hs_year'];
+    $vocational_school = $_POST['vocational_school'];
+    $vocational_address = $_POST['vocational_address'];
+    $vocational_course = $_POST['vocational_course'];
+    $vocational_year = $_POST['vocational_year'];
+    $college_school = $_POST['college_school'];
+    $college_address = $_POST['college_address'];
+    $college_course = $_POST['college_course'];
+    $college_year = $_POST['college_year'];
+    $graduate_school = $_POST['graduate_school'];
+    $graduate_address = $_POST['graduate_address'];
+    $graduate_course = $_POST['graduate_course'];
+    $graduate_year = $_POST['graduate_year'];
 
 
     $sql_check = "SELECT * FROM employee_tbl WHERE employee_id = '$employee_id'";
@@ -86,6 +105,26 @@ if (isset($_POST['add'])) {
         $sql_insert_mother = "INSERT INTO mothers_name (employee_id, fname, mname, lname) VALUES
     ('$employee_id','$mother_fname', '$mother_mname', '$mother_lname')";
         $notifMoth = mysqli_query($conn, $sql_insert_mother) or die(mysqli_error($conn));
+
+        $sql_insert_elem = "INSERT INTO elementary_tbl (employee_id, schoolname, address, year_graduate) VALUES
+    ('$employee_id','$elem_school', '$elem_address', '$elem_year')";
+        $notifelem = mysqli_query($conn, $sql_insert_elem) or die(mysqli_error($conn));
+
+        $sql_insert_hs = "INSERT INTO highschool_tbl (employee_id, schoolname, address, course, year_graduate) VALUES
+    ('$employee_id','$hs_school', '$hs_address','$hs_course', '$hs_year')";
+        $notifhs = mysqli_query($conn, $sql_insert_hs) or die(mysqli_error($conn));
+
+        $sql_insert_vocational = "INSERT INTO vocational_tbl (employee_id, schoolname, address, course, year_graduate) VALUES
+    ('$employee_id','$vocational_school', '$vocational_address','$vocational_course', '$vocational_year')";
+        $notifevocational = mysqli_query($conn, $sql_insert_vocational) or die(mysqli_error($conn));
+
+        $sql_insert_college = "INSERT INTO college_tbl (employee_id, schoolname, address, course, year_graduate) VALUES
+    ('$employee_id','$college_school', '$college_address', '$college_course', '$college_year')";
+        $notifecollege = mysqli_query($conn, $sql_insert_college) or die(mysqli_error($conn));
+
+        $sql_insert_graduate = "INSERT INTO graduate_tbl (employee_id, schoolname, address, course, year_graduate) VALUES
+    ('$employee_id','$graduate_school', '$graduate_address', '$graduate_course', '$graduate_year')";
+        $notifegraduate = mysqli_query($conn, $sql_insert_graduate) or die(mysqli_error($conn));
 
         echo '<script>alert("Employee Added")</script>';
     }
@@ -124,14 +163,14 @@ $active = "add staff";
         <div class="content-title">
             <h3>Add Staff</h3>
         </div>
-        <form class="f-container" method="post">
+        <form class="f-container" method="post" enctype="multipart/form-data">
             <div class="f-section">
                 <div class="f-title">
                     <h1>Personal Information</h1>
                     <div class="hr"></div>
                 </div>
                 <div class="f-inputs px-0">
-                       <div class="relative z-0">
+                    <div class="relative z-0">
                         <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                         <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Employee ID</label>
                     </div>
@@ -160,7 +199,7 @@ $active = "add staff";
                         <label for="dob" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Date of Birth</label>
                     </div>
                     <div class="relative z-0">
-                        <select type="text"name="sex" id="sex" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
+                        <select type="text" name="sex" id="sex" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
                             <option value="" selected hidden>Select sex</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -210,6 +249,10 @@ $active = "add staff";
                     <div class="relative z-0">
                         <input type="text" name="pag-ibigno" id="pag-ibigno" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                         <label for="pag-ibigno" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Pag-ibig No.</label>
+                    </div>
+                    <div class="relative z-0 -mt-1">
+                        <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
+                        <label for="photo" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Photo</label>
                     </div>
                     <div class="text-xl col-span-2">
                         Place of Birth :
@@ -319,7 +362,7 @@ $active = "add staff";
                     </div>
                 </div>
                 <div class="f-inputs px-0">
-                <div class="text-xl col-span-2">
+                    <div class="text-xl col-span-2">
                         High School :
                     </div>
                     <div class="relative z-0">
@@ -331,12 +374,16 @@ $active = "add staff";
                         <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                     </div>
                     <div class="relative z-0">
+                        <input type="text" name="hs_course" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
+                    </div>
+                    <div class="relative z-0">
                         <input type="date" name="hs_year" id="spouse_lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                         <label for="spouse_lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year Graduate</label>
                     </div>
                 </div>
                 <div class="f-inputs px-0">
-                <div class="text-xl col-span-2">
+                    <div class="text-xl col-span-2">
                         Vocational :
                     </div>
                     <div class="relative z-0">
@@ -348,12 +395,16 @@ $active = "add staff";
                         <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                     </div>
                     <div class="relative z-0">
+                        <input type="text" name="vocational_course" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
+                    </div>
+                    <div class="relative z-0">
                         <input type="date" name="vocational_year" id="spouse_lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                         <label for="spouse_lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year Graduate</label>
-                    </div>  
+                    </div>
                 </div>
                 <div class="f-inputs px-0">
-                <div class="text-xl col-span-2">
+                    <div class="text-xl col-span-2">
                         College :
                     </div>
                     <div class="relative z-0">
@@ -365,15 +416,40 @@ $active = "add staff";
                         <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                     </div>
                     <div class="relative z-0">
+                        <input type="text" name="college_course" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
+                    </div>
+                    <div class="relative z-0">
                         <input type="date" name="college_year" id="spouse_lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year Graduate</label>
+                    </div>
+                </div>
+                <div class="f-inputs px-0">
+                    <div class="text-xl col-span-2">
+                        Graduate School :
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="graduate_school" id="spouse_fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">School Name</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="graduate_address" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="text" name="graduate_course" id="spouse_mname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                        <label for="spouse_mname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
+                    </div>
+                    <div class="relative z-0">
+                        <input type="date" name="graduate_year" id="spouse_lname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                         <label for="spouse_lname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year Graduate</label>
                     </div>
                 </div>
             </div>
             <div class="btns">
-                    <input type="submit" name="add" value="Add">
-                    <a href="javascript:history.back()">Cancel</a>
-                </div>
+                <input type="submit" name="add" value="Add">
+                <a href="javascript:history.back()">Cancel</a>
+            </div>
         </form>
     </section>
 </body>
