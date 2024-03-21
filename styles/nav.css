@@ -5,7 +5,6 @@
 .side-bar {
     width: var(--sidebar-close-width);
     height: 100vh;
-    border-right: 1px solid black;
 
     display: flex;
     justify-content: start;
@@ -14,8 +13,11 @@
     position: sticky;
     top: 0;
     left: 0;
+    bottom: 0;
 
-    transition: 0.3s linear;
+    z-index: 1000;
+
+    transition: 0.3s ease-in-out;
 
     background: white;
     overflow: hidden;
@@ -26,7 +28,6 @@
     width: 100%;
     min-height: var(--navbar-height);
     max-height: var(--navbar-height);
-    border-bottom: 1px solid black;
 
     display: flex;
     justify-content: center;
@@ -42,9 +43,22 @@
     transition: none !important;
 }
 
+.side-bar.open .logo {
+    transition: none !important;
+}
+
 .side-bar #sc {
     display: none;
-    padding: 4rem;
+    transition: none !important;
+}
+
+.side-bar.open #sc {
+    transition: none !important;
+}
+
+.side-bar.open .logo img {
+    padding: 3rem;
+    transition: none !important;
 }
 
 .side-link {
@@ -246,7 +260,6 @@
     width: calc(100% - var(--sidebar-close-width));
     min-height: var(--navbar-height);
     max-height: var(--navbar-height);
-    border-bottom: 1px solid black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -558,13 +571,13 @@
         color: #303030;
     }
 
-    .m-burger-menu .m-breadcrumbs> :not(:last-child) {
+    .m-burger-menu .m-breadcrumbs > :not(:last-child) {
         position: relative;
         padding-right: 1.5rem;
         color: #767a7f;
     }
 
-    .m-burger-menu .m-breadcrumbs> :not(:last-child)::after {
+    .m-burger-menu .m-breadcrumbs > :not(:last-child)::after {
         content: ">";
         position: absolute;
         right: 2px;
