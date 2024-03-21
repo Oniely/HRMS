@@ -91,7 +91,7 @@ $active = "all faculty";
                 <div class="table">
                     <table>
                         <thead>
-                            <th>#</th>
+                            <th>Employee Id</th>
                             <th>Name</th>
                             <th>Designation</th>
                             <th>Contact Number</th>

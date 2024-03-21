@@ -16,17 +16,13 @@ body {
 .content-title {
     padding-left: 20px;
     font-size: 30px;
-
 }
 
 .content-title h3 {
+    font-size: 2rem;
     color: #252525;
     padding: 30px 0 10px 30px;
-}
-
-.form-container {
-    padding: 40px;
-    min-height: 100vh;
+    font-weight: 700;
 }
 
 .form {
@@ -98,17 +94,17 @@ label {
     transition: 0.1s ease-in-out;
 }
 
- .btns input:hover {
+.btns input:hover {
     background: #6d85db;
 }
 
- .btns a {
+.btns a {
     background: #f7f7f7;
     color: black;
     border: 1px solid #000;
 }
 
- .btns a:hover {
+.btns a:hover {
     background: #eee;
 }
 
@@ -149,8 +145,22 @@ label {
         flex-direction: column;
     }
 
-    .dashboard-container .content-title {
-        margin-top: -4rem;
+    .dashboard-container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .f-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .f-inputs {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .f-inputs>div {
+        grid-column: 1 / -1;
     }
 }
 
@@ -164,8 +174,8 @@ label {
     }
 }
 
-@media screen and (max-width: 640px) {
+/* @media screen and (max-width: 640px) {
     .f-inputs {
         grid-template-columns: repeat(1, 1fr);
     }
-}
+} */
