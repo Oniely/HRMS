@@ -20,6 +20,7 @@ if (isset($_GET['id'])) {
         $sex = $row['sex'];
         $contact = $row['contact_number'];
         $permanent_address = $row['permanent_address'];
+        $photo_path = $row['photo_path'];
     }
 }
 
@@ -66,7 +67,7 @@ $active = "about staff";
     <div class="about-container">
         <div class="about-profile">
             <div class="prof-img">
-                <img src="images/prof.svg" alt="profile">
+                <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
             </div>
             <div class="profile-desc">
                 <div class="profile-name">

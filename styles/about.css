@@ -1,312 +1,312 @@
 @import url('./main.css');
 
 body {
-  display: flex;
+    display: flex;
 }
 
 :root {
-  --profile-height: 30rem;
+    --profile-height: 30rem;
 }
 
 .about-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  gap: 1.5rem;
+    gap: 1.5rem;
 }
 
 .about-profile {
-  width: 25rem;
-  height: var(--profile-height);
+    width: 25rem;
+    height: var(--profile-height);
 
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 
-  background: #fff;
-  border-radius: 15px;
+    background: #fff;
+    border-radius: 15px;
 
-  padding: 1rem 2rem 1.5rem 2rem;
-  flex-shrink: 0;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 1rem 2rem 1.5rem 2rem;
+    flex-shrink: 0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .prof-img {
-  width: 130px;
-  height: 130px;
+    width: 130px;
+    height: 130px;
 }
 
 .prof-img img {
-  max-width: 100%;
+    max-width: 100%;
 
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 
-  border-radius: 10px
+    border-radius: 10px
 }
 
 .profile-desc {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }
 
 .profile-desc .profile-name {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  padding: 1rem 0;
+    padding: 1rem 0;
 }
 
 .profile-desc .profile-name h1 {
-  font-size: 1.1rem;
+    font-size: 1.1rem;
 }
 
 .profile-desc .profile-name p {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 .profile-desc .profile-info {
-  padding: 1.1rem 2.1rem;
-  border-top: 1px solid #9d9d9d;
-  border-bottom: 1px solid #9d9d9d;
+    padding: 1.1rem 2.1rem;
+    border-top: 1px solid #9d9d9d;
+    border-bottom: 1px solid #9d9d9d;
 }
 
 .profile-desc .profile-info p {
-  white-space: pre-line;
-  text-justify: justify;
-  text-align: start;
-  font-size: 15px;
+    white-space: pre-line;
+    text-justify: justify;
+    text-align: start;
+    font-size: 15px;
 }
 
 .bordered-info {
-  width: 100%;
-  border-bottom: 1px solid #9d9d9d;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #9d9d9d;
+    display: flex;
+    justify-content: space-between;
 
-  padding: 0.3rem 0;
-  padding-right: 9rem;
+    padding: 0.3rem 0;
+    padding-right: 9rem;
 }
 
 .bordered-info h3 {
-  font-size: 1rem;
-  font-weight: 500;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .bordered-info span {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 .about {
-  width: 100%;
-  height: var(--profile-height);
-  background: #fff;
+    width: 100%;
+    height: var(--profile-height);
+    background: #fff;
 
-  border-radius: 15px;
+    border-radius: 15px;
 
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  padding: 1.5rem 3rem;
-  gap: 1.5rem;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem 3rem;
+    gap: 1.5rem;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
 }
 
 .about-me {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .about-me button {
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
 
-  padding: 0.6rem 1.6rem;
-  background: #6d85db;
-  color: white;
+    padding: 0.6rem 1.6rem;
+    background: #6d85db;
+    color: white;
 
-  border-radius: 50px;
+    border-radius: 50px;
 }
 
 .about-me .status-btn {
-  background: white;
-  color: #101010;
-  border: 1px solid #101010;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
+    background: white;
+    color: #101010;
+    border: 1px solid #101010;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
 }
 
 .about-me .status-btn:hover {
-  background: #6d85db;
-  color: white;
-  border-color: white;
+    background: #6d85db;
+    color: white;
+    border-color: white;
 }
 
 .about-me .status-btn:active {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 
 .about .info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-overflow: ellipsis;
-  gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-overflow: ellipsis;
+    gap: 10px;
 }
 
 .about .info div {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
 }
 
 .about .info div h3 {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
 .about .info div p {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #9d9d9d;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #9d9d9d;
 }
 
 .about .desc {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  padding: 1.5rem 0;
+    padding: 1.5rem 0;
 
-  border-top: 1px solid #9d9d9d;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
+    border-top: 1px solid #9d9d9d;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .about .desc p {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  white-space: pre-line;
-  text-align: justify;
-  text-justify: inter-word;
+    white-space: pre-line;
+    text-align: justify;
+    text-justify: inter-word;
 
-  font-size: 1rem;
-  line-height: 1.6;
-  overflow-x: auto;
-  text-overflow: ellipsis;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    text-overflow: ellipsis;
 }
 
 .status-modal {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(3px);
-  z-index: 100;
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(3px);
+    z-index: 100;
 
-  display: none;
-  align-items: center;
-  justify-content: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .status-modal.open {
-  display: flex;
+    display: flex;
 }
 
 .status-modal form {
-  width: 30rem;
-  height: 9rem;
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem 2rem;
+    width: 30rem;
+    height: 9rem;
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
 
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  gap: 1rem;
-  border: 1px solid #101010;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid #101010;
 }
 
 .status-modal form .status-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex: 1 1 0;
 }
 
 .status-modal form .status-header .close-btn {
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  background: white;
-  color: black;
-  cursor: pointer;
-  border-radius: 5px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    background: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .status-modal form .status-header .close-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .status-modal form .status-input {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex: 1 1 0;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1 1 0;
+    width: 100%;
 }
 
 .status-modal form .status-input select {
-  width: 100%;
-  height: 2.8rem;
-  padding: 0.6rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  border: none;
-  border: 0.5px solid #101010;
-  outline: none;
+    width: 100%;
+    height: 2.8rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    border: 0.5px solid #101010;
+    outline: none;
 }
 
 .status-modal form .status-input button {
-  border-radius: 0.5rem;
-  cursor: pointer;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 950px) {
-  body {
-    flex-direction: column;
-  }
+    body {
+        flex-direction: column;
+    }
 
-  .about-container {
-    flex-direction: column;
-  }
+    .about-container {
+        flex-direction: column;
+    }
 
-  .about-profile {
-    width: 100%;
-    padding: 2.5rem 3rem;
-  }
+    .about-profile {
+        width: 100%;
+        padding: 2.5rem 3rem;
+    }
 }
 
 @media screen and (max-width: 680px) {
-  .about .info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .about .info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (max-width: 440px) {
-  .about .info {
-    grid-template-columns: repeat(1, 1fr);
-  }
+    .about .info {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

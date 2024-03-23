@@ -1,6 +1,10 @@
-
 <?php
+
+global $conn;
+
 include('../../includes/connection.php');
+include './includes/query.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $employee_id = $_GET['employee_id'];
 
@@ -29,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
         $permanent_address = $row['permanent_address'];
         $email = $row['email'];
         $contact_number = $row['contact_number'];
+        $photo_path = saveProfileImage() || null;
     } else {
         echo "No data found for the provided employee ID.";
     }
