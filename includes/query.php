@@ -109,13 +109,16 @@ function saveProfileImage($photoFieldName = 'photo', $targetDirectory = 'images/
                 // Return the full path of the saved image.
                 return $targetFilePath;
             } else {
-                return "There was an error uploading the file.";
+                // "There was an error uploading the file."
+                return false;
             }
         } else {
-            return "The file is not an image.";
+            //  "The file is not an image."
+            return false;
         }
     } else {
-        return "No file was uploaded or an upload error occurred.";
+        //  "No file was uploaded or an upload error occurred."
+        return false;
     }
 }
 

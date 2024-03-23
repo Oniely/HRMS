@@ -163,7 +163,7 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
     $conn->close();
 }
 
-$active = "add staff";
+$active = "add faculty";
 ?>
 
 <!DOCTYPE html>

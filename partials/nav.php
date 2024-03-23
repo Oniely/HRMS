@@ -1,3 +1,10 @@
+<?php
+
+global $admin_fname;
+global $active;
+
+?>
+
 <nav class="navbar" id="navbar">
     <div class="left-nav">
         <button id="burger" class="burger">
@@ -15,7 +22,7 @@
             <div class="profile-img-container">
                 <img src="images/profile.svg" alt=""/>
             </div>
-            <span> <?= @$admin_fname ?> </span>
+            <span> <?= @$admin_fname ?? "ADMIN" ?> </span>
             <!-- Popup Menu -->
             <div class="profile-menu">
                 <a href="about_faculty.php?admin_id ">
@@ -49,7 +56,9 @@
 
 <header class="m-header">
     <div class="m-logo">
-        <img src="images/sc-logo.svg" alt="sc-logo">
+        <a href="/hr">
+            <img src="images/sc-logo.svg" alt="sc-logo">
+        </a>
     </div>
     <button id="m-burger" class="m-burger">
         <img id="m-burger-btn" src="images/burger.svg" alt="burger">
@@ -58,7 +67,7 @@
 
     <div class="m-burger-menu">
         <div class="m-breadcrumbs">
-            <a href="#">Home</a>
+            <a href="/hr">Home</a>
             <a href="#">Dashboard</a>
         </div>
 
@@ -129,8 +138,9 @@
                     <a class="<?= $active == "add staff" ? "active" : "" ?>" href=" add_staff.php">Add Staff</a>
                     <a class="<?= $active == "edit staff" ? "active" : "disabled" ?>" href=" javascript:void(0)"
                        disabled>Edit Staff</a>
-                    <a class="<?= $active == "status staff" ? "active" : "disabled" ?>" href=" javascript:void(0)"
-                       disabled>Status</a>
+                    <!--                    <a class="-->
+                    <?php //= $active == "status staff" ? "active" : "disabled" ?><!--" href=" javascript:void(0)"-->
+                    <!--                       disabled>Status</a>-->
                     <a class="<?= $active == "about staff" ? "active" : "disabled" ?>" href=" javascript:void(0)"
                        disabled>About Staff</a>
                 </div>
@@ -160,8 +170,9 @@
                     <a class="<?= $active == "add faculty" ? "active" : "" ?>" href="add_faculty.php">Add Faculty</a>
                     <a class="<?= $active == "edit faculty" ? "active" : "disabled" ?>" href=" javascript:void(0)"
                        disabled>Edit Faculty</a>
-                    <a class="<?= $active == "status faculty" ? "active" : "disabled" ?>" href=" javascript:void(0)"
-                       disabled>Status</a>
+                    <!--                    <a class="-->
+                    <?php //= $active == "status faculty" ? "active" : "disabled" ?><!--" href=" javascript:void(0)"-->
+                    <!--                       disabled>Status</a>-->
                     <a class="<?= $active == "about faculty" ? "active" : "disabled" ?>" href=" javascript:void(0)"
                        disabled>About Faculty</a>
                 </div>

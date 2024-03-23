@@ -30,6 +30,7 @@ if (isset($_GET['faculty_id'])) {
     $query_res = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($query_res)) {
         $fname = $row['fname'];
+        $mname = $row['mname'];
         $lname = $row['lname'];
         $sex = $row['sex'];
         $contact = $row['contact_number'];
@@ -80,11 +81,11 @@ $active = "about faculty";
     <div class="about-container">
         <div class="about-profile">
             <div class="prof-img">
-                <img src="images/prof.svg" alt="profile">
+                <img src="images/profile-black.svg" alt="profile">
             </div>
             <div class="profile-desc">
                 <div class="profile-name">
-                    <?php echo "<h1>$fname $lname</h1>"; ?>
+                    <?php echo "<h1>$fname $mname $lname</h1>"; ?>
                     <?php echo "<p>$position</p>"; ?>
                 </div>
                 <hr>

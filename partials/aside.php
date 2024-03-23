@@ -1,7 +1,11 @@
 <aside class="side-bar" id="side-bar">
     <div class="logo" id="logo">
-        <img id="sc-logo" src="images/sc-logo.svg" alt="sc-logo"/>
-        <img id="sc" src="images/sc.svg" alt="sc-logo"/>
+        <a href="/hr">
+            <img id="sc-logo" src="images/sc-logo.svg" alt="sc-logo"/>
+        </a>
+        <a href="/hr">
+            <img id="sc" src="images/sc.svg" alt="sc-logo"/>
+        </a>
     </div>
 
     <div class="side-link">
