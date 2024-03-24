@@ -319,7 +319,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="tin_id" id="tin_id"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="tin_id"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Tin
                         ID</label>
@@ -327,7 +327,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="sss_no" id="sss_no"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="sss_no"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">SSS
                         No.</label>
@@ -335,7 +335,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="philhealth_no" id="philhealth_no"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="philhealth_no"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">PhilHealth
                         No.</label>
@@ -343,7 +343,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="pagibig_no" id="pagibig_no"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="pagibig_no"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Pag-ibig
                         No.</label>
@@ -351,7 +351,7 @@ $active = "add staff";
                 <div class="relative z-0 -mt-1">
                     <input type="file" name="photo" id="photo"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="photo"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Photo</label>
                 </div>
@@ -503,7 +503,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="elem_school" id="elem_school"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="elem_school"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">School
                         Name</label>
@@ -511,14 +511,14 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="elem_address" id="elem_address"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="elem_address"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                 </div>
                 <div class="relative z-0">
                     <input type="date" name="elem_year" id="elem_year"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="elem_year"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year
                         Graduate</label>
@@ -531,7 +531,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="hs_school" id="hs_school"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="hs_school"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">School
                         Name</label>
@@ -539,21 +539,21 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="hs_address" id="hs_address"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="hs_address"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                 </div>
                 <div class="relative z-0">
                     <input type="text" name="hs_course" id="hs_course"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="hs_course"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Course</label>
                 </div>
                 <div class="relative z-0">
                     <input type="date" name="hs_year" id="hs_year"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="hs_year"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year
                         Graduate</label>
@@ -566,7 +566,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="vocational_school" id="vocational_school"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="vocational_school"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">School
                         Name</label>
@@ -574,21 +574,21 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="vocational_address" id="vocational_address"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="vocational_address"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                 </div>
                 <div class="relative z-0">
                     <input type="text" name="vocational_course" id="vocational_course"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="vocational_course"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Course</label>
                 </div>
                 <div class="relative z-0">
                     <input type="date" name="vocational_year" id="vocational_year"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="vocational_year"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year
                         Graduate</label>
@@ -601,7 +601,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="college_school" id="college_school"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="college_school"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">School
                         Name</label>
@@ -609,21 +609,21 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="college_address" id="college_address"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="college_address"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                 </div>
                 <div class="relative z-0">
                     <input type="text" name="college_course" id="college_course"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="college_course"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Course</label>
                 </div>
                 <div class="relative z-0">
                     <input type="date" name="college_year" id="college_year"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="college_year"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year
                         Graduate</label>
@@ -636,7 +636,7 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="graduate_school" id="graduate_school"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="graduate_school"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">School
                         Name</label>
@@ -644,21 +644,21 @@ $active = "add staff";
                 <div class="relative z-0">
                     <input type="text" name="graduate_address" id="graduate_address"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="graduate_address"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Address</label>
                 </div>
                 <div class="relative z-0">
                     <input type="text" name="graduate_course" id="graduate_course"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="graduate_course"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Course</label>
                 </div>
                 <div class="relative z-0">
                     <input type="date" name="graduate_year" id="graduate_course"
                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer"
-                           placeholder=" " required/>
+                           placeholder=" " />
                     <label for="graduate_course"
                            class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Year
                         Graduate</label>

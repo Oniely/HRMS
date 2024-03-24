@@ -1,3 +1,16 @@
+<?php 
+include('./includes/connection.php');
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:../login.php');
+    exit();
+}
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
+
+?>
 <aside class="side-bar" id="side-bar">
     <div class="logo" id="logo">
         <a href="/hr">

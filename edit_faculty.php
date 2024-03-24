@@ -4,15 +4,7 @@ global $conn;
 
 include('includes/connection.php');
 session_start();
-if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
-    header('location:login.php');
-    exit();
-}
-if (isset($_SESSION['admin_id'])) {
-    $admin_id = $_SESSION['admin_id'];
-    $admin_fname = $_SESSION['fname'];
-    $admin_lname = $_SESSION['lname'];
-}
+
 
 $faculty_id = $_GET["id"];
 

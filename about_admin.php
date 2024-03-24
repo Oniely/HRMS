@@ -24,47 +24,6 @@ if (isset($_SESSION['admin_id'])) {
         $contact = $row['contact'];
     }
 }
-
-if (isset($_GET['faculty_id'])) {
-    $id = $_GET['faculty_id'];
-    $query = "SELECT * FROM faculty_tbl
-              LEFT JOIN elementary_tbl ON faculty_tbl.faculty_id = elementary_tbl.employee_id
-              LEFT JOIN highschool_tbl ON faculty_tbl.faculty_id = highschool_tbl.employee_id
-              LEFT JOIN vocational_tbl ON faculty_tbl.faculty_id = vocational_tbl.employee_id
-              LEFT JOIN college_tbl ON faculty_tbl.faculty_id = college_tbl.employee_id
-              WHERE faculty_tbl.faculty_id = $id";
-    $query_res = mysqli_query($conn, $query);
-    if ($row = mysqli_fetch_assoc($query_res)) {
-        $fname = $row['fname'];
-        $lname = $row['lname'];
-        $email = $row['email'];
-        $sex = $row['sex'];
-        $contact = $row['contact_number'];
-        $permanent_address = $row['permanent_address'];
-        $status= $row['status'];
-        $photo_path = $row['photo_path'];
-        if (empty($photo_path)) {
-            $photo_path = "images/profile-black.svg"; // Change this to your default image path
-        }
-        $elem_school = $row['schoolname'];
-        $elem_year = $row['year_graduate'];
-
-        $highschool_school = $row['schoolname'];
-        $highschool_year = $row['year_graduate'];
-
-        $vocational_school = $row['schoolname'];
-        $vocational_course = $row['course'];
-        $vocational_year = $row['year_graduate'];
-
-        $college_school = $row['schoolname'];
-        $college_course = $row['course'];
-        $college_year = $row['year_graduate'];
-    } else {
-        // Handle case where employee with given ID is not found
-        echo "Employee not found!";
-    }
-}
-
 $active = "about faculty";
 ?>
 <!DOCTYPE html>
@@ -124,19 +83,7 @@ $active = "about faculty";
                 </div>
                 <hr>
                 <div class="profile-info">
-                    <p>Hello I am <?php echo "$fname $lname" ?>, a Faculty in Southland College.</p>
-                </div>
-                <div class="bordered-info">
-                    <h3>Gender</h3>
-                    <span><?php echo "$sex" ?></span>
-                </div>
-                <div class="bordered-info">
-                    <h3>Degree</h3>
-                    <span><?php echo "$college_course" ?></span>
-                </div>
-                <div class="bordered-info">
-                    <h3>Status</h3>
-                    <span><?php echo "$status" ?></span>
+                    <p>Hello I am <?php echo "$fname $lname" ?></p>
                 </div>
             </div>
         </div>
@@ -205,16 +152,6 @@ $active = "about faculty";
                     <?php
                 }
                 ?>
-            </div>
-            <div class="desc">
-                <!-- prettier-ignore -->
-                <h3>Educational Attainment</h3>
-                    <p>
-                        <strong>Elementary:</strong> <?php echo "$elem_school - $elem_year"; ?> <br>
-                        <strong>High School:</strong> <?php echo "$highschool_school - $highschool_year"; ?> <br>
-                        <strong>Vocational:</strong> <?php echo "$vocational_school - $vocational_course - $vocational_year"; ?> <br>
-                        <strong>College:</strong> <?php echo "$college_school - $college_course - $college_year"; ?>
-                    </p>
             </div>
         </div>
     </div>

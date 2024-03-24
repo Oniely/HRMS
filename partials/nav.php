@@ -3,6 +3,16 @@
 global $admin_fname;
 global $active;
 
+include('./includes/connection.php');
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:./login.php');
+    exit();
+}
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
 ?>
 
 <nav class="navbar" id="navbar">
@@ -25,13 +35,13 @@ global $active;
             <span> <?= @$admin_fname ?? "ADMIN" ?> </span>
             <!-- Popup Menu -->
             <div class="profile-menu">
-                <a href="about_faculty.php?admin_id ">
+                <a href="about_admin.php?admin_id ">
                     <div>
                         <img src="images/1.svg" alt=""/>
                         <span>Profile</span>
                     </div>
                 </a>
-                <a href="about_faculty.php?admin_id">
+                <a href="about_admin.php?admin_id">
                     <div>
                         <img src="images/5.svg" alt=""/>
                         <span>Setting</span>
