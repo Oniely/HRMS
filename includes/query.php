@@ -74,6 +74,8 @@ function updateDataFaculty($conn, $id, $newData)
     return $result;
 }
 
+
+
 function redirect($url)
 {
     echo '<script type="text/javascript">';
