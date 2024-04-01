@@ -11,12 +11,12 @@ if ($conn->connect_error) {
     die('Error' . $conn->connect_error);
 }
 
-$sql = "SELECT COUNT(*) AS count FROM leave_tbl WHERE application_status = 'PENDING'";
+$sql = "SELECT COUNT(*) AS count FROM leave_tbl";
 $result = $conn->query($sql);
 
 if ($result) {
     $row = $result->fetch_assoc();
-    echo $row['count'];
+    $notificationCount = $row['count'];
 } else {
     echo "Error: " . $conn->error;
 }

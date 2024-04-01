@@ -1,5 +1,7 @@
 <?php
 
+
+include('connection.php');
 // the $data takes in an object array: 
 /* $data = [
   'column_name1' => 'column_value1',
@@ -43,22 +45,6 @@ function updateDatae($conn, $table, $id, $newData)
 
     return $result;
 }
-
-function updateDataEmployee($conn, $id, $newData)
-{
-    $setClause = "";
-    foreach ($newData as $column => $value) {
-        $setClause .= "$column = '$value', ";
-    }
-
-    $setClause = rtrim($setClause, ', ');
-    $sql = "UPDATE employee_tbl SET $setClause WHERE employee_id = $id";
-
-    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-    return $result;
-}
-
 function updateDataFaculty($conn, $id, $newData)
 {
     $setClause = "";
@@ -124,7 +110,7 @@ function saveProfileImage($photoFieldName = 'photo', $targetDirectory = 'images/
 
 function resetForm()
 {
-    ?>
+?>
     <script>
         const formInputs = document.querySelectorAll('input, select');
 
@@ -132,5 +118,5 @@ function resetForm()
             localStorage.removeItem(input.id)
         })
     </script>
-    <?php
+<?php
 }

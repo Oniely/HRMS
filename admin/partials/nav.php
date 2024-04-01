@@ -18,6 +18,9 @@ if (isset($_SESSION['admin_id'])) {
 }
 ?>
 
+<script src="https://cdn.tailwindcss.com"></script>
+
+
 <nav class="navbar" id="navbar">
     <div class="left-nav">
         <button id="burger" class="burger">
@@ -35,22 +38,51 @@ if (isset($_SESSION['admin_id'])) {
             <div class="notification-img-container">
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
+            <?php
+            include 'notification_count.php';
+
+            if ($notificationCount > 0) {
+                echo "<div class='notification-count' id='notificationCount'>";
+                echo $notificationCount;
+                echo "</div>";
+            }
+            ?>
             <div class="notification-menu">
                 <a href="#"></a>
-                <div>
+                <div class="notification-content">
                     <span>
                         <?php
+                        $clickedNotifications = isset($_SESSION['clicked_notifications']) ? $_SESSION['clicked_notifications'] : array();
+
                         $sql = "SELECT * FROM leave_tbl";
                         $result = mysqli_query($conn, $sql);
                         if ($result && mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
+                                $unreadClass = '';
+                                $leave_id = $row['leave_id'];
+                                $employee_id = $row['employee_id'];
                                 $employee_name = $row['employee_name'];
                                 $reason = $row['reason'];
                                 $leave_type = $row['leave_type'];
                                 $start_date = $row['from_date'];
                                 $end_date = $row['to_date'];
-                                // echo "<tr onclick=\"openModal('{$employee_name}', '{$start_date}', '{$end_date}')\">";
-                                echo "<strong> $employee_name </strong> requested to $leave_type due to $reason<br><br>";
+                                $date = date('Y-m-d');
+
+                                
+                                if (in_array($leave_id, $clickedNotifications)) {
+                                    $unreadClass = ''; // Mark as read if notification is clicked
+                                } else {
+                                    $unreadClass = 'unread'; // Mark as unread if notification is not clicked and 'read' status is not stored
+                                }
+
+                                echo "<div class='notification-item $unreadClass' data-employee-id='$employee_id'>";
+
+
+                                echo "<strong> $employee_name </strong> requested to $leave_type due to ";
+                                echo "<button type='button' id='viewDetailsButton' class='btn btn-primary underline view-details' 
+                                data-leave_id='$leave_id' data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date'>View Details</button>";
+                                echo "<span>$date</span>";
+                                echo "</div>";
                             }
                         } else {
                             echo "No notification messages";
@@ -59,26 +91,38 @@ if (isset($_SESSION['admin_id'])) {
                     </span>
                 </div>
             </div>
-            <div class="notification-count" id="notificationCount">
-                <?php
-                // Include the PHP file to retrieve the notification count
-                include 'notification_count.php';
-                ?>
-            </div>
+
         </div>
-        <!-- <div id="leaveModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Leave Request</h2>
-                <p>Employee: <span id="employeeName"></span></p>
-                <p>Start Date: <span id="startDate"></span></p>
-                <p>End Date: <span id="endDate"></span></p>
-                <div class="button-container">
-                    <button id="declineBtn">Decline</button>
-                    <button id="acceptBtn">Accept</button>
+        <div class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="leaveModal">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                </h3>
+                                <div class="mt-2" id="employeeData">
+                                    <p class="text-sm text-gray-500">
+                                        <?php
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="button" id="confirmBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                            Confirm
+                        </button>
+                        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" id="cancel-button">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <button class="profile-btn">
             <div class="profile-img-container">
                 <img src="images/profile.svg" alt="" />
@@ -250,6 +294,78 @@ if (isset($_SESSION['admin_id'])) {
 </header>
 
 <script>
+    $(document).ready(function() {
+        $('.view-details').click(function() {
+            var leave_id = $(this).data('leave_id');
+            var employee_id = $(this).data('employee_id');
+            var employee = $(this).data('employee');
+            var reason = $(this).data('reason');
+            var leave = $(this).data('leave');
+            var start = $(this).data('start');
+            var end = $(this).data('end');
+
+            $('#modal-title').text('Leave Details for ' + employee);
+            var employeeData = `
+      <p><strong>Employee Name:</strong> ${employee}</p>
+      <p><strong>Employee ID:</strong> ${employee_id}</p>
+      <p><strong>Leave Type:</strong> ${leave}</p>
+      <p><strong>Reason:</strong> ${reason}</p>
+      <p><strong>Start Date:</strong> ${start}</p>
+      <p><strong>End Date:</strong> ${end}</p>`;
+
+            $('#employeeData').html(employeeData);
+            $('#leaveModal').removeClass('hidden');
+
+            $("#confirmBtn").click(function() {
+                var newData = {
+                    'status': leave
+                };
+
+                $.ajax({
+                    url: "includes/leave_request.php",
+                    type: "post",
+                    data: {
+                        functionname: 'updateDataEmployee',
+                        arguments: [leave_id, employee_id, newData, 'APPROVED']
+                    },
+                    success: function(result) {
+                        alert("Request Approved Successfully");
+                        window.location.href = './index.php';
+                    }
+                });
+            });
+
+
+            var clickedNotifications = sessionStorage.getItem('clicked_notifications');
+            if (clickedNotifications) {
+                clickedNotifications = JSON.parse(clickedNotifications);
+            } else {
+                clickedNotifications = [];
+            }
+            clickedNotifications.push(leave_id);
+            sessionStorage.setItem('clicked_notifications', JSON.stringify(clickedNotifications));
+
+            console.log(clickedNotifications);
+
+            // Remove the red dot by updating the class of the notification item
+            var notification = $(this).closest('.notification-item');
+            notification.removeClass("unread");
+
+            // Store the 'read' status in local storage
+            localStorage.setItem("notificationRead", "true");
+
+            $('#leaveModal').removeClass('hidden');
+
+        });
+
+        $('#cancel-button').click(function() {
+            $('#leaveModal').addClass('hidden');
+        });
+    });
+
+
+
+
     function updateNotificationCount() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {

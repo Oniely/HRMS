@@ -13,6 +13,9 @@ if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))){
 include('./includes/connection.php');
 ?>
 
+<script src="https://cdn.tailwindcss.com"></script>
+
+
 <nav class="navbar" id="navbar">
     <div class="left-nav">
         <button id="burger" class="burger">
@@ -32,8 +35,34 @@ include('./includes/connection.php');
             </div>
             <div class="notification-menu">
                 <a href="#"></a>
-                <div>
+                <div class="notification-content">
                     <span>
+                        <?php
+                        $sql = "SELECT * FROM leave_tbl WHERE employee_id = '$employee_id'";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $employee_id = $row['employee_id'];
+                                $employee_name = $row['employee_name'];
+                                $reason = $row['reason'];
+                                $leave_type = $row['leave_type'];
+                                $start_date = $row['from_date'];
+                                $end_date = $row['to_date'];
+                                $date = date('Y-m-d');
+
+
+                                echo "<div class='notification-item'>";
+
+                                echo "<strong> $employee_name </strong> requested to $leave_type due to ";
+                                echo "<button type='button' class='btn btn-primary underline view-details' 
+                                data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date'>View Details</button>";
+                                echo "<span>$date</span>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "No notification messages";
+                        }
+                        ?>
                     </span>
                 </div>
             </div>

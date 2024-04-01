@@ -130,7 +130,7 @@ $active = "about staff";
                     <div class="status-modal">
                         <form method="POST" class="status-form">
                             <div class="status-header">
-                                <h1>Status:</h1>
+                                <h1>Status</h1>
                                 <button type="button" class="close-btn">
                                     <img src="images/close.svg" alt="x">
                                 </button>
@@ -144,14 +144,22 @@ $active = "about staff";
                                     <label for="">Employee ID</label>
                                     <input type="text" name="employee_id" value="<?php echo $employee_id; ?>" disabled>
                                 </div>
-                                <label for="">From</label>
-                                <input type="date" name="from_date" value="">
-                                <label for="">To</label>
-                                <input type="date" name="to_date" value="">
-                                <label for="">Destination</label>
-                                <input type="text" name="destination" value="">
-                                <label for="">Accompany With: </label>
-                                <input type="text" name="accompany" value="">
+                                <div class="column">
+                                    <label for="">From</label>
+                                    <input type="date" name="from_date" value="">
+                                </div>
+                                <div class="column">
+                                    <label for="">To</label>
+                                    <input type="date" name="to_date" value="">
+                                </div>
+                                <div class="column">
+                                    <label for="">Destination</label>
+                                    <input type="text" name="destination" value="">
+                                </div>
+                                <div class="column">
+                                    <label for="">Accompany With: </label>
+                                    <input type="text" name="accompany" value="">
+                                </div>
                                 <label for="">Reason</label>
                                 <textarea rows="4" cols="50" name="reason">
 
@@ -159,13 +167,20 @@ $active = "about staff";
                             </div>
                             <div class="status-input">
                                 <select name="status" id="status">
-                                    <option value="NON_ACTIVE">Leave</option>
+                                    <option value="LEAVE">Leave</option>
                                 </select>
                                 <button id="submit" name="submit">REQUEST</button>
                             </div>
                             <?php
                             if (isset($_POST['submit'])) {
-                                $name = $fname . $lname;
+
+                                $numberOfDigits = 6; // Specify the number of digits you want in the random number
+
+                                $min = pow(10, $numberOfDigits - 1); // Minimum value based on the number of digits
+                                $max = pow(10, $numberOfDigits) - 1; // Maximum value based on the number of digits
+
+                                $leave_id = rand($min, $max); // Generate a random number within the specified range
+                                $name = $fname . " " . $lname;
                                 $fromDate = $_POST['from_date'];
                                 $toDate = $_POST['to_date'];
 
@@ -183,13 +198,14 @@ $active = "about staff";
                                 $balanceDays = $initialLeaveBalance - $totalDaysLeave;
 
 
-                                $newData = [
-                                    'status' => $_POST['status']
-                                ];
+                                // $newData = [
+                                //     'status' => $_POST['status']
+                                // ];
 
-                                updateDataEmployee($conn, $id, $newData);
+                                // updateDataEmployee($conn, $id, $newData);
 
                                 $insertData = [
+                                    'leave_id' => $leave_id,
                                     'employee_id' => $employee_id,
                                     'employee_name' => $name,
                                     'leave_type' => $_POST['status'],

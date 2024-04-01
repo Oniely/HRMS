@@ -54,7 +54,7 @@ $active = "all faculty";
 
     <div class="table-container">
         <div class="table-buttons">
-            <button><img src="../images/refresh.svg" alt="refresh"></button>
+            <button><img src="images/refresh.svg" alt="refresh"></button>
             <button>
                 <svg id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                      width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500"
@@ -63,7 +63,7 @@ $active = "all faculty";
                           fill-opacity="1" fill-rule="evenodd"/>
                 </svg>
             </button>
-            <button><img src="../images/x.svg" alt="x"></button>
+            <button><img src="images/x.svg" alt="x"></button>
         </div>
         <hr/>
         <div class="all-staff">
@@ -118,18 +118,18 @@ $active = "all faculty";
                                 <a class="view-btn"
                                    href="about_faculty.php?faculty_id=<?php echo $row['faculty_id'] ?>">
                                     <div>
-                                        <img src="../images/eyes.svg" alt="View">
+                                        <img src="images/eyes.svg" alt="View">
                                     </div>
                                 </a>
                                 <a class='update-btn' href='edit_faculty.php?id=<?php echo $row['faculty_id']; ?>'>
                                     <div>
-                                        <img src="../images/update-btn.svg" alt="update">
+                                        <img src="images/update-btn.svg" alt="update">
                                     </div>
                                 </a>
                                 <a class="delete-btn"
                                    href="functions/faculty/delete.php?id=<?php echo $row['faculty_id']; ?>">
                                     <div>
-                                        <img src="../images/delete-btn.svg" alt="update">
+                                        <img src="images/delete-btn.svg" alt="update">
                                     </div>
                                 </a>
                             </td>
