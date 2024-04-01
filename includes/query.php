@@ -29,7 +29,7 @@ function insertData($conn, $table, $data)
     return $result;
 }
 
-function updateDatae($conn, $table, $id, $newData)
+function updateData($conn, $table, $id, $newData)
 {
     $setClause = "";
     foreach ($newData as $column => $value) {
@@ -38,6 +38,21 @@ function updateDatae($conn, $table, $id, $newData)
 
     $setClause = rtrim($setClause, ', ');
     $sql = "UPDATE $table SET $setClause WHERE id = $id";
+
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+    return $result;
+}
+
+function updateAdmin($conn, $table, $id, $newData)
+{
+    $setClause = "";
+    foreach ($newData as $column => $value) {
+        $setClause .= "$column = '$value', ";
+    }
+
+    $setClause = rtrim($setClause, ', ');
+    $sql = "UPDATE $table SET $setClause WHERE admin_id = $id";
 
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
@@ -74,7 +89,12 @@ function updateDataFaculty($conn, $id, $newData)
     return $result;
 }
 
-
+function querySelectAll($conn, $sql)
+{
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $row;
+}
 
 function redirect($url)
 {
@@ -126,7 +146,7 @@ function saveProfileImage($photoFieldName = 'photo', $targetDirectory = 'images/
 
 function resetForm()
 {
-    ?>
+?>
     <script>
         const formInputs = document.querySelectorAll('input, select');
 
@@ -134,5 +154,5 @@ function resetForm()
             localStorage.removeItem(input.id)
         })
     </script>
-    <?php
+<?php
 }

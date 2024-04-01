@@ -7,7 +7,7 @@
 # 
 # Host: 127.0.0.1 (mariadb.org binary distribution 10.4.32)
 # Database: hr
-# Generation time: 2024-03-22T00:43:43+08:00
+# Generation time: 2024-04-01T22:59:38+08:00
 # ************************************************************
 
 
@@ -23,6 +23,8 @@ SET NAMES utf8mb4;
 # Dump of table admin_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `admin_tbl`;
+
 CREATE TABLE `admin_tbl` (
   `admin_id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
@@ -31,14 +33,19 @@ CREATE TABLE `admin_tbl` (
   `lname` varchar(150) NOT NULL,
   `contact` varchar(150) NOT NULL,
   `position` varchar(150) NOT NULL,
+  `privilage` enum('super_admin','admin') NOT NULL,
+  `photo_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `admin_tbl` WRITE;
 /*!40000 ALTER TABLE `admin_tbl` DISABLE KEYS */;
 
-INSERT INTO `admin_tbl` (`admin_id`, `username`, `password`, `fname`, `lname`, `contact`, `position`) VALUES
-	(1, "admin", "admin", "Thomas", "Arguelles", "09123456789", "Head Administrator");
+INSERT INTO `admin_tbl` (`admin_id`, `username`, `password`, `fname`, `lname`, `contact`, `position`, `privilage`, `photo_path`) VALUES
+	(1, "admin", "admin", "Thomas", "Arguelles", "09123456789", "Head Administrator", "super_admin", NULL),
+	(4, "secretary", "secret", "Max", "Verstappen", "09123456789", "Secretary", "admin", NULL),
+	(5, "Secret", "seventime", "Lewis ", "Hamilton", "09123456789", "Ferrari Ambassador", "admin", NULL),
+	(6, "Secret", "qwe", "Lewis ", "Hamilton", "09123456789", "Ferrari Ambassador", "admin", NULL);
 
 /*!40000 ALTER TABLE `admin_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -47,6 +54,8 @@ UNLOCK TABLES;
 
 # Dump of table business_address_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `business_address_tbl`;
 
 CREATE TABLE `business_address_tbl` (
   `business_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,6 +71,8 @@ CREATE TABLE `business_address_tbl` (
 
 # Dump of table children_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `children_tbl`;
 
 CREATE TABLE `children_tbl` (
   `c_id` int(50) NOT NULL AUTO_INCREMENT,
@@ -80,6 +91,8 @@ CREATE TABLE `children_tbl` (
 
 # Dump of table college_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `college_tbl`;
 
 CREATE TABLE `college_tbl` (
   `employee_id` int(11) NOT NULL,
@@ -108,6 +121,8 @@ UNLOCK TABLES;
 # Dump of table educational_attainment_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `educational_attainment_tbl`;
+
 CREATE TABLE `educational_attainment_tbl` (
   `educ_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
@@ -124,6 +139,8 @@ CREATE TABLE `educational_attainment_tbl` (
 
 # Dump of table elementary_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `elementary_tbl`;
 
 CREATE TABLE `elementary_tbl` (
   `employee_id` int(11) NOT NULL,
@@ -150,6 +167,8 @@ UNLOCK TABLES;
 
 # Dump of table employee_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `employee_tbl`;
 
 CREATE TABLE `employee_tbl` (
   `employee_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -192,6 +211,8 @@ UNLOCK TABLES;
 # Dump of table faculty_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `faculty_tbl`;
+
 CREATE TABLE `faculty_tbl` (
   `faculty_id` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(255) NOT NULL,
@@ -233,6 +254,8 @@ UNLOCK TABLES;
 # Dump of table family_background_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `family_background_tbl`;
+
 CREATE TABLE `family_background_tbl` (
   `fb_id` int(50) NOT NULL AUTO_INCREMENT,
   `spouse_id` int(50) DEFAULT NULL,
@@ -258,6 +281,8 @@ CREATE TABLE `family_background_tbl` (
 
 # Dump of table fathers_name
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `fathers_name`;
 
 CREATE TABLE `fathers_name` (
   `father_id` int(50) NOT NULL AUTO_INCREMENT,
@@ -301,6 +326,8 @@ UNLOCK TABLES;
 # Dump of table graduate_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `graduate_tbl`;
+
 CREATE TABLE `graduate_tbl` (
   `employee_id` int(11) NOT NULL,
   `schoolname` varchar(255) NOT NULL,
@@ -327,6 +354,8 @@ UNLOCK TABLES;
 
 # Dump of table highschool_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `highschool_tbl`;
 
 CREATE TABLE `highschool_tbl` (
   `employee_id` int(11) NOT NULL,
@@ -355,6 +384,8 @@ UNLOCK TABLES;
 # Dump of table leave_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `leave_tbl`;
+
 CREATE TABLE `leave_tbl` (
   `sick_leave_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -379,6 +410,8 @@ CREATE TABLE `leave_tbl` (
 # Dump of table membership_organization_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `membership_organization_tbl`;
+
 CREATE TABLE `membership_organization_tbl` (
   `membership_organization_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -394,6 +427,8 @@ CREATE TABLE `membership_organization_tbl` (
 
 # Dump of table mothers_name
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `mothers_name`;
 
 CREATE TABLE `mothers_name` (
   `mother_id` int(50) NOT NULL AUTO_INCREMENT,
@@ -437,6 +472,8 @@ UNLOCK TABLES;
 # Dump of table other_information_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `other_information_tbl`;
+
 CREATE TABLE `other_information_tbl` (
   `other_information_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -451,6 +488,8 @@ CREATE TABLE `other_information_tbl` (
 
 # Dump of table permanent_address_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `permanent_address_tbl`;
 
 CREATE TABLE `permanent_address_tbl` (
   `employee_id` int(50) NOT NULL,
@@ -500,6 +539,8 @@ UNLOCK TABLES;
 # Dump of table place_of_birth_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `place_of_birth_tbl`;
+
 CREATE TABLE `place_of_birth_tbl` (
   `id` int(50) NOT NULL AUTO_INCREMENT,
   `employee_id` int(50) NOT NULL,
@@ -536,6 +577,8 @@ UNLOCK TABLES;
 
 # Dump of table resedential_address_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `resedential_address_tbl`;
 
 CREATE TABLE `resedential_address_tbl` (
   `employee_id` int(50) NOT NULL,
@@ -587,6 +630,8 @@ UNLOCK TABLES;
 # Dump of table spouse_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `spouse_tbl`;
+
 CREATE TABLE `spouse_tbl` (
   `s_id` int(50) NOT NULL AUTO_INCREMENT,
   `bussiness_id` int(50) NOT NULL,
@@ -609,6 +654,8 @@ CREATE TABLE `spouse_tbl` (
 # Dump of table training_and_study_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `training_and_study_tbl`;
+
 CREATE TABLE `training_and_study_tbl` (
   `training_and_study_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -625,6 +672,8 @@ CREATE TABLE `training_and_study_tbl` (
 
 # Dump of table vocational_tbl
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `vocational_tbl`;
 
 CREATE TABLE `vocational_tbl` (
   `employee_id` int(11) NOT NULL,
@@ -653,6 +702,8 @@ UNLOCK TABLES;
 # Dump of table work_experience_tbl
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `work_experience_tbl`;
+
 CREATE TABLE `work_experience_tbl` (
   `experience_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -680,4 +731,4 @@ CREATE TABLE `work_experience_tbl` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-# Dump completed on 2024-03-22T00:43:45+08:00
+# Dump completed on 2024-04-01T22:59:38+08:00
