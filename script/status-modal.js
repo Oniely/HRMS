@@ -24,3 +24,26 @@ $(document).ready(function () {
 		e.stopPropagation();
 	});
 });
+
+$('#photo').on('change', function () {
+	const files = $('#photo')[0].files;
+	const formData = new FormData();
+	if (files.length > 0) {
+		formData.append('photo', this.files[0]);
+	}
+
+	$.ajax({
+		url: "/hr/functions/faculty/upload_photo.php",
+		method: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+		success: (res) => {
+			if (res === 'SUCCESS') {
+				location.reload();
+			} else {
+				alert('Failed To Upload a Photo');
+			}
+		}
+	});
+});
