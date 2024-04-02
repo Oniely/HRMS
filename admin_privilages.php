@@ -13,7 +13,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin_lname = $_SESSION['lname'];
 }
 
-$sql = "SELECT * FROM admin_tbl WHERE position != 'Head Administrator'";
+$sql = "SELECT * FROM admin_tbl WHERE position != 'Head Administrator' AND admin_id != $admin_id";
 $result = querySelectAll($conn, $sql);
 
 ?>
@@ -93,7 +93,7 @@ $result = querySelectAll($conn, $sql);
                                         <?= $row['contact'] ?>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <?= $row['privilage'] ?>
+                                        <?= $row['privilage'] === "super_admin" ? "Super Admin" : "Admin" ?>
                                     </td>
                                     <td class="actions px-6 py-4 space-x-2">
                                         <button data-admin-id="<?= $row['admin_id'] ?>" class="show_password_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Show Password</button>
@@ -119,6 +119,7 @@ $result = querySelectAll($conn, $sql);
     <!-- Add Admin Modal -->
     <?php include_once "modals/add_admin.modal.php" ?>
     <?php include_once "modals/edit_privilage.modal.php" ?>
+    <?php include_once "modals/show_password.modal.php" ?>
 </body>
 
 </html>

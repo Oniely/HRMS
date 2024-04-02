@@ -2,8 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-echo "<script>alert('Logged out successfully');
+echo "<script>
  window.location.href='../login.php';
  </script>";
-
-?>
