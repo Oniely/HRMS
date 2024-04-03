@@ -31,6 +31,36 @@ function insertData($conn, $table, $data)
     return $result;
 }
 
+function updateAdmin($conn, $table, $id, $newData)
+{
+    $setClause = "";
+    foreach ($newData as $column => $value) {
+        $setClause .= "$column = '$value', ";
+    }
+
+    $setClause = rtrim($setClause, ', ');
+    $sql = "UPDATE $table SET $setClause WHERE admin_id = $id";
+
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+    return $result;
+}
+
+function updateDataEmployee($conn, $id, $newData)
+{
+    $setClause = "";
+    foreach ($newData as $column => $value) {
+        $setClause .= "$column = '$value', ";
+    }
+
+    $setClause = rtrim($setClause, ', ');
+    $sql = "UPDATE employee_tbl SET $setClause WHERE employee_id = $id";
+
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+    return $result;
+}
+
 function updateDatae($conn, $table, $id, $newData)
 {
     $setClause = "";
@@ -106,6 +136,13 @@ function saveProfileImage($photoFieldName = 'photo', $targetDirectory = 'images/
         //  "No file was uploaded or an upload error occurred."
         return false;
     }
+}
+
+function querySelectAll($conn, $sql)
+{
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $row;
 }
 
 function resetForm()

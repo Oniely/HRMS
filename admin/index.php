@@ -7,10 +7,11 @@ session_name('adminSession');
 session_start();
 
 
-if (!isset($_SESSION['admin_id'])){
-    header('location: login.php');
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
     exit();
-}elseif (isset($_SESSION['admin_id'])) {
+}
+if (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
@@ -32,10 +33,8 @@ $active = "dashboard"
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
-    <script src="script/status-modal.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -46,7 +45,7 @@ $active = "dashboard"
     <!-- Dashboard -->
     <!-- ONLY SECTION ONLY -->
     <!-- Desktop Section -->
-    <section class="section container">
+    <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Dashboard</h1>
@@ -57,7 +56,7 @@ $active = "dashboard"
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
-        <div class="dashboard-boxes container">
+        <div class="dashboard-boxes">
             <div class="box employee">
                 <div class="box-img">
                     <img src="images/box (1).svg" alt="" />
@@ -131,7 +130,7 @@ $active = "dashboard"
             </div>
         </div>
 
-        <div class="dashboard-table container">
+        <div class="dashboard-table">
             <table>
                 <div class="table-title">
                     <h1>Faculty List</h1>
@@ -213,7 +212,7 @@ $active = "dashboard"
         <div class="m-content">
             <h1>Dashboard</h1>
 
-            <div class="dashboard-boxes container">
+            <div class="dashboard-boxes">
                 <div class="box employee">
                     <div class="box-img">
                         <img src="images/box (1).svg" alt="" />
@@ -289,7 +288,7 @@ $active = "dashboard"
         </div>
 
         <!-- Mobile Table -->
-        <div class="dashboard-table container">
+        <div class="dashboard-table">
             <div class="table-title">
                 <h1>Faculty List</h1>
             </div>
