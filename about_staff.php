@@ -9,6 +9,12 @@ if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
     exit();
 }
 
+if (isset($_SESSION['admin_id'])) {
+    $admin_id = $_SESSION['admin_id'];
+    $admin_fname = $_SESSION['fname'];
+    $admin_lname = $_SESSION['lname'];
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * from employee_tbl WHERE employee_id = $id";
@@ -67,7 +73,7 @@ $active = "about staff";
         <div class="about-container">
             <div class="about-profile">
                 <div class="prof-img">
-                    <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
+                    <img src="<?= $photo_path ? $photo_path : "images/profile-black.svg" ?>" alt="profile">
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">
