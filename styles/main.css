@@ -94,6 +94,12 @@ button {
     align-items: center;
 }
 
+@media screen and (max-width: 950px) {
+    .section-title .breadcrumbs {
+        display: none;
+    }
+}
+
 .section-title .breadcrumbs a {
     display: flex;
     justify-content: center;
@@ -118,6 +124,10 @@ button {
     font-size: 1.5rem;
 }
 
+.m-top {
+    display: none;
+}
+
 @media screen and (max-width: 950px) {
     .section {
         padding-left: 1rem;
@@ -125,7 +135,70 @@ button {
     }
 
     .section-title {
+        padding-top: 0;
         margin-top: -4rem;
+    }
+
+    .m-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 1rem 1rem;
+    }
+
+    .m-profile-btn {
+        width: 30px;
+        height: 30px;
+        position: relative;
+    }
+
+    .m-profile-btn svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        fill: #4763ca;
+    }
+
+    .m-profile-menu a {
+        text-decoration: none;
+        background: transparent;
+        color: #101010;
+    }
+
+    .m-profile-menu a span {
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    .breadcrumbs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .breadcrumbs a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 500;
+
+        padding: 10px;
+        color: #303030;
+    }
+
+    .breadcrumbs> :not(:last-child) {
+        position: relative;
+        padding-right: 1.5rem;
+        color: #767a7f;
+    }
+
+    .breadcrumbs> :not(:last-child)::after {
+        content: ">";
+        position: absolute;
+        right: 2px;
+        font-size: 1.5rem;
     }
 }
 
