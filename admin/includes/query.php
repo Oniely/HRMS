@@ -1,6 +1,7 @@
 <?php
-
-
+ ini_set('display_errors', 1);
+ ini_set('display_startup_errors', 1);
+ error_reporting(E_ALL);
 include('connection.php');
 // the $data takes in an object array: 
 /* $data = [
@@ -141,9 +142,15 @@ function saveProfileImage($photoFieldName = 'photo', $targetDirectory = 'images/
 function querySelectAll($conn, $sql)
 {
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return $row;
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    
+    if (count($rows) > 0) {
+        return $rows;
+    } else {
+        return null;
+    }
 }
+
 
 function resetForm()
 {

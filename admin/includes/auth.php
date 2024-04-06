@@ -22,19 +22,17 @@ function loginAuth($username, $password)
         $row = $result->fetch_assoc();
 
         if ($password === $row['password']) {
-            session_name('adminSession');
-            session_start();
+      
             $_SESSION['admin_id'] = $row['admin_id'];
             $_SESSION['fname'] = $row['fname'];
             $_SESSION['lname'] = $row['lname'];
+            $_SESSION['username'] = $row['username'];
             $_SESSION['admin_privilage'] = $row['privilage'];
             return true;
         } else {
-            session_destroy();
             return false;
         }
     } else {
-        session_destroy();
         return false;
     }
 }

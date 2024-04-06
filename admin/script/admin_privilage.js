@@ -39,7 +39,7 @@ $('#showPasswordForm').on('submit', function (e) {
     const password = $('#admin_password').val();
 
     $.ajax({
-        url: "/hr/functions/admin/show_password.php",
+        url: "/hrms/admin/functions/admin/show_password.php",
         method: "GET",
         data: {
             admin_id,

@@ -1,10 +1,8 @@
 <?php
 include('includes/connection.php');
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_name('staffSession');
-    session_start();
-}
+session_start();
+
 if(!isset($_SESSION['employee_id'])) {
     header('location: staff_login.php');
     exit();

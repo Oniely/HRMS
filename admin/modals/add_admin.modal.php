@@ -14,7 +14,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="/hr/functions/admin/create_admin_account.php" method="POST" class="p-4 md:p-5">
+            <form action="/HRMS/admin/functions/admin/create_admin_account.php" method="POST" class="p-4 md:p-5">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2 sm:col-span-2">
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>

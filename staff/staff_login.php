@@ -29,7 +29,7 @@ include './includes/connection.php';
                 if (isset($_POST['submit'])) {
                     $username = $_POST['username'];
                     $password = $_POST['password'];
-
+                    
                     if (staffloginAuth($username, $password)) {
                         echo "Redirecting to staff_index.php";
                         header('location: staff_index.php');

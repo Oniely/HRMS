@@ -1,14 +1,8 @@
 <?php
-
-global $conn;
-
 include('../../includes/connection.php');
-include '../../includes/query.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $employee_id = $_GET['employee_id'];
-
-    // Fetch data from the database
     $query = "SELECT * FROM employee_tbl WHERE employee_id = $employee_id";
     $result = mysqli_query($conn, $query);
     if ($result && mysqli_num_rows($result) > 0) {

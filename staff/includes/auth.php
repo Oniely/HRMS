@@ -19,9 +19,6 @@ function staffloginAuth($username, $password)
 
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
-
-        session_name('staffSession');
-        session_start();
         
         $_SESSION['employee_id'] = $row['employee_id'];
         $_SESSION['fname'] = $row['fname'];

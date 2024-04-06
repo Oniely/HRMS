@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" &&  isset($_POST['createAccount'])) {
     ];
 
     if (insertDataColumns($conn, 'admin_tbl', $data)) {
-        header('Location: ' . "/hr/admin_privilages.php");
+        header('Location: ' . "/hrms/admin/admin_privilages.php");
     } else {
         return false;
     }

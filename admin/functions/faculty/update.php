@@ -1,5 +1,7 @@
 <?php
 include('../../includes/connection.php');
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $faculty_id = $_GET['faculty_id'];
     $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $faculty_id";
@@ -72,15 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
-    $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id=$faculty_id";
+    $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id='$faculty_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
-    $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id=$faculty_id";
+    $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$faculty_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
-    $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id=$faculty_id";
+    $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id='$faculty_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }

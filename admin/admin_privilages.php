@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include('includes/connection.php');
 include('includes/query.php');
 
@@ -16,8 +20,9 @@ if (isset($_SESSION['admin_id'])) {
     $admin_lname = $_SESSION['lname'];
 }
 
-$sql = "SELECT * FROM admin_tbl WHERE position != 'Head Administrator'";
-$result = querySelectAll($conn, $sql);
+$sql = "SELECT * FROM admin_tbl WHERE privilage != 'super_admin'";
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -58,27 +63,25 @@ $result = querySelectAll($conn, $sql);
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
-        <?php if (mysqli_num_rows($result) > 0) : ?>         
+        <?php if ($rows != null && is_array($rows) && count($rows) > 0) : ?>
             <div class="w-full">
                 <div class="py-8">
                     <button id="modal_btn" class="text-sm font-semibold uppercase tracking-tight text-white bg-[#4763ca] py-4 px-4 rounded-full hover:opacity-95">Add New Admin</button>
                 </div>
                 <div class="relative overflow-x-auto shadow-md">
                     <table class="w-full text-sm text-left text-gray table-auto">
-                        <thead class=" text-[15px] text-white uppercase bg-[#4763ca]">
+                        <thead class="text-[15px] text-white uppercase bg-[#4763ca]">
                             <tr>
                                 <th scope="col" class="px-6 py-3">Employee</th>
                                 <th scope="col" class="px-6 py-3">Position</th>
                                 <th scope="col" class="px-6 py-3">Username</th>
                                 <th scope="col" class="px-6 py-3">Contact Number</th>
-                                <th scope="col" class="px-6 py-3">Privilage</th>
+                                <th scope="col" class="px-6 py-3">Privilege</th>
                                 <th scope="col" class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach ($result as $row) {
-                            ?>
+                            <?php foreach ($rows as $row) : ?>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
@@ -100,12 +103,10 @@ $result = querySelectAll($conn, $sql);
                                     </td>
                                     <td class="actions px-6 py-4 space-x-2">
                                         <button data-admin-id="<?= $row['admin_id'] ?>" class="show_password_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Show Password</button>
-                                        <button data-admin-id="<?= $row['admin_id'] ?>" class="edit_privilage_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Edit Privilage</button>
+                                        <button data-admin-id="<?= $row['admin_id'] ?>" class="edit_privilage_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Edit Privilege</button>
                                     </td>
                                 </tr>
-                            <?php
-                            }
-                            ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -122,6 +123,7 @@ $result = querySelectAll($conn, $sql);
     <!-- Add Admin Modal -->
     <?php include_once "modals/add_admin.modal.php" ?>
     <?php include_once "modals/edit_privilage.modal.php" ?>
+    <?php include_once "modals/show_password.modal.php" ?>
 </body>
 
 </html>
