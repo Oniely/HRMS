@@ -3,15 +3,12 @@ include('includes/connection.php');
 
 session_start();
 
-if(!isset($_SESSION['employee_id'])) {
+if(!isset($_SESSION['employee_id'])){
     header('location: staff_login.php');
     exit();
-}
-elseif (isset($_SESSION['employee_id'])){
-    $employee_id = $_SESSION['employee_id'];
-    $fname = $_SESSION['fname'];
-    $lname = $_SESSION['lname'];
-}
+} 
+
+
 $active = "dashboard"
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,7 @@
 <?php
-session_name('staffSession');
+
+global $id;
+
 session_start();
 require_once "./includes/auth.php";
 include './includes/connection.php';
@@ -31,7 +33,6 @@ include './includes/connection.php';
                     $password = $_POST['password'];
                     
                     if (staffloginAuth($username, $password)) {
-                        echo "Redirecting to staff_index.php";
                         header('location: staff_index.php');
                     } else {
                         echo "<span class='w-full bg-red-500 text-center py-3 text-white'>Invalid Credentials</span>";

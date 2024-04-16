@@ -1,6 +1,10 @@
 <?php
+
+
 session_name('adminSession');
 session_start();
+
+
 require_once "includes/auth.php";
 include 'includes/connection.php';
 

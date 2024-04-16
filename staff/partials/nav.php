@@ -4,11 +4,8 @@ global $active;
 global $fname;
 
 if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))){
-    $employee_id = $_SESSION['employee_id'];
-    $fname = $_SESSION['fname'];
-    $lname = $_SESSION['lname'];
-}
 
+}
 
 include('./includes/connection.php');
 ?>

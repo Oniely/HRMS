@@ -14,15 +14,27 @@ function staffloginAuth($username, $password)
 {
     require "connection.php";
 
-    $sql = "SELECT * FROM employee_tbl WHERE email='$username' AND employee_id='$password'";
-    $result = $conn->query($sql);
+    $sql_employee = "SELECT * FROM employee_tbl WHERE email = ? AND employee_id = ?";
+    $stmt_employee = $conn->prepare($sql_employee);
+    $stmt_employee->bind_param("si", $username, $password);
+    $stmt_employee->execute();
+    $result_employee = $stmt_employee->get_result();
 
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        
-        $_SESSION['employee_id'] = $row['employee_id'];
+    $sql_faculty = "SELECT * FROM faculty_tbl WHERE email = ? AND faculty_id = ?";
+    $stmt_faculty = $conn->prepare($sql_faculty);
+    $stmt_faculty->bind_param("si", $username, $password);
+    $stmt_faculty->execute();
+    $result_faculty = $stmt_faculty->get_result();
+
+    if ($result_employee->num_rows > 0 || $result_faculty->num_rows > 0) {
+        // Login successful, set session variables and redirect to index
+        $row = ($result_employee->num_rows > 0) ? $result_employee->fetch_assoc() : $result_faculty->fetch_assoc();
+   
+        $_SESSION['employee_id'] = $row['employee_id'] ?? $row['faculty_id'];
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['lname'] = $row['lname'];
+
+        $id = $_SESSION['employee_id'];
         return true;
     } else {
         return false;

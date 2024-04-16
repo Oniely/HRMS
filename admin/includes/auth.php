@@ -22,7 +22,7 @@ function loginAuth($username, $password)
         $row = $result->fetch_assoc();
 
         if ($password === $row['password']) {
-      
+            
             $_SESSION['admin_id'] = $row['admin_id'];
             $_SESSION['fname'] = $row['fname'];
             $_SESSION['lname'] = $row['lname'];

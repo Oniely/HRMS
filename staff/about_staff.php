@@ -5,48 +5,93 @@ global $conn;
 include('includes/connection.php');
 
 
-session_name('staffSession');
-session_start();
+
+session_start(); 
 
 if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
-    $query = "SELECT * FROM employee_tbl
-              LEFT JOIN elementary_tbl ON employee_tbl.employee_id = elementary_tbl.employee_id
-              LEFT JOIN highschool_tbl ON employee_tbl.employee_id = highschool_tbl.employee_id
-              LEFT JOIN vocational_tbl ON employee_tbl.employee_id = vocational_tbl.employee_id
-              LEFT JOIN college_tbl ON employee_tbl.employee_id = college_tbl.employee_id
-              WHERE employee_tbl.employee_id = $id";
+    $elem_school = $elem_year = $highschool_school = $highschool_year = $vocational_school = $vocational_course = $vocational_year = $college_school = $college_course = $college_year = $faculty_id = $fname = $lname = $sex = $contact = $email = $permanent_address = $status = $photo_path = "";
+
+    // Check if the user is in the faculty table
+    $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
     $query_res = mysqli_query($conn, $query);
     if ($row = mysqli_fetch_assoc($query_res)) {
+        // The user is a faculty member
+        // Fetch data from the faculty table
+        $faculty_id = $row['faculty_id'];
         $fname = $row['fname'];
         $lname = $row['lname'];
-        $email = $row['email'];
         $sex = $row['sex'];
         $contact = $row['contact_number'];
+        $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $status = $row['status'];
         $photo_path = $row['photo_path'];
         if (empty($photo_path)) {
             $photo_path = "images/profile-black.svg"; // Change this to your default image path
         }
-        $elem_school = $row['schoolname'];
-        $elem_year = $row['year_graduate'];
-
-        $highschool_school = $row['schoolname'];
-        $highschool_year = $row['year_graduate'];
-
-        $vocational_school = $row['schoolname'];
-        $vocational_course = $row['course'];
-        $vocational_year = $row['year_graduate'];
-
-        $college_school = $row['schoolname'];
-        $college_course = $row['course'];
-        $college_year = $row['year_graduate'];
     } else {
-        // Handle case where employee with given ID is not found
-        echo "Employee not found!";
+        // The user is not a faculty member, so they must be an employee
+        // Fetch data from the employee table
+        $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            $employee_id = $row['employee_id'];
+            $fname = $row['fname'];
+            $lname = $row['lname'];
+            $email = $row['email'];
+            $sex = $row['sex'];
+            $contact = $row['contact_number'];
+            $permanent_address = $row['permanent_address'];
+            $status = $row['status'];
+            $photo_path = $row['photo_path'];
+            if (empty($photo_path)) {
+                $photo_path = "images/profile-black.svg"; // Change this to your default image path
+            }
+        }
+        $elem_school = $elem_year = $highschool_school = $highschool_year = $vocational_school = $vocational_course = $vocational_year = $college_school = $college_course = $college_year = $faculty_id = $fname = $lname = $sex = $contact = $email = $permanent_address = $status = $photo_path = "";
+
+        $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            $elem_school = $row['schoolname'];
+            $elem_address = $row['address'];
+            $elem_year = $row['year_graduate'];
+        }
+
+        $query = "SELECT * FROM highschool_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            // Display information for high school
+            $highschool_school = $row['schoolname'];
+            $highschool_address = $row['address'];
+            $highschool_year = $row['year_graduate'];
+        }
+
+        $query = "SELECT * FROM vocational_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            // Display information for vocational school
+            $vocational_school = $row['schoolname'];
+            $vocational_course = $row['course'];
+            $vocational_address = $row['address'];
+            $vocational_year = $row['year_graduate'];
+        }
+
+        // Check if the employee's data exists in college_tbl
+        $query = "SELECT * FROM college_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            // Display information for college
+            $college_school = $row['schoolname'];
+            $college_course = $row['course'];
+            $college_address = $row['address'];
+            $college_year = $row['year_graduate'];
+        }
     }
 }
+
+
 
 require_once './includes/query.php';
 $active = "about staff";
@@ -91,7 +136,7 @@ $active = "about staff";
         <div class="about-container">
             <div class="about-profile">
                 <div class="prof-img">
-                    <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
+                    <img src="<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile">
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">
@@ -99,10 +144,6 @@ $active = "about staff";
                         echo "<h1>$fname $lname</h1>";
 
                         ?>
-
-                        <?php if (isset($_GET['admin_id'])) {
-                            echo "<p>$position</p>";
-                        } ?>
                     </div>
                     <hr>
                     <div class="profile-info">
