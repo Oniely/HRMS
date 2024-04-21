@@ -165,10 +165,6 @@ label {
 }
 
 @media screen and (max-width: 768px) {
-    .container {
-        max-width: 768px;
-    }
-
     .flex {
         flex-direction: column;
     }

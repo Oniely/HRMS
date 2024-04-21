@@ -118,22 +118,6 @@ button {
     font-size: 1.5rem;
 }
 
-.container {
-    width: 100%;
-}
-
-@media screen and (max-width: 640px) {
-    .container {
-        max-width: 640px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        max-width: 768px;
-    }
-}
-
 @media screen and (max-width: 950px) {
     .section {
         padding-left: 1rem;
@@ -146,10 +130,6 @@ button {
 }
 
 @media screen and (max-width: 1024px) {
-    .container {
-        max-width: 1024px;
-    }
-
     .section-title a:first-child {
         padding-left: 0;
     }
@@ -159,17 +139,5 @@ button {
     .section-title {
         flex-direction: column;
         align-items: start;
-    }
-}
-
-@media screen and (max-width: 1280px) {
-    .container {
-        max-width: 1280px;
-    }
-}
-
-@media screen and (max-width: 1536px) {
-    .container {
-        max-width: 1536px;
     }
 }

@@ -85,7 +85,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
-                                            <img class="w-8 h-8 object-contain object-center aspect-square" src="/hr/images/profile-black.svg" alt="photo">
+                                            <img class="w-8 h-8 object-contain object-center aspect-square" src="/HRMS/admin/images/profile-black.svg" alt="photo">
                                             <span><?= $row['fname'] . " " .  $row['lname'] ?></span>
                                         </div>
                                     </td>

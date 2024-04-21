@@ -39,7 +39,7 @@ $('#showPasswordForm').on('submit', function (e) {
     const password = $('#admin_password').val();
 
     $.ajax({
-        url: "/hrms/admin/functions/admin/show_password.php",
+        url: "/HRMS/admin/functions/admin/show_password.php",
         method: "GET",
         data: {
             admin_id,
@@ -115,7 +115,7 @@ $('#editPrivilageForm').on('submit', (e) => {
     }
 
     $.ajax({
-        url: '/hr/functions/admin/edit_admin_privilage.php',
+        url: '/HRMS/admin/functions/admin/edit_admin_privilage.php',
         method: 'POST',
         data: {
             admin_id,

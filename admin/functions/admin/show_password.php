@@ -1,7 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/hrms/admin/includes/connection.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/hrms/admin/includes/auth.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/auth.php';
 
 session_start();
 

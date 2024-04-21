@@ -189,7 +189,7 @@ $active = "dashboard"
                         <span>Help</span>
                     </div>
                 </a>
-                <a href="/HRMS/includes/logout.php">
+                <a href="/HRMS/staff/includes/logout.php">
                     <div>
                         <img src="images/arrow.svg" alt=""/>
                         <span>Logout</span>

@@ -103,7 +103,7 @@ include('./includes/connection.php');
 
 <header class="m-header">
     <div class="m-logo">
-        <a href="/hr">
+        <a href="/HRMS">
             <img src="images/sc-logo.svg" alt="sc-logo">
         </a>
     </div>
@@ -114,7 +114,7 @@ include('./includes/connection.php');
 
     <div class="m-burger-menu">
         <div class="m-breadcrumbs">
-            <a href="/hr">Home</a>
+            <a href="/HRMS">Home</a>
             <a href="#">Dashboard</a>
         </div>
 

@@ -15,10 +15,10 @@ if (isset($_SESSION['admin_id'])) {
 ?>
 <aside class="side-bar" id="side-bar">
     <div class="logo" id="logo">
-        <a href="/hr">
+        <a href="/HRMS/admin/">
             <img id="sc-logo" src="images/sc-logo.svg" alt="sc-logo"/>
         </a>
-        <a href="/hr">
+        <a href="/HRMS/admin/">
             <img id="sc" src="images/sc.svg" alt="sc-logo"/>
         </a>
     </div>

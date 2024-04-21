@@ -159,7 +159,7 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
         insertDataColumns($conn, 'graduate_tbl', $graduate_array);
 
         echo '<script>alert("Employee Added")</script>';
-        redirect('/');
+        redirect('/HRMS/admin/all_staff.php');
     }
     resetForm();
     $conn->close();

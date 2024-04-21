@@ -92,6 +92,7 @@ body {
     justify-content: space-between;
 
     padding: 0.3rem 0;
+    padding-right: 9rem;
 }
 
 .bordered-info h3 {
