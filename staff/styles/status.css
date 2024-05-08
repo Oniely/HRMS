@@ -1,0 +1,82 @@
+.section-container {
+  position: relative;
+  width: 100%;
+  margin-top: 4rem;
+  bottom: 0;
+  background-color: #e6f1ff;
+  padding: 0 2rem;
+}
+.status-container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 1rem;
+}
+.status-nav {
+  padding-left: 1.5rem;
+  text-decoration: none;
+}
+.status-nav a {
+  padding-left: 1rem;
+}
+.status-content-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.status-items {
+  align-items: center;
+  justify-content: center;
+  background: #48cfae;
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 2rem;
+}
+table {
+  width: 100%;
+}
+tr {
+  justify-content: space-between;
+}
+td {
+  text-align: left;
+}
+th {
+  text-align: left;
+}
+
+.status-text {
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+}
+.status-content-text {
+  padding-left: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+}
+
+.status-content-text h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 0.6rem;
+}
+.status-content-text p {
+  padding: 1rem 0 0 0;
+}
+.active {
+  position: relative;
+  color: #6d85db;
+  padding-bottom: 0.5rem;
+}
+.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 1rem;
+  width: 90%;
+  height: 4px;
+  background-color: #6d85db;
+  transition: width 0.5s ease;
+}

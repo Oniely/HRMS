@@ -1,7 +1,6 @@
 <?php
 
 
-session_name('adminSession');
 session_start();
 
 
@@ -33,7 +32,7 @@ include 'includes/connection.php';
                 if (isset($_POST['submit'])) {
                     $username = $_POST['username'];
                     $passw = $_POST['password'];
-
+                    
                     if (loginAuth($username, $passw)) {
                         header('location: index.php');
                     } else {

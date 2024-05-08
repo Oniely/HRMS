@@ -3,8 +3,7 @@
 global $active;
 global $fname;
 
-if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))){
-
+if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))) {
 }
 
 include('./includes/connection.php');
@@ -26,12 +25,11 @@ include('./includes/connection.php');
         </div>
     </div>
     <div class="right-nav">
-        <div class="notification-btn">
+        <a class="notification-btn" href="./notifications.php">
             <div class="notification-img-container">
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
-            <div class="notification-menu">
-                <a href="#"></a>
+            <!-- <div class="notification-menu">
                 <div class="notification-content">
                     <span>
                         <?php
@@ -63,8 +61,8 @@ include('./includes/connection.php');
                     </span>
                 </div>
             </div>
-            <div class="notification-count">3</div>
-        </div>
+            <div class="notification-count">3</div> -->
+                    </a>
         <button class="profile-btn">
             <div class="profile-img-container">
                 <img src="images/profile.svg" alt="" />

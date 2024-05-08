@@ -4,7 +4,6 @@ include('./includes/connection.php');
 if (!isset($_SESSION['admin_id'])){
     header('location: ../login.php');
     exit();
-
 }
 if (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];

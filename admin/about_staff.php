@@ -14,7 +14,6 @@ if (isset($_SESSION['admin_id'])) {
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
 }
-
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * from employee_tbl WHERE employee_id = $id";
@@ -27,6 +26,42 @@ if (isset($_GET['id'])) {
         $contact = $row['contact_number'];
         $permanent_address = $row['permanent_address'];
         $photo_path = $row['photo_path'];
+    }
+    $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        $elem_school = $row['schoolname'];
+        $elem_address = $row['address'];
+        $elem_year = $row['year_graduate'];
+    }
+    $query = "SELECT * FROM highschool_tbl WHERE employee_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        // Display information for high school
+        $highschool_school = $row['schoolname'];
+        $highschool_address = $row['address'];
+        $highschool_year = $row['year_graduate'];
+    }
+
+    $query = "SELECT * FROM vocational_tbl WHERE employee_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        // Display information for vocational school
+        $vocational_school = $row['schoolname'];
+        $vocational_course = $row['course'];
+        $vocational_address = $row['address'];
+        $vocational_year = $row['year_graduate'];
+    }
+
+    // Check if the employee's data exists in college_tbl
+    $query = "SELECT * FROM college_tbl WHERE employee_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        // Display information for college
+        $college_school = $row['schoolname'];
+        $college_course = $row['course'];
+        $college_address = $row['address'];
+        $college_year = $row['year_graduate'];
     }
 }
 
@@ -82,8 +117,7 @@ $active = "about staff";
                     </div>
                     <hr>
                     <div class="profile-info">
-                        <p>Hello I am Celena Anderson a Clerk in Xyz College Surat. I love to work with all my college staff
-                            and seniour professors.</p>
+                        <p>Hello I am <?php echo "$fname $lname"?> an Employee in Southland College.</p>
                     </div>
                     <div class="bordered-info">
                         <h3>Gender</h3>
@@ -150,14 +184,14 @@ $active = "about staff";
                         <?php echo "<p>$permanent_address</p>"; ?>
                     </div>
                 </div>
-                <div class="desc">
+                <div class="desc overflow-hidden">
                     <!-- prettier-ignore -->
-                    <p>Completed my graduation in Commerce from the well known and renowned institution of India SARDAR
-                        PATEL COMMERCE COLLEGE, BARODA in 2000-01, which was affiliated to M.S. University.
-
-                        I ranker in University exams from the same university from 1996-01. Worked as Clerk and Head of the
-                        department at Sarda Collage, Rajkot, Gujarat from 2003-2015
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    <h3>Educational Attainment</h3>
+                    <p>
+                        <strong>Elementary:</strong> <?php echo "$elem_school - $elem_year"; ?> <br>
+                        <strong>High School:</strong> <?php echo "$highschool_school - $highschool_year"; ?> <br>
+                        <strong>Vocational:</strong> <?php echo "$vocational_school - $vocational_course - $vocational_year"; ?> <br>
+                        <strong>College:</strong> <?php echo "$college_school - $college_course - $college_year"; ?>
                     </p>
                 </div>
             </div>

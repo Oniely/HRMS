@@ -2,7 +2,6 @@
 
 global $conn;
 
-session_name('adminSession');
 session_start();
 
 if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {

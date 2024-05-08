@@ -210,7 +210,8 @@ $active = "about staff";
     <title>Southland College</title>
     <!-- Styles -->
     <link rel="stylesheet" href="styles/nav.css" />
-    <link rel="stylesheet" href="styles/about.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <link rel="stylesheet" href="styles/status.css" />
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
@@ -229,82 +230,110 @@ $active = "about staff";
     <section class="section container">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
-            <h1>About Employee</h1>
-            <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Other Staff</a>
-                <a href="#">Staff</a>
-            </div>
+            <h1>Leave Status</h1>
         </div>
+
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
-        <div class="about-container">
-            <div class="about-profile">
-                <div class="prof-img">
-                    <img src="<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile">
-                </div>
-                <div class="profile-desc">
-                    <div class="profile-name">
-                        <?php
-                        echo "<h1>$fname $lname</h1>";
-
-                        ?>
-                    </div>
-                    <hr>
-                    <div class="profile-info">
-                        <p>Hello I am <?php echo "$fname $lname" ?>, an Employee in Southland College.</p>
-                    </div>
-                    <div class="bordered-info">
-                        <h3>Gender</h3>
-                        <span><?php echo "$sex" ?></span>
-                    </div>
-                    <div class="bordered-info">
-                        <h3>Degree</h3>
-                        <span><?php echo "$college_course" ?></span>
-                    </div>
-                    <div class="bordered-info">
-                        <h3>Status</h3>
-                        <span><?php echo "$status" ?></span>
-                    </div>
-                </div>
+        <div class="status-container">
+            <div class="status-nav">
+                <a href="#" id="pending-link">Pending</a>
+                <a href="#" id="balance-link">Leave Balance</a>
+                <a href="#" id="history-link">Leave Usage History</a>
             </div>
-            <div class="about">
-                <div class="about-me">
-                    <button>About Me</button>
-                    <button class="status-btn"><a href="request_leave.php">REQUEST</a></button>
+            <div class="status-content" id="status-content">
 
-                </div>
-                <div class="info">
-                    <div>
-                        <h3>Fullname</h3>
-                        <?php echo "<p>$fname $lname</p>"; ?>
-                    </div>
-                    <div>
-                        <h3>Mobile</h3>
-                        <?php echo "<p>$contact</p>"; ?>
-                    </div>
-                    <div>
-                        <h3>Email</h3>
-                        <?php echo "<p>$email</p>"; ?>
-                    </div>
-                    <div>
-                        <h3>Location</h3>
-                        <?php echo "<p>$permanent_address</p>"; ?>
-                    </div>
-                </div>
-                <div class="desc">
-                    <!-- prettier-ignore -->
-                    <h3>Educational Attainment</h3>
-                    <p>
-                        <strong>Elementary:</strong> <?php echo "$elem_school - $elem_year"; ?> <br>
-                        <strong>High School:</strong> <?php echo "$highschool_school - $highschool_year"; ?> <br>
-                        <strong>Vocational:</strong> <?php echo "$vocational_school - $vocational_course - $vocational_year"; ?> <br>
-                        <strong>College:</strong> <?php echo "$college_school - $college_course - $college_year"; ?>
-                    </p>
-                </div>
             </div>
         </div>
+
     </section>
 </body>
 
 </html>
+
+<script>
+    const pendingLink = document.getElementById('pending-link');
+    const balanceLink = document.getElementById('balance-link');
+    const historyLink = document.getElementById('history-link');
+    const statusContent = document.getElementById('status-content');
+
+    pendingLink.addEventListener('click', () => showContent('pending'));
+    balanceLink.addEventListener('click', () => showContent('balance'));
+    historyLink.addEventListener('click', () => showContent('history'));
+
+    function showContent(type) {
+        let content;
+        switch (type) {
+            case 'pending':
+                content = "<p>This is pending content</p>";
+                break;
+            case 'balance':
+                content = "<p>This is leave balance content</p>";
+                break;
+            case 'history':
+                content = "<?php
+                            $sql = "SELECT * FROM leave_tbl WHERE employee_id = '$employee_id'";
+                            $result = mysqli_query($conn, $sql);
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $employee_id = $row['employee_id'];
+                                    $employee_name = $row['employee_name'];
+                                    $reason = $row['reason'];
+                                    $leave_type = $row['leave_type'];
+                                    $start_date = $row['from_date'];
+                                    $end_date = $row['to_date'];
+                                    $date = date('Y-m-d');
+                                    $status = $row['application_status'];
+                                    $leave_id = $row['leave_id'];
+
+
+                                   if( $status == 'ACCEPTED') {
+                                        $statusBackground = '#48cfae';
+                                    } elseif ($status == 'REJECTED') {
+                                        $statusBackground = '#fa5858';
+                                    } elseif($status == 'PENDING') {
+                                        $statusBackground = '#f6c06e';
+                                    }
+
+                                    echo "<div class='status-items' id='notification_$leave_id' style='background-color: $statusBackground'>";
+                                    echo "<table>";
+                                    echo "<tr'>";
+                                    echo "<th>Application No. </th>";
+                                    echo "<th>Type of Leave </th>";
+                                    echo "<th>Data of Application</th>";
+                                    echo "<th>Status</th>";
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>$leave_id</td>";
+                                    echo "<td>$leave_type</td>";
+                                    echo "<td>$start_date</td>";
+                                    echo "<td>$status</td>";
+                                    echo "</tr>";
+                                    echo "</table>";
+                                    echo "</div>";
+                                }
+                            }
+                            ?>";
+                break;
+            default:
+                content = "<p>Content not available</p>";
+        }
+        statusContent.innerHTML = content;
+
+        pendingLink.classList.remove('active');
+        balanceLink.classList.remove('active');
+        historyLink.classList.remove('active');
+
+        switch (type) {
+            case 'pending':
+                pendingLink.classList.add('active');
+                break;
+            case 'balance':
+                balanceLink.classList.add('active');
+                break;
+            case 'history':
+                historyLink.classList.add('active');
+                break;
+        }
+    }
+</script>

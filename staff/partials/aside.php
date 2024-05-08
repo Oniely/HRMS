@@ -31,7 +31,28 @@ if (isset($_SESSION['employee_id'])){
         <ul class="links">
             <li>
                 <a class="s-link <?= $active == "dashboard" ? "active" : "" ?>" href="staff_index.php">
-                    <svg class="icon <?= $active == "dashboard" ? "active" : "" ?>" xmlns="http://www.w3.org/2000/svg"
+                <svg class="icon <?= str_contains($active, "profile") ? "active" : "" ?>"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500"
+                         zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500"
+                         preserveAspectRatio="xMidYMid meet" version="1.0">
+                        <defs>
+                            <clipPath id="397a3b1a3c">
+                                <path d="M 35.453125 0 L 337.703125 0 L 337.703125 375 L 35.453125 375 Z M 35.453125 0 "
+                                      clip-rule="nonzero"/>
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#397a3b1a3c)">
+                            <path d="M 240.347656 184.542969 C 268.097656 166.734375 286.5625 135.667969 286.5625 100.332031 C 286.5625 45.148438 241.65625 0.246094 186.472656 0.246094 C 131.289062 0.246094 86.386719 45.148438 86.386719 100.332031 C 86.386719 135.6875 104.851562 166.734375 132.601562 184.542969 C 75.863281 206.300781 35.453125 261.296875 35.453125 325.597656 C 35.453125 352.695312 57.511719 374.753906 84.609375 374.753906 L 288.320312 374.753906 C 315.433594 374.753906 337.476562 352.695312 337.476562 325.597656 C 337.492188 261.296875 297.085938 206.300781 240.347656 184.542969 Z M 112.226562 100.332031 C 112.226562 59.398438 145.539062 26.089844 186.472656 26.089844 C 227.40625 26.089844 260.71875 59.398438 260.71875 100.332031 C 260.71875 141.265625 227.40625 174.578125 186.472656 174.578125 C 145.539062 174.578125 112.226562 141.265625 112.226562 100.332031 Z M 288.339844 348.910156 L 84.609375 348.910156 C 71.746094 348.910156 61.296875 338.445312 61.296875 325.597656 C 61.296875 256.578125 117.453125 200.421875 186.472656 200.421875 C 255.496094 200.421875 311.652344 256.578125 311.652344 325.597656 C 311.632812 338.445312 301.183594 348.910156 288.339844 348.910156 Z M 288.339844 348.910156 "
+                                  fill-opacity="1" fill-rule="nonzero"/>
+                        </g>
+                    </svg>
+                    <span class="link-name <?= $active == "dashboard" ? "active" : "" ?>">About Me</span>
+                </a>
+            </li>
+   
+            <li>
+                <button class="dropdown-btn">
+                <svg class="icon <?= $active == "dashboard" ? "active" : "" ?>" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify"
                          viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
                         <defs>
@@ -52,34 +73,14 @@ if (isset($_SESSION['employee_id'])){
                                   fill-opacity="1" fill-rule="nonzero"/>
                         </g>
                     </svg>
-                    <span class="link-name <?= $active == "dashboard" ? "active" : "" ?>">About Me</span>
-                </a>
-            </li>
-   
-            <li>
-                <button class="dropdown-btn">
-                    <svg class="icon <?= str_contains($active, "faculty") ? "active" : "" ?>"
-                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500"
-                         zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500"
-                         preserveAspectRatio="xMidYMid meet" version="1.0">
-                        <defs>
-                            <clipPath id="397a3b1a3c">
-                                <path d="M 35.453125 0 L 337.703125 0 L 337.703125 375 L 35.453125 375 Z M 35.453125 0 "
-                                      clip-rule="nonzero"/>
-                            </clipPath>
-                        </defs>
-                        <g clip-path="url(#397a3b1a3c)">
-                            <path d="M 240.347656 184.542969 C 268.097656 166.734375 286.5625 135.667969 286.5625 100.332031 C 286.5625 45.148438 241.65625 0.246094 186.472656 0.246094 C 131.289062 0.246094 86.386719 45.148438 86.386719 100.332031 C 86.386719 135.6875 104.851562 166.734375 132.601562 184.542969 C 75.863281 206.300781 35.453125 261.296875 35.453125 325.597656 C 35.453125 352.695312 57.511719 374.753906 84.609375 374.753906 L 288.320312 374.753906 C 315.433594 374.753906 337.476562 352.695312 337.476562 325.597656 C 337.492188 261.296875 297.085938 206.300781 240.347656 184.542969 Z M 112.226562 100.332031 C 112.226562 59.398438 145.539062 26.089844 186.472656 26.089844 C 227.40625 26.089844 260.71875 59.398438 260.71875 100.332031 C 260.71875 141.265625 227.40625 174.578125 186.472656 174.578125 C 145.539062 174.578125 112.226562 141.265625 112.226562 100.332031 Z M 288.339844 348.910156 L 84.609375 348.910156 C 71.746094 348.910156 61.296875 338.445312 61.296875 325.597656 C 61.296875 256.578125 117.453125 200.421875 186.472656 200.421875 C 255.496094 200.421875 311.652344 256.578125 311.652344 325.597656 C 311.632812 338.445312 301.183594 348.910156 288.339844 348.910156 Z M 288.339844 348.910156 "
-                                  fill-opacity="1" fill-rule="nonzero"/>
-                        </g>
-                    </svg>
+              
                     <span class="link-name <?= str_contains($active, "faculty") ? "active" : "" ?>">Leave</span>
                     <img class="arrow" src="images/arrow.svg" alt=""/>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="<?= $active == "all faculty" ? "active" : "" ?>" href="./request_leave.php">Application</a>
-                    <a class="<?= $active == "add faculty" ? "active" : "" ?>" href="add_faculty.php">Status</a>
-                    <a class="<?= $active == "edit faculty" ? "active" : "" ?>" href="javascript:void(0)"
+                    <a class="<?= $active == "application" ? "active" : "" ?>" href="./request_leave.php">Application</a>
+                    <a class="<?= $active == "status" ? "active" : "" ?>" href="./status.php">Status</a>
+                    <a class="<?= $active == "notification" ? "active" : "" ?>" href="./notifications.php"
                        >Notifications</a>
                     <!--                    <a class="-->
                     <?php //= $active == "status faculty" ? "active" : "disabled" ?><!--" href="javascript:void(0)" disabled>Status</a>-->
@@ -87,7 +88,7 @@ if (isset($_SESSION['employee_id'])){
                 </div>
             </li>
             <li>
-                <a class="s-link" href="../includes/logout.php">
+                <a class="s-link" href="./includes/logout.php">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                          width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500"
                          preserveAspectRatio="xMidYMid meet" version="1.0">

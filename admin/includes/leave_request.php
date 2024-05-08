@@ -1,25 +1,23 @@
-<?php 
-
+<?php
 include('connection.php');
 
 function updateDataEmployee($conn, $leave_id, $employee_id, $newData, $application_status)
 {
-    $setClause = "";
-    foreach ($newData as $column => $value) {
-        $setClause .= "$column = '$value', ";
-    }
-    $setClause = rtrim($setClause, ', ');
-
-    $sqlUpdate = "UPDATE employee_tbl SET $setClause WHERE employee_id = '$employee_id'";
-    $resultUpdate = mysqli_query($conn, $sqlUpdate) or die(mysqli_error($conn));
-
+    // Use prepared statement to prevent SQL injection
+    $sqlUpdate = "UPDATE employee_tbl SET status = ? WHERE employee_id = ?";
+    $stmt = mysqli_prepare($conn, $sqlUpdate);
+    mysqli_stmt_bind_param($stmt, "si", $newData['status'], $employee_id);
+    $resultUpdate = mysqli_stmt_execute($stmt);
 
     if ($resultUpdate) {
-        $sqlUpdateLeave = "UPDATE leave_tbl SET application_status = '$application_status' WHERE leave_id = '$leave_id'";
-        $resultUpdateLeave = mysqli_query($conn, $sqlUpdateLeave) or die(mysqli_error($conn));
+        // Update leave_tbl
+        $sqlUpdateLeave = "UPDATE leave_tbl SET application_status = ? WHERE leave_id = ?";
+        $stmtLeave = mysqli_prepare($conn, $sqlUpdateLeave);
+        mysqli_stmt_bind_param($stmtLeave, "si", $application_status, $leave_id);
+        $resultUpdateLeave = mysqli_stmt_execute($stmtLeave);
 
         if ($resultUpdateLeave) {
-            return $resultUpdateLeave;
+            return true;
         } else {
             return false;
         }
@@ -28,18 +26,31 @@ function updateDataEmployee($conn, $leave_id, $employee_id, $newData, $applicati
     }
 }
 
-$leave_id = $_POST['arguments'][0];
-$employee_id = $_POST['arguments'][1];
-$newData = $_POST['arguments'][2];
-$application_status = $_POST['arguments'][3];
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the function name is provided and is 'updateDataEmployee'
+    if (isset($_POST['functionname']) && $_POST['functionname'] === 'updateDataEmployee') {
+        // Check if all necessary arguments are provided
+        if (isset($_POST['arguments']) && count($_POST['arguments']) === 4) {
+            $leave_id = $_POST['arguments'][0];
+            $employee_id = $_POST['arguments'][1];
+            $newData = $_POST['arguments'][2];
+            $application_status = $_POST['arguments'][3];
 
-$updateResult = updateDataEmployee($conn, $leave_id, $employee_id, $newData, $application_status);
+            // Update the data
+            $updateResult = updateDataEmployee($conn, $leave_id, $employee_id, $newData, $application_status);
 
-if ($updateResult !== false) {
-    echo "Request Approved Successfully";
-    header("Location: ../index.php");
+            if ($updateResult) {
+                echo "Request Approved/Rejected Successfully";
+            } else {
+                echo "Error updating employee data";
+            }
+        } else {
+            echo "Missing arguments";
+        }
+    } else {
+        echo "Invalid function name";
+    }
 } else {
-    echo "Error updating employee data: " . mysqli_error($conn);
+    echo "Invalid request method";
 }
-
-?>

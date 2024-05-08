@@ -2,11 +2,12 @@
 
 include('includes/connection.php');
 session_start();
-if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
-    header('location:login.php');
-    exit();
-}
-if (isset($_SESSION['admin_id'])) {
+// Check if admin_id session variable is not set or empty
+if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
+    // Redirect to login page
+    header('Location: login.php');
+    exit(); // Stop further execution of the script
+} elseif (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
