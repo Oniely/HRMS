@@ -7,117 +7,7 @@ include('includes/connection.php');
 
 
 session_start();
-// if (isset($_SESSION['employee_id'])) {
-//     $id = $_SESSION['employee_id'];
-//     $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
-//     $query_res = mysqli_query($conn, $query);
 
-//     if ($row = mysqli_fetch_assoc($query_res)) {
-//         // Fetch and display basic personal information for faculty
-//         $faculty_id = $row['faculty_id'];
-//         $fname = $row['fname'];
-//         $lname = $row['lname'];
-//         $sex = $row['sex'];
-//         $contact = $row['contact_number'];
-//         $email = $row['email'];
-//         $permanent_address = $row['permanent_address'];
-//         $status = $row['status'];
-//         $photo_path = !empty($row['photo_path']) ? $row['photo_path'] : "images/profile-black.svg"; // Use default image if photo path is empty
-
-//         // Fetch and display educational attainment for faculty
-//         $elem_query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
-//         $elem_query_res = mysqli_query($conn, $elem_query);
-//         if ($elem_row = mysqli_fetch_assoc($elem_query_res)) {
-//             $elem_school = $elem_row['schoolname'];
-//             $elem_address = $elem_row['address'];
-//             $elem_year = $elem_row['year_graduate'];
-//         }
-
-//         // Fetch and display high school education
-//         $highschool_query = "SELECT * FROM highschool_tbl WHERE employee_id = $id";
-//         $highschool_query_res = mysqli_query($conn, $highschool_query);
-//         if ($highschool_row = mysqli_fetch_assoc($highschool_query_res)) {
-//             $highschool_school = $highschool_row['schoolname'];
-//             $highschool_address = $highschool_row['address'];
-//             $highschool_year = $highschool_row['year_graduate'];
-//         }
-
-//         // Fetch and display vocational education
-//         $vocational_query = "SELECT * FROM vocational_tbl WHERE employee_id = $id";
-//         $vocational_query_res = mysqli_query($conn, $vocational_query);
-//         if ($vocational_row = mysqli_fetch_assoc($vocational_query_res)) {
-//             $vocational_school = $vocational_row['schoolname'];
-//             $vocational_course = $vocational_row['course'];
-//             $vocational_address = $vocational_row['address'];
-//             $vocational_year = $vocational_row['year_graduate'];
-//         }
-
-//         // Fetch and display college education
-//         $college_query = "SELECT * FROM college_tbl WHERE employee_id = $id";
-//         $college_query_res = mysqli_query($conn, $college_query);
-//         if ($college_row = mysqli_fetch_assoc($college_query_res)) {
-//             $college_school = $college_row['schoolname'];
-//             $college_course = $college_row['course'];
-//             $college_address = $college_row['address'];
-//             $college_year = $college_row['year_graduate'];
-//         }
-//     } else {
-//         // If user is not in faculty_tbl, assume they are an employee
-//         $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
-//         $query_res = mysqli_query($conn, $query);
-
-//         if ($row = mysqli_fetch_assoc($query_res)) {
-//             // Fetch and display basic personal information for employee
-//             $employee_id = $row['employee_id'];
-//             $fname = $row['fname'];
-//             $lname = $row['lname'];
-//             $email = $row['email'];
-//             $sex = $row['sex'];
-//             $contact = $row['contact_number'];
-//             $permanent_address = $row['permanent_address'];
-//             $status = $row['status'];
-//             $photo_path = !empty($row['photo_path']) ? $row['photo_path'] : "images/profile-black.svg"; // Use default image if photo path is empty
-
-//             // Fetch and display educational attainment for employee
-//             $elem_query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
-//             $elem_query_res = mysqli_query($conn, $elem_query);
-//             if ($elem_row = mysqli_fetch_assoc($elem_query_res)) {
-//                 $elem_school = $elem_row['schoolname'];
-//                 $elem_address = $elem_row['address'];
-//                 $elem_year = $elem_row['year_graduate'];
-//             }
-
-//             // Fetch and display high school education
-//             $highschool_query = "SELECT * FROM highschool_tbl WHERE employee_id = $id";
-//             $highschool_query_res = mysqli_query($conn, $highschool_query);
-//             if ($highschool_row = mysqli_fetch_assoc($highschool_query_res)) {
-//                 $highschool_school = $highschool_row['schoolname'];
-//                 $highschool_address = $highschool_row['address'];
-//                 $highschool_year = $highschool_row['year_graduate'];
-//             }
-
-//             // Fetch and display vocational education
-//             $vocational_query = "SELECT * FROM vocational_tbl WHERE employee_id = $id";
-//             $vocational_query_res = mysqli_query($conn, $vocational_query);
-//             if ($vocational_row = mysqli_fetch_assoc($vocational_query_res)) {
-//                 $vocational_school = $vocational_row['schoolname'];
-//                 $vocational_course = $vocational_row['course'];
-//                 $vocational_address = $vocational_row['address'];
-//                 $vocational_year = $vocational_row['year_graduate'];
-//             }
-
-//             // Fetch and display college education
-//             $college_query = "SELECT * FROM college_tbl WHERE employee_id = $id";
-//             $college_query_res = mysqli_query($conn, $college_query);
-//             if ($college_row = mysqli_fetch_assoc($college_query_res)) {
-//                 $college_school = $college_row['schoolname'];
-//                 $college_course = $college_row['course'];
-//                 $college_address = $college_row['address'];
-//                 $college_year = $college_row['year_graduate'];
-//             }
-//         }
-//     }
-// }
 
 if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
@@ -237,9 +127,9 @@ $active = "about staff";
         <!-- NEW THINGS -->
         <div class="status-container">
             <div class="status-nav">
-                <a href="#" id="pending-link">Pending</a>
-                <a href="#" id="balance-link">Leave Balance</a>
-                <a href="#" id="history-link">Leave Usage History</a>
+                <button id="pending-link">Pending</button>
+                <button id="balance-link">Leave Balance</button>
+                <button id="history-link">Leave Usage History</button>
             </div>
             <div class="status-content" id="status-content">
 
@@ -261,64 +151,38 @@ $active = "about staff";
     balanceLink.addEventListener('click', () => showContent('balance'));
     historyLink.addEventListener('click', () => showContent('history'));
 
+    window.addEventListener('load', () => {
+       showContent('history');
+    });
+
+    function getContent(path) {
+        $.ajax({
+            url: path,
+            type: 'GET',
+            success: (res) => {
+                $('#status-content').html(res)
+            },
+            error: () => {
+                $('#status-content').html("<p>Error loading content</p>")
+            }
+        })
+    }
+
     function showContent(type) {
         let content;
         switch (type) {
             case 'pending':
-                content = "<p>This is pending content</p>";
+                getContent('status/pending.php');
                 break;
             case 'balance':
-                content = "<p>This is leave balance content</p>";
+                getContent('status/leave_balance.php');
                 break;
             case 'history':
-                content = "<?php
-                            $sql = "SELECT * FROM leave_tbl WHERE employee_id = '$employee_id'";
-                            $result = mysqli_query($conn, $sql);
-                            if ($result && mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $employee_id = $row['employee_id'];
-                                    $employee_name = $row['employee_name'];
-                                    $reason = $row['reason'];
-                                    $leave_type = $row['leave_type'];
-                                    $start_date = $row['from_date'];
-                                    $end_date = $row['to_date'];
-                                    $date = date('Y-m-d');
-                                    $status = $row['application_status'];
-                                    $leave_id = $row['leave_id'];
-
-
-                                   if( $status == 'ACCEPTED') {
-                                        $statusBackground = '#48cfae';
-                                    } elseif ($status == 'REJECTED') {
-                                        $statusBackground = '#fa5858';
-                                    } elseif($status == 'PENDING') {
-                                        $statusBackground = '#f6c06e';
-                                    }
-
-                                    echo "<div class='status-items' id='notification_$leave_id' style='background-color: $statusBackground'>";
-                                    echo "<table>";
-                                    echo "<tr'>";
-                                    echo "<th>Application No. </th>";
-                                    echo "<th>Type of Leave </th>";
-                                    echo "<th>Data of Application</th>";
-                                    echo "<th>Status</th>";
-                                    echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>$leave_id</td>";
-                                    echo "<td>$leave_type</td>";
-                                    echo "<td>$start_date</td>";
-                                    echo "<td>$status</td>";
-                                    echo "</tr>";
-                                    echo "</table>";
-                                    echo "</div>";
-                                }
-                            }
-                            ?>";
+                getContent('status/status.php');
                 break;
             default:
                 content = "<p>Content not available</p>";
         }
-        statusContent.innerHTML = content;
 
         pendingLink.classList.remove('active');
         balanceLink.classList.remove('active');
@@ -335,5 +199,7 @@ $active = "about staff";
                 historyLink.classList.add('active');
                 break;
         }
+        statusContent.innerHTML = content;
+
     }
 </script>

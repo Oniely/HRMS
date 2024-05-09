@@ -2,6 +2,7 @@
 
 include('includes/connection.php');
 session_start();
+session_name('adminSession');
 if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
     header('location:login.php');
     exit();

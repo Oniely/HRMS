@@ -18,6 +18,8 @@ function loginAuth($username, $password)
     $sql = "SELECT * FROM admin_tbl WHERE username='$username'";
     $result = $conn->query($sql);
 
+    session_name('adminSession');
+    session_start();
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if ($password === $row['password']) {

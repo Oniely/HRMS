@@ -1,3 +1,4 @@
+
 .section-container {
   position: relative;
   width: 100%;
@@ -15,7 +16,7 @@
   padding-left: 1.5rem;
   text-decoration: none;
 }
-.status-nav a {
+.status-nav button {
   padding-left: 1rem;
 }
 .status-content-title {
@@ -31,6 +32,7 @@
   border-radius: 15px;
   margin: 2rem;
 }
+
 table {
   width: 100%;
 }
@@ -80,3 +82,32 @@ th {
   background-color: #6d85db;
   transition: width 0.5s ease;
 }
+
+.p-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
+
+.p-top {
+  background: #E6F1FF;
+  border-radius: 5px;
+  padding: 1.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: start;
+  gap: 2rem;
+}
+
+.p-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p-info h2 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+

@@ -1,6 +1,7 @@
 <?php
 
 include('includes/connection.php');
+session_name('adminSession');
 session_start();
 // Check if admin_id session variable is not set or empty
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {

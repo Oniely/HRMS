@@ -1,6 +1,6 @@
 <?php
 
-
+session_name('adminSession');
 session_start();
 
 
