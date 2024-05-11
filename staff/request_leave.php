@@ -49,19 +49,9 @@ $active = "leave application";
                                                  Employee ID</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <textarea name="reason" id="reason" class="block py-2.5 px-0 w-full text-sm bg-transparent border-1 border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
-                           </textarea>
-                                          <label for="citizenship" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Reason</label>
-                                   </div>
-                                   <div class="relative z-0">
                                           <input type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " disabled value="<?php echo "$fname $lname" ?>" />
                                           <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
                                                  Name</label>
-                                   </div>
-                                   <div class="relative z-0">
-                                          <textarea name="accompany" id="accompany  " class="block py-2.5 px-0 w-full text-sm bg-transparent border-1 border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
-                           </textarea>
-                                          <label for="citizenship" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Accompany</label>
                                    </div>
                                    <div class="relative z-0">
                                           <input type="date" name="from_date" id="from_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
@@ -86,8 +76,16 @@ $active = "leave application";
                                           <input type="text" name="destination" id="destination" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                                           <label for="dob" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Destination</label>
                                    </div>
-                                   <div class="btns">
-                                          <button id="submit" name="submit">APPLY LEAVE</button>
+                                   <div class="relative z-0">
+                                          <textarea name="accompany" id="accompany" class="block py-2.5 px-0 w-full text-sm bg-transparent border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer h-[45px]" placeholder=" "></textarea>
+                                          <label for="accompany" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-7 scale-75 -top-3 -left-3 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-7 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Accompany</label>
+                                   </div>
+                                   <div class="relative z-0">
+                                          <textarea name="reason" id="reason" class="block py-2.5 px-0 w-full text-sm bg-transparent border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer h-[45px]" placeholder=" "></textarea>
+                                          <label for="reason" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-7 scale-75 -top-3 -left-3 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-7 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Reason</label>
+                                   </div>
+                                   <div class="btns bg-[#6d85db] text-white px-4 py-3 w-1/3 flex items-center justify-center rounded-md col-span-2 place-self-end cursor-pointer">
+                                          <button id="submit" name="submit" class="font-bold">APPLY LEAVE</button>
                                    </div>
                                    <?php
                                    if (isset($_POST['submit'])) {

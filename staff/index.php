@@ -1,14 +1,123 @@
 <?php
+
+global $conn;
+
 include('includes/connection.php');
 
+
+
 session_start();
+if (isset($_SESSION['employee_id'])) {
+    $id = $_SESSION['employee_id'];
+    $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
+    $query_res = mysqli_query($conn, $query);
 
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        // Fetch and display basic personal information for faculty
+        $faculty_id = $row['faculty_id'];
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $sex = $row['sex'];
+        $contact = $row['contact_number'];
+        $email = $row['email'];
+        $permanent_address = $row['permanent_address'];
+        $status = $row['status'];
+        $photo_path = !empty($row['photo_path']) ? $row['photo_path'] : "images/profile-black.svg"; // Use default image if photo path is empty
 
-if (!isset($_SESSION['employee_id'])) {
-    header('location: staff_login.php');
-    exit();
+        // Fetch and display educational attainment for faculty
+        $elem_query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
+        $elem_query_res = mysqli_query($conn, $elem_query);
+        if ($elem_row = mysqli_fetch_assoc($elem_query_res)) {
+            $elem_school = $elem_row['schoolname'];
+            $elem_address = $elem_row['address'];
+            $elem_year = $elem_row['year_graduate'];
+        }
+
+        // Fetch and display high school education
+        $highschool_query = "SELECT * FROM highschool_tbl WHERE employee_id = $id";
+        $highschool_query_res = mysqli_query($conn, $highschool_query);
+        if ($highschool_row = mysqli_fetch_assoc($highschool_query_res)) {
+            $highschool_school = $highschool_row['schoolname'];
+            $highschool_address = $highschool_row['address'];
+            $highschool_year = $highschool_row['year_graduate'];
+        }
+
+        // Fetch and display vocational education
+        $vocational_query = "SELECT * FROM vocational_tbl WHERE employee_id = $id";
+        $vocational_query_res = mysqli_query($conn, $vocational_query);
+        if ($vocational_row = mysqli_fetch_assoc($vocational_query_res)) {
+            $vocational_school = $vocational_row['schoolname'];
+            $vocational_course = $vocational_row['course'];
+            $vocational_address = $vocational_row['address'];
+            $vocational_year = $vocational_row['year_graduate'];
+        }
+
+        // Fetch and display college education
+        $college_query = "SELECT * FROM college_tbl WHERE employee_id = $id";
+        $college_query_res = mysqli_query($conn, $college_query);
+        if ($college_row = mysqli_fetch_assoc($college_query_res)) {
+            $college_school = $college_row['schoolname'];
+            $college_course = $college_row['course'];
+            $college_address = $college_row['address'];
+            $college_year = $college_row['year_graduate'];
+        }
+    } else {
+        // If user is not in faculty_tbl, assume they are an employee
+        $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            // Fetch and display basic personal information for employee
+            $employee_id = $row['employee_id'];
+            $fname = $row['fname'];
+            $lname = $row['lname'];
+            $email = $row['email'];
+            $sex = $row['sex'];
+            $contact = $row['contact_number'];
+            $permanent_address = $row['permanent_address'];
+            $status = $row['status'];
+            $photo_path = !empty($row['photo_path']) ? $row['photo_path'] : "images/profile-black.svg"; // Use default image if photo path is empty
+
+            // Fetch and display educational attainment for employee
+            $elem_query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
+            $elem_query_res = mysqli_query($conn, $elem_query);
+            if ($elem_row = mysqli_fetch_assoc($elem_query_res)) {
+                $elem_school = $elem_row['schoolname'];
+                $elem_address = $elem_row['address'];
+                $elem_year = $elem_row['year_graduate'];
+            }
+
+            // Fetch and display high school education
+            $highschool_query = "SELECT * FROM highschool_tbl WHERE employee_id = $id";
+            $highschool_query_res = mysqli_query($conn, $highschool_query);
+            if ($highschool_row = mysqli_fetch_assoc($highschool_query_res)) {
+                $highschool_school = $highschool_row['schoolname'];
+                $highschool_address = $highschool_row['address'];
+                $highschool_year = $highschool_row['year_graduate'];
+            }
+
+            // Fetch and display vocational education
+            $vocational_query = "SELECT * FROM vocational_tbl WHERE employee_id = $id";
+            $vocational_query_res = mysqli_query($conn, $vocational_query);
+            if ($vocational_row = mysqli_fetch_assoc($vocational_query_res)) {
+                $vocational_school = $vocational_row['schoolname'];
+                $vocational_course = $vocational_row['course'];
+                $vocational_address = $vocational_row['address'];
+                $vocational_year = $vocational_row['year_graduate'];
+            }
+
+            // Fetch and display college education
+            $college_query = "SELECT * FROM college_tbl WHERE employee_id = $id";
+            $college_query_res = mysqli_query($conn, $college_query);
+            if ($college_row = mysqli_fetch_assoc($college_query_res)) {
+                $college_school = $college_row['schoolname'];
+                $college_course = $college_row['course'];
+                $college_address = $college_row['address'];
+                $college_year = $college_row['year_graduate'];
+            }
+        }
+    }
 }
-
 
 if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
@@ -24,7 +133,10 @@ if (isset($_SESSION['employee_id'])) {
         $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $status = $row['status'];
-        $photo_path = $row['photo_path'] ?? "images/profile-black.svg";
+        $photo_path = $row['photo_path'];
+        if (empty($photo_path)) {
+            $photo_path = "images/profile-black.svg"; // Change this to your default image path
+        }
     } elseif (!$row) {
         // Data not found in faculty_tbl, handle here
         // Fetch data from employee_tbl
@@ -42,6 +154,9 @@ if (isset($_SESSION['employee_id'])) {
             $permanent_address = $row['permanent_address'];
             $status = $row['status'];
             $photo_path = $row['photo_path'];
+            if (empty($photo_path)) {
+                $photo_path = "images/profile-black.svg"; // Change this to your default image path
+            }
         }
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
@@ -82,9 +197,9 @@ if (isset($_SESSION['employee_id'])) {
     }
 }
 
-require_once './includes/query.php';
 
-$active = "profile"
+require_once './includes/query.php';
+$active = "about staff";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,14 +210,13 @@ $active = "profile"
     <title>Southland College</title>
     <!-- Styles -->
     <link rel="stylesheet" href="styles/nav.css" />
-    <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/about.css" />
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
+    <script src="script/status-modal.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -110,13 +224,17 @@ $active = "profile"
     <?php require 'partials/aside.php' ?>
     <!-- Navbar -->
     <?php require 'partials/nav.php' ?>
-    <!-- Dashboard -->
+    <!-- All Staff -->
     <!-- ONLY SECTION ONLY -->
-    <!-- Desktop Section -->
     <section class="section container">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
-            <h1>Personal Information</h1>
+            <h1>About Employee</h1>
+            <div class="breadcrumbs">
+                <a href="#">Home</a>
+                <a href="#">Other Staff</a>
+                <a href="#">Staff</a>
+            </div>
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
@@ -152,10 +270,8 @@ $active = "profile"
             </div>
             <div class="about">
                 <div class="about-me">
-                    <div class="about-me">
-                        <button>About Me</button>
-                        <button class="status-btn"><a href="request_leave.php">REQUEST</a></button>
-                    </div>
+                    <button>About Me</button>
+                    <button class="status-btn"><a href="request_leave.php">REQUEST</a></button>
 
                 </div>
                 <div class="info">
@@ -189,47 +305,6 @@ $active = "profile"
             </div>
         </div>
     </section>
-    <!-- Mobile Section -->
-    <main class="m-main">
-        <div class="m-top">
-            <button class="m-profile-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
-                    <path d="M 187.496094 242.777344 C 139.324219 242.777344 100.132812 203.585938 100.132812 155.410156 C 100.132812 107.238281 139.324219 68.046875 187.496094 68.046875 C 235.667969 68.046875 274.863281 107.238281 274.863281 155.410156 C 274.863281 203.585938 235.667969 242.777344 187.496094 242.777344 Z M 187.496094 80.078125 C 145.957031 80.078125 112.164062 113.871094 112.164062 155.410156 C 112.164062 196.949219 145.957031 230.746094 187.496094 230.746094 C 229.035156 230.746094 262.828125 196.949219 262.828125 155.410156 C 262.828125 113.871094 229.035156 80.078125 187.496094 80.078125 Z M 320.078125 54.917969 C 284.664062 19.503906 237.578125 0 187.496094 0 C 137.414062 0 90.328125 19.503906 54.917969 54.917969 C 19.503906 90.328125 0 137.414062 0 187.496094 C 0 237.578125 19.503906 284.664062 54.917969 320.078125 C 90.328125 355.492188 137.414062 374.992188 187.496094 374.992188 C 237.578125 374.992188 284.664062 355.492188 320.078125 320.078125 C 355.492188 284.664062 374.992188 237.578125 374.992188 187.496094 C 374.992188 137.414062 355.492188 90.328125 320.078125 54.917969 Z M 63.425781 63.425781 C 96.566406 30.285156 140.628906 12.03125 187.496094 12.03125 C 234.363281 12.03125 278.429688 30.285156 311.570312 63.425781 C 344.710938 96.566406 362.960938 140.628906 362.960938 187.496094 C 362.960938 226.457031 350.335938 263.476562 327.042969 293.894531 C 308.503906 267.976562 278.902344 252.660156 246.753906 252.660156 L 128.238281 252.660156 C 96.089844 252.660156 66.488281 267.976562 47.949219 293.894531 C 24.65625 263.472656 12.03125 226.457031 12.03125 187.496094 C 12.03125 140.628906 30.285156 96.566406 63.425781 63.425781 Z M 187.496094 362.960938 C 140.628906 362.960938 96.566406 344.710938 63.425781 311.570312 C 60.824219 308.96875 58.324219 306.289062 55.90625 303.558594 C 72.027344 279.191406 98.925781 264.691406 128.238281 264.691406 L 246.753906 264.691406 C 276.066406 264.691406 302.964844 279.191406 319.085938 303.558594 C 316.671875 306.289062 314.171875 308.96875 311.570312 311.570312 C 278.429688 344.710938 234.363281 362.960938 187.496094 362.960938 Z M 187.496094 362.960938 " fill-opacity="1" fill-rule="nonzero" />
-                </svg>
-                <div class="m-profile-menu">
-                    <a href="about_faculty.php?employee_id">
-                        <div>
-                            <img src="images/1.svg" alt="" />
-                            <span>Profile</span>
-                        </div>
-                    </a>
-                    <a href="about_faculty.php?employee_id">
-                        <div>
-                            <img src="images/5.svg" alt="" />
-                            <span>Setting</span>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div>
-                            <img src="images/3.svg" alt="" />
-                            <span>Help</span>
-                        </div>
-                    </a>
-                    <a href="/HRMS/staff/includes/logout.php">
-                        <div>
-                            <img src="images/arrow.svg" alt="" />
-                            <span>Logout</span>
-                        </div>
-                    </a>
-                </div>
-            </button>
-
-            <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Dashboard</a>
-            </div>
-        </div>
-    </main>
 </body>
 
 </html>
