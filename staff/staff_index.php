@@ -24,10 +24,7 @@ if (isset($_SESSION['employee_id'])) {
         $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $status = $row['status'];
-        $photo_path = $row['photo_path'];
-        if (empty($photo_path)) {
-            $photo_path = "images/profile-black.svg"; // Change this to your default image path
-        }
+        $photo_path = $row['photo_path'] ?? "images/profile-black.svg";
     } elseif (!$row) {
         // Data not found in faculty_tbl, handle here
         // Fetch data from employee_tbl
@@ -90,7 +87,6 @@ if (isset($_SESSION['employee_id'])) {
 
 require_once './includes/query.php';
 
-
 $active = "profile"
 ?>
 <!DOCTYPE html>
@@ -130,7 +126,7 @@ $active = "profile"
         <div class="about-container">
             <div class="about-profile">
                 <div class="prof-img">
-                    <img src="<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile">
+                    <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">
@@ -234,137 +230,6 @@ $active = "profile"
             <div class="breadcrumbs">
                 <a href="#">Home</a>
                 <a href="#">Dashboard</a>
-            </div>
-        </div>
-        <!-- ONLY CHANGE THIS -->
-        <div class="m-content">
-            <h1>Dashboard</h1>
-
-            <div class="dashboard-boxes container">
-                <div class="box employee">
-                    <div class="box-img">
-                        <img src="images/box (1).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Employee</h1>
-                        <?php
-                        $sql1 = "SELECT COUNT(*) as count FROM employee_tbl";
-                        $sql2 = "SELECT COUNT(*) as count FROM faculty_tbl";
-                        $result1 = mysqli_query($conn, $sql1);
-                        $result2 = mysqli_query($conn, $sql2);
-                        $row1 = mysqli_fetch_assoc($result1);
-                        $row2 = mysqli_fetch_assoc($result2);
-                        $total = $row1['count'] + $row2['count'];
-                        echo '<h2>' . $total . '</h2>';
-                        ?>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-                <div class="box staff">
-                    <div class="box-img">
-                        <img src="images/box (2).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Staff</h1>
-                        <?php
-                        $sql = "SELECT COUNT(*) as count FROM employee_tbl";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        echo '<h2>' . $row['count'] . '</h2>';
-                        ?>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-                <div class="box faculty">
-                    <div class="box-img">
-                        <img src="images/box (3).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Faculty</h1>
-                        <?php
-                        $sql = "SELECT COUNT(*) as count FROM faculty_tbl";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        echo '<h2>' . $row['count'] . '</h2>';
-                        ?>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-                <div class="box fulltime">
-                    <div class="box-img">
-                        <img src="images/box (4).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Fulltime</h1>
-                        <h2>250</h2>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Table -->
-        <div class="dashboard-table container">
-            <div class="table-title">
-                <h1>Faculty List</h1>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Contact no.</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Joining Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $query = mysqli_query($conn, "select * from `faculty_tbl`");
-                        while ($row = mysqli_fetch_array($query)) {
-                        ?>
-                            <tr>
-                                <td><label>
-                                        <?php echo $row['faculty_id']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['lname']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['contact_number']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['email']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['permanent_address']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['date_of_birth']; ?>
-                                    </label></td>
-                            </tr>
-                        <?php }
-                        ?>
-                    </tbody>
-                </table>
             </div>
         </div>
     </main>

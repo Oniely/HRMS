@@ -107,7 +107,7 @@ if (isset($_SESSION['employee_id'])) {
 
 
 require_once './includes/query.php';
-$active = "about staff";
+$active = "leave status";
 ?>
 <!DOCTYPE html>
 <html lang="en">

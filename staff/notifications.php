@@ -9,6 +9,7 @@ session_start();
 include('includes/connection.php');
 require_once './includes/query.php';
 
+$active = "leave notification";
 ?>
 
 <!DOCTYPE html>

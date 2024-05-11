@@ -7,7 +7,7 @@ session_start();
 require 'includes/connection.php';
 require 'includes/query.php';
 
-$active = "application";
+$active = "leave application";
 ?>
 
 <!DOCTYPE html>

@@ -79,7 +79,7 @@ include('./includes/connection.php');
             <span> <?= @$fname ?? "USER" ?> </span>
             <!-- Popup Menu -->
             <div class="profile-menu">
-                <a href="about_staff.php?employee_id">
+                <a href="staff_index.php">
                     <div>
                         <img src="images/1.svg" alt="" />
                         <span>Profile</span>

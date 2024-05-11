@@ -156,7 +156,6 @@
   object-fit: contain;
   flex-shrink: 0;
   aspect-ratio: 1/1;
-  fill: #303030;
 }
 
 .links .s-link.active {
@@ -165,6 +164,12 @@
 
 .side-link .icon.active {
   fill: #6d85db;
+  color: #6d85db;
+}
+
+.side-link .icon-leave.active {
+  fill: transparent;
+  color: #6d85db;
 }
 
 .links .dropdown-menu a.active {
@@ -239,7 +244,7 @@
 }
 
 .dropdown-menu.open {
-  height: 16rem;
+  height: 10rem;
   visibility: visible;
   opacity: 1;
   transition: none;
@@ -798,7 +803,6 @@
     object-fit: contain;
     flex-shrink: 0;
     aspect-ratio: 1/1;
-    fill: #303030;
   }
 
   .m-links .s-link.active {
