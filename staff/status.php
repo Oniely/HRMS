@@ -85,7 +85,25 @@ if (isset($_SESSION['employee_id'])) {
         $college_address = $row['address'];
         $college_year = $row['year_graduate'];
     }
+    $query = "SELECT * from leave_balance_tbl WHERE employee_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        $annual_leave = $row['annual_leave'];
+        $sick_leave = $row['sick_leave'];
+        $unpaid_leave = $row['unpaid_leave'];
+        $balance = $row['balance'];
+    }
+
+    $query = "SELECT * from leave_balance_tbl WHERE employee_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        $annual_leave = $row['annual_leave'];
+        $sick_leave = $row['sick_leave'];
+        $unpaid_leave = $row['unpaid_leave'];
+        $balance = $row['balance'];
+    }
 }
+
 
 
 require_once './includes/query.php';
@@ -108,6 +126,7 @@ $active = "about staff";
     <script src="script/status-modal.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body>
@@ -152,7 +171,7 @@ $active = "about staff";
     historyLink.addEventListener('click', () => showContent('history'));
 
     window.addEventListener('load', () => {
-       showContent('history');
+        showContent('balance');
     });
 
     function getContent(path) {

@@ -1,0 +1,80 @@
+.section-container {
+  position: relative;
+  width: 100%;
+  margin-top: 4rem;
+  bottom: 0;
+  background-color: #e6f1ff;
+  padding: 0 2rem;
+}
+
+.notification-container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 2rem;
+  cursor: pointer;
+}
+.notification-content-img {
+  object-fit: cover;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.notification-content-img img {
+  max-width: 50px;
+  max-height: 50px;
+}
+.notification-content-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.notification-content-desc {
+  font-weight: 300;
+  padding: 0.6rem 0;
+  border-bottom: 2px solid #ccc;
+}
+.notification-items {
+  border-top: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-content-text {
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-content-text h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 0.6rem;
+}
+
+.notification-content-text p {
+  align-items: center;
+  padding: 1rem 0 0 0;
+}
+
+.notification-content-text span {
+  display: block;
+  font-size: 12px;
+  text-align: end;
+  color: #767a7f;
+}
+.notification-content-text a {
+  display: block;
+  font-size: 12px;
+  text-align: end;
+  color: blue;
+  cursor: pointer;
+}
+.additional-content {
+  display: none; /* Initially hide the additional content */
+}
+
+.notification-items.expanded .additional-content {
+  display: block; /* Display the additional content when the notification is expanded */
+}

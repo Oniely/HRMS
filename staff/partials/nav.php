@@ -29,6 +29,15 @@ include('./includes/connection.php');
             <div class="notification-img-container">
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
+               <?php
+            include 'notification_count.php';
+
+            if ($notificationCount > 0) {
+                echo "<div class='notification-count' id='notificationCount'>";
+                echo $notificationCount;
+                echo "</div>";
+            }
+            ?>
             <!-- <div class="notification-menu">
                 <div class="notification-content">
                     <span>

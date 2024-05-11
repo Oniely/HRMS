@@ -37,7 +37,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
         </div>
     </div>
     <div class="right-nav">
-        <div class="notification-btn">
+        <a class="notification-btn" href="./notifications.php">
             <div class="notification-img-container">
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
@@ -50,8 +50,8 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                 echo "</div>";
             }
             ?>
-            <div class="notification-menu">
-                <a href="#"></a>
+            <!-- <div class="notification-menu">
+                <a href=""></a>
                 <div class="notification-content">
                     <span>
                         <?php
@@ -79,8 +79,6 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                                 }
 
                                 echo "<div class='notification-item $unreadClass' data-employee-id='$employee_id'>";
-
-
                                 echo "<strong> $employee_name </strong> requested to $leave_type due to ";
                                 echo "<button type='button' id='viewDetailsButton' class='btn btn-primary underline view-details' 
                                 data-leave_id='$leave_id' data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date'>View Details</button>";
@@ -93,51 +91,50 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                         ?>
                     </span>
                 </div>
-            </div>
+            </div> -->
 
-        </div>
 
-        <button class="profile-btn">
-            <div class="profile-img-container">
-                <img src="images/profile.svg" alt="" />
-            </div>
-            <span> <?= @$admin_fname ?? "ADMIN" ?> </span>
-            <!-- Popup Menu -->
-            <div class="profile-menu">
-                <a href="about_admin.php?admin_id ">
-                    <div>
-                        <img src="images/1.svg" alt="" />
-                        <span>Profile</span>
-                    </div>
-                </a>
-                <?= @$privilage === "super_admin" ?
-                    '<a href="admin_privilages.php ">
+            <button class="profile-btn">
+                <div class="profile-img-container">
+                    <img src="images/profile.svg" alt="" />
+                </div>
+                <span> <?= @$admin_fname ?? "ADMIN" ?> </span>
+                <!-- Popup Menu -->
+                <div class="profile-menu">
+                    <a href="about_admin.php?admin_id ">
+                        <div>
+                            <img src="images/1.svg" alt="" />
+                            <span>Profile</span>
+                        </div>
+                    </a>
+                    <?= @$privilage === "super_admin" ?
+                        '<a href="admin_privilages.php ">
                     <div>
                         <img src="images/key.svg" alt="" />
                         <span>Admin Privilages</span>
                     </div>
                 </a>' : ""
-                ?>
-                <a href="admin_privilages.php">
-                    <div>
-                        <img src="images/5.svg" alt="" />
-                        <span>Setting</span>
-                    </div>
-                </a>
-                <a href="">
-                    <div>
-                        <img src="images/3.svg" alt="" />
-                        <span>Help</span>
-                    </div>
-                </a>
-                <a href="./includes/logout.php">
-                    <div>
-                        <img src="images/arrow.svg" alt="" />
-                        <span>Logout</span>
-                    </div>
-                </a>
-            </div>
-        </button>
+                    ?>
+                    <a href="admin_privilages.php">
+                        <div>
+                            <img src="images/5.svg" alt="" />
+                            <span>Setting</span>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div>
+                            <img src="images/3.svg" alt="" />
+                            <span>Help</span>
+                        </div>
+                    </a>
+                    <a href="./includes/logout.php">
+                        <div>
+                            <img src="images/arrow.svg" alt="" />
+                            <span>Logout</span>
+                        </div>
+                    </a>
+                </div>
+            </button>
     </div>
 </nav>
 
@@ -315,7 +312,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
 <?php include_once "modals/confirm_request.modal.php" ?>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('.view-details').click(function() {
             var leave_id = $(this).data('leave_id');
@@ -423,4 +420,4 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
     // Fetch notifications initially and then periodically
     updateNotificationCount();
     setInterval(fetchNotifications, 5000); // Fetch every 5 seconds
-</script>
+</script> -->

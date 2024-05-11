@@ -3,8 +3,8 @@
 global $conn;
 
 include('includes/connection.php');
-session_start();
 session_name('adminSession');
+session_start();
 if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
     header('location:login.php');
     exit();

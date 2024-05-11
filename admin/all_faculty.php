@@ -1,8 +1,8 @@
 <?php
 
 include('includes/connection.php');
-session_start();
 session_name('adminSession');
+session_start();
 if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
     header('location:login.php');
     exit();
@@ -97,12 +97,12 @@ $active = "all faculty";
                         <table>
                             <thead>
                                 <th>Employee Id</th>
+                                <th>Status</th>
                                 <th>Name</th>
-                                <th>Designation</th>
                                 <th>Contact Number</th>
                                 <th>Email</th>
                                 <th>Address</th>
-                                <th>Joining Date</th>
+                                <th>Date of Birth</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
@@ -112,9 +112,9 @@ $active = "all faculty";
                                 ?>
                                     <tr>
                                         <td><label><?php echo $row['faculty_id']; ?></label></td>
+                                        <td><label><?= $row['status'] ?></label></td>
                                         <td><label><?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?></label>
                                         </td>
-                                        <td><label><?php echo $row['lname']; ?></label></td>
                                         <td><label><?php echo $row['contact_number']; ?></label></td>
                                         <td><label><?php echo $row['email']; ?></label></td>
                                         <td><label><?php echo $row['permanent_address']; ?></label></td>

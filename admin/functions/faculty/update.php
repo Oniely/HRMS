@@ -1,7 +1,6 @@
 <?php
 include('../../includes/connection.php');
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $faculty_id = $_GET['faculty_id'];
     $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $faculty_id";
@@ -28,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
         $permanent_address = $row['permanent_address'];
         $email = $row['email'];
         $contact_number = $row['contact_number'];
+        $photo = saveProfileImage() || null;
     } else {
         echo "No data found for the provided employee ID.";
     }
@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $philhealth_no = $_POST['philhealthno'];
     $height = $_POST['height'];
     $weight = $_POST['weight'];
+    $photo = $_POST['photo'];
     $res_barangay = $_POST['res_barangay'];
     $res_city = $_POST['res_city'];
     $res_province = $_POST['res_province'];
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $mother_lname = $_POST['mother_lname'];
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
 
-     $sql = "UPDATE faculty_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number' WHERE faculty_id='$faculty_id'";
+    $sql = "UPDATE faculty_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo' WHERE faculty_id='$faculty_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
@@ -93,7 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $sql = "UPDATE mothers_name SET fname = '$mother_fname', mname = '$mother_mname', lname = '$mother_lname' WHERE employee_id='$faculty_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in fathers_name :" . mysqli_error($conn);
-    }    if (mysqli_query($conn, $sql)) {
+    }
+    if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data Updated Successfully")</script>';
         echo '<script>window.open("../../all_faculty.php","_self")</script>';
     } else {

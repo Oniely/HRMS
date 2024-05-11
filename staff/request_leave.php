@@ -41,7 +41,7 @@ $active = "application";
               </div>
               <form class="f-container" method="post" enctype="multipart/form-data">
                      <div class="f-section">
-        
+
                             <div class="f-inputs px-0">
                                    <div class="relative z-0">
                                           <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " disabled value="<?php echo "$employee_id" ?>" />
@@ -75,7 +75,9 @@ $active = "application";
                                    </div>
                                    <div class="relative z-0">
                                           <select name="status" id="status" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
-                                                 <option value="LEAVE">Leave</option>
+                                                 <option value="Sick Leave">Sick Leave</option>
+                                                 <option value="Annual Leave">Annual Leave</option>
+                                                 <option value="Unpaid Leave">Unpaid Leave</option>
                                           </select>
                                           <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
                                                  Type of Leave</label>
@@ -97,28 +99,55 @@ $active = "application";
 
                                           $leave_id = rand($min, $max); // Generate a random number within the specified range
                                           $name = $fname . " " . $lname;
+
                                           $fromDate = $_POST['from_date'];
                                           $toDate = $_POST['to_date'];
-
 
                                           $fromDateTime = new DateTime($fromDate);
                                           $toDateTime = new DateTime($toDate);
 
-                                          // Calculate the difference between the from and to dates
                                           $interval = $fromDateTime->diff($toDateTime);
 
-                                          // Get the total days of leave
                                           $totalDaysLeave = $interval->days + 1; // Add 1 to include both the from and to dates
-                                          $initialLeaveBalance = 15; // Initial leave balance for each employee
 
+                                          $initialLeaveBalanceQuery = "SELECT * FROM leave_balance_tbl WHERE employee_id = $employee_id";
+                                          $initialLeaveBalanceResult = mysqli_query($conn, $initialLeaveBalanceQuery);
+
+                                          if ($initialLeaveBalanceResult && mysqli_num_rows($initialLeaveBalanceResult) > 0) {
+                                                 $row = mysqli_fetch_assoc($initialLeaveBalanceResult);
+                                                 $initialSickLeaveBalance = $row['sick_leave']; // Assuming 'sick_leave' is the column name for the initial sick leave balance
+                                                 $initialAnnualLeaveBalance = $row['annual_leave']; // Assuming 'annual_leave' is the column name for the initial annual leave balance
+                                                 $initialUnpaidLeaveBalance = $row['unpaid_leave']; // Assuming 'balance' is the column name for the initial leave balance
+                                          } else {
+                                                 echo "Error: Unable to retrieve initial leave balance.";
+                                                 exit; // Exit the script
+                                          }
+                                          if ($_POST['status'] === 'Sick Leave') {
+                                                 $initialLeaveBalance = $initialSickLeaveBalance;
+                                                 $leaveType = 'sick_leave';
+                                          } elseif ($_POST['status'] === 'Annual Leave') {
+                                                 $initialLeaveBalance = $initialAnnualLeaveBalance;
+                                                 $leaveType = 'annual_leave';
+                                          } elseif ($_POST['status'] === 'Unpaid Leave') {
+                                                 $initialLeaveBalance = $initialUnpaidLeaveBalance;
+                                                 $leaveType = 'unpaid_leave';
+                                          } else {
+                                                 // Handle unknown leave categories
+                                                 echo "Error: Unknown leave category selected.";
+                                                 exit; // Exit the script
+                                          }
                                           $balanceDays = $initialLeaveBalance - $totalDaysLeave;
 
+                                          $updateBalanceQuery = "UPDATE leave_balance_tbl SET $leaveType = $balanceDays WHERE employee_id = $employee_id";
+                                          $updateBalanceResult = mysqli_query($conn, $updateBalanceQuery);
 
-                                          // $newData = [
-                                          //     'status' => $_POST['status']
-                                          // ];
-
-                                          // updateDataEmployee($conn, $id, $newData);
+                                          if (!$updateBalanceResult) {
+                                                 // Error handling if unable to update leave balance
+                                                 echo "Error: Unable to update leave balance.";
+                                                 exit; // Exit the script
+                                          }
+                                          // Calculate the remaining leave balance after deducting the total days of leave
+                                          $balanceDays = $initialLeaveBalance - $totalDaysLeave;
 
                                           $insertData = [
                                                  'leave_id' => $leave_id,
@@ -133,12 +162,12 @@ $active = "application";
                                                  'application_status' => 'PENDING',
                                                  'destination' => $_POST['destination'],
                                                  'accompany_with' => $_POST['accompany'],
-                                                 'balance_days' => $balanceDays
-
+                                                 'balance_days' => $balanceDays // Include the remaining leave balance in the insert data
                                           ];
 
                                           insertLeaveEmployee($conn, 'leave_tbl', $insertData);
                                    }
+
                                    ?>
               </form>
        </section>

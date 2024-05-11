@@ -158,6 +158,23 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
         ];
         insertDataColumns($conn, 'graduate_tbl', $graduate_array);
 
+        $annual_leave_balance = 5; // Assuming a default value for annual leave balance
+        $sick_leave_balance = 5; // Assuming a default value for sick leave balance
+        $unpaid_leave_balance = 5; // Assuming a default value for unpaid leave balance
+
+        // Calculate the total balance
+        $total_balance = $annual_leave_balance + $sick_leave_balance + $unpaid_leave_balance;
+
+        $leave_balance_array = [
+               'employee_id' => $form['employee_id'],
+               'annual_leave' => $annual_leave_balance,
+               'sick_leave' => $sick_leave_balance,
+               'unpaid_leave' => $unpaid_leave_balance,
+               'balance' => $total_balance, // Set the total balance
+        ];
+        insertDataColumns($conn, 'leave_balance_tbl', $leave_balance_array);
+
+
         echo '<script>alert("Employee Added")</script>';
         redirect('/');
     }

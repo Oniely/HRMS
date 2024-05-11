@@ -111,3 +111,52 @@ th {
   font-weight: 700;
 }
 
+
+
+.leave-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 2rem;
+
+}
+.leave-title {
+  margin-bottom: 2rem;
+}
+.leave-title h3{
+  font-size: 24px;
+  font-weight: 600;
+}
+.leave-boxes {
+  display: grid;
+}
+.chart-container {
+  background-color: #E6F1FF;
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+}
+.leave-content {
+  background-color: #E6F1FF;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+}
+.leave-tbl {
+  padding: 0.6rem;
+}
+.leave-th {
+  background-color: #99acff;
+  padding: 1rem;
+  border-collapse: collapse;
+  border: 1px solid white;
+}
+.leave-td {
+  padding: 1rem;
+  border-collapse: collapse;
+  border: 1px solid white;
+  background-color: #E3E8FF;
+  text-align: center;
+  font-size: 18px;
+}
+#td-bg {
+  background-color: #CDD6FF;
+}
