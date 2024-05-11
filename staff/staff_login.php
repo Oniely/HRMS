@@ -33,7 +33,7 @@ include './includes/connection.php';
                     $password = $_POST['password'];
                     
                     if (staffloginAuth($username, $password)) {
-                        header('location: staff_index.php');
+                        header('location: index.php');
                     } else {
                         echo "<span class='w-full bg-red-500 text-center py-3 text-white'>Invalid Credentials</span>";
                     }

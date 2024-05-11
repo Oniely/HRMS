@@ -30,7 +30,7 @@ if (isset($_SESSION['employee_id'])) {
         </div>
         <ul class="links">
             <li>
-                <a class="s-link <?= $active == "profile" ? "active" : "" ?>" href="staff_index.php">
+                <a class="s-link <?= $active == "profile" ? "active" : "" ?>" href="index.php">
                     <svg class="icon <?= str_contains($active, "profile") ? "active" : "" ?>" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
                         <defs>
                             <clipPath id="397a3b1a3c">
