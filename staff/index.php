@@ -42,9 +42,6 @@ if (isset($_SESSION['employee_id'])) {
             $permanent_address = $row['permanent_address'];
             $status = $row['status'];
             $photo_path = $row['photo_path'];
-            if (empty($photo_path)) {
-                $photo_path = "images/profile-black.svg"; // Change this to your default image path
-            }
         }
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
@@ -126,7 +123,7 @@ $active = "profile"
         <div class="about-container">
             <div class="about-profile">
                 <div class="prof-img">
-                    <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
+                    <img src="/hrms/admin/<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile">
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">
