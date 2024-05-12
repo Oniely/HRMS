@@ -226,7 +226,7 @@ $active = "about staff";
     <?php require 'partials/nav.php' ?>
     <!-- All Staff -->
     <!-- ONLY SECTION ONLY -->
-    <section class="section container">
+    <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>About Employee</h1>

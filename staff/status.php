@@ -136,7 +136,7 @@ $active = "leave status";
     <?php require 'partials/nav.php' ?>
     <!-- All Staff -->
     <!-- ONLY SECTION ONLY -->
-    <section class="section container">
+    <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Leave Status</h1>
@@ -171,7 +171,7 @@ $active = "leave status";
     historyLink.addEventListener('click', () => showContent('history'));
 
     window.addEventListener('load', () => {
-        showContent('balance');
+        showContent('pending');
     });
 
     function getContent(path) {
@@ -203,22 +203,20 @@ $active = "leave status";
                 content = "<p>Content not available</p>";
         }
 
-        pendingLink.classList.remove('active');
-        balanceLink.classList.remove('active');
-        historyLink.classList.remove('active');
+        pendingLink.classList.remove('active-tab');
+        balanceLink.classList.remove('active-tab');
+        historyLink.classList.remove('active-tab');
 
         switch (type) {
             case 'pending':
-                pendingLink.classList.add('active');
+                pendingLink.classList.add('active-tab');
                 break;
             case 'balance':
-                balanceLink.classList.add('active');
+                balanceLink.classList.add('active-tab');
                 break;
             case 'history':
-                historyLink.classList.add('active');
+                historyLink.classList.add('active-tab');
                 break;
         }
-        statusContent.innerHTML = content;
-
     }
 </script>
