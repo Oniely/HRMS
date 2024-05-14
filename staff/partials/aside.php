@@ -61,7 +61,7 @@ if (isset($_SESSION['employee_id'])) {
                 </div>
             </li>
             <li>
-                <a class="s-link" href="./includes/logout.php">
+                <a class="s-link" href="#">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
                         <defs>
                             <clipPath id="2cd95ec2d4">
@@ -83,7 +83,7 @@ if (isset($_SESSION['employee_id'])) {
                         </g>
                         <path d="M 156.203125 55.375 C 158.375 55.375 160.46875 56.242188 162.011719 57.78125 C 163.550781 59.320312 164.417969 61.410156 164.417969 63.589844 C 164.417969 65.769531 163.550781 67.863281 162.011719 69.398438 C 160.46875 70.9375 158.375 71.804688 156.203125 71.804688 L 8.414062 71.804688 C 6.238281 71.804688 4.148438 70.9375 2.601562 69.398438 C 1.0625 67.863281 0.199219 65.769531 0.199219 63.589844 C 0.199219 61.410156 1.0625 59.320312 2.601562 57.78125 C 4.148438 56.242188 6.238281 55.375 8.414062 55.375 Z M 156.203125 55.375 " fill-opacity="1" fill-rule="nonzero" />
                     </svg>
-                    <span class="link-name">Log out</span>
+                    <span class="link-name">Settings</span>
                 </a>
             </li>
         </ul>

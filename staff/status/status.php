@@ -20,7 +20,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         $leave_id = $row['leave_id'];
 
 
-        if ($status == 'ACCEPTED') {
+        if ($status == 'APPROVED') {
             $statusBackground = '#48cfae';
         } elseif ($status == 'REJECTED') {
             $statusBackground = '#fa5858';

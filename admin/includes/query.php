@@ -3,6 +3,7 @@
  ini_set('display_startup_errors', 1);
  error_reporting(E_ALL);
 include('connection.php');
+
 // the $data takes in an object array: 
 /* $data = [
   'column_name1' => 'column_value1',

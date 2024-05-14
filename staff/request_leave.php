@@ -106,47 +106,37 @@ $active = "leave application";
 
                                           $interval = $fromDateTime->diff($toDateTime);
 
-                                          $totalDaysLeave = $interval->days + 1; // Add 1 to include both the from and to dates
+                                          $totalDaysLeave = $interval->days + 1; 
 
                                           $initialLeaveBalanceQuery = "SELECT * FROM leave_balance_tbl WHERE employee_id = $employee_id";
                                           $initialLeaveBalanceResult = mysqli_query($conn, $initialLeaveBalanceQuery);
 
                                           if ($initialLeaveBalanceResult && mysqli_num_rows($initialLeaveBalanceResult) > 0) {
                                                  $row = mysqli_fetch_assoc($initialLeaveBalanceResult);
-                                                 $initialSickLeaveBalance = $row['sick_leave']; // Assuming 'sick_leave' is the column name for the initial sick leave balance
-                                                 $initialAnnualLeaveBalance = $row['annual_leave']; // Assuming 'annual_leave' is the column name for the initial annual leave balance
-                                                 $initialUnpaidLeaveBalance = $row['unpaid_leave']; // Assuming 'balance' is the column name for the initial leave balance
-                                          } else {
-                                                 echo "Error: Unable to retrieve initial leave balance.";
-                                                 exit; // Exit the script
+                                                 $initialSickLeaveBalance = $row['sick_leave']; 
+                                                 $initialAnnualLeaveBalance = $row['annual_leave'];
+                                                 $initialUnpaidLeaveBalance = $row['unpaid_leave'];
+                                                 $initialBalance = $row['unpaid_leave'];
+                                          // } else {
+                                          //        echo "Error: Unable to retrieve initial leave balance.";
+                                          //        exit; // Exit the script
+                                          // }
+                                          // if ($_POST['status'] === 'Sick Leave') {
+                                          //        $initialLeaveBalance = $initialSickLeaveBalance;
+                                          //        $leaveType = 'sick_leave';
+                                          // } elseif ($_POST['status'] === 'Annual Leave') {
+                                          //        $initialLeaveBalance = $initialAnnualLeaveBalance;
+                                          //        $leaveType = 'annual_leave';
+                                          // } elseif ($_POST['status'] === 'Unpaid Leave') {
+                                          //        $initialLeaveBalance = $initialUnpaidLeaveBalance;
+                                          //        $leaveType = 'unpaid_leave';
+                                          // } else {
+                                          //        echo "Error: Unknown leave category selected.";
+                                          //        exit; // Exit the script
+                                          // }
                                           }
-                                          if ($_POST['status'] === 'Sick Leave') {
-                                                 $initialLeaveBalance = $initialSickLeaveBalance;
-                                                 $leaveType = 'sick_leave';
-                                          } elseif ($_POST['status'] === 'Annual Leave') {
-                                                 $initialLeaveBalance = $initialAnnualLeaveBalance;
-                                                 $leaveType = 'annual_leave';
-                                          } elseif ($_POST['status'] === 'Unpaid Leave') {
-                                                 $initialLeaveBalance = $initialUnpaidLeaveBalance;
-                                                 $leaveType = 'unpaid_leave';
-                                          } else {
-                                                 // Handle unknown leave categories
-                                                 echo "Error: Unknown leave category selected.";
-                                                 exit; // Exit the script
-                                          }
-                                          $balanceDays = $initialLeaveBalance - $totalDaysLeave;
-
-                                          $updateBalanceQuery = "UPDATE leave_balance_tbl SET $leaveType = $balanceDays WHERE employee_id = $employee_id";
-                                          $updateBalanceResult = mysqli_query($conn, $updateBalanceQuery);
-
-                                          if (!$updateBalanceResult) {
-                                                 // Error handling if unable to update leave balance
-                                                 echo "Error: Unable to update leave balance.";
-                                                 exit; // Exit the script
-                                          }
-                                          // Calculate the remaining leave balance after deducting the total days of leave
-                                          $balanceDays = $initialLeaveBalance - $totalDaysLeave;
-
+                        
+                                          $balanceDays = $initialBalance - $totalDaysLeave;
                                           $insertData = [
                                                  'leave_id' => $leave_id,
                                                  'employee_id' => $employee_id,

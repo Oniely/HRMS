@@ -65,7 +65,7 @@ $active = "leave notification";
 
 
                             $image = '';
-                            if ($row['application_status'] == 'ACCEPTED') {
+                            if ($row['application_status'] == 'APPROVED') {
                                 $image = 'approved.svg';
                             } elseif ($row['application_status'] == 'REJECTED') {
                                 $image = 'declined.svg';

@@ -199,7 +199,7 @@ if (isset($_SESSION['employee_id'])) {
 
 
 require_once './includes/query.php';
-$active = "about staff";
+$active = "profile";
 ?>
 <!DOCTYPE html>
 <html lang="en">

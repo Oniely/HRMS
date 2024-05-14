@@ -24,7 +24,7 @@ if (isset($_SESSION['admin_id'])) {
         $contact = $row['contact'];
     }
 }
-$active = "about faculty";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,10 +51,10 @@ $active = "about faculty";
 <?php require 'partials/nav.php' ?>
 <!-- All Staff -->
 <!-- ONLY SECTION ONLY -->
-<section class="section container">
+<section class="section">
     <!-- DEFAULT TITLE -->
     <div class="section-title">
-        <h1>About Employee</h1>
+        <h1>Admin</h1>
         <div class="breadcrumbs">
             <a href="#">Home</a>
             <a href="#">Other Faculty</a>
@@ -90,7 +90,6 @@ $active = "about faculty";
         <div class="about">
             <div class="about-me">
                 <button>About Me</button>
-                <button class="status-btn">Status</button>
 
                 <div class="status-modal">
                     <form method="POST" class="status-form">

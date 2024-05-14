@@ -169,7 +169,8 @@
 
 .side-link .icon-leave.active {
   fill: transparent;
-  color: #6d85db;
+  color: transparent;
+  stroke: #6d85db;
 }
 
 .links .dropdown-menu a.active {
@@ -815,6 +816,7 @@
 
   .m-links .dropdown-menu a.active {
     color: #6d85db;
+    stroke: #6d85db;
   }
 
   .link-name.active {
