@@ -63,7 +63,7 @@ function updateDataEmployee($conn, $id, $newData)
     return $result;
 }
 
-function updateDatae($conn, $table, $id, $newData)
+function updateEmployee($conn, $table, $id, $newData)
 {
     $setClause = "";
     foreach ($newData as $column => $value) {
@@ -71,7 +71,7 @@ function updateDatae($conn, $table, $id, $newData)
     }
 
     $setClause = rtrim($setClause, ', ');
-    $sql = "UPDATE $table SET $setClause WHERE id = $id";
+    $sql = "UPDATE $table SET $setClause WHERE employee_id = $id";
 
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 

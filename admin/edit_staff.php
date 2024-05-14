@@ -8,7 +8,7 @@ include('includes/connection.php');
 session_name('adminSession');
 session_start();
 
-$employee_id = $_GET["id"];
+$staff_id = $_GET["id"];
 
 $sql = "SELECT
   employee_tbl.*,
@@ -35,7 +35,7 @@ FROM
   INNER JOIN fathers_name ON employee_tbl.employee_id = fathers_name.employee_id
   INNER JOIN mothers_name ON employee_tbl.employee_id = mothers_name.employee_id
 WHERE
-  employee_tbl.employee_id = $employee_id";
+  employee_tbl.employee_id = $staff_id";
 
 
 $query = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -74,7 +74,7 @@ $active = 'edit staff';
               <div class="content-title">
                      <h3>Edit Staff Details</h3>
               </div>
-              <form class="f-container" method="post" action="functions/staff/update.php?employee_id=<?php echo $employee_id; ?>">
+              <form class="f-container" method="post" action="functions/staff/update.php?employee=true&employee_id=<?php echo $staff_id; ?>">
                      <div class="f-section">
                             <div class="f-title">
                                    <h1>Personal Information</h1>
@@ -82,7 +82,7 @@ $active = 'edit staff';
                             </div>
                             <div class="f-inputs px-0">
                                    <div class="relative z-0">
-                                          <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " value="<?php echo $employee_id ?>" />
+                                          <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " value="<?php echo $staff_id ?>" />
                                           <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Employee
                                                  ID</label>
                                    </div>
@@ -112,7 +112,7 @@ $active = 'edit staff';
                                                  Number</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="date" name="birthdate" id="dob" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " value="<?php echo $data_of_birth ?>" />
+                                          <input type="date" name="birthdate" id="dob" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " value="<?php echo $date_of_birth ?>" />
                                           <label for="dob" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Date
                                                  of Birth</label>
                                    </div>
@@ -272,7 +272,7 @@ $active = 'edit staff';
                             </div>
                      </div>
                      <div class="btns">
-                            <input type="submit" name="add" value="Add">
+                            <input type="submit" name="add" value="Update">
                             <a href="javascript:history.back()">Cancel</a>
                      </div>
               </form>

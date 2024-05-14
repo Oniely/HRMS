@@ -74,7 +74,7 @@ $active = "edit faculty";
               <div class="content-title">
                      <h3>Edit Faculty Details</h3>
               </div>
-              <form class="f-container" method="post" action="functions/faculty/update.php?faculty_id=<?php echo $faculty_id; ?>">
+              <form class="f-container" method="post" action="functions/faculty/update.php?faculty=true&faculty_id=<?php echo $faculty_id; ?>">
                      <div class="f-section">
                             <div class="f-title">
                                    <h1>Personal Information</h1>
@@ -272,7 +272,7 @@ $active = "edit faculty";
                             </div>
                      </div>
                      <div class="btns">
-                            <input type="submit" name="add" value="Add">
+                            <input type="submit" name="add" value="Update">
                             <a href="javascript:history.back()">Cancel</a>
                      </div>
               </form>

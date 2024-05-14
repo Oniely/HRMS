@@ -1,5 +1,6 @@
 <?php
 include('../../includes/connection.php');
+include('../../includes/query.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $employee_id = $_GET['employee_id'];
@@ -71,7 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
     $photo = $_POST['photo'];
 
-    $sql = "UPDATE employee_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo' WHERE employee_id='$employee_id'";
+    $target_file = '/hrms/admin/images/profiles/' . basename($_FILES['photo']['name']);
+    move_uploaded_file($_FILES['photo']['tmp_name'], $target_file);
+
+    $sql = "UPDATE employee_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$target_file' WHERE employee_id='$employee_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }

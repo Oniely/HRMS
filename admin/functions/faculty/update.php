@@ -1,9 +1,18 @@
 <?php
 include('../../includes/connection.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
+if ($_GET['faculty']) {
     $faculty_id = $_GET['faculty_id'];
-    $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $faculty_id";
+} elseif ($_GET['employee']) {
+    $employee_id = $_GET['employee_id'];
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
+    if ($_GET['faculty']) {
+        $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $faculty_id";
+    } elseif ($_GET['employee']) {
+        $query = "SELECT * FROM employee_id WHERE employee_id = $employee_id";
+    }
     $result = mysqli_query($conn, $query);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -27,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
         $permanent_address = $row['permanent_address'];
         $email = $row['email'];
         $contact_number = $row['contact_number'];
-        $photo = saveProfileImage() || null;
+        $photo = $row['photo_path'];
     } else {
         echo "No data found for the provided employee ID.";
     }
@@ -71,30 +80,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $mother_lname = $_POST['mother_lname'];
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
 
-    $sql = "UPDATE faculty_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo' WHERE faculty_id='$faculty_id'";
-    if (!mysqli_query($conn, $sql)) {
-        echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+    if ($_GET['faculty']) {
+        $sql = "UPDATE faculty_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo' WHERE faculty_id='$faculty_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id='$faculty_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$faculty_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id='$faculty_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE fathers_name SET fname = '$father_fname', mname = '$father_mname', lname = '$father_lname' WHERE employee_id='$faculty_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in fathers_name :" . mysqli_error($conn);
+        }
+        $sql = "UPDATE mothers_name SET fname = '$mother_fname', mname = '$mother_mname', lname = '$mother_lname' WHERE employee_id='$faculty_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in fathers_name :" . mysqli_error($conn);
+        }
+    } elseif ($_GET['employee']) {
+        $sql = "UPDATE employee_id SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo' WHERE employee_id='$employee_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id='$employee_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$employee_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id='$employee_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in employee_tbl: " . mysqli_error($conn);
+        }
+        $sql = "UPDATE fathers_name SET fname = '$father_fname', mname = '$father_mname', lname = '$father_lname' WHERE employee_id='$employee_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in fathers_name :" . mysqli_error($conn);
+        }
+        $sql = "UPDATE mothers_name SET fname = '$mother_fname', mname = '$mother_mname', lname = '$mother_lname' WHERE employee_id='$employee_id'";
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error updating record in fathers_name :" . mysqli_error($conn);
+        }
     }
-    $sql = "UPDATE resedential_address_tbl SET barangay='$res_barangay', municipality_city='$res_city', province='$res_province' WHERE employee_id='$faculty_id'";
-    if (!mysqli_query($conn, $sql)) {
-        echo "Error updating record in employee_tbl: " . mysqli_error($conn);
-    }
-    $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$faculty_id'";
-    if (!mysqli_query($conn, $sql)) {
-        echo "Error updating record in employee_tbl: " . mysqli_error($conn);
-    }
-    $sql = "UPDATE place_of_birth_tbl SET barangay='$pob_barangay', municipality_city='$pob_city', province='$pob_province' WHERE employee_id='$faculty_id'";
-    if (!mysqli_query($conn, $sql)) {
-        echo "Error updating record in employee_tbl: " . mysqli_error($conn);
-    }
-    $sql = "UPDATE fathers_name SET fname = '$father_fname', mname = '$father_mname', lname = '$father_lname' WHERE employee_id='$faculty_id'";
-    if (!mysqli_query($conn, $sql)) {
-        echo "Error updating record in fathers_name :" . mysqli_error($conn);
-    }
-    $sql = "UPDATE mothers_name SET fname = '$mother_fname', mname = '$mother_mname', lname = '$mother_lname' WHERE employee_id='$faculty_id'";
-    if (!mysqli_query($conn, $sql)) {
-        echo "Error updating record in fathers_name :" . mysqli_error($conn);
-    }
+
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("Data Updated Successfully")</script>';
         echo '<script>window.open("../../all_faculty.php","_self")</script>';
