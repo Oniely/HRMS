@@ -4,7 +4,7 @@ body {
     display: flex;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 950px) {
     body {
         flex-direction: column;
     }

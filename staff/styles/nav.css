@@ -814,6 +814,11 @@
     fill: #6d85db;
   }
 
+  .m-links .icon-leave.active {
+    fill: transparent;
+    stroke: #6d85db;
+  }
+
   .m-links .dropdown-menu a.active {
     color: #6d85db;
     stroke: #6d85db;

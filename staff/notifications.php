@@ -36,7 +36,7 @@ $active = "leave notification";
     <?php require 'partials/aside.php' ?>
     <!-- Navbar -->
     <?php require 'partials/nav.php' ?>
-    <section class="section container">
+    <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Notifications</h1>
