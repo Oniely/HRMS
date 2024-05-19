@@ -42,6 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $faculty_id = $_POST['faculty_id'];
+
+    $sqlQuery = "SELECT photo_path FROM faculty_tbl WHERE faculty_id = $faculty_id";
+    $result = mysqli_query($conn, $sqlQuery);
+    $photo_path_original = mysqli_fetch_assoc($result)['photo_path'];
+
     $fname = $_POST['firstname'];
     $mname = $_POST['middlename'];
     $lname = $_POST['lastname'];
@@ -60,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $philhealth_no = $_POST['philhealthno'];
     $height = $_POST['height'];
     $weight = $_POST['weight'];
-    $photo = $_POST['photo'];
     $res_barangay = $_POST['res_barangay'];
     $res_city = $_POST['res_city'];
     $res_province = $_POST['res_province'];
@@ -79,9 +83,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['faculty_id'])) {
     $mother_mname = $_POST['mother_mname'];
     $mother_lname = $_POST['mother_lname'];
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
+    $photo_path = $photo_path_original;
+
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+        $target_dir = "../../images/profiles/";
+
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true);
+        } else {
+            echo "<script>alert('DIRECTORY EXISTS')</script>";
+        }
+
+        $target_file = $target_dir . basename($_FILES['photo']['name']);
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $target_file)) {
+            $photo_path = "/hrms/admin/images/profiles/" . basename($_FILES['photo']['name']);
+        } else {
+            echo "<script>alert('NOT MOVED')</script>";
+        }
+    }
 
     if ($_GET['faculty']) {
-        $sql = "UPDATE faculty_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo' WHERE faculty_id='$faculty_id'";
+        $sql = "UPDATE faculty_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo_path' WHERE faculty_id='$faculty_id'";
         if (!mysqli_query($conn, $sql)) {
             echo "Error updating record in employee_tbl: " . mysqli_error($conn);
         }

@@ -1,6 +1,5 @@
 <?php
 include('../../includes/connection.php');
-include('../../includes/query.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $employee_id = $_GET['employee_id'];
@@ -34,6 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $employee_id = $_POST["employee_id"];
+
+    $sqlQuery = "SELECT photo_path FROM employee_tbl WHERE employee_id = $employee_id";
+    $result = mysqli_query($conn, $sqlQuery);
+    $photo_path_original = mysqli_fetch_assoc($result)['photo_path'];
+
     $fname = $_POST['firstname'];
     $mname = $_POST['middlename'];
     $lname = $_POST['lastname'];
@@ -70,12 +74,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     $mother_mname = $_POST['mother_mname'];
     $mother_lname = $_POST['mother_lname'];
     $mother_name = $mother_fname . ", " . $mother_mname . ", " . $mother_lname;
-    $photo = $_POST['photo'];
+    $photo_path = $photo_path_original;
 
-    $target_file = '/hrms/admin/images/profiles/' . basename($_FILES['photo']['name']);
-    move_uploaded_file($_FILES['photo']['tmp_name'], $target_file);
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+        $target_dir = "../../images/profiles/";
 
-    $sql = "UPDATE employee_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$target_file' WHERE employee_id='$employee_id'";
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true);
+        } else {
+            echo "<script>alert('DIRECTORY EXISTS')</script>";
+        }
+
+        $target_file = $target_dir . basename($_FILES['photo']['name']);
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $target_file)) {
+            $photo_path = "/hrms/admin/images/profiles/" . basename($_FILES['photo']['name']);
+        } else {
+            echo "<script>alert('NOT MOVED')</script>";
+        }
+    }
+
+    $sql = "UPDATE employee_tbl SET fname='$fname', mname='$mname', lname='$lname', date_of_birth='$birthdate', place_of_birth='$birthplace', sex='$sex', blood_type='$bloodtype', civil_status='$civilstatus', tin_id='$tin_id', citizenship='$citizenship', sss_no='$sss_no', `pagibig_no`='$pagibig_no', philhealth_no='$philhealth_no', height='$height', weight='$weight', residential_address='$residential_address', permanent_address='$permanent_address', email='$email', contact_number='$contact_number', photo_path = '$photo_path' WHERE employee_id='$employee_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in employee_tbl: " . mysqli_error($conn);
     }
@@ -83,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in resedential_address_tbl: " . mysqli_error($conn);
     }
-    $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city', province='$per_province' WHERE employee_id='$employee_id'";
+    $sql = "UPDATE permanent_address_tbl SET barangay='$per_barangay', municipality_city='$per_city',   province='$per_province' WHERE employee_id='$employee_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating record in permanent_address_tbl: " . mysqli_error($conn);
     }

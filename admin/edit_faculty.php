@@ -74,7 +74,7 @@ $active = "edit faculty";
               <div class="content-title">
                      <h3>Edit Faculty Details</h3>
               </div>
-              <form class="f-container" method="post" action="functions/faculty/update.php?faculty=true&faculty_id=<?php echo $faculty_id; ?>">
+              <form class="f-container" method="post" action="functions/faculty/update.php?faculty=true&faculty_id=<?php echo $faculty_id; ?>" enctype="multipart/form-data">
                      <div class="f-section">
                             <div class="f-title">
                                    <h1>Personal Information</h1>
@@ -174,7 +174,7 @@ $active = "edit faculty";
                                                  No.</label>
                                    </div>
                                    <div class="relative z-0 -mt-1">
-                                          <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " value="<?php echo $photo ?>" />
+                                          <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                                           <label for="photo" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Photo</label>
                                    </div>
                                    <div class="text-xl col-span-2">
