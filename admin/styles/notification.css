@@ -39,6 +39,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 0 0 0;
+  background-color: white;
 }
 .notification-content-text {
   flex-grow: 1;
@@ -73,9 +75,25 @@
   cursor: pointer;
 }
 .additional-content {
-  display: none; /* Initially hide the additional content */
+  display: none;
 }
 
 .notification-items.expanded .additional-content {
-  display: block; /* Display the additional content when the notification is expanded */
+  display: block;
+}
+
+.notification-items.unread {
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.notification-items.unread::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
 }

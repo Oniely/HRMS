@@ -4,7 +4,38 @@ global $active;
 global $fname;
 
 if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))) {
+    $id = $_SESSION['employee_id'];
+    $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        $faculty_id = $row['faculty_id'];
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $sex = $row['sex'];
+        $contact = $row['contact_number'];
+        $email = $row['email'];
+        $permanent_address = $row['permanent_address'];
+        $status = $row['status'];
+        $department = $row['department'];
+        $photo_path = $row['photo_path'];  
+    } else {
+        $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            $employee_id = $row['employee_id'];
+            $fname = $row['fname'];
+            $lname = $row['lname'];
+            $email = $row['email'];
+            $sex = $row['sex'];
+            $contact = $row['contact_number'];
+            $permanent_address = $row['permanent_address'];
+            $status = $row['status'];
+            $department = $row['department'];
+            $photo_path = $row['photo_path'];  
+            }
+    }
 }
+
 
 include('./includes/connection.php');
 ?>
@@ -74,7 +105,7 @@ include('./includes/connection.php');
         </a>
         <button class="profile-btn">
             <div class="profile-img-container">
-                <img src="images/profile.svg" alt="" />
+                <img src="<?= $photo_path ?? "images/profile.svg" ?>" alt="" />
             </div>
             <span> <?= @$fname ?? "USER" ?> </span>
             <!-- Popup Menu -->

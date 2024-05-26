@@ -116,8 +116,12 @@ $active = "dashboard"
                     <img src="images/box (4).svg" alt="" />
                 </div>
                 <div class="box-info">
-                    <h1>Total Fulltime</h1>
-                    <h2>250</h2>
+                    <h1>Total Leave</h1>
+                    <?php $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    echo '<h2>' . $row['count'] . '</h2>';
+                    ?>
                     <div class="percentage">
                         <div></div>
                     </div>
@@ -129,32 +133,32 @@ $active = "dashboard"
         <div class="dashboard-table">
             <table>
                 <div class="table-title">
-                    <h1>Faculty List</h1>
+                    <h1>On Leave List</h1>
                 </div>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Employee ID</th>
                         <th>Name</th>
                         <th>Department</th>
-                        <th>Contact no.</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Joining Date</th>
+                        <th>Leave Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Days</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $query = mysqli_query($conn, "select * from `faculty_tbl`");
+                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE application_status = 'APPROVED'");
                     while ($row = mysqli_fetch_array($query)) {
                     ?>
                         <tr>
-                            <td><label><?php echo $row['faculty_id']; ?></label></td>
-                            <td><label><?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?></label></td>
-                            <td><label><?php echo $row['lname']; ?></label></td>
-                            <td><label><?php echo $row['contact_number']; ?></label></td>
-                            <td><label><?php echo $row['email']; ?></label></td>
-                            <td><label><?php echo $row['permanent_address']; ?></label></td>
-                            <td><label><?php echo $row['date_of_birth']; ?></label></td>
+                            <td><label><?php echo $row['employee_id']; ?></label></td>
+                            <td><label><?php echo $row['employee_name']; ?></label></td>
+                            <td><label><?php echo $row['department']; ?></label></td>
+                            <td><label><?php echo $row['leave_type']; ?></label></td>
+                            <td><label><?php echo $row['from_date']; ?></label></td>
+                            <td><label><?php echo $row['to_date']; ?></label></td>
+                            <td><label><?php echo $row['total_days_leave']; ?></label></td>
 
                         </tr>
                     <?php }

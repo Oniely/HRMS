@@ -20,7 +20,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         $leave_id = $row['leave_id'];
 
 
-        if ($status == 'APPROVED') {
+        if ($status == 'APPROVED' || $status == 'DEPARTMENT APPROVED') {
             $statusBackground = '#48cfae';
         } elseif ($status == 'REJECTED') {
             $statusBackground = '#fa5858';
@@ -33,7 +33,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "<tr'>";
         echo "<th>Application No. </th>";
         echo "<th>Type of Leave </th>";
-        echo "<th>Data of Application</th>";
+        echo "<th>Date of Application</th>";
         echo "<th>Status</th>";
         echo "</tr>";
         echo "<tr>";

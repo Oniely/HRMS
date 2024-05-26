@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die('Error' . $conn->connect_error);
 }
 
-$sql = "SELECT COUNT(*) AS count FROM leave_tbl";
+$sql = "SELECT COUNT(*) AS count FROM leave_tbl WHERE application_status = 'DEPARTMENT APPROVED'";
 $result = $conn->query($sql);
 
 if ($result) {

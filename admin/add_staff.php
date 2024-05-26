@@ -24,7 +24,7 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
               'employee_id', 'fname', 'mname', 'lname', 'email',
               'contactnumber', 'birthdate', 'sex', 'civilstatus', 'citizenship',
               'height', 'weight', 'bloodtype', 'tin_id', 'sss_no', 'philhealth_no',
-              'pagibig_no', 'photo', 'pob_barangay', 'pob_city', 'pob_province',
+              'pagibig_no', 'photo', 'department', 'pob_barangay', 'pob_city', 'pob_province',
               'res_barangay', 'res_city', 'res_province', 'per_barangay', 'per_city',
               'per_province', 'father_fname', 'father_mname', 'father_lname',
               'mother_fname', 'mother_mname', 'mother_lname', 'elem_address',
@@ -69,7 +69,8 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
                      "permanent_address" => $permanent_address,
                      "email" => $form['email'],
                      "contact_number" => $form['contactnumber'],
-                     "photo_path" => saveProfileImage()
+                     "photo_path" => saveProfileImage(),
+                     "department" => $form['department']
               ];
               insertDataColumns($conn, 'employee_tbl', $employee_tbl_array);
 
@@ -158,9 +159,9 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
               insertDataColumns($conn, 'graduate_tbl', $graduate_array);
 
 
-              $annual_leave_balance = 5; // Assuming a default value for annual leave balance
-              $sick_leave_balance = 5; // Assuming a default value for sick leave balance
-              $unpaid_leave_balance = 5; // Assuming a default value for unpaid leave balance
+              $annual_leave_balance = 15; 
+              $sick_leave_balance = 15; 
+              $unpaid_leave_balance = 15; 
 
               // Calculate the total balance
               $total_balance = $annual_leave_balance + $sick_leave_balance + $unpaid_leave_balance;
@@ -225,6 +226,16 @@ $active = "add staff";
                                           <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Employee
                                                  ID</label>
+                                   </div>
+                                   <div class="relative z-0">
+                                          <select type="text" name="department" id="department" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" " required>
+                                                 <option value="" selected hidden>Select Department</option>
+                                                 <option value="SECSA">SECSA</option>
+                                                 <option value="SEAS">SEAS</option>
+                                                 <option value="SBA">SBA</option>
+                                                 <option value="SHTM">SHTM</option>
+                                          </select>
+                                          <label for="department" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Department</label>
                                    </div>
                                    <div class="relative z-0">
                                           <input type="text" name="fname" id="fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />

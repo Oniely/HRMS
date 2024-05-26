@@ -86,27 +86,29 @@ $active = "all faculty";
                     </div>
                     <!-- References to nav search -->
                     <div class="search-container">
-                        <input id="search" name="search" type="text" placeholder="Search" />
+                        <input id="search" name="search" type="text" placeholder="Search" autocomplete="off" />
                         <button>
                             <img src="images/search.svg" alt="" />
                         </button>
+                        <div id="suggestions" class="suggestions"></div>
                     </div>
                 </div>
                 <div class="main-table-container">
                     <div class="table">
                         <table>
                             <thead>
-                                <th>Employee Id</th>
+                                <th>Employee ID</th>
                                 <th>Status</th>
                                 <th>Name</th>
-                                <th>Contact Number</th>
+                                <th>Department</th>
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Date of Birth</th>
                                 <th>Action</th>
                             </thead>
-                            <tbody>
+                            <tbody id="staff-table-body">
                                 <?php
+                                include('includes/connection.php');
                                 $query = mysqli_query($conn, "select * from `faculty_tbl`");
                                 while ($row = mysqli_fetch_array($query)) {
                                 ?>
@@ -115,7 +117,7 @@ $active = "all faculty";
                                         <td><label><?= $row['status'] ?></label></td>
                                         <td><label><?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?></label>
                                         </td>
-                                        <td><label><?php echo $row['contact_number']; ?></label></td>
+                                        <td><label><?php echo $row['department']; ?></label></td>
                                         <td><label><?php echo $row['email']; ?></label></td>
                                         <td><label><?php echo $row['permanent_address']; ?></label></td>
                                         <td><label><?php echo $row['date_of_birth']; ?></label></td>
@@ -149,3 +151,68 @@ $active = "all faculty";
 </body>
 
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search');
+        const suggestionsContainer = document.getElementById('suggestions');
+        const tableBody = document.getElementById('staff-table-body');
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.toLowerCase();
+            filterTable(query);
+            showSuggestions(query);
+        });
+
+        function filterTable(query) {
+            const rows = tableBody.getElementsByTagName('tr');
+            for (let row of rows) {
+                const nameCell = row.getElementsByTagName('label')[2];
+                if (nameCell) {
+                    const name = nameCell.textContent.toLowerCase();
+                    if (name.includes(query)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function showSuggestions(query) {
+            suggestionsContainer.innerHTML = '';
+            if (query.length < 1) {
+                return;
+            }
+
+            const rows = tableBody.getElementsByTagName('tr');
+            const suggestions = new Set();
+            for (let row of rows) {
+                const nameCell = row.getElementsByTagName('label')[2];
+                if (nameCell) {
+                    const name = nameCell.textContent;
+                    if (name.toLowerCase().includes(query)) {
+                        suggestions.add(name);
+                    }
+                }
+            }
+
+            suggestions.forEach(name => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.textContent = name;
+                suggestionItem.addEventListener('click', function() {
+                    searchInput.value = name;
+                    filterTable(name.toLowerCase());
+                    suggestionsContainer.innerHTML = '';
+                });
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!suggestionsContainer.contains(event.target) && event.target !== searchInput) {
+                suggestionsContainer.innerHTML = '';
+            }
+        });
+    });
+</script>

@@ -4,8 +4,23 @@ include('./includes/connection.php');
 
 if (isset($_SESSION['employee_id'])) {
     $employee_id = $_SESSION['employee_id'];
-    $fname = $_SESSION['fname'];
-    $lname = $_SESSION['lname'];
+    $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $employee_id";
+    $query_res = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($query_res)) {
+        $faculty_id = $row['faculty_id'];
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $department = $row['department'];
+    } else {
+        $query = "SELECT * FROM employee_tbl WHERE employee_id = $employee_id";
+        $query_res = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            $employee_id = $row['employee_id'];
+            $fname = $row['fname'];
+            $lname = $row['lname'];
+            $department = $row['department'];
+        }
+    }
 }
 ?>
 <aside class="side-bar" id="side-bar">
@@ -21,11 +36,12 @@ if (isset($_SESSION['employee_id'])) {
     <div class="side-link">
         <div class="profile" id="profile">
             <div class="profile-img-container">
-                <a href="index.php"><img src="images/1.svg" alt="icon" /></a>
+                <a href="index.php"><img src="<?= $photo_path ?? "images/profile.svg" ?>" alt="icon" /></a>
             </div>
             <div class="profile-info">
                 <?php echo "<h1> $fname $lname </h1>"; ?>
                 <h3>Employee</h3>
+                <h3><?php echo $department ?></h3>
             </div>
         </div>
         <ul class="links">

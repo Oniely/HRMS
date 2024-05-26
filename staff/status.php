@@ -25,11 +25,9 @@ if (isset($_SESSION['employee_id'])) {
         $status = $row['status'];
         $photo_path = $row['photo_path'];
         if (empty($photo_path)) {
-            $photo_path = "images/profile-black.svg"; // Change this to your default image path
+            $photo_path = "images/profile-black.svg";
         }
     } elseif (!$row) {
-        // Data not found in faculty_tbl, handle here
-        // Fetch data from employee_tbl
         $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
         $query_res = mysqli_query($conn, $query);
 

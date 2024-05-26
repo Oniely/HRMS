@@ -11,9 +11,7 @@ if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
     $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
     $query_res = mysqli_query($conn, $query);
-
     if ($row = mysqli_fetch_assoc($query_res)) {
-        // Fetch and display basic personal information for faculty
         $faculty_id = $row['faculty_id'];
         $fname = $row['fname'];
         $lname = $row['lname'];
@@ -22,9 +20,11 @@ if (isset($_SESSION['employee_id'])) {
         $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $status = $row['status'];
+        $department = $row['department'];
         $photo_path = !empty($row['photo_path']) ? $row['photo_path'] : "images/profile-black.svg"; // Use default image if photo path is empty
 
-        // Fetch and display educational attainment for faculty
+        $_SESSION['department'] = $department;
+
         $elem_query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
         $elem_query_res = mysqli_query($conn, $elem_query);
         if ($elem_row = mysqli_fetch_assoc($elem_query_res)) {
@@ -61,13 +61,13 @@ if (isset($_SESSION['employee_id'])) {
             $college_address = $college_row['address'];
             $college_year = $college_row['year_graduate'];
         }
+
+
     } else {
-        // If user is not in faculty_tbl, assume they are an employee
         $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
         $query_res = mysqli_query($conn, $query);
 
         if ($row = mysqli_fetch_assoc($query_res)) {
-            // Fetch and display basic personal information for employee
             $employee_id = $row['employee_id'];
             $fname = $row['fname'];
             $lname = $row['lname'];
@@ -76,7 +76,11 @@ if (isset($_SESSION['employee_id'])) {
             $contact = $row['contact_number'];
             $permanent_address = $row['permanent_address'];
             $status = $row['status'];
+            $department = $row['department'];
             $photo_path = !empty($row['photo_path']) ? $row['photo_path'] : "images/profile-black.svg"; // Use default image if photo path is empty
+
+
+            $_SESSION['department'] = $department;
 
             // Fetch and display educational attainment for employee
             $elem_query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
@@ -133,10 +137,14 @@ if (isset($_SESSION['employee_id'])) {
         $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $status = $row['status'];
+        $department = $row['department'];
         $photo_path = $row['photo_path'];
         if (empty($photo_path)) {
             $photo_path = "images/profile-black.svg"; // Change this to your default image path
         }
+
+        $_SESSION['department'] = $department;
+
     } elseif (!$row) {
         // Data not found in faculty_tbl, handle here
         // Fetch data from employee_tbl
@@ -144,7 +152,6 @@ if (isset($_SESSION['employee_id'])) {
         $query_res = mysqli_query($conn, $query);
 
         if ($row = mysqli_fetch_assoc($query_res)) {
-            // Assign values from employee_tbl
             $faculty_id = $row['employee_id'];
             $fname = $row['fname'];
             $lname = $row['lname'];
@@ -153,10 +160,12 @@ if (isset($_SESSION['employee_id'])) {
             $contact = $row['contact_number'];
             $permanent_address = $row['permanent_address'];
             $status = $row['status'];
+            $department = $row['department'];
             $photo_path = $row['photo_path'];
             if (empty($photo_path)) {
                 $photo_path = "images/profile-black.svg"; // Change this to your default image path
             }
+            $_SESSION['department'] = $department;
         }
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
@@ -241,7 +250,7 @@ $active = "profile";
         <div class="about-container">
             <div class="about-profile">
                 <div class="prof-img">
-                    <img src="/hrms/admin/<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile">
+                    <img src="<?= $photo_path ?? '/hrms/admin/images/profile-black.svg' ?>" alt="profile">
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">
@@ -293,14 +302,42 @@ $active = "profile";
                     </div>
                 </div>
                 <div class="desc">
-                    <!-- prettier-ignore -->
                     <h3>Educational Attainment</h3>
-                    <p>
-                        <strong>Elementary:</strong> <?php echo "$elem_school - $elem_year"; ?> <br>
-                        <strong>High School:</strong> <?php echo "$highschool_school - $highschool_year"; ?> <br>
-                        <strong>Vocational:</strong> <?php echo "$vocational_school - $vocational_course - $vocational_year"; ?> <br>
-                        <strong>College:</strong> <?php echo "$college_school - $college_course - $college_year"; ?>
-                    </p>
+                    <div class="desc-cont">
+                        <table>
+                            <tr>
+                                <th>Level</th>
+                                <th>School</th>
+                                <th>Course</th>
+                                <th>Year</th>
+                            </tr>
+                            <tr>
+                                <td>Elementary</td>
+                                <td><?php echo $elem_school ?></td>
+                                <td></td>
+                                <td><?php echo $elem_year ?></td>
+                            </tr>
+                            <tr>
+                                <td>High School</td>
+                                <td><?php echo $highschool_school ?></td>
+                                <td></td>
+                                <td><?php echo $highschool_year ?></td>
+                            </tr>
+                            <tr>
+                                <td>Vocational</td>
+                                <td><?php echo $vocational_school ?></td>
+                                <td><?php echo $vocational_course ?></td>
+                                <td><?php echo $vocational_year ?></td>
+                            </tr>
+                            <tr>
+                                <td>College</td>
+                                <td><?php echo $college_school ?></td>
+                                <td><?php echo $college_course ?></td>
+                                <td><?php echo $college_year ?></td>
+                            </tr>
+                        </table>
+                 
+                    </div>
                 </div>
             </div>
         </div>

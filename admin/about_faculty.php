@@ -22,6 +22,7 @@ if (isset($_GET['faculty_id'])) {
         $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $f_photo_path = $row['photo_path'];
+        $department = $row['department'];
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
@@ -140,8 +141,8 @@ $active = "about faculty";
                         <span>BSIT</span>
                     </div>
                     <div class="bordered-info">
-                        <h3>Designation</h3>
-                        <span>MSIT</span>
+                        <h3>Department</h3>
+                        <span><?php echo $department ?></span>
                     </div>
                 </div>
             </div>
@@ -196,15 +197,43 @@ $active = "about faculty";
                         <?php echo "<p>$permanent_address</p>"; ?>
                     </div>
                 </div>
-                <div class="desc overflow-hidden">
-                    <!-- prettier-ignore -->
+                <div class="desc">
                     <h3>Educational Attainment</h3>
-                    <p>
-                        <strong>Elementary:</strong> <?php echo "$elem_school - $elem_year"; ?> <br>
-                        <strong>High School:</strong> <?php echo "$highschool_school - $highschool_year"; ?> <br>
-                        <strong>Vocational:</strong> <?php echo "$vocational_school - $vocational_course - $vocational_year"; ?> <br>
-                        <strong>College:</strong> <?php echo "$college_school - $college_course - $college_year"; ?>
-                    </p>
+                    <div class="desc-cont">
+                        <table>
+                            <tr>
+                                <th>Level</th>
+                                <th>School</th>
+                                <th>Course</th>
+                                <th>Year</th>
+                            </tr>
+                            <tr>
+                                <td>Elementary</td>
+                                <td><?php echo $elem_school ?></td>
+                                <td></td>
+                                <td><?php echo $elem_year ?></td>
+                            </tr>
+                            <tr>
+                                <td>High School</td>
+                                <td><?php echo $highschool_school ?></td>
+                                <td></td>
+                                <td><?php echo $highschool_year ?></td>
+                            </tr>
+                            <tr>
+                                <td>Vocational</td>
+                                <td><?php echo $vocational_school ?></td>
+                                <td><?php echo $vocational_course ?></td>
+                                <td><?php echo $vocational_year ?></td>
+                            </tr>
+                            <tr>
+                                <td>College</td>
+                                <td><?php echo $college_school ?></td>
+                                <td><?php echo $college_course ?></td>
+                                <td><?php echo $college_year ?></td>
+                            </tr>
+                        </table>
+
+                    </div>
                 </div>
             </div>
         </div>

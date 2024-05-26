@@ -75,7 +75,7 @@ button {
 
 .section-title {
     width: 100%;
-
+    color: #252525;
     display: flex;
     justify-content: space-between;
     align-items: center;

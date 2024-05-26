@@ -1,5 +1,6 @@
 <?php
-
+include('./includes/connection.php');
+$employee_id = $_SESSION['employee_id'];
 // Assuming $employee_id is already defined
 $sql = "SELECT COUNT(*) AS notification_count FROM leave_tbl WHERE employee_id = $employee_id";
 $result = $conn->query($sql);

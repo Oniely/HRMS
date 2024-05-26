@@ -44,7 +44,7 @@ require_once './includes/query.php';
             <div class="notification-content">
                 <div class="notification-content-desc">
                     <?php
-                    $sql = "SELECT * FROM leave_tbl";
+                    $sql = "SELECT * FROM leave_tbl WHERE application_status IN ('DEPARTMENT APPROVED', 'APPROVED', 'REJECTED')";
                     $result = mysqli_query($conn, $sql);
                     if ($result && mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -58,9 +58,12 @@ require_once './includes/query.php';
                             $accompany = $row['accompany_with'];
                             $total_days = $row['total_days_leave'];
                             $application_status = $row['application_status'];
+                            $read_status = $row['read_status'];
                             $date = date('Y-m-d');
 
-                            echo "<div class='notification-items' id='notification_$leave_id'>";
+                            $unreadClass = $read_status ? '' : 'unread';
+
+                            echo "<div class='notification-items $unreadClass' id='notification_$leave_id'>";
                             echo "<div class='notification-content-text'>";
                             echo "<h2>Request for $leave_type</h2>";
                             echo "<span>$date</span>";
@@ -68,8 +71,8 @@ require_once './includes/query.php';
                             echo "<p>$employee_name request for $leave_type from $start_date to $end_date</p>";
 
                             echo "<button type='button' class='btn btn-primary' 
-                                    data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date' data-total='$total_days'></button>";
-                            echo "<a>Delete</a>";
+                            data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date' data-total='$total_days'></button>";
+                            echo "<a class='delete-btn' href='#' data-leave-id='$leave_id'>Delete</a>";
                             echo "<div class='additional-container' data-leave-id='$leave_id'>";
                             echo "<div class='additional-content' data-employee-id='$employee_id'>";
                             echo "<p>Employee ID: $leave_id</p>";
@@ -80,19 +83,19 @@ require_once './includes/query.php';
                             echo "<p>Accompany: $accompany</p>";
                             echo "<p>Start Date: $start_date</p>";
                             echo "<p>End Date: $end_date</p>";
-                            echo "<p>Total days : $total_days</p>";
+                            echo "<p>Total days: $total_days</p>";
                             echo '<div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">';
 
                             $buttonsDisabled = ($application_status === 'APPROVED' || $application_status === 'REJECTED') ? 'disabled' : '';
 
                             echo "<button type='button' id='confirmBtn' class='confirm-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm' 
-                            data-leave-id='$leave_id' data-employee-id='$employee_id'data-leave='$leave_type' data-total='$total_days'  $buttonsDisabled>
-                            Confirm
-                          </button>";
-                            echo "<button type='button' id='confirmBtn' class='reject-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm' 
-                            data-leave-id='$leave_id' data-employee-id='$employee_id' data-leave='$leave_type' data-total='$total_days' $buttonsDisabled>
-                            Reject
-                          </button>";
+                    data-leave-id='$leave_id' data-employee-id='$employee_id'data-leave='$leave_type' data-total='$total_days' $buttonsDisabled>
+                    Confirm
+                  </button>";
+                            echo "<button type='button' id='rejectBtn' class='reject-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm' 
+                    data-leave-id='$leave_id' data-employee-id='$employee_id' data-leave='$leave_type' data-total='$total_days' $buttonsDisabled>
+                    Reject
+                  </button>";
                             echo "</div>";
                             echo "</div>";
                             echo "</div>";
@@ -118,16 +121,19 @@ require_once './includes/query.php';
     document.addEventListener('DOMContentLoaded', function() {
         var notifications = document.querySelectorAll('.notification-items');
 
-        notifications.forEach(function(notification) {
+        notifications.forEach(notification => {
+            notification.addEventListener('click', function() {
+                const leaveId = this.getAttribute('id').split('_')[1];
+                markAsRead(leaveId, this);
+            });
+
             notification.addEventListener('click', function(event) {
                 var leaveId = this.id.split('_')[1];
-
                 console.log("leaveId:", leaveId);
 
                 this.classList.toggle('expanded');
 
-                var additionalContainer = this.parentElement.querySelector('.additional-container[data-leave-id="' + leaveId + '"]');
-
+                var additionalContainer = this.querySelector('.additional-container[data-leave-id="' + leaveId + '"]');
                 console.log("additionalContainer:", additionalContainer);
 
                 if (additionalContainer) {
@@ -138,8 +144,18 @@ require_once './includes/query.php';
             });
         });
 
-
-
+        function markAsRead(leaveId, notificationElement) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'includes/mark_as_read.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    notificationElement.classList.remove('unread');
+                }
+            };
+            xhr.send('leave_id=' + leaveId);
+        }
+        
         $('.confirm-btn').click(function() {
             var leave_id = $(this).data('leave-id');
             var employee_id = $(this).data('employee-id');
@@ -158,18 +174,14 @@ require_once './includes/query.php';
             }
         });
 
-        function updateLeaveStatus(leave_id, employee_id, status, leave_type, requested_days) {
-            var newData = {
-                'status': status
-            };
+        function updateLeaveStatus(leave_id, employee_id, status, leave_type = null, requested_days = null) {
             $.ajax({
                 url: "includes/leave_request.php",
                 type: "post",
                 data: {
-                    functionname: 'updateDataEmployee',
+                    functionname: 'updateApplicationStatus',
                     leave_id: leave_id,
                     employee_id: employee_id,
-                    newData: newData,
                     status: status,
                     leave_type: leave_type,
                     requested_days: requested_days
@@ -182,6 +194,10 @@ require_once './includes/query.php';
                         alert("Request Rejected Successfully");
                         window.location.href = './notifications.php';
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + error);
+                    console.log("Response: " + xhr.responseText);
                 }
             });
         }
@@ -198,28 +214,16 @@ require_once './includes/query.php';
                 },
                 success: function(result) {
                     window.location.href = './notifications.php';
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + error);
+                    console.log("Response: " + xhr.responseText);
                 }
             });
         }
 
 
-        var clickedNotifications = sessionStorage.getItem('clicked_notifications');
-        if (clickedNotifications) {
-            clickedNotifications = JSON.parse(clickedNotifications);
-        } else {
-            clickedNotifications = [];
-        }
-        clickedNotifications.push(leave_id);
-        sessionStorage.setItem('clicked_notifications', JSON.stringify(clickedNotifications));
 
-        console.log(clickedNotifications);
-
-        var notification = $(this).closest('.notification-item');
-        notification.removeClass("unread");
-
-        localStorage.setItem("notificationRead", "true");
-
-        $('#leaveModal').removeClass('hidden');
     });
 
 

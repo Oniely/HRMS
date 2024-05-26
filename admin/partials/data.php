@@ -1,7 +1,7 @@
 <?php 
 include("../includes/connection.php");
 
-$sql = "SELECT COUNT(*) as unread_count FROM leave_tbl";
+$sql = "SELECT COUNT(*) as unread_count FROM leave_tbl WHERE application_status = 'DEPARTMENT APPROVED' || application_status = 'APPROVED'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
