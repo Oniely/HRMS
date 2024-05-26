@@ -4,8 +4,6 @@ global $conn;
 
 include('includes/connection.php');
 
-
-
 session_start();
 if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
@@ -61,8 +59,6 @@ if (isset($_SESSION['employee_id'])) {
             $college_address = $college_row['address'];
             $college_year = $college_row['year_graduate'];
         }
-
-
     } else {
         $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
         $query_res = mysqli_query($conn, $query);
@@ -121,6 +117,8 @@ if (isset($_SESSION['employee_id'])) {
             }
         }
     }
+} else {
+    header('Location: staff_login.php');
 }
 
 if (isset($_SESSION['employee_id'])) {
@@ -144,7 +142,6 @@ if (isset($_SESSION['employee_id'])) {
         }
 
         $_SESSION['department'] = $department;
-
     } elseif (!$row) {
         // Data not found in faculty_tbl, handle here
         // Fetch data from employee_tbl
@@ -204,6 +201,8 @@ if (isset($_SESSION['employee_id'])) {
         $college_address = $row['address'];
         $college_year = $row['year_graduate'];
     }
+} else {
+    header('Location: staff_login.php');
 }
 
 
@@ -336,7 +335,7 @@ $active = "profile";
                                 <td><?php echo $college_year ?></td>
                             </tr>
                         </table>
-                 
+
                     </div>
                 </div>
             </div>

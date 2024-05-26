@@ -176,10 +176,6 @@ body {
         flex-direction: column;
     }
 
-    .section {
-        display: none;
-    }
-
     .m-main {
         display: flex;
         flex-direction: column;

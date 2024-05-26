@@ -147,6 +147,27 @@ include('./includes/connection.php');
         <ul class="m-links">
             <li>
                 <a class="s-link <?= $active == "dashboard" ? "active" : "" ?>" href=" index.php">
+                    <svg class="icon <?= $active == "dashboard" ? "active" : "" ?>" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
+                        <defs>
+                            <clipPath id="6325d10b93">
+                                <path d="M 0 43.125 L 375 43.125 L 375 287 L 0 287 Z M 0 43.125 " clip-rule="nonzero" />
+                            </clipPath>
+                            <clipPath id="1e1b69b5b5">
+                                <path d="M 107 294 L 268 294 L 268 337.875 L 107 337.875 Z M 107 294 " clip-rule="nonzero" />
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#6325d10b93)">
+                            <path d="M 343 286.007812 L 32 286.007812 C 14.355469 286.007812 0 271.652344 0 254.007812 L 0 75.59375 C 0 57.949219 14.355469 43.59375 32 43.59375 L 343 43.59375 C 360.644531 43.59375 375 57.949219 375 75.59375 L 375 254.007812 C 375 271.652344 360.644531 286.007812 343 286.007812 Z M 32 59.59375 C 23.179688 59.59375 16 66.769531 16 75.59375 L 16 254.007812 C 16 262.832031 23.179688 270.007812 32 270.007812 L 343 270.007812 C 351.820312 270.007812 359 262.832031 359 254.007812 L 359 75.59375 C 359 66.769531 351.820312 59.59375 343 59.59375 Z M 32 59.59375 " fill-opacity="1" fill-rule="nonzero" />
+                        </g>
+                        <g clip-path="url(#1e1b69b5b5)">
+                            <path d="M 267.5 329.027344 C 267.5 333.4375 263.910156 337.027344 259.5 337.03125 C 259.5 337.03125 115.496094 337.03125 115.496094 337.03125 C 108.519531 337.195312 104.796875 328.132812 109.851562 323.382812 C 111.289062 321.925781 113.289062 321.027344 115.496094 321.027344 L 158.699219 321.027344 L 153.5625 294.003906 L 221.4375 294.003906 L 216.300781 321.027344 L 259.5 321.027344 C 263.917969 321.027344 267.5 324.613281 267.5 329.027344 Z M 267.5 329.027344 " fill-opacity="1" fill-rule="nonzero" />
+                        </g>
+                    </svg>
+                    <span class="link-name <?= $active == "dashboard" ? "active" : "" ?>">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="s-link <?= $active == "profile" ? "active" : "" ?>" href="about_department.php">
                     <svg class="icon <?= str_contains($active, "profile") ? "active" : "" ?>" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
                         <defs>
                             <clipPath id="397a3b1a3c">
@@ -157,20 +178,20 @@ include('./includes/connection.php');
                             <path d="M 240.347656 184.542969 C 268.097656 166.734375 286.5625 135.667969 286.5625 100.332031 C 286.5625 45.148438 241.65625 0.246094 186.472656 0.246094 C 131.289062 0.246094 86.386719 45.148438 86.386719 100.332031 C 86.386719 135.6875 104.851562 166.734375 132.601562 184.542969 C 75.863281 206.300781 35.453125 261.296875 35.453125 325.597656 C 35.453125 352.695312 57.511719 374.753906 84.609375 374.753906 L 288.320312 374.753906 C 315.433594 374.753906 337.476562 352.695312 337.476562 325.597656 C 337.492188 261.296875 297.085938 206.300781 240.347656 184.542969 Z M 112.226562 100.332031 C 112.226562 59.398438 145.539062 26.089844 186.472656 26.089844 C 227.40625 26.089844 260.71875 59.398438 260.71875 100.332031 C 260.71875 141.265625 227.40625 174.578125 186.472656 174.578125 C 145.539062 174.578125 112.226562 141.265625 112.226562 100.332031 Z M 288.339844 348.910156 L 84.609375 348.910156 C 71.746094 348.910156 61.296875 338.445312 61.296875 325.597656 C 61.296875 256.578125 117.453125 200.421875 186.472656 200.421875 C 255.496094 200.421875 311.652344 256.578125 311.652344 325.597656 C 311.632812 338.445312 301.183594 348.910156 288.339844 348.910156 Z M 288.339844 348.910156 " fill-opacity="1" fill-rule="nonzero" />
                         </g>
                     </svg>
-                    <span class="link-name <?= $active == "profile" ? "active" : "" ?>">About Me</span>
+                    <span class="link-name <?= $active == "profile" ? "active" : "" ?>">Profile</span>
                 </a>
             </li>
             <li>
                 <button class=" dropdown-btn">
-                    <svg class="w-6 h-6 icon icon-leave <?= str_contains($active, 'leave') ? 'active' : '' ?>" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <svg class="w-6 h-6 icon icon-leave <?= str_contains($active, 'data') ? 'active' : '' ?>" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                     </svg>
-                    <span class="link-name <?= str_contains($active, "leave") ? "active" : "" ?>">Leave</span>
+                    <span class="link-name <?= str_contains($active, "data") ? "active" : "" ?>">Data</span>
                     <img class=" arrow" src="images/arrow.svg" alt=">" />
                 </button>
                 <div class="dropdown-menu">
-                    <a class="<?= str_contains($active, "application") ? "active" : "" ?>" href="./request_leave.php">Application</a>
-                    <a class="<?= str_contains($active, "status") ? "active" : "" ?>" href="./status.php">Status</a>
+                    <a class="<?= str_contains($active, "staff") ? "active" : "" ?>" href="department_staff.php">Employee</a>
+                    <a class="<?= str_contains($active, "faculty") ? "active" : "" ?>" href="department_faculty.php">Faculty</a>
                     <a class="<?= str_contains($active, "notification") ? "active" : "" ?>" href="./notifications.php">Notifications</a>
                 </div>
             </li>
