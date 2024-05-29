@@ -22,6 +22,7 @@ if (isset($_GET['faculty_id'])) {
         $email = $row['email'];
         $permanent_address = $row['permanent_address'];
         $f_photo_path = $row['photo_path'];
+        $status = $row['status'];
         $department = $row['department'];
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
@@ -153,7 +154,9 @@ $active = "about faculty";
             <div class="about">
                 <div class="about-me">
                     <button>About Me</button>
-                    <button>Leave History</button>
+                    <a href="leave_history.php?id=<?php echo $id; ?>">
+                        <button class="history-btn">Leave History</button>
+                    </a>
                     <button class="status-btn">Status</button>
 
                     <div class="status-modal">

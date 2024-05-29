@@ -14,9 +14,14 @@ if (isset($_SESSION['admin_id'])) {
 }
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $query = "SELECT * from employee_tbl WHERE employee_id = $id";
+
+    // First, check if the ID exists in employee_tbl
+    $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
-    while ($row = mysqli_fetch_assoc($query_res)) {
+
+    if (mysqli_num_rows($query_res) > 0) {
+        // Fetch data from employee_tbl
+        $row = mysqli_fetch_assoc($query_res);
         $fname = $row['fname'];
         $lname = $row['lname'];
         $email = $row['email'];
@@ -26,6 +31,28 @@ if (isset($_GET['id'])) {
         $photo_path = $row['photo_path'];
         $status = $row['status'];
         $department = $row['department'];
+    } else {
+        // If the ID is not found in employee_tbl, check faculty_tbl
+        $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
+        $query_res = mysqli_query($conn, $query);
+
+        if ($row = mysqli_fetch_assoc($query_res)) {
+            // Fetch data from faculty_tbl
+            $fname = $row['fname'];
+            $lname = $row['lname'];
+            $email = $row['email'];
+            $sex = $row['sex'];
+            $contact = $row['contact_number'];
+            $permanent_address = $row['permanent_address'];
+            $photo_path = $row['photo_path'];
+            $status = $row['status'];
+            $department = $row['department'];
+        } else {
+            // Handle the case where the ID is not found in both tables
+            echo "ID not found in employee_tbl or faculty_tbl";
+            // Optionally, you can redirect to an error page or handle this case as needed
+            exit();
+        }
     }
 }
 require_once './includes/query.php';
