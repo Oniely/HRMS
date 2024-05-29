@@ -3,6 +3,9 @@
 global $conn;
 session_start();
 
+if (!isset($_SESSION['employee_id'])) {
+       header('Location: staff_login.php');
+}
 
 require 'includes/connection.php';
 require 'includes/query.php';

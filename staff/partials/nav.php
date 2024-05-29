@@ -144,10 +144,19 @@ include('./includes/connection.php');
             <img src="images/sc-logo.svg" alt="sc-logo">
         </a>
     </div>
-    <button id="m-burger" class="m-burger">
-        <img id="m-burger-btn" src="images/burger.svg" alt="burger">
-        <img id="m-x-burger-btn" src="images/x-burger.svg" alt="X">
-    </button>
+    <div class="m-right-nav">
+        <a class="notification-btn" href="./notifications.php">
+            <div class="notification-img-container">
+                <img src="images/notification-bell.svg" alt="" class="white-svg" />
+            </div>
+            <div class="notification-count" id="notificationCount">
+            </div>
+        </a>
+        <button id="m-burger" class="m-burger">
+            <img id="m-burger-btn" src="images/burger.svg" alt="burger">
+            <img id="m-x-burger-btn" src="images/x-burger.svg" alt="X">
+        </button>
+    </div>
 
     <div class="m-burger-menu">
         <div class="m-search-container">
@@ -221,6 +230,14 @@ include('./includes/connection.php');
                         <path d="M 156.203125 55.375 C 158.375 55.375 160.46875 56.242188 162.011719 57.78125 C 163.550781 59.320312 164.417969 61.410156 164.417969 63.589844 C 164.417969 65.769531 163.550781 67.863281 162.011719 69.398438 C 160.46875 70.9375 158.375 71.804688 156.203125 71.804688 L 8.414062 71.804688 C 6.238281 71.804688 4.148438 70.9375 2.601562 69.398438 C 1.0625 67.863281 0.199219 65.769531 0.199219 63.589844 C 0.199219 61.410156 1.0625 59.320312 2.601562 57.78125 C 4.148438 56.242188 6.238281 55.375 8.414062 55.375 Z M 156.203125 55.375 " fill-opacity="1" fill-rule="nonzero" />
                     </svg>
                     <span class="link-name">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a class="s-link" href="/HRMS/staff/includes/logout.php">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 27px; height: 27px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                    </svg>
+                    <span class="link-name">Logout</span>
                 </a>
             </li>
         </ul>

@@ -149,10 +149,19 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
             <img src="images/sc-logo.svg" alt="sc-logo">
         </a>
     </div>
-    <button id="m-burger" class="m-burger">
-        <img id="m-burger-btn" src="images/burger.svg" alt="burger">
-        <img id="m-x-burger-btn" src="images/x-burger.svg" alt="X">
-    </button>
+    <div class="m-right-nav">
+        <a class="notification-btn" href="./notifications.php">
+            <div class="notification-img-container">
+                <img src="images/notification-bell.svg" alt="" class="white-svg" />
+            </div>
+            <div class="notification-count" id="notificationCount">
+            </div>
+        </a>
+        <button id="m-burger" class="m-burger">
+            <img id="m-burger-btn" src="images/burger.svg" alt="burger">
+            <img id="m-x-burger-btn" src="images/x-burger.svg" alt="X">
+        </button>
+    </div>
 
     <div class="m-burger-menu">
         <div class="m-breadcrumbs">

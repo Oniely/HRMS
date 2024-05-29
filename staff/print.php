@@ -5,6 +5,9 @@ session_start();
 include('includes/connection.php');
 require 'includes/query.php';
 
+if (!isset($_SESSION['employee_id'])) {
+    header('Location: staff_login.php');
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $employee_id = isset($_POST['employee_id']) ? $_POST['employee_id'] : '';

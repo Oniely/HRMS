@@ -114,7 +114,8 @@ td, th {
 
 .about {
   width: 100%;
-  height: var(--profile-height);
+  min-height: var(--profile-height);
+  max-height: var(--profile-height);
   background: #fff;
 
   border-radius: 15px;
@@ -173,6 +174,7 @@ td, th {
 }
 
 .about .info div {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -334,15 +336,15 @@ td, th {
   }
 }
 
-@media screen and (max-width: 680px) {
-  .about .info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+@media screen and (max-width: 950px) {
+  .about {
+    max-height: 100%;
   }
 }
 
 @media screen and (max-width: 440px) {
   .about .info {
-    grid-template-columns: repeat(1, 1fr);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

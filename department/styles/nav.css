@@ -599,6 +599,22 @@
     object-position: center;
   }
 
+  .m-header .m-right-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .m-header .notification-btn {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .m-header .notification-img-container {
+    width: 25px;
+    height: 25px;
+  }
+
   .m-header .m-burger {
     width: 35px;
     height: 100%;

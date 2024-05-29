@@ -4,8 +4,6 @@ global $conn;
 
 include('includes/connection.php');
 
-
-
 session_start();
 // if (isset($_SESSION['employee_id'])) {
 //     $id = $_SESSION['employee_id'];
