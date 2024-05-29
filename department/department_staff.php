@@ -136,16 +136,8 @@ $active = "data department staff";
                                                     <img src="images/eyes.svg" alt="View">
                                                 </div>
                                             </a>
-                                            <a class='update-btn' href='edit_staff.php?id=<?php echo $row['employee_id']; ?>'>
-                                                <div>
-                                                    <img src="images/update-btn.svg" alt="update">
-                                                </div>
-                                            </a>
-                                            <a class="delete-btn" href="functions/staff/delete.php?id=<?php echo $row['employee_id']; ?>">
-                                                <div>
-                                                    <img src="images/delete-btn.svg" alt="update">
-                                                </div>
-                                            </a>
+                                       
+                                       
                                         </td>
                                     </tr>
                                 <?php } ?>

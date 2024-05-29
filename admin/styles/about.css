@@ -137,6 +137,23 @@ body {
   border-radius: 50px;
 }
 
+.about-me .history-btn {
+  background: white;
+  color: #101010;
+  border: 1px solid #101010;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.about-me .history-btn:hover {
+  background: #6d85db;
+  color: white;
+  border-color: white;
+}
+
+.about-me .history-btn:active {
+  opacity: 0.8;
+}
 .about-me .status-btn {
   background: white;
   color: #101010;
@@ -205,6 +222,81 @@ body {
   text-overflow: ellipsis;
 }
 
+.history-modal {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  z-index: 100;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-modal.open {
+  display: flex;
+}
+
+.history-modal form {
+  width: 30rem;
+  height: 9rem;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid #101010;
+}
+
+.history-modal form .history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1 1 0;
+}
+
+.history-modal form .history-header .close-btn {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: white;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.history-modal form .history-header .close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.history-modal form .history-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1 1 0;
+  width: 100%;
+}
+
+.history-modal form .history-input select {
+  width: 100%;
+  height: 2.8rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  border: 0.5px solid #101010;
+  outline: none;
+}
+
+.history-modal form .history-input button {
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
 .status-modal {
   position: fixed;
   inset: 0;

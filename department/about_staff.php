@@ -3,26 +3,45 @@
 global $conn;
 
 include('includes/connection.php');
-session_name('adminSession');
+session_name('departmentSession');
 session_start();
-if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
-    header('location:login.php');
+
+if (isset($_SESSION['department_id'])) {
+    $id = $_SESSION['department_id'];
+    $query = "SELECT * FROM department_tbl WHERE department_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($query_res && mysqli_num_rows($query_res) > 0) {
+        $row = mysqli_fetch_assoc($query_res);
+        $department_id = $row['department_id'];
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $position = $row['position'];
+        $contact = $row['contact'];
+        $department = $row['department'];
+
+        $_SESSION['department'] = $department;
+    } else {
+        echo "Department not found.";
+    }
+} else {
+
+    header("Location: department_login.php");
     exit();
 }
-if (isset($_GET['faculty_id'])) {
-    $id = $_GET['faculty_id'];
-    $query = "SELECT * from faculty_tbl WHERE faculty_id = '$id'";
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = "SELECT * from employee_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($query_res)) {
-        $fname = $row['fname'];
-        $mname = $row['mname'];
-        $lname = $row['lname'];
-        $sex = $row['sex'];
-        $contact = $row['contact_number'];
+        $firstname = $row['fname'];
+        $lastname = $row['lname'];
         $email = $row['email'];
+        $sex = $row['sex'];
+        $contact_num = $row['contact_number'];
         $permanent_address = $row['permanent_address'];
-        $f_photo_path = $row['photo_path'];
-        $department = $row['department'];
+        $photo_path = $row['photo_path'];
+        $status = $row['status'];
+        $staff_department = $row['department'];
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
@@ -62,7 +81,8 @@ if (isset($_GET['faculty_id'])) {
     }
 }
 
-$active = "about faculty";
+require_once './includes/query.php';
+$active = "about staff";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,52 +113,31 @@ $active = "about faculty";
     <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
-            <h1>About Employee</h1>
+            <h1>About Staff</h1>
             <div class="breadcrumbs">
                 <a href="#">Home</a>
-                <a href="#">Other Faculty</a>
-                <a href="#">Faculty</a>
+                <a href="#">Other Staff</a>
+                <a href="#">Staff</a>
             </div>
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
         <div class="about-container">
             <div class="about-profile">
-                <form id="photoForm" class="prof-img transition-all relative group">
-
-                    <?php if (isset($_GET['faculty_id'])) : ?>
-                        <img src="<?= !@$f_photo_path ? "images/profile-black.svg" : $f_photo_path ?>" alt="profile" class="object-cover">
-                    <?php else : ?>
-                        <img src="<?= !@$photo_path ? "images/profile-black.svg" : $photo_path ?>" alt="profile" class="object-cover">
-                    <?php endif; ?>
-
-                    <?php if (!isset($_GET['faculty_id'])) : ?>
-                        <div class="absolute top-0 right-0 max-[950px]:visible invisible group group-hover:visible transition">
-                            <label for="photo" class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#121212" class="w-5 h-5 bg-white rounded-sm">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                </svg>
-                            </label>
-                            <input type="file" id="photo" class="hidden max-h-0" accept="image/*">
-                        </div>
-                    <?php endif; ?>
-                </form>
+                <div class="prof-img">
+                    <img src="<?= $photo_path ? $photo_path : "images/profile-black.svg" ?>" alt="profile">
+                </div>
                 <div class="profile-desc">
                     <div class="profile-name">
-                        <?php echo "<h1>$fname $lname</h1>"; ?>
-                        <?= @$_GET['faculty_id'] === "" ? $position : "" ?>
+                        <?php echo "<h1>$firstname $lastname</h1>"; ?>
                     </div>
                     <hr>
                     <div class="profile-info">
-                        <p>Hello I am <?php echo "$fname $lname" ?> an Employee in Southland College.</p>
+                        <p>Hello I am <?php echo "$firstname $lastname" ?> an Employee in Southland College.</p>
                     </div>
                     <div class="bordered-info">
                         <h3>Gender</h3>
                         <?php echo "<p>$sex</p>"; ?>
-                    </div>
-                    <div class="bordered-info">
-                        <h3>Degree</h3>
-                        <span><?php echo "$college_course" ?></span>
                     </div>
                     <div class="bordered-info">
                         <h3>Status</h3>
@@ -146,14 +145,13 @@ $active = "about faculty";
                     </div>
                     <div class="bordered-info">
                         <h3>Department</h3>
-                        <span><?php echo $department ?></span>
+                        <span><?php echo $staff_department ?></span>
                     </div>
                 </div>
             </div>
             <div class="about">
                 <div class="about-me">
                     <button>About Me</button>
-                    <button>Leave History</button>
                     <button class="status-btn">Status</button>
 
                     <div class="status-modal">
@@ -178,7 +176,7 @@ $active = "about faculty";
                                     'status' => $_POST['status']
                                 ];
 
-                                updateDataFaculty($conn, $id, $newData);
+                                updateDataEmployee($conn, $id, $newData);
                             }
                             ?>
                         </form>
@@ -191,7 +189,7 @@ $active = "about faculty";
                     </div>
                     <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Mobile</h3>
-                        <?php echo "<p>$contact</p>"; ?>
+                        <?php echo "<p>$contact_num</p>"; ?>
                     </div>
                     <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Email</h3>

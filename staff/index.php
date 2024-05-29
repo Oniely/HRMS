@@ -274,6 +274,10 @@ $active = "profile";
                         <h3>Status</h3>
                         <span><?php echo "$status" ?></span>
                     </div>
+                    <div class="bordered-info">
+                        <h3>Department</h3>
+                        <span><?php echo "$department" ?></span>
+                    </div>
                 </div>
             </div>
             <div class="about">
@@ -283,19 +287,19 @@ $active = "profile";
 
                 </div>
                 <div class="info">
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Fullname</h3>
                         <?php echo "<p>$fname $lname</p>"; ?>
                     </div>
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Mobile</h3>
                         <?php echo "<p>$contact</p>"; ?>
                     </div>
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Email</h3>
                         <?php echo "<p>$email</p>"; ?>
                     </div>
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Location</h3>
                         <?php echo "<p>$permanent_address</p>"; ?>
                     </div>

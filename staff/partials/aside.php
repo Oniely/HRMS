@@ -11,6 +11,7 @@ if (isset($_SESSION['employee_id'])) {
         $fname = $row['fname'];
         $lname = $row['lname'];
         $department = $row['department'];
+        $photo_path = $row['photo_path'];
     } else {
         $query = "SELECT * FROM employee_tbl WHERE employee_id = $employee_id";
         $query_res = mysqli_query($conn, $query);
@@ -18,6 +19,7 @@ if (isset($_SESSION['employee_id'])) {
             $employee_id = $row['employee_id'];
             $fname = $row['fname'];
             $lname = $row['lname'];
+            $photo_path = $row['photo_path'];
             $department = $row['department'];
         }
     }

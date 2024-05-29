@@ -14,11 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'Annual Leave':
             $leave_balance_column = 'annual_leave';
             break;
+        case 'Vacational Leave':
+            $leave_balance_column = 'vacational_leave';
+            break;
         case 'Unpaid Leave':
             $leave_balance_column = 'unpaid_leave';
             break;
         default:
-            echo json_encode(['balance' => 0]);
+            echo json_encode(['balance' => null]); // Indicate no balance tracking for other types
             exit;
     }
 

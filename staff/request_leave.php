@@ -41,7 +41,6 @@ $active = "leave application";
               </div>
               <form class="f-container" method="post" enctype="multipart/form-data">
                      <div class="f-section">
-
                             <div class="f-inputs px-0">
                                    <div class="relative z-0">
                                           <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " disabled value="<?php echo "$employee_id" ?>" />
@@ -68,9 +67,15 @@ $active = "leave application";
                                                  <option value="Sick Leave">Sick Leave</option>
                                                  <option value="Annual Leave">Annual Leave</option>
                                                  <option value="Unpaid Leave">Unpaid Leave</option>
+                                                 <option value="Vacational Leave">Vacational Leave</option>
+                                                 <option value="Bereavement Leave">Bereavement Leave</option>
+                                                 <option value="Marriage Leave">Marriage Leave</option>
+                                                 <option value="Others">Others</option>
                                           </select>
-                                          <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                                                 Type of Leave</label>
+                                          <div class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 appearance-none text-black focus:outline-none focus:ring-0 peer">
+                                                 <input type="text" id="other-text" name="otherText" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" Please specify" disabled>
+                                          </div>
+                                          <label for="status" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Type of Leave</label>
                                    </div>
                                    <div class="relative z-0">
                                           <input type="text" name="destination" id="destination" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
@@ -165,7 +170,7 @@ $active = "leave application";
                                                  'application_status' => 'PENDING',
                                                  'destination' => $_POST['destination'],
                                                  'accompany_with' => $_POST['accompany'],
-                                                 'balance_days' => $balanceDays // Include the remaining leave balance in the insert data
+                                                 'balance_days' => $balanceDays
                                           ];
 
                                           insertLeaveEmployee($conn, 'leave_tbl', $insertData);
@@ -188,12 +193,17 @@ $active = "leave application";
               var totalDaysInput = document.getElementById('total_days');
               var warningMessage = document.getElementById('warningMessage');
               var submitBtn = document.getElementById('submitBtn');
-
-              var today = new Date().toISOString().split('T')[0];
-              startDateInput.setAttribute('min', today);
-              endDateInput.setAttribute('min', today);
+              const otherTextInput = document.getElementById('other-text');
 
               leaveTypeInput.addEventListener('change', function() {
+                     if (leaveTypeInput.value === 'Others') {
+                            otherTextInput.disabled = false;
+                            otherTextInput.focus();
+                     } else {
+                            otherTextInput.disabled = true;
+                            otherTextInput.value = '';
+                     }
+
                      var leaveType = this.value;
                      if (leaveType) {
                             fetchLeaveBalance(leaveType);
@@ -204,6 +214,10 @@ $active = "leave application";
                             warningMessage.style.display = 'none';
                      }
               });
+
+              var today = new Date().toISOString().split('T')[0];
+              startDateInput.setAttribute('min', today);
+              endDateInput.setAttribute('min', today);
 
               startDateInput.addEventListener('change', function() {
                      endDateInput.setAttribute('min', this.value);
@@ -226,15 +240,24 @@ $active = "leave application";
                             dataType: "json",
                             success: function(response) {
                                    if (response && response.balance !== undefined) {
-                                          leaveBalanceInput.value = response.balance;
-                                          if (response.balance == 0) {
-                                                 startDateInput.disabled = true;
-                                                 endDateInput.disabled = true;
-                                                 warningMessage.style.display = 'block';
-                                          } else {
+                                          if (response.balance === null) {
+                                                 leaveBalanceInput.value = '';
+                                                 leaveBalanceInput.style.display = 'none';
+                                                 warningMessage.style.display = 'none';
                                                  startDateInput.disabled = false;
                                                  endDateInput.disabled = false;
-                                                 warningMessage.style.display = 'none';
+                                          } else {
+                                                 leaveBalanceInput.value = response.balance;
+                                                 leaveBalanceInput.style.display = 'block';
+                                                 if (response.balance == 0) {
+                                                        startDateInput.disabled = true;
+                                                        endDateInput.disabled = true;
+                                                        warningMessage.style.display = 'block';
+                                                 } else {
+                                                        startDateInput.disabled = false;
+                                                        endDateInput.disabled = false;
+                                                        warningMessage.style.display = 'none';
+                                                 }
                                           }
                                    } else {
                                           console.error("Error: Invalid response from server.", response);
@@ -270,8 +293,8 @@ $active = "leave application";
               }
        });
 
+
        function submitPrintForm() {
-              // Create a new form
               const printForm = document.createElement('form');
               printForm.method = 'post';
               printForm.action = 'print.php';

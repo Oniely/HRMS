@@ -135,16 +135,7 @@ $active = "data department faculty";
                                                     <img src="images/eyes.svg" alt="View">
                                                 </div>
                                             </a>
-                                            <a class='update-btn' href='edit_faculty.php?id=<?php echo $row['faculty_id']; ?>'>
-                                                <div>
-                                                    <img src="images/update-btn.svg" alt="update">
-                                                </div>
-                                            </a>
-                                            <a class="delete-btn" href="functions/faculty/delete.php?id=<?php echo $row['faculty_id']; ?>">
-                                                <div>
-                                                    <img src="images/delete-btn.svg" alt="update">
-                                                </div>
-                                            </a>
+                                         
                                         </td>
                                     </tr>
                                 <?php }

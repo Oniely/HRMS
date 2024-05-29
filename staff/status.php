@@ -1,14 +1,7 @@
 <?php
-
 global $conn;
-
 include('includes/connection.php');
-
-
-
 session_start();
-
-
 if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
     $elem_school = $elem_year = $highschool_school = $highschool_year = $vocational_school = $vocational_course = $vocational_year = $college_school = $college_course = $college_year = $faculty_id = $fname = $lname = $sex = $contact = $email = $permanent_address = $status = $photo_path = "";

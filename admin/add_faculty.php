@@ -159,9 +159,9 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
               ];
               insertDataColumns($conn, 'graduate_tbl', $graduate_array);
 
-              $annual_leave_balance = 5; // Assuming a default value for annual leave balance
-              $sick_leave_balance = 5; // Assuming a default value for sick leave balance
-              $unpaid_leave_balance = 5; // Assuming a default value for unpaid leave balance
+              $annual_leave_balance = 15; // Assuming a default value for annual leave balance
+              $sick_leave_balance = 15; // Assuming a default value for sick leave balance
+              $unpaid_leave_balance = 15; // Assuming a default value for unpaid leave balance
 
               // Calculate the total balance
               $total_balance = $annual_leave_balance + $sick_leave_balance + $unpaid_leave_balance;
@@ -258,7 +258,7 @@ $active = "add faculty";
                                                  Address</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="number" name="contactnumber" id="contactnumber" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="text" name="contactnumber" id="contactnumber" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                                           <label for="contactnumber" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone
                                                  Number</label>
                                    </div>

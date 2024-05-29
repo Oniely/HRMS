@@ -11,11 +11,12 @@ if ($row = mysqli_fetch_assoc($query_res)) {
     $annual_leave = $row['annual_leave'];
     $sick_leave = $row['sick_leave'];
     $unpaid_leave = $row['unpaid_leave'];
+    $vacational_leave = $row['vacational_leave'];
     $balance = $row['balance'];
 }
 
-$xValues = ["Annual Leave", "Sick Leave", "Unpaid Leave"];
-$yValues = [$annual_leave, $sick_leave, $unpaid_leave];
+$xValues = ["Annual Leave", "Sick Leave","Vacational Leave", "Unpaid Leave"];
+$yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave];
 
 ?>
 
@@ -47,6 +48,11 @@ $yValues = [$annual_leave, $sick_leave, $unpaid_leave];
                     <td class="leave-td">9</td>
                 </tr>
                 <tr>
+                    <td class="leave-td" id="td-bg">Vacational Leave</td>
+                    <td class="leave-td"><?php echo $vacational_leave ?></td>
+                    <td class="leave-td">9</td>
+                </tr>
+                <tr>
                     <td class="leave-td" id="td-bg">Unpaid Leave</td>
                     <td class="leave-td"><?php echo $unpaid_leave ?></td>
                     <td class="leave-td">9</td>
@@ -62,6 +68,7 @@ $yValues = [$annual_leave, $sick_leave, $unpaid_leave];
     const barColors = [
         "#b91d47",
         "#00aba9",
+        "#32ab01",
         "#2b5797",
     ];
 

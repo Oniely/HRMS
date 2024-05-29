@@ -261,6 +261,8 @@ session_start();
         }
         if (applicationStatus === 'APPROVED') {
             document.getElementById('stat-3').classList.add('active');
+            document.getElementById('separator-3').classList.remove('active');
+
         }
     }
 

@@ -45,7 +45,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
             </div>
         </a>
- 
+
         <!-- <div class="notification-menu">
                 <a href=""></a>
                 <div class="notification-content">
@@ -112,23 +112,32 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                 </a>' : ""
                 ?>
                 <a href="admin_privilages.php">
+                    <?= @$privilage === "super_admin" ?
+                        '<a href="department_sect.php ">
                     <div>
-                        <img src="images/5.svg" alt="" />
-                        <span>Setting</span>
+                        <img src="images/department.svg" alt="" />
+                        <span>Department</span>
                     </div>
-                </a>
-                <a href="">
-                    <div>
-                        <img src="images/3.svg" alt="" />
-                        <span>Help</span>
-                    </div>
-                </a>
-                <a href="./includes/logout.php">
-                    <div>
-                        <img src="images/arrow.svg" alt="" />
-                        <span>Logout</span>
-                    </div>
-                </a>
+                </a>' : ""
+                    ?>
+                    <a href="department_sect.php">
+                        <div>
+                            <img src="images/5.svg" alt="" />
+                            <span>Setting</span>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div>
+                            <img src="images/3.svg" alt="" />
+                            <span>Help</span>
+                        </div>
+                    </a>
+                    <a href="./includes/logout.php">
+                        <div>
+                            <img src="images/arrow.svg" alt="" />
+                            <span>Logout</span>
+                        </div>
+                    </a>
             </div>
         </button>
     </div>

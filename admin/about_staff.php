@@ -29,6 +29,7 @@ if (isset($_GET['id'])) {
         $photo_path = $row['photo_path'];
         $status = $row['status'];
         $department = $row['department'];
+
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
@@ -85,6 +86,7 @@ $active = "about staff";
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
     <script src="script/status-modal.js" defer></script>
+    <!-- <script src="script/history-modal.js" defer></script> -->
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -127,6 +129,10 @@ $active = "about staff";
                         <?php echo "<p>$sex</p>"; ?>
                     </div>
                     <div class="bordered-info">
+                        <h3>Degree</h3>
+                        <span><?php echo "$college_course" ?></span>
+                    </div>
+                    <div class="bordered-info">
                         <h3>Status</h3>
                         <span><?php echo $status ?></span>
                     </div>
@@ -139,7 +145,48 @@ $active = "about staff";
             <div class="about">
                 <div class="about-me">
                     <button>About Me</button>
+                    <a href="leave_history.php?id=<?php echo $id; ?>">
+                        <button class="history-btn">Leave History</button>
+                    </a>
                     <button class="status-btn">Status</button>
+                    <!-- <div class="history-modal">
+                        <form method="POST" class="history-form">
+                            <div class="history-header">
+                                <h1>Leave History</h1>
+                                <button type="button" class="close-btn">
+                                    <img src="images/close.svg" alt="x">
+                                </button>
+                            </div>
+                            <div class="history-input">
+                                <select id="leave-history-select" name="leave_id" onchange="updateLeaveDetails()">
+                                    <option value="">Select Leave</option>
+                                    <?php
+                                    $sql = "SELECT * FROM leave_tbl WHERE employee_id = $id";
+                                    $result = mysqli_query($conn, $sql);
+
+                                    if (!$result) {
+                                        echo "<option>Error: Failed to fetch leave history</option>";
+                                    } else {
+                                        // Check if there are leave records
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $leaveId = $row['leave_id'];
+                                                $leaveType = $row['leave_type'];
+                                                $fromDate = $row['from_date'];
+                                                $toDate = $row['to_date'];
+                                                // Output leave history as dropdown options
+                                                echo "<option value='$leaveId' data-leave-type='$leaveType' data-from-date='$fromDate' data-to-date='$toDate'>$leaveType - $fromDate to $toDate</option>";
+                                            }
+                                        } else {
+                                            echo "<option>No leave history found</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </form>
+                    </div> -->
+
 
                     <div class="status-modal">
                         <form method="POST" class="status-form">

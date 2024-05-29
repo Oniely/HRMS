@@ -3,7 +3,7 @@
 include('includes/connection.php');
 session_name('adminSession');
 session_start();
-// Check if admin_id session variable is not set or empty
+$currentDate = date('Y-m-d');
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
     // Redirect to login page
     header('Location: login.php');
@@ -117,10 +117,31 @@ $active = "dashboard"
                 </div>
                 <div class="box-info">
                     <h1>Total Leave</h1>
-                    <?php $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED'";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    echo '<h2>' . $row['count'] . '</h2>';
+                    <?php
+                    $sql = "SELECT COUNT(*) as count 
+             FROM leave_tbl 
+             WHERE application_status = 'APPROVED' 
+             AND to_date >= ?";
+
+                    $stmt = mysqli_prepare($conn, $sql);
+
+                    if ($stmt) {
+                        // Bind the current date to the prepared statement
+                        mysqli_stmt_bind_param($stmt, "s", $currentDate);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+
+                        if ($row = mysqli_fetch_assoc($result)) {
+                            echo '<h2>' . $row['count'] . '</h2>';
+                        } else {
+                            echo '<h2>0</h2>';
+                        }
+
+                        mysqli_stmt_close($stmt);
+                    } else {
+                        echo "Error in SQL statement: " . mysqli_error($conn);
+                    }
+
                     ?>
                     <div class="percentage">
                         <div></div>
@@ -133,7 +154,7 @@ $active = "dashboard"
         <div class="dashboard-table">
             <table>
                 <div class="table-title">
-                    <h1>On Leave List</h1>
+                    <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
                 </div>
                 <thead>
                     <tr>
@@ -148,7 +169,8 @@ $active = "dashboard"
                 </thead>
                 <tbody>
                     <?php
-                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE application_status = 'APPROVED'");
+
+                    $query = mysqli_query($conn, "SELECT * FROM `leave_tbl` WHERE application_status = 'APPROVED' AND '$currentDate' BETWEEN `from_date` AND `to_date`");
                     while ($row = mysqli_fetch_array($query)) {
                     ?>
                         <tr>

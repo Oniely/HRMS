@@ -20,6 +20,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $leave_type = isset($_POST['status']) ? $_POST['status'] : '';
 
     $department = isset($_SESSION['department']) ? $_SESSION['department'] : 'Unknown';
+
+
+    $designation = '';
+
+    $designation = '';
+
+    // Debugging: Display the employee ID being checked
+    error_log("Checking employee ID: $employee_id");
+
+    // Query to check if employee_id is in employee_tbl
+    $checkEmployee = "SELECT * FROM employee_tbl WHERE employee_id = ?";
+    $stmtEmployee = $conn->prepare($checkEmployee);
+    $stmtEmployee->bind_param("i", $employee_id);
+    $stmtEmployee->execute();
+    $resultEmployee = $stmtEmployee->get_result();
+
+    if ($resultEmployee->num_rows > 0) {
+        $designation = 'Staff';
+    } else {
+        // Query to check if employee_id is in faculty_tbl
+        $checkFaculty = "SELECT * FROM faculty_tbl WHERE faculty_id = ?";
+        $stmtFaculty = $conn->prepare($checkFaculty);
+        $stmtFaculty->bind_param("i", $employee_id);
+        $stmtFaculty->execute();
+        $resultFaculty = $stmtFaculty->get_result();
+
+        if ($resultFaculty->num_rows > 0) {
+            $designation = 'Faculty';
+        } else {
+            $designation = 'Not Designated';
+        }
+
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -47,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <p>Date of Filing: <span>2021-06-24</span></p>
                             <p>Name: <span><?php echo $name ?></span></p>
                             <p>Department: <span><?php echo $department ?></span></p>
-                            <p>Designation: <span>Staff</span></p>
+                            <p>Designation: <span><?php echo $designation ?></span></p>
                         </div>
                         <div>
                             <b><?php echo $name ?></b>

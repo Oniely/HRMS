@@ -143,8 +143,14 @@ $active = "dashboard";
                     <img src="images/box (4).svg" alt="" />
                 </div>
                 <div class="box-info">
-                    <h1>Total Fulltime</h1>
-                    <h2>250</h2>
+                    <h1>Total Leave</h1>
+
+                    <?php 
+                    $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE department = '$department' AND application_status = 'APPROVED'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    echo '<h2>' . $row['count'] . '</h2>';
+                    ?>
                     <div class="percentage">
                         <div></div>
                     </div>
@@ -171,7 +177,7 @@ $active = "dashboard";
                 </thead>
                 <tbody>
                     <?php
-                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE department = '$department'");
+                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE department = '$department' and application_status = 'APPROVED'");
                     while ($row = mysqli_fetch_array($query)) {
                     ?>
                         <tr>

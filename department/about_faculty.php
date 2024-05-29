@@ -3,26 +3,46 @@
 global $conn;
 
 include('includes/connection.php');
-session_name('adminSession');
+session_name('departmentSession');
 session_start();
-if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
-    header('location:login.php');
+
+if (isset($_SESSION['department_id'])) {
+    $id = $_SESSION['department_id'];
+    $query = "SELECT * FROM department_tbl WHERE department_id = $id";
+    $query_res = mysqli_query($conn, $query);
+    if ($query_res && mysqli_num_rows($query_res) > 0) {
+        $row = mysqli_fetch_assoc($query_res);
+        $department_id = $row['department_id'];
+        $fname = $row['fname'];
+        $lname = $row['lname'];
+        $position = $row['position'];
+        $contact = $row['contact'];
+        $department = $row['department'];
+
+        $_SESSION['department'] = $department;
+    } else {
+        echo "Department not found.";
+    }
+} else {
+
+    header("Location: department_login.php");
     exit();
 }
+
 if (isset($_GET['faculty_id'])) {
     $id = $_GET['faculty_id'];
     $query = "SELECT * from faculty_tbl WHERE faculty_id = '$id'";
     $query_res = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($query_res)) {
-        $fname = $row['fname'];
-        $mname = $row['mname'];
-        $lname = $row['lname'];
-        $sex = $row['sex'];
-        $contact = $row['contact_number'];
+        $firstname = $row['fname'];
+        $lastname = $row['lname'];
         $email = $row['email'];
+        $sex = $row['sex'];
+        $contact_num = $row['contact_number'];
         $permanent_address = $row['permanent_address'];
-        $f_photo_path = $row['photo_path'];
-        $department = $row['department'];
+        $photo_path = $row['photo_path'];
+        $status = $row['status'];
+        $staff_department = $row['department'];
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
@@ -134,15 +154,11 @@ $active = "about faculty";
                     </div>
                     <div class="bordered-info">
                         <h3>Gender</h3>
-                        <?php echo "<p>$sex</p>"; ?>
+                        <span><?php echo $sex ?></span>
                     </div>
                     <div class="bordered-info">
                         <h3>Degree</h3>
-                        <span><?php echo "$college_course" ?></span>
-                    </div>
-                    <div class="bordered-info">
-                        <h3>Status</h3>
-                        <span><?php echo $status ?></span>
+                        <span>BSIT</span>
                     </div>
                     <div class="bordered-info">
                         <h3>Department</h3>
@@ -153,7 +169,6 @@ $active = "about faculty";
             <div class="about">
                 <div class="about-me">
                     <button>About Me</button>
-                    <button>Leave History</button>
                     <button class="status-btn">Status</button>
 
                     <div class="status-modal">

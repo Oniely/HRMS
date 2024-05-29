@@ -1,173 +1,174 @@
 @import url("./main.css");
 
 body {
-    display: flex;
+  display: flex;
 }
 
 .dashboard-container {
-    position: relative;
-    width: 100%;
-    margin-top: 4rem;
-    bottom: 0;
-    background-color: #e6f1ff;
-    padding: 0 2rem;
+  position: relative;
+  width: 100%;
+  margin-top: 4rem;
+  bottom: 0;
+  background-color: #e6f1ff;
+  padding: 0 2rem;
 }
 
 .content-title {
-    font-size: 30px;
-    text-align: left;
+  font-size: 30px;
+  text-align: left;
 }
 
 .content-title h3 {
-    font-size: 2rem;
-    color: #252525;
-    padding: 30px 10px;
-    font-weight: 700;
+  font-size: 2rem;
+  color: #252525;
+  padding: 30px 10px;
+  font-weight: 700;
 }
 
 .form {
-    background-color: white;
-    min-height: 100vh;
-    border-radius: 30px;
-    padding: 30px;
-    width: 100%;
+  background-color: white;
+  min-height: 100vh;
+  border-radius: 30px;
+  padding: 30px;
+  width: 100%;
 }
 
 .form-title {
-    padding: 20px 0 10px 40px;
-    border-bottom: 1px solid #9d9d9d;
+  padding: 20px 0 10px 40px;
+  border-bottom: 1px solid #9d9d9d;
 }
 
 .form-title h5 {
-    font-size: 30px;
-    padding-bottom: 10px;
-    font-weight: 600;
-    color: #303030;
+  font-size: 30px;
+  padding-bottom: 10px;
+  font-weight: 600;
+  color: #303030;
 }
 
 .flex {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 30px;
-    padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 30px;
+  padding-top: 30px;
 }
 
 label {
-    position: relative;
-    width: 100%;
-    padding: 20px 20px;
-    font-weight: bold;
+  position: relative;
+  width: 100%;
+  padding: 20px 20px;
+  font-weight: bold;
 }
 
 .form input {
-    width: 100%;
-    padding: 5px;
-    outline: none;
-    font-size: 1rem;
-    border: 0;
-    border-bottom: 1px solid #9d9d9d;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  font-size: 1rem;
+  border: 0;
+  border-bottom: 1px solid #9d9d9d;
 }
 
 .btns {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 
-    padding: 0;
-    margin-top: 1.5rem;
+  padding: 0;
+  margin-top: 1.5rem;
 }
 
 .btns input,
 .btns a {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    background: #4763ca;
-    color: white;
+  background: #4763ca;
+  color: white;
 
-    padding: 0.8rem 0;
-    font-size: 1.2rem;
-    cursor: pointer;
+  padding: 0.8rem 0;
+  font-size: 1.2rem;
+  cursor: pointer;
 
-    transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .btns input:hover {
-    background: #6d85db;
+  background: #6d85db;
 }
 
 .btns a {
-    background: #f7f7f7;
-    color: black;
-    border: 1px solid #000;
+  background: #f7f7f7;
+  color: black;
+  border: 1px solid #000;
 }
 
 .btns a:hover {
-    background: #eee;
+  background: #eee;
 }
 
 .educational-background h2 {
-    padding: 20px;
+  padding: 20px;
 }
 
 .f-container {
-    background: white;
-    padding: 2rem 2rem 3rem 2rem;
-    border-radius: 1rem;
-    margin-bottom: 3rem;
+  background: white;
+  padding: 2rem 2rem 3rem 2rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
 }
 
 .f-title h1 {
-    padding: 0.5rem 1rem;
-    color: #303030;
-    font-size: 1.8rem;
-    font-weight: 600;
+  padding: 0.5rem 1rem;
+  color: #303030;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .f-title .hr {
-    border-bottom: 1px solid #9d9d9d;
+  border-bottom: 1px solid #9d9d9d;
 }
 
 .f-inputs {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 2.5rem;
-    row-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2.5rem;
+  row-gap: 2rem;
 
-    padding: 1.5rem 2rem 0;
+  padding: 1.5rem 2rem 0;
 }
 
+
 @media screen and (max-width: 950px) {
-    body {
-        flex-direction: column;
-    }
+  body {
+    flex-direction: column;
+  }
 
-    .dashboard-container {
-        width: 100%;
-        margin: 0;
-        padding: 1rem;
-    }
+  .dashboard-container {
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+  }
 
-    .f-container {
-        padding: 2rem 1.5rem;
-    }
+  .f-container {
+    padding: 2rem 1.5rem;
+  }
 
-    .f-inputs {
-        display: grid;
-        grid-template-columns: 1fr;
-    }
+  .f-inputs {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
-    .f-inputs > div {
-        grid-column: 1 / -1;
-    }
+  .f-inputs > div {
+    grid-column: 1 / -1;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .flex {
-        flex-direction: column;
-    }
+  .flex {
+    flex-direction: column;
+  }
 }
 
 /* @media screen and (max-width: 640px) {

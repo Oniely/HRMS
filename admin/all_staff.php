@@ -111,6 +111,9 @@ $active = "all staff";
                             <tbody id="staff-table-body">
                                 <?php
                                 include('includes/connection.php');
+                                include('includes/update_status.php');
+                           
+                                
                                 $query = mysqli_query($conn, "SELECT * FROM `employee_tbl`");
                                 while ($row = mysqli_fetch_array($query)) {
                                 ?>

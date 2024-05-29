@@ -17,7 +17,7 @@ if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))) {
         $permanent_address = $row['permanent_address'];
         $status = $row['status'];
         $department = $row['department'];
-        $photo_path = $row['photo_path'];  
+        $photo_path = $row['photo_path'];
     } else {
         $query = "SELECT * FROM employee_tbl WHERE employee_id = $id";
         $query_res = mysqli_query($conn, $query);
@@ -31,8 +31,8 @@ if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))) {
             $permanent_address = $row['permanent_address'];
             $status = $row['status'];
             $department = $row['department'];
-            $photo_path = $row['photo_path'];  
-            }
+            $photo_path = $row['photo_path'];
+        }
     }
 }
 
@@ -62,7 +62,6 @@ include('./includes/connection.php');
             </div>
             <?php
             include 'notification_count.php';
-
             if ($notificationCount > 0) {
                 echo "<div class='notification-count' id='notificationCount'>";
                 echo $notificationCount;
