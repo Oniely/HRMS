@@ -239,8 +239,7 @@ $active = "profile";
         <div class="section-title">
             <h1>About Employee</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Other Staff</a>
+                <a href="/hrms/staff/">Home</a>
                 <a href="#">Staff</a>
             </div>
         </div>

@@ -45,8 +45,8 @@ $active = "all staff";
         <div class="section-title">
             <h1>All Staff</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Staff</a>
+                <a href="/hrms/admin/">Home</a>
+                <a href="/hrms/admin/all_staff.php">Staff</a>
                 <a href="#">All Staff</a>
             </div>
         </div>

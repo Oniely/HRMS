@@ -53,8 +53,8 @@ $active = "data department faculty";
         <div class="section-title">
             <h1>All Faculty</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Faculty</a>
+                <a href="/hrms/department/">Home</a>
+                <a href="/hrms/department/department_faculty.php">Faculty</a>
                 <a href="#">All Faculty</a>
             </div>
         </div>

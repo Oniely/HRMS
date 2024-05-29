@@ -69,6 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
         <!-- HR COPY -->
         <section>
+            <div class="banner">
+                <img src="images/southland_banner.png" alt="Southland College">
+            </div>
             <div class="container">
                 <h2>
                     Application for Leave of Absence
@@ -205,6 +208,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </section>
         <!-- EMPLOYEE COPY -->
         <section>
+            <div class="banner">
+                <img src="images/southland_banner.png" alt="Southland College">
+            </div>
             <div class="container">
                 <h2>
                     Application for Leave of Absence
@@ -342,9 +348,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </main>
     <script>
         window.onload = window.print
-        // window.onafterprint = function() {
-        //     window.close();
-        // }
+        window.onafterprint = function() {
+            window.close();
+        }
     </script>
 </body>
 

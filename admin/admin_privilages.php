@@ -57,7 +57,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="section-title">
             <h1>Admin Privilages</h1>
             <div class="breadcrumbs">
-                <a href="#">Dashboard</a>
+                <a href="/hrms/admin/">Dashboard</a>
                 <a href="#">Admin Privilages</a>
             </div>
         </div>

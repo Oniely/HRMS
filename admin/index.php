@@ -46,7 +46,7 @@ $active = "dashboard"
         <div class="section-title">
             <h1>Dashboard</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
+                <a href="/hrms/admin/">Home</a>
                 <a href="#">Dashboard</a>
             </div>
         </div>

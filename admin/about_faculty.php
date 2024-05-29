@@ -95,8 +95,8 @@ $active = "about faculty";
         <div class="section-title">
             <h1>About Employee</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Other Faculty</a>
+                <a href="/hrms/admin/">Home</a>
+                <a href="/hrms/admin/all_faculty.php">All Faculty</a>
                 <a href="#">Faculty</a>
             </div>
         </div>

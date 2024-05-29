@@ -310,7 +310,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
     </button>
 
     <div class="breadcrumbs">
-        <a href="#">Home</a>
+        <a href="/hrms/admin/">Home</a>
         <a href="#">Dashboard</a>
     </div>
 </div>

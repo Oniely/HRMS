@@ -117,7 +117,7 @@ include('./includes/connection.php');
 
 <header class="m-header">
     <div class="m-logo">
-        <a href="/HRMS">
+        <a href="/HRMS/department/">
             <img src="images/sc-logo.svg" alt="sc-logo">
         </a>
     </div>
