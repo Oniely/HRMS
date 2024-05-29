@@ -5,10 +5,10 @@ include('./includes/connection.php');
 ?>
 <aside class="side-bar" id="side-bar">
     <div class="logo" id="logo">
-        <a href="/HRMS">
+        <a href="/HRMS/department/">
             <img id="sc-logo" src="images/sc-logo.svg" alt="sc-logo" />
         </a>
-        <a href="/HRMS">
+        <a href="/HRMS/department/">
             <img id="sc" src="images/sc.svg" alt="sc-logo" />
         </a>
     </div>

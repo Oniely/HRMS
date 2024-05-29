@@ -61,8 +61,7 @@ $active = "profile";
         <div class="section-title">
             <h1>About Department</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
-
+                <a href="/hrms/department/">Home</a>
             </div>
         </div>
         <!-- END DEFAULT -->
