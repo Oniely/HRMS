@@ -5,8 +5,6 @@ global $conn;
 
 include('includes/connection.php');
 
-
-
 if (isset($_SESSION['department_id'])) {
     $id = $_SESSION['department_id'];
     $query = "SELECT * FROM department_tbl WHERE department_id = $id";

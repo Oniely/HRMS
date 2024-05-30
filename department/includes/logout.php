@@ -1,4 +1,5 @@
 <?php
+session_name('departmentSession');
 session_start();
 session_unset();
 session_destroy();

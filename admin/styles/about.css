@@ -105,7 +105,8 @@ body {
 
 .about {
   width: 100%;
-  height: var(--profile-height);
+  min-height: var(--profile-height);
+  max-height: var(--profile-height);
   background: #fff;
 
   border-radius: 15px;
@@ -154,6 +155,7 @@ body {
 .about-me .history-btn:active {
   opacity: 0.8;
 }
+
 .about-me .status-btn {
   background: white;
   color: #101010;
@@ -181,6 +183,7 @@ body {
 }
 
 .about .info div {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -297,6 +300,7 @@ body {
   border-radius: 0.5rem;
   cursor: pointer;
 }
+
 .status-modal {
   position: fixed;
   inset: 0;
@@ -372,12 +376,14 @@ body {
   border-radius: 0.5rem;
   cursor: pointer;
 }
+
 table {
   justify-content: center;
   align-items: center;
   width: 100%;
   overflow: hidden;
 }
+
 td,
 th {
   text-align: left;
@@ -399,15 +405,15 @@ th {
   }
 }
 
-@media screen and (max-width: 680px) {
-  .about .info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+@media screen and (max-width: 950px) {
+  .about {
+    max-height: 100%;
   }
 }
 
 @media screen and (max-width: 440px) {
   .about .info {
-    grid-template-columns: repeat(1, 1fr);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

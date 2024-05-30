@@ -5,6 +5,11 @@ global $conn;
 include('includes/connection.php');
 
 session_start();
+
+if (!isset($_SESSION['employee_id'])) {
+    header('Location: staff_login.php');
+}
+
 if (isset($_SESSION['employee_id'])) {
     $id = $_SESSION['employee_id'];
     $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
@@ -117,8 +122,6 @@ if (isset($_SESSION['employee_id'])) {
             }
         }
     }
-} else {
-    header('Location: staff_login.php');
 }
 
 if (isset($_SESSION['employee_id'])) {
@@ -201,8 +204,6 @@ if (isset($_SESSION['employee_id'])) {
         $college_address = $row['address'];
         $college_year = $row['year_graduate'];
     }
-} else {
-    header('Location: staff_login.php');
 }
 
 
