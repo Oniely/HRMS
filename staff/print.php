@@ -20,11 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $leave_type = isset($_POST['status']) ? $_POST['status'] : '';
 
     $department = isset($_SESSION['department']) ? $_SESSION['department'] : 'Unknown';
-
-
-    $designation = '';
+    $date_applied = date('Y-m-d');
 
     $designation = '';
+
 
     // Debugging: Display the employee ID being checked
     error_log("Checking employee ID: $employee_id");
@@ -80,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box application-box">
                     <div class="box-left">
                         <div>
-                            <p>Date of Filing: <span>2021-06-24</span></p>
+                            <p>Date of Filing: <span><?php echo $date_applied ?></span></p>
                             <p>Name: <span><?php echo $name ?></span></p>
                             <p>Department: <span><?php echo $department ?></span></p>
                             <p>Designation: <span><?php echo $designation ?></span></p>
@@ -125,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box certification-box">
                     <div class="box-left">
                         <div>
-                            <p>Leave Credits as of: <span>2021-06-24</span></p>
+                            <p>Leave Credits as of: <span><?php echo $date_applied ?></span></p>
                             <p>
                                 Reason:
                                 <span><?php echo $reason ?></span>
@@ -219,7 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box application-box">
                     <div class="box-left">
                         <div>
-                            <p>Date of Filing: <span>2021-06-24</span></p>
+                            <p>Date of Filing: <span><?php echo $date_applied ?></span></p>
                             <p>Name: <span><?php echo $name ?></span></p>
                             <p>Department: <span><?php echo $department ?></span></p>
                             <p>Designation: <span>Staff</span></p>
@@ -264,7 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="box certification-box">
                     <div class="box-left">
                         <div>
-                            <p>Leave Credits as of: <span>2021-06-24</span></p>
+                            <p>Leave Credits as of: <span><?php echo $date_applied ?></span></p>
                             <p>
                                 Reason:
                                 <span><?php echo $reason ?></span>

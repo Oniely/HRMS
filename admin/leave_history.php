@@ -48,9 +48,7 @@ if (isset($_GET['id'])) {
             $status = $row['status'];
             $department = $row['department'];
         } else {
-            // Handle the case where the ID is not found in both tables
             echo "ID not found in employee_tbl or faculty_tbl";
-            // Optionally, you can redirect to an error page or handle this case as needed
             exit();
         }
     }

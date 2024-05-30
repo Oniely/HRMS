@@ -79,3 +79,87 @@
 .notification-items.expanded .additional-content {
   display: block; /* Display the additional content when the notification is expanded */
 }
+.notification-items.unread {
+  background-color: #e0e0e0;
+  position: relative;
+padding: 10px 0;
+}
+
+.notification-items.unread::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+#leaveDetailsModal {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  z-index: 100;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+}
+#leaveDetailsModal.open {
+  display: flex;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+.modal-title {
+  text-align: center;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-size: 30px;
+  border-bottom: 1px solid #888;
+}
+.modal-desc p {
+  padding: 0.5rem 0;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.btn {
+  padding: 10px 15px;
+  border: none;
+
+  border-radius: 25px;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+.view-details-btn {
+  text-decoration: underline;
+  color: #007bff;
+}

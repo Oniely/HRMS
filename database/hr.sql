@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2024 at 01:11 PM
+-- Generation Time: May 30, 2024 at 06:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -100,6 +100,8 @@ INSERT INTO `college_tbl` (`employee_id`, `schoolname`, `address`, `course`, `ye
 (12345, 'Southland College', 'Barangay 9, Kabankalan City', 'IT', '2017-07-01'),
 (20202, 'Southland College', 'Kabankalan City', 'Accountancy', '2023-05-28'),
 (30303, 'Southland College', 'Kabankalan City', 'Accountancy', '0000-00-00'),
+(40404, 'Southland College', 'Kabankalan City', 'Mechanical Engineering', '2019-04-28'),
+(50505, 'Fellowship Baptist College', 'Kabankalan City', 'Information Technology', '2010-03-03'),
 (823728, 'qwe', 'qwe', 'qwe', '2002-12-22'),
 (9830290, 'Southland College', 'Barangay 9, Kabankalan City', 'IT', '2018-06-07'),
 (10101010, 'Cebu National University', 'Cebu', 'Accountancy', '0000-00-00'),
@@ -142,7 +144,8 @@ INSERT INTO `department_tbl` (`department_id`, `username`, `password`, `fname`, 
 (1, 'secsa', 'secsa', 'Secsa', 'Secsa', '09123456789', 'Dean', 'SECSA'),
 (2, 'seas', 'seas', 'Seas', 'Seas', '098893289793', 'SEAS Administrator', 'SEAS'),
 (3, 'shtm', 'shtm', 'Shtm', 'Shtm', '099839829793', 'Head Administrator', 'SHTM'),
-(4, 'sba', 'sba', 'SBA', 'SBA', '09898329', 'Head Administrator', 'SBA');
+(4, 'sba', 'sba', 'SBA', 'SBA', '09898329', 'Head Administrator', 'SBA'),
+(6, 'secsa101', 'secsa', 'Secretary', 'Secretary', '09887948293', 'Secretary', 'SECSA');
 
 -- --------------------------------------------------------
 
@@ -181,6 +184,8 @@ INSERT INTO `elementary_tbl` (`employee_id`, `schoolname`, `address`, `year_grad
 (10101, 'Southland College', 'Kabankalan City', '2014-03-25'),
 (20202, 'Southland College ', 'Kabankalan City', '2012-03-27'),
 (30303, 'Southland College', 'Kabankalan City', '2015-03-28'),
+(40404, 'Salong Elementary School', 'Barangay Salong, Kabankalan City ', '2009-03-26'),
+(50505, 'Erams West ', 'Kabankalan City', '2002-02-03'),
 (10101010, 'Guadalupe Elementary School', 'Guadalupe', '2013-04-28'),
 (20202020, 'Makati Elementary', 'Makati', '2012-03-05'),
 (30303030, 'Banga Elementary School', 'Banga, Lapu-lapu', '2012-03-28'),
@@ -225,8 +230,9 @@ CREATE TABLE `employee_tbl` (
 --
 
 INSERT INTO `employee_tbl` (`employee_id`, `fname`, `mname`, `lname`, `date_of_birth`, `place_of_birth`, `sex`, `blood_type`, `civil_status`, `tin_id`, `citizenship`, `sss_no`, `pagibig_no`, `philhealth_no`, `height`, `weight`, `residential_address`, `permanent_address`, `email`, `contact_number`, `status`, `photo_path`, `department`) VALUES
-(20202, 'Aiah Mary', 'Z.', 'Arceta', '2000-02-17', 'Barangay 9, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T00993', 'Filipino', 'SSS8872', 'PG90021', 'PHN5994', 166.5, 55.2, 'Barangay 9, Kabankalan City, Negros Occidental', 'Barangay 9, Kabankalan City, Negros Occidental', 'aiah@gmail.com', '09889903', 'INACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
-(30303, 'Jhoanna', 'E.', 'Robles', '2003-03-28', 'Brgy 5, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T001', 'Filipino', 'SSS9940', 'PG3302-1', 'PHN-233', 167.4, 51.3, 'Barangay 9, Kabankalan City, Negros Occidental', 'Punta Rojas St., Barangay 6, Kabankalan City, Negros Occidental', 'jhoanna@gmail.com', '09884873', 'INACTIVE', '/hrms/admin/images/profiles/photo_66435c74adce18.18081286.jpg', 'SEAS');
+(20202, 'Aiah Mary', 'Z.', 'Arceta', '2000-02-17', 'Barangay 9, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T00993', 'Filipino', 'SSS8872', 'PG90021', 'PHN5994', 166.5, 55.2, 'Barangay 9, Kabankalan City, Negros Occidental', 'Barangay 9, Kabankalan City, Negros Occidental', 'aiah@gmail.com', '09889903', 'ACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
+(30303, 'Jhoanna', 'E.', 'Robles', '1995-03-28', 'Brgy 5, Kabankalan City, Negros Occidental', 'Female', 'O', 'Male', 'T001', 'Filipino', 'SSS9940', 'PG3302-1', 'PHN-233', 167.4, 51.3, 'Barangay 9, Kabankalan City, Negros Occidental', 'Punta Rojas St., Barangay 6, Kabankalan City, Negros Occidental', 'jhoanna@gmail.com', '09884873', 'INACTIVE', '/hrms/admin/images/profiles/photo_66435c74adce18.18081286.jpg', 'SEAS'),
+(40404, 'Yves Saint', 'E.', 'Laurent', '1997-05-28', 'Barangay Salong, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T92003', 'Filipino', 'SSS9903', 'PG01-2', 'PHN778', 175.3, 60.4, 'Barangay 7, Kabankalan City, Negros Occidental', 'Barangay Salong, Kabankalan City, Negros Occidental', 'yves@gmail.com', '09884930', 'INACTIVE', '/hrms/admin/images/profiles/photo_665478e9ba4e53.66543055.jpg', 'SBA');
 
 -- --------------------------------------------------------
 
@@ -265,7 +271,8 @@ CREATE TABLE `faculty_tbl` (
 --
 
 INSERT INTO `faculty_tbl` (`faculty_id`, `fname`, `mname`, `lname`, `date_of_birth`, `place_of_birth`, `sex`, `blood_type`, `civil_status`, `tin_id`, `citizenship`, `sss_no`, `pagibig_no`, `philhealth_no`, `height`, `weight`, `residential_address`, `permanent_address`, `email`, `contact_number`, `status`, `photo_path`, `department`) VALUES
-(10101, 'Gwen Yves', 'G.', 'Apuli', '2001-05-05', 'Barangay 5, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T0993', 'Filipino', 'SSS8833', 'PG00334-1', 'PHN2211', 167.5, 54.3, 'Barangay 5, Kabankalan City, Negros Occidental', 'Barangay 5, Kabankalan City, Negros Occidental', 'gwen@gmail.com', '0988939002', 'ACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA');
+(10101, 'Gwen Yves', 'G.', 'Apuli', '2001-05-05', 'Barangay 5, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T0993', 'Filipino', 'SSS8833', 'PG00334-1', 'PHN2211', 167.5, 54.3, 'Barangay 5, Kabankalan City, Negros Occidental', 'Barangay 5, Kabankalan City, Negros Occidental', 'gwen@gmail.com', '0988939002', 'ACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
+(50505, 'Christian', 'L.', 'Dior', '1990-08-27', 'Barangay 6, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T99802', 'Filipino', 'SSS0331', 'PG123', 'PHN8002', 170.5, 60.4, 'Barangay 6, Kabankalan City, Negros Occidental', 'Barangay 6, Kabankalan City, Negros Occidental', 'christian@gmail.com', '099894893', 'INACTIVE', '/hrms/admin/images/profiles/f1_by_dinapixstudio_dh4gwmr.jpg', 'SHTM');
 
 -- --------------------------------------------------------
 
@@ -310,7 +317,9 @@ INSERT INTO `fathers_name` (`father_id`, `employee_id`, `fname`, `mname`, `lname
 (33, 60606060, '', '', ''),
 (34, 10101, 'George', 'T.', 'Apuli'),
 (35, 20202, 'Andrew Lei', 'T.', 'Arceta'),
-(36, 30303, 'Jack', 'R.', 'Robles');
+(36, 30303, 'Jack', 'R.', 'Robles'),
+(37, 40404, 'Terrence', 'T.', 'Laurent'),
+(38, 50505, 'Carlos', 'E.', 'Dior');
 
 -- --------------------------------------------------------
 
@@ -334,6 +343,8 @@ INSERT INTO `graduate_tbl` (`employee_id`, `schoolname`, `address`, `course`, `y
 (10101, '', '', '', '0000-00-00'),
 (20202, 'Southland College', 'Kabankalan City', 'Accountancy', '2023-05-28'),
 (30303, '', '', '', '0000-00-00'),
+(40404, 'Southland College', 'Kabankalan City', 'Mechanical Engineering', '2019-04-28'),
+(50505, 'Fellowship Baptist College', 'Kabankalan City', 'Information Technology', '2010-03-03'),
 (10101010, '', '', '', '0000-00-00'),
 (20202020, '', '', '', '0000-00-00'),
 (30303030, '', '', '', '0000-00-00'),
@@ -363,6 +374,8 @@ INSERT INTO `highschool_tbl` (`employee_id`, `schoolname`, `address`, `course`, 
 (10101, 'Southland College ', 'Kabankalan City', 'None', '2018-04-07'),
 (20202, 'Southland College ', 'Kabankalan City', 'None', '2016-04-05'),
 (30303, 'Southland College', 'Kabankalan City', 'None', '2019-04-15'),
+(40404, 'Salong National High School', 'Barangay Salong, Kabankalan City', 'None', '2013-04-04'),
+(50505, 'Fellowship Baptist College', 'Kabankalan City', 'None', '2006-03-03'),
 (10101010, 'Guadalupe National High School', 'Guadalupe', 'None', '2017-05-05'),
 (20202020, 'Makati High School', 'Makati', 'None', '2016-04-28'),
 (30303030, 'Banga National High School', 'Banga, Lapu-lapu', 'None', '2016-12-04'),
@@ -381,6 +394,10 @@ CREATE TABLE `leave_balance_tbl` (
   `annual_leave` int(11) NOT NULL,
   `sick_leave` int(11) NOT NULL,
   `unpaid_leave` int(11) NOT NULL,
+  `vacational_leave` int(11) NOT NULL,
+  `bereavement_leave` int(11) NOT NULL,
+  `marriage_leave` int(11) NOT NULL,
+  `other_leave` int(11) NOT NULL,
   `balance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -388,10 +405,12 @@ CREATE TABLE `leave_balance_tbl` (
 -- Dumping data for table `leave_balance_tbl`
 --
 
-INSERT INTO `leave_balance_tbl` (`employee_id`, `annual_leave`, `sick_leave`, `unpaid_leave`, `balance`) VALUES
-(10101, 5, 9, 5, 35),
-(20202, 13, 13, 15, 35),
-(30303, 3, 3, 5, 15);
+INSERT INTO `leave_balance_tbl` (`employee_id`, `annual_leave`, `sick_leave`, `unpaid_leave`, `vacational_leave`, `bereavement_leave`, `marriage_leave`, `other_leave`, `balance`) VALUES
+(10101, 5, 9, 5, 15, 0, 1, 0, 35),
+(20202, 13, 13, 15, 15, 0, 0, 0, 35),
+(30303, 3, 3, 5, 15, 1, 0, 0, 15),
+(40404, 13, 15, 15, 15, 0, 0, 0, 45),
+(50505, 5, 5, 5, 14, 0, 0, 0, 15);
 
 -- --------------------------------------------------------
 
@@ -407,8 +426,8 @@ CREATE TABLE `leave_tbl` (
   `leave_type` varchar(255) NOT NULL,
   `date_applied` datetime NOT NULL,
   `reason` varchar(255) NOT NULL,
-  `from_date` datetime NOT NULL,
-  `to_date` datetime NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
   `total_days_leave` int(11) NOT NULL,
   `application_status` varchar(255) NOT NULL,
   `destination` varchar(255) NOT NULL,
@@ -422,8 +441,12 @@ CREATE TABLE `leave_tbl` (
 --
 
 INSERT INTO `leave_tbl` (`leave_id`, `employee_id`, `employee_name`, `department`, `leave_type`, `date_applied`, `reason`, `from_date`, `to_date`, `total_days_leave`, `application_status`, `destination`, `accompany_with`, `balance_days`, `read_status`) VALUES
-(310208, 30303, 'Jhoanna Robles', 'SEAS', 'Sick Leave', '2024-05-26 00:00:00', 'N/A', '2024-05-27 00:00:00', '2024-05-28 00:00:00', 2, 'APPROVED', 'N/A', 'N/A', '3', 1),
-(415089, 20202, 'Aiah Mary Arceta', 'SECSA', 'Annual Leave', '2024-05-25 00:00:00', 'N/A', '2024-05-27 00:00:00', '2024-05-28 00:00:00', 2, 'APPROVED', 'N/A', 'N/A', '13', 1);
+(310208, 30303, 'Jhoanna Robles', 'SEAS', 'Sick Leave', '2024-05-26 00:00:00', 'N/A', '2024-05-27', '2024-05-28', 2, 'APPROVED', 'N/A', 'N/A', '3', 1),
+(415089, 20202, 'Aiah Mary Arceta', 'SECSA', 'Annual Leave', '2024-05-25 00:00:00', 'N/A', '2024-05-27', '2024-05-28', 2, 'APPROVED', 'N/A', 'N/A', '13', 1),
+(907174, 10101, 'Gwen Yves Apuli', 'SECSA', 'Marriage Leave', '2024-05-29 00:00:00', 'To attend marriage of relatives', '2024-05-30', '2024-05-30', 1, 'APPROVED', 'Kabankalan City', 'None', '4', 1),
+(925855, 40404, 'Yves Saint Laurent', 'SBA', 'Annual Leave', '2024-05-27 00:00:00', 'Tour and Attend Program in the Siliman University', '2024-05-28', '2024-05-29', 2, 'APPROVED', 'Dumaguete', 'Students', '13', 1),
+(954563, 30303, 'Jhoanna Robles', 'SEAS', 'Bereavement Leave', '2024-05-29 00:00:00', 'To attend funeral ', '2024-05-30', '2024-05-30', 1, 'APPROVED', 'Kabankalan City', 'None', '4', 1),
+(991342, 50505, 'Christian Dior', 'SHTM', 'Vacational Leave', '2024-05-29 00:00:00', 'To attend seminar regarding to sports committee', '2024-05-30', '2024-05-30', 1, 'APPROVED', 'Dumaguete', 'None', '4', 1);
 
 -- --------------------------------------------------------
 
@@ -466,7 +489,9 @@ INSERT INTO `mothers_name` (`mother_id`, `employee_id`, `fname`, `mname`, `lname
 (33, 60606060, '', '', ''),
 (34, 10101, 'Gwyneth Airah', 'E.', 'Gonzaga'),
 (35, 20202, 'Laureen Andrea', 'P.', 'Zamora'),
-(36, 30303, 'Jericha', 'T.', 'Elula');
+(36, 30303, 'Jericha', 'T.', 'Elula'),
+(37, 40404, 'Ylona', 'M.', 'Exalia'),
+(38, 50505, 'Cristina Rose', 'T.', 'Terabittha');
 
 -- --------------------------------------------------------
 
@@ -507,7 +532,9 @@ INSERT INTO `permanent_address_tbl` (`employee_id`, `barangay`, `municipality_ci
 (60606060, 'Barangay 5', 'Kabankalan City', 'Negros Occidental'),
 (10101, 'Barangay 5', 'Kabankalan City', 'Negros Occidental'),
 (20202, 'Barangay 9', 'Kabankalan City', 'Negros Occidental'),
-(30303, 'Punta Rojas St., Barangay 6', 'Kabankalan City', 'Negros Occidental');
+(30303, 'Punta Rojas St., Barangay 6', 'Kabankalan City', 'Negros Occidental'),
+(40404, 'Barangay Salong', 'Kabankalan City', 'Negros Occidental'),
+(50505, 'Barangay 6', 'Kabankalan City', 'Negros Occidental');
 
 -- --------------------------------------------------------
 
@@ -536,7 +563,9 @@ INSERT INTO `place_of_birth_tbl` (`id`, `employee_id`, `barangay`, `municipality
 (6, 60606060, 'Barangay 5', 'Kabankalan City', 'Negros Occidental'),
 (7, 10101, 'Barangay 5', 'Kabankalan City', 'Negros Occidental'),
 (8, 20202, 'Barangay 9', 'Kabankalan City', 'Negros Occidental'),
-(9, 30303, 'Brgy 5', 'Kabankalan City', 'Negros Occidental');
+(9, 30303, 'Brgy 5', 'Kabankalan City', 'Negros Occidental'),
+(10, 40404, 'Barangay Salong', 'Kabankalan City', 'Negros Occidental'),
+(11, 50505, 'Barangay 6', 'Kabankalan City', 'Negros Occidental');
 
 -- --------------------------------------------------------
 
@@ -564,7 +593,9 @@ INSERT INTO `resedential_address_tbl` (`employee_id`, `barangay`, `municipality_
 (60606060, 'Barangay 5', 'Kabankalan City', 'Negros Occidental'),
 (10101, 'Barangay 5', 'Kabankalan City', 'Negros Occidental'),
 (20202, 'Barangay 9', 'Kabankalan City', 'Negros Occidental'),
-(30303, 'Barangay 9', 'Kabankalan City', 'Negros Occidental');
+(30303, 'Barangay 9', 'Kabankalan City', 'Negros Occidental'),
+(40404, 'Barangay 7', 'Kabankalan City', 'Negros Occidental'),
+(50505, 'Barangay 6', 'Kabankalan City', 'Negros Occidental');
 
 -- --------------------------------------------------------
 
@@ -619,6 +650,8 @@ INSERT INTO `vocational_tbl` (`employee_id`, `schoolname`, `address`, `course`, 
 (10101, 'Southland College', 'Kabankalan City', 'STEM', '2020-04-27'),
 (20202, 'Southland College ', 'Kabankalan City', 'ABM', '2018-04-15'),
 (30303, 'Southland College', 'Kabankalan City', 'STEM', '2021-04-25'),
+(40404, 'Fellowship Baptist College', 'Kabankalan City', 'STEM', '2015-05-07'),
+(50505, 'None', 'None', 'None', '0000-00-00'),
 (10101010, 'None', 'None', 'None', '0000-00-00'),
 (20202020, 'None', 'None', 'None', '0000-00-00'),
 (30303030, 'None', 'None', 'None', '0000-00-00'),
@@ -786,7 +819,7 @@ ALTER TABLE `work_experience_tbl`
 -- AUTO_INCREMENT for table `admin_tbl`
 --
 ALTER TABLE `admin_tbl`
-  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `business_address_tbl`
@@ -804,7 +837,7 @@ ALTER TABLE `children_tbl`
 -- AUTO_INCREMENT for table `department_tbl`
 --
 ALTER TABLE `department_tbl`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `employee_tbl`
@@ -828,7 +861,7 @@ ALTER TABLE `family_background_tbl`
 -- AUTO_INCREMENT for table `fathers_name`
 --
 ALTER TABLE `fathers_name`
-  MODIFY `father_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `father_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `membership_organization_tbl`
@@ -840,7 +873,7 @@ ALTER TABLE `membership_organization_tbl`
 -- AUTO_INCREMENT for table `mothers_name`
 --
 ALTER TABLE `mothers_name`
-  MODIFY `mother_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `mother_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `other_information_tbl`
@@ -852,7 +885,7 @@ ALTER TABLE `other_information_tbl`
 -- AUTO_INCREMENT for table `place_of_birth_tbl`
 --
 ALTER TABLE `place_of_birth_tbl`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `spouse_tbl`

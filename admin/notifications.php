@@ -3,6 +3,10 @@
 session_name('adminSession');
 session_start();
 
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    header('location:login.php');
+    exit();
+}
 
 include('includes/connection.php');
 require_once './includes/query.php';
@@ -33,7 +37,7 @@ require_once './includes/query.php';
     <?php require 'partials/aside.php' ?>
     <!-- Navbar -->
     <?php require 'partials/nav.php' ?>
-    <section class="section container">
+    <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Notifications</h1>
@@ -155,7 +159,7 @@ require_once './includes/query.php';
             };
             xhr.send('leave_id=' + leaveId);
         }
-        
+
         $('.confirm-btn').click(function() {
             var leave_id = $(this).data('leave-id');
             var employee_id = $(this).data('employee-id');

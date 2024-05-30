@@ -61,6 +61,31 @@ $active = "data leave notification";
         <div class="section-title">
             <h1>Notifications</h1>
         </div>
+
+        <!-- Modal Structure -->
+        <div id="leaveDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-title">
+                    <h2>Leave Request Details</h2>
+                </div>
+                <div class="modal-desc">
+                    <p id="modalLeaveId"></p>
+                    <p id="modalEmployeeId"></p>
+                    <p id="modalEmployeeName"></p>
+                    <p id="modalLeaveType"></p>
+                    <p id="modalReason"></p>
+                    <p id="modalAccompany"></p>
+                    <p id="modalStartDate"></p>
+                    <p id="modalEndDate"></p>
+                    <p id="modalTotalDays"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmBtn" class="confirm-btn">Confirm</button>
+                    <button id="rejectBtn" class="reject-btn">Reject</button>
+                </div>
+            </div>
+        </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
         <div class="notification-container">
@@ -74,6 +99,7 @@ $active = "data leave notification";
                             $leave_id = $row['leave_id'];
                             $employee_id = $row['employee_id'];
                             $employee_name = $row['employee_name'];
+                            $date_applied = $row['date_applied'];
                             $reason = $row['reason'];
                             $leave_type = $row['leave_type'];
                             $start_date = $row['from_date'];
@@ -81,39 +107,22 @@ $active = "data leave notification";
                             $accompany = $row['accompany_with'];
                             $total_days = $row['total_days_leave'];
                             $application_status = $row['application_status'];
-                            $date = date('Y-m-d');
+                            $read_status = $row['read_status'];
 
-                            echo "<div class='notification-items' id='notification_$leave_id'>";
+                            $unreadClass = $read_status ? '' : 'unread';
+
+                            echo "<div class='notification-items $unreadClass' data-leave-id='$leave_id' data-employee-id='$employee_id' data-employee-name='$employee_name' data-reason='$reason' data-leave-type='$leave_type' data-accompany='$accompany' data-start='$start_date' data-end='$end_date' data-total='$total_days' data-status='$application_status'>";
                             echo "<div class='notification-content-text'>";
                             echo "<h2>Request for $leave_type</h2>";
-                            echo "<span>$date</span>";
+                            echo "<span>$date_applied</span>";
                             echo "<div class='notification-text'>";
                             echo "<p>$employee_name request for $leave_type from $start_date to $end_date</p>";
 
-                            echo "<button type='button' class='btn btn-primary' data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date' data-total='$total_days'></button>";
-                            echo "<a>Delete</a>";
-                            echo "<div class='additional-container' data-leave-id='$leave_id'>";
-                            echo "<div class='additional-content' data-employee-id='$employee_id'>";
-                            echo "<p>Employee ID: $leave_id</p>";
-                            echo "<p>Employee ID: $employee_id</p>";
-                            echo "<p>Employee Name: $employee_name</p>";
-                            echo "<p>Employee Leave Type: $leave_type</p>";
-                            echo "<p>Reason: $reason</p>";
-                            echo "<p>Accompany: $accompany</p>";
-                            echo "<p>Start Date: $start_date</p>";
-                            echo "<p>End Date: $end_date</p>";
-                            echo "<p>Total days : $total_days</p>";
-                            echo '<div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">';
-
-                            $buttonsDisabled = ($application_status === 'DEPARTMENT APPROVED' || $application_status === 'REJECTED' || $application_status === 'APPROVED') ? 'disabled' : '';
-
-                            echo "<button type='button' id='confirmBtn' class='confirm-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm' data-leave-id='$leave_id' data-employee-id='$employee_id' data-leave='$leave_type' data-total='$total_days' $buttonsDisabled>
-                                                Confirm
-                                            </button>";
-                            echo "<button type='button' id='confirmBtn' class='reject-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm' data-leave-id='$leave_id' data-employee-id='$employee_id' data-leave='$leave_type' data-total='$total_days' $buttonsDisabled>
-                                                Reject
-                                            </button>";
-                            echo "</div>";
+                            echo "<button type='button' class='view-details-btn' 
+                            data-leave-id='$leave_id' data-employee-id='$employee_id' data-employee-name='$employee_name' data-reason='$reason' data-leave-type='$leave_type' data-accompany='$accompany' data-start='$start_date' data-end='$end_date' data-total='$total_days' data-status='$application_status'>
+                       
+                        </button>";
+                            echo "<a class='delete-btn' href='#' data-leave-id='$leave_id'>Delete</a>";
                             echo "</div>";
                             echo "</div>";
                             echo "</div>";
@@ -134,30 +143,80 @@ $active = "data leave notification";
 </html>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var notifications = document.querySelectorAll('.notification-items');
+  document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById("leaveDetailsModal");
+        const span = document.getElementsByClassName("close")[0];
 
-        notifications.forEach(function(notification) {
+        document.querySelectorAll('.notification-items').forEach(notification => {
             notification.addEventListener('click', function(event) {
-                var leaveId = this.id.split('_')[1];
+                const leaveId = this.getAttribute('data-leave-id');
+                const employeeId = this.getAttribute('data-employee-id');
+                const employeeName = this.getAttribute('data-employee-name');
+                const reason = this.getAttribute('data-reason');
+                const accompany = this.getAttribute('data-accompany');
+                const leaveType = this.getAttribute('data-leave-type');
+                const startDate = this.getAttribute('data-start');
+                const endDate = this.getAttribute('data-end');
+                const totalDays = this.getAttribute('data-total');
+                const applicationStatus = this.getAttribute('data-status');
 
-                console.log("leaveId:", leaveId);
+                // Mark the notification as read and open the modal
+                markAsRead(leaveId, this);
 
-                this.classList.toggle('expanded');
+                modal.classList.add("open");
 
-                var additionalContainer = this.parentElement.querySelector('.additional-container[data-leave-id="' + leaveId + '"]');
+                document.getElementById('modalLeaveId').innerText = 'Leave ID: ' + leaveId;
+                document.getElementById('modalEmployeeId').innerText = 'Employee ID: ' + employeeId;
+                document.getElementById('modalEmployeeName').innerText = 'Employee Name: ' + employeeName;
+                document.getElementById('modalLeaveType').innerText = 'Leave Type: ' + leaveType;
+                document.getElementById('modalReason').innerText = 'Reason: ' + reason;
+                document.getElementById('modalAccompany').innerText = 'Accompany: ' + accompany;
+                document.getElementById('modalStartDate').innerText = 'Start Date: ' + startDate;
+                document.getElementById('modalEndDate').innerText = 'End Date: ' + endDate;
+                document.getElementById('modalTotalDays').innerText = 'Total Days: ' + totalDays;
 
-                console.log("additionalContainer:", additionalContainer);
+                // Update the buttons' data attributes
+                document.getElementById('confirmBtn').setAttribute('data-leave-id', leaveId);
+                document.getElementById('confirmBtn').setAttribute('data-employee-id', employeeId);
+                document.getElementById('confirmBtn').setAttribute('data-leave', leaveType);
+                document.getElementById('confirmBtn').setAttribute('data-total', totalDays);
+                
+                document.getElementById('rejectBtn').setAttribute('data-leave-id', leaveId);
+                document.getElementById('rejectBtn').setAttribute('data-employee-id', employeeId);
 
-                if (additionalContainer) {
-                    additionalContainer.classList.toggle('expanded');
+                if (applicationStatus === 'APPROVED' || applicationStatus === 'REJECTED') {
+                    document.getElementById('confirmBtn').disabled = true;
+                    document.getElementById('rejectBtn').disabled = true;
+                } else {
+                    document.getElementById('confirmBtn').disabled = false;
+                    document.getElementById('rejectBtn').disabled = false;
                 }
-
-                event.stopPropagation();
             });
         });
 
-        $('.confirm-btn').click(function() {
+        span.onclick = function() {
+            modal.classList.remove("open");
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.remove("open");
+            }
+        }
+
+        function markAsRead(leaveId, notificationElement) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'includes/mark_as_read.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    notificationElement.classList.remove('unread');
+                }
+            };
+            xhr.send('leave_id=' + leaveId);
+        }
+
+        $(document).on('click', '.confirm-btn', function() {
             var leave_id = $(this).data('leave-id');
             var employee_id = $(this).data('employee-id');
             var leave_type = $(this).data('leave');
@@ -167,7 +226,7 @@ $active = "data leave notification";
             }
         });
 
-        $('.reject-btn').click(function() {
+        $(document).on('click', '.reject-btn', function() {
             var leave_id = $(this).data('leave-id');
             var employee_id = $(this).data('employee-id');
             if (confirm("Are you sure you want to reject this leave request?")) {
@@ -188,9 +247,9 @@ $active = "data leave notification";
                     requested_days: requested_days
                 },
                 success: function(result) {
-                    if (status === 'DEPARTMENT APPROVED') {
+                    if (status === 'APPROVED') {
                         alert("Request Approved Successfully");
-                        window.location.href = './notifications.php';
+                        updateLeaveBalance(employee_id, leave_type, requested_days);
                     } else if (status === 'REJECTED') {
                         alert("Request Rejected Successfully");
                         window.location.href = './notifications.php';
@@ -203,46 +262,24 @@ $active = "data leave notification";
             });
         }
 
-      
-        var clickedNotifications = sessionStorage.getItem('clicked_notifications');
-        if (clickedNotifications) {
-            clickedNotifications = JSON.parse(clickedNotifications);
-        } else {
-            clickedNotifications = [];
+        function updateLeaveBalance(employee_id, leave_type, requested_days) {
+            $.ajax({
+                url: "includes/leave_request.php",
+                type: "post",
+                data: {
+                    functionname: 'updateLeaveBalance',
+                    employee_id: employee_id,
+                    leave_type: leave_type,
+                    requested_days: requested_days
+                },
+                success: function(result) {
+                    window.location.href = './notifications.php';
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + error);
+                    console.log("Response: " + xhr.responseText);
+                }
+            });
         }
-        clickedNotifications.push(leave_id);
-        sessionStorage.setItem('clicked_notifications', JSON.stringify(clickedNotifications));
-
-        console.log(clickedNotifications);
-
-        var notification = $(this).closest('.notification-item');
-        notification.removeClass("unread");
-
-        localStorage.setItem("notificationRead", "true");
-
-        $('#leaveModal').removeClass('hidden');
     });
-
-
-
-
-
-    // function updateNotificationCount() {
-    //     var xhttp = new XMLHttpRequest();
-    //     xhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             document.getElementById("notificationCount").textContent = this.responseText;
-    //         }
-    //     };
-    //     xhr.open('GET', 'notifications_count.php', true);
-    //     xhr.send();
-    // }
-
-    // function displayNotifications(notifications) {
-    //     var notificationCount = document.getElementById('notificationCount');
-    //     notificationCount.textContent = notifications.length;
-    // }
-
-    // updateNotificationCount();
-    // setInterval(fetchNotifications, 5000); 
 </script>
