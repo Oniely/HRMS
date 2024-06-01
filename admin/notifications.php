@@ -48,7 +48,7 @@ require_once './includes/query.php';
             <div class="notification-content">
                 <div class="notification-content-desc">
                     <?php
-                    $sql = "SELECT * FROM leave_tbl WHERE application_status IN ('DEPARTMENT APPROVED', 'APPROVED', 'REJECTED')";
+                    $sql = "SELECT * FROM leave_tbl WHERE application_status IN ('DEPARTMENT APPROVED', 'APPROVED', 'REJECTED') ORDER BY date_applied DESC";
                     $result = mysqli_query($conn, $sql);
                     if ($result && mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -61,6 +61,7 @@ require_once './includes/query.php';
                             $end_date = $row['to_date'];
                             $accompany = $row['accompany_with'];
                             $total_days = $row['total_days_leave'];
+                            $date_applied = $row['date_applied'];
                             $application_status = $row['application_status'];
                             $read_status = $row['read_status'];
                             $date = date('Y-m-d');
@@ -70,7 +71,7 @@ require_once './includes/query.php';
                             echo "<div class='notification-items $unreadClass' id='notification_$leave_id'>";
                             echo "<div class='notification-content-text'>";
                             echo "<h2>Request for $leave_type</h2>";
-                            echo "<span>$date</span>";
+                            echo "<span>$date_applied</span>";
                             echo "<div class='notification-text'>";
                             echo "<p>$employee_name request for $leave_type from $start_date to $end_date</p>";
 

@@ -21,8 +21,8 @@
                         <input type="password" name="admin_password" id="admin_password" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Your password here" required="">
                     </div>
                     <div id="passwordContainer" class="hidden col-span-2 space-y-2">
-                        <p class="text-sm font-medium">Username: <span id="showed_username">admin</span></p>
-                        <p class="text-sm font-medium">Password: <span id="showed_password">admin</span></p>
+                        <p class="text-sm font-medium">Username: <span id="showed_username"></span></p>
+                        <p class="text-sm font-medium">Password: <span id="showed_password"></span></p>
                         <p class="text-sm text-gray-500 font-light">Closing Automatically in <span id="timer">10</span>s</p>
                     </div>
                 </div>

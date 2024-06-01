@@ -1,37 +1,47 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/connection.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/auth.php';
+include('includes/connection.php');
+include('includes/query.php');
 
 session_name('adminSession');
 session_start();
 
-if (isset($_SESSION['admin_id'])) {
-    $current_admin_id = $_SESSION['admin_id'];
-    $current_admin_username = $_SESSION['username'];
-} else {
-    echo 'NO ADMIN ID';
+header('Content-Type: application/json');
+
+if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized']);
+    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === "GET") {
-    $department_id = $_GET['department_id'];
-    $password = $_GET['password'];
+$department_id = $_GET['department_id'];
+$password = $_GET['password'];
 
-    if (loginAuth($current_admin_username, $password)) {
+$admin_id = $_SESSION['admin_id'];
+$sql = "SELECT password FROM admin_tbl WHERE admin_id = '$admin_id'";
+$result = mysqli_query($conn, $sql);
 
-        $sql = "SELECT username, password FROM department_tbl WHERE department_id = ?";
-        $query = $conn->prepare($sql);
-        $query->bind_param('i', $department_id);
-        $query->execute();
-        $result = $query->get_result();
-        if ($result) {
-            $row = $result->fetch_assoc();
-            $data = json_encode([$row['username'], $row['password']]);
-            echo $data;
-        } else {
-            echo "FETCH FAILED";
-        }
-    } else {
-        echo "FAILED";
+if (!$result) {
+    echo json_encode(['status' => 'error', 'message' => 'Database query failed']);
+    exit();
+}
+
+$row = mysqli_fetch_assoc($result);
+
+if (password_verify($password, $row['password'])) {
+    $sql = "SELECT username, password FROM department_tbl WHERE department_id = '$department_id'";
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        echo json_encode(['status' => 'error', 'message' => 'Database query failed']);
+        exit();
     }
+
+    $row = mysqli_fetch_assoc($result);
+    echo json_encode(['status' => 'success', 'username' => $row['username'], 'password' => $row['password']]);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Password verification failed']);
 }
+?>

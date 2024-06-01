@@ -38,7 +38,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
-    <script src="script/admin_privilage.js" defer></script>
+    <script src="script/department.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,8 +57,8 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="section-title">
             <h1>Department</h1>
             <div class="breadcrumbs">
-                <a href="#">Dashboard</a>
-                <a href="#">Department</a>
+                <a href="./index.php">Dashboard</a>
+                <a href="./department_sect.php">Department</a>
             </div>
         </div>
         <!-- END DEFAULT -->
@@ -122,7 +122,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </section>
     <!-- Add Admin Modal -->
     <?php include_once "modals/add_department.modal.php" ?>
-    <?php include_once "modals/edit_privilage.modal.php" ?>
+    <?php include_once "modals/edit_department.modal.php" ?>
     <?php include_once "modals/show_dept_password.modal.php" ?>
 </body>
 
