@@ -71,8 +71,9 @@ $active = "dashboard";
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1><?php echo $department . " Dashboard" ?></h1>
-            <div class="addbreadcrumbs">
+            <div class="breadcrumbs">
                 <a href="/hrms/department/">Home</a>
+                <a href="#">Dashboard</a>
             </div>
         </div>
         <!-- END DEFAULT -->

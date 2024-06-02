@@ -1,15 +1,11 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-include('includes/connection.php');
-include('includes/query.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/auth.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/HRMS/admin/includes/query.php';
 
 session_name('adminSession');
 session_start();
-
-header('Content-Type: application/json');
 
 if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
     echo json_encode(['status' => 'error', 'message' => 'Unauthorized']);
@@ -20,7 +16,7 @@ $department_id = $_GET['department_id'];
 $password = $_GET['password'];
 
 $admin_id = $_SESSION['admin_id'];
-$sql = "SELECT password FROM admin_tbl WHERE admin_id = '$admin_id'";
+$sql = "SELECT username,password FROM admin_tbl WHERE admin_id = $admin_id";
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {
@@ -30,7 +26,7 @@ if (!$result) {
 
 $row = mysqli_fetch_assoc($result);
 
-if (password_verify($password, $row['password'])) {
+if (loginAuth($row['username'], $row['password'])) {
     $sql = "SELECT username, password FROM department_tbl WHERE department_id = '$department_id'";
     $result = mysqli_query($conn, $sql);
 
@@ -44,4 +40,3 @@ if (password_verify($password, $row['password'])) {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Password verification failed']);
 }
-?>

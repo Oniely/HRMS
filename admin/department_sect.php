@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include('includes/connection.php');
 include('includes/query.php');
 
@@ -103,7 +99,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     </td>
                                     <td class="actions px-6 py-4 space-x-2">
                                         <button data-department-id="<?= $row['department_id'] ?>" class="show_password_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Show Password</button>
-                                        <button data-department-id="<?= $row['department_id'] ?>" class="edit_privilage_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Edit Account</button>
+                                        <button data-department-id="<?= $row['department_id'] ?>" class="edit_department_btn font-medium text-[#4f6acd]  hover:underline whitespace-nowrap">Edit Account</button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
