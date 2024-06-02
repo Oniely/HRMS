@@ -3,7 +3,7 @@ function updateEmployeeStatus($conn) {
     // Get the current date
     $currentDate = date('Y-m-d');
 
-    // Query to select all employee and faculty IDs with leave end date less than the current date
+    // Query to select all employees and faculty with leave end date less than the current date
     $sql = "
         SELECT l.employee_id, 'employee' AS table_type
         FROM leave_tbl l
@@ -19,12 +19,18 @@ function updateEmployeeStatus($conn) {
     ";
 
     $stmt = mysqli_prepare($conn, $sql);
+    if (!$stmt) {
+        error_log("Error preparing statement: " . mysqli_error($conn));
+        return false;
+    }
+
     mysqli_stmt_bind_param($stmt, "ss", $currentDate, $currentDate);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if (!$result) {
         error_log("Error fetching employees and faculty with past leave end date: " . mysqli_error($conn));
+        mysqli_stmt_close($stmt);
         return false;
     }
 
@@ -40,11 +46,19 @@ function updateEmployeeStatus($conn) {
         }
 
         $updateStmt = mysqli_prepare($conn, $updateSql);
+        if (!$updateStmt) {
+            error_log("Error preparing update statement for $table_type: " . mysqli_error($conn));
+            mysqli_stmt_close($stmt);
+            return false;
+        }
+        
         mysqli_stmt_bind_param($updateStmt, "i", $employee_id);
         $updateResult = mysqli_stmt_execute($updateStmt);
 
         if (!$updateResult) {
             error_log("Error updating status to ACTIVE in $table_type: " . mysqli_error($conn));
+            mysqli_stmt_close($updateStmt);
+            mysqli_stmt_close($stmt);
             return false;
         }
 
