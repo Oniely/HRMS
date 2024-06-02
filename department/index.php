@@ -4,7 +4,7 @@ session_start();
 global $conn;
 
 include('includes/connection.php');
-
+$currentDate = date('Y-m-d');
 if (isset($_SESSION['department_id'])) {
     $id = $_SESSION['department_id'];
     $query = "SELECT * FROM department_tbl WHERE department_id = $id";
@@ -144,11 +144,25 @@ $active = "dashboard";
                 <div class="box-info">
                     <h1>Total Leave</h1>
 
-                    <?php 
-                    $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE department = '$department' AND application_status = 'APPROVED'";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    echo '<h2>' . $row['count'] . '</h2>';
+                    <?php
+                    $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE department = '$department' AND application_status = 'APPROVED' and to_date >= ?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    if ($stmt) {
+                        mysqli_stmt_bind_param($stmt, "s", $currentDate);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+
+                        if ($row = mysqli_fetch_assoc($result)) {
+                            echo '<h2>' . $row['count'] . '</h2>';
+                        } else {
+                            echo '<h2>0</h2>';
+                        }
+
+                        mysqli_stmt_close($stmt);
+                    } else {
+                        echo "Error in SQL statement: " . mysqli_error($conn);
+                    }
+
                     ?>
                     <div class="percentage">
                         <div></div>
@@ -176,7 +190,7 @@ $active = "dashboard";
                 </thead>
                 <tbody>
                     <?php
-                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE department = '$department' and application_status = 'APPROVED'");
+                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE department = '$department' and application_status = 'APPROVED'  AND '$currentDate' BETWEEN `from_date` AND `to_date`");
                     while ($row = mysqli_fetch_array($query)) {
                     ?>
                         <tr>
