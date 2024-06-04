@@ -81,8 +81,8 @@ $active = "data leave notification";
                     <p id="modalTotalDays"></p>
                 </div>
                 <div class="modal-footer">
-                    <button id="confirmBtn" class="confirm-btn">Confirm</button>
-                    <button id="rejectBtn" class="reject-btn">Reject</button>
+                    <button id="confirmBtn" class="confirm-btn btn">Confirm</button>
+                    <button id="rejectBtn" class="reject-btn btn">Reject</button>
                 </div>
             </div>
         </div>
