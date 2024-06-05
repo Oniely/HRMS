@@ -77,9 +77,6 @@ $active = "data department staff";
             </div>
             <hr />
             <div class="all-staff">
-                <div class="add-btn">
-                    <a href="add_staff.php">Add New</a>
-                </div>
                 <div class="filter-search-container">
                     <div class="filter">
                         <span>Show</span>
