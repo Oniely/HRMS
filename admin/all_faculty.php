@@ -111,11 +111,11 @@ $active = "all faculty";
                                 include('includes/connection.php');
                                 include('includes/update_status.php');
 
-                                // if (updateEmployeeStatus($conn)) {
-                                //     echo "Employee statuses updated successfully.";
-                                // } else {
-                                //     echo "Failed to update employee statuses.";
-                                // }
+                                if (updateEmployeeStatus($conn)) {
+                                    // echo "Employee statuses updated successfully.";
+                                } else {
+                                    // echo "Failed to update employee statuses.";
+                                }
 
                                 $query = mysqli_query($conn, "SELECT * FROM `faculty_tbl`");
                                 if (!$query) {

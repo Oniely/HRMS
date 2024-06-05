@@ -113,11 +113,11 @@ $active = "all staff";
                                 include('includes/connection.php');
                                 include('includes/update_status.php');
 
-                                // if (updateEmployeeStatus($conn)) {
-                                //     echo "Employee statuses updated successfully.";
-                                // } else {
-                                //     echo "Failed to update employee statuses.";
-                                // }
+                                if (updateEmployeeStatus($conn)) {
+                                    // echo "Employee statuses updated successfully.";
+                                } else {
+                                    // echo "Failed to update employee statuses.";
+                                }
                                 
                                 $query = mysqli_query($conn, "SELECT * FROM `employee_tbl`");
                                 while ($row = mysqli_fetch_array($query)) {

@@ -8,14 +8,14 @@ function updateEmployeeStatus($conn) {
         SELECT l.employee_id, 'employee' AS table_type
         FROM leave_tbl l
         INNER JOIN employee_tbl e ON l.employee_id = e.employee_id
-        WHERE l.to_date < ? AND e.status != 'ACTIVE'
+        WHERE DATE(l.to_date) < ? AND e.status != 'ACTIVE'
         
         UNION
         
         SELECT l.employee_id, 'faculty' AS table_type
         FROM leave_tbl l
         INNER JOIN faculty_tbl f ON l.employee_id = f.faculty_id
-        WHERE l.to_date < ? AND f.status != 'ACTIVE'
+        WHERE DATE(l.to_date) < ? AND f.status != 'ACTIVE'
     ";
 
     $stmt = mysqli_prepare($conn, $sql);
@@ -68,4 +68,5 @@ function updateEmployeeStatus($conn) {
     mysqli_stmt_close($stmt);
     return true;
 }
+
 ?>

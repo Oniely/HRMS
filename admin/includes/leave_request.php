@@ -5,6 +5,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['functionname'])) {
         $functionname = $_POST['functionname'];
 
+        // Log the function name and all received POST data
+        error_log("Function name: " . $functionname);
+        error_log("POST data: " . json_encode($_POST));
+
         if ($functionname === 'updateApplicationStatus') {
             if (isset($_POST['leave_id'], $_POST['employee_id'], $_POST['status'])) {
                 $leave_id = $_POST['leave_id'];
@@ -18,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "Failed to update application status";
                 }
             } else {
-                echo "Missing arguments";
+                echo "Missing arguments for updateApplicationStatus";
+                error_log("Missing arguments for updateApplicationStatus: " . json_encode($_POST));
             }
         } else if ($functionname === 'updateLeaveBalance') {
             if (isset($_POST['employee_id'], $_POST['leave_type'], $_POST['requested_days'])) {
@@ -33,16 +38,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "Failed to update leave balance";
                 }
             } else {
-                echo "Missing arguments";
+                echo "Missing arguments for updateLeaveBalance";
+                error_log("Missing arguments for updateLeaveBalance: " . json_encode($_POST));
             }
         } else {
             echo "Invalid function name";
+            error_log("Invalid function name: " . $functionname);
         }
     } else {
         echo "Missing function name";
+        error_log("Missing function name");
     }
 } else {
     echo "Invalid request method";
+    error_log("Invalid request method");
 }
 
 function updateApplicationStatus($conn, $leave_id, $employee_id, $application_status)
@@ -56,6 +65,7 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
     }
     mysqli_stmt_bind_param($stmtLeave, "si", $application_status, $leave_id);
     $resultUpdateLeave = mysqli_stmt_execute($stmtLeave);
+    mysqli_stmt_close($stmtLeave);
 
     if (!$resultUpdateLeave) {
         error_log("Error executing statement for updating leave: " . mysqli_error($conn));
@@ -73,6 +83,7 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
     mysqli_stmt_execute($stmtCheckFaculty);
     $resultCheckFaculty = mysqli_stmt_get_result($stmtCheckFaculty);
     $isFaculty = mysqli_num_rows($resultCheckFaculty) > 0;
+    mysqli_stmt_close($stmtCheckFaculty);
 
     // Default status
     $status = ($application_status === 'APPROVED') ? 'INACTIVE' : 'ACTIVE';
@@ -89,6 +100,7 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
         mysqli_stmt_execute($stmtLeaveEndDate);
         $resultLeaveEndDate = mysqli_stmt_get_result($stmtLeaveEndDate);
         $leaveRow = mysqli_fetch_assoc($resultLeaveEndDate);
+        mysqli_stmt_close($stmtLeaveEndDate);
 
         if (!$leaveRow) {
             error_log("Error fetching leave end date: No rows returned");
@@ -118,6 +130,7 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
         }
         mysqli_stmt_bind_param($stmtUpdateFaculty, "si", $status, $employee_id);
         $resultUpdate = mysqli_stmt_execute($stmtUpdateFaculty);
+        mysqli_stmt_close($stmtUpdateFaculty);
     } else {
         $sqlUpdateEmployee = "UPDATE employee_tbl SET status = ? WHERE employee_id = ?";
         $stmtUpdateEmployee = mysqli_prepare($conn, $sqlUpdateEmployee);
@@ -127,6 +140,7 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
         }
         mysqli_stmt_bind_param($stmtUpdateEmployee, "si", $status, $employee_id);
         $resultUpdate = mysqli_stmt_execute($stmtUpdateEmployee);
+        mysqli_stmt_close($stmtUpdateEmployee);
     }
 
     if (!$resultUpdate) {
@@ -138,79 +152,104 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
 }
 
 
-
 function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
 {
     $leave_balance_column = '';
+    $isBalanceLeave = false;
+
+    // Determine if the leave type affects the balance
     switch ($leave_type) {
         case 'Sick Leave':
-            $leave_balance_column = 'sick_leave';
-            break;
         case 'Annual Leave':
-            $leave_balance_column = 'annual_leave';
-            break;
         case 'Vacational Leave':
-            $leave_balance_column = 'vacational_leave';
-            break;
         case 'Unpaid Leave':
-            $leave_balance_column = 'unpaid_leave';
+            $leave_balance_column = strtolower(str_replace(' ', '_', $leave_type));
+            $isBalanceLeave = true;
+            break;
+        case 'Bereavement Leave':
+        case 'Marriage Leave':
+        case 'Other Leave':
+            $leave_balance_column = strtolower(str_replace(' ', '_', $leave_type));
+            $isBalanceLeave = false;
             break;
         default:
             return false;
     }
 
-    // Fetch the current leave balances
-    $sqlSelectLeaveBalance = "SELECT annual_leave, sick_leave, vacational_leave, unpaid_leave FROM leave_balance_tbl WHERE employee_id = ?";
-    $stmtSelectLeaveBalance = mysqli_prepare($conn, $sqlSelectLeaveBalance);
-    mysqli_stmt_bind_param($stmtSelectLeaveBalance, "i", $employee_id);
-    mysqli_stmt_execute($stmtSelectLeaveBalance);
-    $resultLeaveBalance = mysqli_stmt_get_result($stmtSelectLeaveBalance);
-    $row = mysqli_fetch_assoc($resultLeaveBalance);
-
-    $annual_leave_balance = $row['annual_leave'];
-    $sick_leave_balance = $row['sick_leave'];
-    $vacational_leave_balance = $row['vacational_leave'];
-    $unpaid_leave_balance = $row['unpaid_leave'];
-
-    // Update the leave balance based on the leave type
-    switch ($leave_type) {
-        case 'Sick Leave':
-            if ($sick_leave_balance >= $requested_days) {
-                $sick_leave_balance -= $requested_days;
-            } else {
-                return false;
-            }
-            break;
-        case 'Annual Leave':
-            if ($annual_leave_balance >= $requested_days) {
-                $annual_leave_balance -= $requested_days;
-            } else {
-                return false;
-            }
-            break;
-        case 'Vacational Leave':
-            if ($vacational_leave_balance >= $requested_days) {
-                $vacational_leave_balance -= $requested_days;
-            } else {
-                return false;
-            }
-            break;
-        case 'Unpaid Leave':
-            if ($unpaid_leave_balance >= $requested_days) {
-                $unpaid_leave_balance -= $requested_days;
-            } else {
-                return false;
-            }
-            break;
-        default:
+    if ($isBalanceLeave) {
+        // Fetch the current leave balances
+        $sqlSelectLeaveBalance = "SELECT $leave_balance_column FROM leave_balance_tbl WHERE employee_id = ?";
+        $stmtSelectLeaveBalance = mysqli_prepare($conn, $sqlSelectLeaveBalance);
+        if (!$stmtSelectLeaveBalance) {
+            error_log("Error preparing statement for fetching leave balances: " . mysqli_error($conn));
             return false;
+        }
+        mysqli_stmt_bind_param($stmtSelectLeaveBalance, "i", $employee_id);
+        mysqli_stmt_execute($stmtSelectLeaveBalance);
+        $resultLeaveBalance = mysqli_stmt_get_result($stmtSelectLeaveBalance);
+        $row = mysqli_fetch_assoc($resultLeaveBalance);
+
+        if (!$row) {
+            error_log("Error fetching leave balances: " . mysqli_error($conn));
+            return false;
+        }
+
+        $leave_balance = $row[$leave_balance_column];
+
+        // Update the leave balance based on the leave type
+        if ($leave_balance >= $requested_days) {
+            $leave_balance -= $requested_days;
+        } else {
+            return false;
+        }
+
+        // Update the leave balances in the database
+        $sqlUpdateLeaveBalance = "UPDATE leave_balance_tbl SET $leave_balance_column = ? WHERE employee_id = ?";
+        $stmtUpdateLeaveBalance = mysqli_prepare($conn, $sqlUpdateLeaveBalance);
+        if (!$stmtUpdateLeaveBalance) {
+            error_log("Error preparing statement for updating leave balance: " . mysqli_error($conn));
+            return false;
+        }
+        mysqli_stmt_bind_param($stmtUpdateLeaveBalance, "ii", $leave_balance, $employee_id);
+        $resultUpdateLeaveBalance = mysqli_stmt_execute($stmtUpdateLeaveBalance);
+    } else {
+        // Fetch the current leave balance for the non-balance affecting leave types
+        $sqlSelectLeaveBalance = "SELECT $leave_balance_column FROM leave_balance_tbl WHERE employee_id = ?";
+        $stmtSelectLeaveBalance = mysqli_prepare($conn, $sqlSelectLeaveBalance);
+        if (!$stmtSelectLeaveBalance) {
+            error_log("Error preparing statement for fetching leave balances: " . mysqli_error($conn));
+            return false;
+        }
+        mysqli_stmt_bind_param($stmtSelectLeaveBalance, "i", $employee_id);
+        mysqli_stmt_execute($stmtSelectLeaveBalance);
+        $resultLeaveBalance = mysqli_stmt_get_result($stmtSelectLeaveBalance);
+        $row = mysqli_fetch_assoc($resultLeaveBalance);
+
+        if (!$row) {
+            error_log("Error fetching leave balances: " . mysqli_error($conn));
+            return false;
+        }
+
+        $current_balance = $row[$leave_balance_column];
+        $new_balance = $current_balance + $requested_days;
+
+        // Update the leave balances in the database
+        $sqlUpdateLeaveBalance = "UPDATE leave_balance_tbl SET $leave_balance_column = ? WHERE employee_id = ?";
+        $stmtUpdateLeaveBalance = mysqli_prepare($conn, $sqlUpdateLeaveBalance);
+        if (!$stmtUpdateLeaveBalance) {
+            error_log("Error preparing statement for updating leave balance: " . mysqli_error($conn));
+            return false;
+        }
+        mysqli_stmt_bind_param($stmtUpdateLeaveBalance, "ii", $new_balance, $employee_id);
+        $resultUpdateLeaveBalance = mysqli_stmt_execute($stmtUpdateLeaveBalance);
     }
 
-    // Update the leave balances in the database
-    $sqlUpdateLeaveBalance = "UPDATE leave_balance_tbl SET annual_leave = ?, sick_leave = ?, vacational_leave = ?, unpaid_leave = ? WHERE employee_id = ?";
-    $stmtUpdateLeaveBalance = mysqli_prepare($conn, $sqlUpdateLeaveBalance);
-    mysqli_stmt_bind_param($stmtUpdateLeaveBalance, "iiiii", $annual_leave_balance, $sick_leave_balance,$vacational_leave_balance, $unpaid_leave_balance, $employee_id);
-    $resultUpdateLeaveBalance = mysqli_stmt_execute($stmtUpdateLeaveBalance);
+    if (!$resultUpdateLeaveBalance) {
+        error_log("Error executing statement for updating leave balance: " . mysqli_error($conn));
+        return false;
+    }
 
-    return $resultUpdateLeaveBalance;
+    return true;
 }
+
+?>
