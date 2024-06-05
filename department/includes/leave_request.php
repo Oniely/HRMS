@@ -42,3 +42,20 @@ function updateApplicationStatus($conn, $leave_id, $application_status)
         return false;
     }
 }
+// function forwardToAdmin($conn, $leave_id) {
+//     $sql = "UPDATE leave_tbl SET admin_read_status = 0 WHERE leave_id = ?";
+//     $stmt = mysqli_prepare($conn, $sql);
+//     if (!$stmt) {
+//         error_log("Error preparing statement for resetting admin read status: " . mysqli_error($conn));
+//         return false;
+//     }
+//     mysqli_stmt_bind_param($stmt, "i", $notification_id);
+//     $result = mysqli_stmt_execute($stmt);
+//     mysqli_stmt_close($stmt);
+
+//     if (!$result) {
+//         error_log("Error resetting admin read status: " . mysqli_error($conn));
+//         return false;
+//     }
+//     return true;
+// }

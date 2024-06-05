@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2024 at 06:25 AM
+-- Generation Time: Jun 05, 2024 at 03:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -230,9 +230,9 @@ CREATE TABLE `employee_tbl` (
 --
 
 INSERT INTO `employee_tbl` (`employee_id`, `fname`, `mname`, `lname`, `date_of_birth`, `place_of_birth`, `sex`, `blood_type`, `civil_status`, `tin_id`, `citizenship`, `sss_no`, `pagibig_no`, `philhealth_no`, `height`, `weight`, `residential_address`, `permanent_address`, `email`, `contact_number`, `status`, `photo_path`, `department`) VALUES
-(20202, 'Aiah Mary', 'Z.', 'Arceta', '2000-02-17', 'Barangay 9, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T00993', 'Filipino', 'SSS8872', 'PG90021', 'PHN5994', 166.5, 55.2, 'Barangay 9, Kabankalan City, Negros Occidental', 'Barangay 9, Kabankalan City, Negros Occidental', 'aiah@gmail.com', '09889903', 'ACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
-(30303, 'Jhoanna', 'E.', 'Robles', '1995-03-28', 'Brgy 5, Kabankalan City, Negros Occidental', 'Female', 'O', 'Male', 'T001', 'Filipino', 'SSS9940', 'PG3302-1', 'PHN-233', 167.4, 51.3, 'Barangay 9, Kabankalan City, Negros Occidental', 'Punta Rojas St., Barangay 6, Kabankalan City, Negros Occidental', 'jhoanna@gmail.com', '09884873', 'INACTIVE', '/hrms/admin/images/profiles/photo_66435c74adce18.18081286.jpg', 'SEAS'),
-(40404, 'Yves Saint', 'E.', 'Laurent', '1997-05-28', 'Barangay Salong, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T92003', 'Filipino', 'SSS9903', 'PG01-2', 'PHN778', 175.3, 60.4, 'Barangay 7, Kabankalan City, Negros Occidental', 'Barangay Salong, Kabankalan City, Negros Occidental', 'yves@gmail.com', '09884930', 'INACTIVE', '/hrms/admin/images/profiles/photo_665478e9ba4e53.66543055.jpg', 'SBA');
+(20202, 'Aiah Mary', 'Z.', 'Arceta', '2000-02-17', 'Barangay 9, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T00993', 'Filipino', 'SSS8872', 'PG90021', 'PHN5994', 166.5, 55.2, 'Barangay 9, Kabankalan City, Negros Occidental', 'Barangay 9, Kabankalan City, Negros Occidental', 'aiah@gmail.com', '09889903', 'INACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
+(30303, 'Jhoanna', 'E.', 'Robles', '1995-03-28', 'Brgy 5, Kabankalan City, Negros Occidental', 'Female', 'O', 'Male', 'T001', 'Filipino', 'SSS9940', 'PG3302-1', 'PHN-233', 167.4, 51.3, 'Barangay 9, Kabankalan City, Negros Occidental', 'Punta Rojas St., Barangay 6, Kabankalan City, Negros Occidental', 'jhoanna@gmail.com', '09884873', 'ACTIVE', '/hrms/admin/images/profiles/photo_66435c74adce18.18081286.jpg', 'SEAS'),
+(40404, 'Yves Saint', 'E.', 'Laurent', '1997-05-28', 'Barangay Salong, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T92003', 'Filipino', 'SSS9903', 'PG01-2', 'PHN778', 175.3, 60.4, 'Barangay 7, Kabankalan City, Negros Occidental', 'Barangay Salong, Kabankalan City, Negros Occidental', 'yves@gmail.com', '09884930', 'ACTIVE', '/hrms/admin/images/profiles/photo_665478e9ba4e53.66543055.jpg', 'SBA');
 
 -- --------------------------------------------------------
 
@@ -271,7 +271,7 @@ CREATE TABLE `faculty_tbl` (
 --
 
 INSERT INTO `faculty_tbl` (`faculty_id`, `fname`, `mname`, `lname`, `date_of_birth`, `place_of_birth`, `sex`, `blood_type`, `civil_status`, `tin_id`, `citizenship`, `sss_no`, `pagibig_no`, `philhealth_no`, `height`, `weight`, `residential_address`, `permanent_address`, `email`, `contact_number`, `status`, `photo_path`, `department`) VALUES
-(10101, 'Gwen Yves', 'G.', 'Apuli', '2001-05-05', 'Barangay 5, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T0993', 'Filipino', 'SSS8833', 'PG00334-1', 'PHN2211', 167.5, 54.3, 'Barangay 5, Kabankalan City, Negros Occidental', 'Barangay 5, Kabankalan City, Negros Occidental', 'gwen@gmail.com', '0988939002', 'ACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
+(10101, 'Gwen Yves', 'G.', 'Apuli', '2001-05-05', 'Barangay 5, Kabankalan City, Negros Occidental', 'Male', 'AB', 'Male', 'T0993', 'Filipino', 'SSS8833', 'PG00334-1', 'PHN2211', 167.5, 54.3, 'Barangay 5, Kabankalan City, Negros Occidental', 'Barangay 5, Kabankalan City, Negros Occidental', 'gwen@gmail.com', '0988939002', 'INACTIVE', '/hrms/admin/images/profiles/women_example.jpg', 'SECSA'),
 (50505, 'Christian', 'L.', 'Dior', '1990-08-27', 'Barangay 6, Kabankalan City, Negros Occidental', 'Male', 'O', 'Male', 'T99802', 'Filipino', 'SSS0331', 'PG123', 'PHN8002', 170.5, 60.4, 'Barangay 6, Kabankalan City, Negros Occidental', 'Barangay 6, Kabankalan City, Negros Occidental', 'christian@gmail.com', '099894893', 'INACTIVE', '/hrms/admin/images/profiles/f1_by_dinapixstudio_dh4gwmr.jpg', 'SHTM');
 
 -- --------------------------------------------------------
@@ -406,11 +406,11 @@ CREATE TABLE `leave_balance_tbl` (
 --
 
 INSERT INTO `leave_balance_tbl` (`employee_id`, `annual_leave`, `sick_leave`, `unpaid_leave`, `vacational_leave`, `bereavement_leave`, `marriage_leave`, `other_leave`, `balance`) VALUES
-(10101, 5, 9, 5, 15, 0, 1, 0, 35),
-(20202, 13, 13, 15, 15, 0, 0, 0, 35),
-(30303, 3, 3, 5, 15, 1, 0, 0, 15),
-(40404, 13, 15, 15, 15, 0, 0, 0, 45),
-(50505, 5, 5, 5, 14, 0, 0, 0, 15);
+(10101, 5, 8, 4, 15, 0, 1, 0, 35),
+(20202, 13, 13, 15, 13, 3, 4, 0, 35),
+(30303, 2, 3, 5, 15, 1, 0, 0, 15),
+(40404, 13, 14, 15, 14, 0, 0, 0, 45),
+(50505, 5, 5, 5, 8, 0, 0, 0, 15);
 
 -- --------------------------------------------------------
 
@@ -433,20 +433,17 @@ CREATE TABLE `leave_tbl` (
   `destination` varchar(255) NOT NULL,
   `accompany_with` varchar(255) NOT NULL,
   `balance_days` varchar(100) NOT NULL,
-  `read_status` tinyint(1) DEFAULT 0
+  `department_read_status` tinyint(1) DEFAULT 0,
+  `admin_read_status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `leave_tbl`
 --
 
-INSERT INTO `leave_tbl` (`leave_id`, `employee_id`, `employee_name`, `department`, `leave_type`, `date_applied`, `reason`, `from_date`, `to_date`, `total_days_leave`, `application_status`, `destination`, `accompany_with`, `balance_days`, `read_status`) VALUES
-(310208, 30303, 'Jhoanna Robles', 'SEAS', 'Sick Leave', '2024-05-26 00:00:00', 'N/A', '2024-05-27', '2024-05-28', 2, 'APPROVED', 'N/A', 'N/A', '3', 1),
-(415089, 20202, 'Aiah Mary Arceta', 'SECSA', 'Annual Leave', '2024-05-25 00:00:00', 'N/A', '2024-05-27', '2024-05-28', 2, 'APPROVED', 'N/A', 'N/A', '13', 1),
-(907174, 10101, 'Gwen Yves Apuli', 'SECSA', 'Marriage Leave', '2024-05-29 00:00:00', 'To attend marriage of relatives', '2024-05-30', '2024-05-30', 1, 'APPROVED', 'Kabankalan City', 'None', '4', 1),
-(925855, 40404, 'Yves Saint Laurent', 'SBA', 'Annual Leave', '2024-05-27 00:00:00', 'Tour and Attend Program in the Siliman University', '2024-05-28', '2024-05-29', 2, 'APPROVED', 'Dumaguete', 'Students', '13', 1),
-(954563, 30303, 'Jhoanna Robles', 'SEAS', 'Bereavement Leave', '2024-05-29 00:00:00', 'To attend funeral ', '2024-05-30', '2024-05-30', 1, 'APPROVED', 'Kabankalan City', 'None', '4', 1),
-(991342, 50505, 'Christian Dior', 'SHTM', 'Vacational Leave', '2024-05-29 00:00:00', 'To attend seminar regarding to sports committee', '2024-05-30', '2024-05-30', 1, 'APPROVED', 'Dumaguete', 'None', '4', 1);
+INSERT INTO `leave_tbl` (`leave_id`, `employee_id`, `employee_name`, `department`, `leave_type`, `date_applied`, `reason`, `from_date`, `to_date`, `total_days_leave`, `application_status`, `destination`, `accompany_with`, `balance_days`, `department_read_status`, `admin_read_status`) VALUES
+(108331, 20202, 'Aiah Mary Arceta', 'SECSA', 'Vacational Leave', '2024-06-05 00:00:00', 'N/A', '2024-06-06', '2024-06-07', 2, 'APPROVED', 'Kabankalan City', 'N/A', '13', 1, 1),
+(960890, 10101, 'Gwen Yves Apuli', 'SECSA', 'Sick Leave', '2024-06-05 00:00:00', 'N/A', '2024-06-06', '2024-06-06', 1, 'APPROVED', 'Kabankalan City', 'N/A', '3', 1, 1);
 
 -- --------------------------------------------------------
 

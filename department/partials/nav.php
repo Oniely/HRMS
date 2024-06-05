@@ -45,39 +45,9 @@ include('./includes/connection.php');
             <div class="notification-img-container">
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
-            <?php
-            include 'notification_count.php';
+            <div class="notification-count" id="notificationCount">
 
-            if ($notificationCount > 0) {
-                echo "<div class='notification-count' id='notificationCount'>";
-                echo $notificationCount;
-                echo "</div>";
-            }
-            ?>
-            <!-- <div class="notification-menu">
-                <div class="notification-content">
-                    <span>
-                        <?php
-                        $sql = "SELECT * FROM leave_tbl";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $employee_id = $row['employee_id'];
-                                $employee_name = $row['employee_name'];
-                                $reason = $row['reason'];
-                                $leave_type = $row['leave_type'];
-                                $start_date = $row['from_date'];
-                                $end_date = $row['to_date'];
-                                $date = date('Y-m-d');
-                            }
-                        } else {
-                            echo "No notification messages";
-                        }
-                        ?>
-                    </span>
-                </div>
             </div>
-            <div class="notification-count">3</div> -->
         </a>
         <button class="profile-btn">
             <div class="profile-img-container">
@@ -241,3 +211,18 @@ include('./includes/connection.php');
         </ul>
     </div>
 </header>
+<script>
+    function loadDoc() {
+        setInterval(function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("notificationCount").innerText = this.responseText;
+                }
+            };
+            xhttp.open("GET", "partials/notification_count.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc();
+</script>

@@ -78,6 +78,42 @@ $active = "dashboard";
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
+        <div class="dashboard-table">
+            <table>
+                <div class="table-title">
+                    <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
+                </div>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Leave Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE department = '$department' and application_status = 'APPROVED'  AND '$currentDate' BETWEEN `from_date` AND `to_date`");
+                    while ($row = mysqli_fetch_array($query)) {
+                    ?>
+                        <tr>
+                            <td><label><?php echo $row['employee_id']; ?></label></td>
+                            <td><label><?php echo $row['employee_name']; ?></label></td>
+                            <td><label><?php echo $row['department']; ?></label></td>
+                            <td><label><?php echo $row['leave_type']; ?></label></td>
+                            <td><label><?php echo $row['from_date']; ?></label></td>
+                            <td><label><?php echo $row['to_date']; ?></label></td>
+                            <td><label><?php echo $row['total_days_leave']; ?></label></td>
+                        </tr>
+                    <?php }
+                    ?>
+
+                </tbody>
+            </table>
+        </div>
         <div class="dashboard-boxes">
             <div class="box employee" style='background-color: <?php echo $statusBackground ?>'>
                 <div class="box-img">
@@ -171,44 +207,8 @@ $active = "dashboard";
                 </div>
             </div>
         </div>
-
-        <div class="dashboard-table">
-            <table>
-                <div class="table-title">
-                    <h1>On Leave List</h1>
-                </div>
-                <thead>
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Leave Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Total Days</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = mysqli_query($conn, "select * from `leave_tbl` WHERE department = '$department' and application_status = 'APPROVED'  AND '$currentDate' BETWEEN `from_date` AND `to_date`");
-                    while ($row = mysqli_fetch_array($query)) {
-                    ?>
-                        <tr>
-                            <td><label><?php echo $row['employee_id']; ?></label></td>
-                            <td><label><?php echo $row['employee_name']; ?></label></td>
-                            <td><label><?php echo $row['department']; ?></label></td>
-                            <td><label><?php echo $row['leave_type']; ?></label></td>
-                            <td><label><?php echo $row['from_date']; ?></label></td>
-                            <td><label><?php echo $row['to_date']; ?></label></td>
-                            <td><label><?php echo $row['total_days_leave']; ?></label></td>
-                        </tr>
-                    <?php }
-                    ?>
-
-                </tbody>
-            </table>
-        </div>
     </section>
+
 </body>
 
 </html>

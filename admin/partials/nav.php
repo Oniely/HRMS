@@ -155,6 +155,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
             <div class="notification-count" id="notificationCount">
+
             </div>
         </a>
         <button id="m-burger" class="m-burger">
@@ -181,7 +182,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                 <a href="index.php"><img src="images/1.svg" alt="icon" /></a>
             </div>
             <div class="profile-info">
-                <h1>Hello World!</h1>
+                <span> <?= @$admin_fname . " " . $admin_lname ?? "ADMIN" ?> </span>
                 <h3>Administrator</h3>
             </div>
         </div>
@@ -340,112 +341,3 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
     }
     loadDoc();
 </script>
-<!-- <script>
-    $(document).ready(function() {
-        $('.view-details').click(function() {
-            var leave_id = $(this).data('leave_id');
-            var employee_id = $(this).data('employee_id');
-            var employee = $(this).data('employee');
-            var reason = $(this).data('reason');
-            var leave = $(this).data('leave');
-            var start = $(this).data('start');
-            var end = $(this).data('end');
-
-            $('#modal-title').text('Leave Details for ' + employee);
-            var employeeData = `
-      <p><strong>Employee Name:</strong> ${employee}</p>
-      <p><strong>Employee ID:</strong> ${employee_id}</p>
-      <p><strong>Leave Type:</strong> ${leave}</p>
-      <p><strong>Reason:</strong> ${reason}</p>
-      <p><strong>Start Date:</strong> ${start}</p>
-      <p><strong>End Date:</strong> ${end}</p>`;
-
-            $('#employeeData').html(employeeData);
-            $('#leaveModal').removeClass('hidden');
-
-            $("#rejectBtn").click(function() {
-                var newData = {
-                    'status': leave
-                }; 
-                $.ajax( {
-                    url: "includes/leave_request.php",
-                    type: "post",
-                    data: {
-                        functionname: 'updateDataEmployee',
-                        arguments: [leave_id, employee_id, newData, 'REJECTED']
-                    },
-                    success: function(result) {
-                        alert("Request Rejected Successfully");
-                        window.location.href = './index.php';
-                    }
-                });
-            });
-
-            $("#confirmBtn").click(function() {
-                var newData = {
-                    'status': leave
-                };
-
-                $.ajax({
-                    url: "includes/leave_request.php",
-                    type: "post",
-                    data: {
-                        functionname: 'updateDataEmployee',
-                        arguments: [leave_id, employee_id, newData, 'APPROVED']
-                    },
-                    success: function(result) {
-                        alert("Request Approved Successfully");
-                        window.location.href = './index.php';
-                    }
-                });
-            });
-
-
-            var clickedNotifications = sessionStorage.getItem('clicked_notifications');
-            if (clickedNotifications) {
-                clickedNotifications = JSON.parse(clickedNotifications);
-            } else {
-                clickedNotifications = [];
-            }
-            clickedNotifications.push(leave_id);
-            sessionStorage.setItem('clicked_notifications', JSON.stringify(clickedNotifications));
-
-            console.log(clickedNotifications);
-
-            var notification = $(this).closest('.notification-item');
-            notification.removeClass("unread");
-
-            localStorage.setItem("notificationRead", "true");
-
-            $('#leaveModal').removeClass('hidden');
-
-        });
-
-        $('#cancel-button').click(function() {
-            $('#leaveModal').addClass('hidden');
-        });
-    });
-
-
-
-
-    function updateNotificationCount() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("notificationCount").textContent = this.responseText;
-            }
-        };
-        xhr.open('GET', 'notifications_count.php', true);
-        xhr.send();
-    }
-
-    function displayNotifications(notifications) {
-        var notificationCount = document.getElementById('notificationCount');
-        notificationCount.textContent = notifications.length;
-    }
-
-    // Fetch notifications initially and then periodically
-    updateNotificationCount();
-    setInterval(fetchNotifications, 5000); // Fetch every 5 seconds
-</script> -->

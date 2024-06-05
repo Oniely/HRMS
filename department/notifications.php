@@ -107,22 +107,29 @@ $active = "data leave notification";
                             $accompany = $row['accompany_with'];
                             $total_days = $row['total_days_leave'];
                             $application_status = $row['application_status'];
-                            $read_status = $row['read_status'];
+                            $department_read_status = $row['department_read_status'];
+                            $admin_read_status = $row['admin_read_status'];
 
-                            $unreadClass = $read_status ? '' : 'unread';
+                            $unreadClass = $department_read_status ? '' : 'unread';
+
+                            if ($department_read_status == 1) {
+                                $read_status = 'Read';
+                            } else {
+                                $read_status = 'Unread';
+                            }
 
                             echo "<div class='notification-items $unreadClass' data-leave-id='$leave_id' data-employee-id='$employee_id' data-employee-name='$employee_name' data-reason='$reason' data-leave-type='$leave_type' data-accompany='$accompany' data-start='$start_date' data-end='$end_date' data-total='$total_days' data-status='$application_status'>";
                             echo "<div class='notification-content-text'>";
                             echo "<h2>Request for $leave_type</h2>";
-                            echo "<span>$date_applied</span>";
+                            echo "<h5><i>$read_status</i></h5>";
                             echo "<div class='notification-text'>";
                             echo "<p>$employee_name request for $leave_type from $start_date to $end_date</p>";
+                            echo "<span>$date_applied</span>";
 
                             echo "<button type='button' class='view-details-btn' 
                             data-leave-id='$leave_id' data-employee-id='$employee_id' data-employee-name='$employee_name' data-reason='$reason' data-leave-type='$leave_type' data-accompany='$accompany' data-start='$start_date' data-end='$end_date' data-total='$total_days' data-status='$application_status'>
                        
                         </button>";
-                            echo "<a class='delete-btn' href='#' data-leave-id='$leave_id'>Delete</a>";
                             echo "</div>";
                             echo "</div>";
                             echo "</div>";
@@ -143,7 +150,7 @@ $active = "data leave notification";
 </html>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById("leaveDetailsModal");
         const span = document.getElementsByClassName("close")[0];
 
@@ -180,7 +187,7 @@ $active = "data leave notification";
                 document.getElementById('confirmBtn').setAttribute('data-employee-id', employeeId);
                 document.getElementById('confirmBtn').setAttribute('data-leave', leaveType);
                 document.getElementById('confirmBtn').setAttribute('data-total', totalDays);
-                
+
                 document.getElementById('rejectBtn').setAttribute('data-leave-id', leaveId);
                 document.getElementById('rejectBtn').setAttribute('data-employee-id', employeeId);
 

@@ -63,21 +63,27 @@ require_once './includes/query.php';
                             $total_days = $row['total_days_leave'];
                             $date_applied = $row['date_applied'];
                             $application_status = $row['application_status'];
-                            $read_status = $row['read_status'];
+                            $department_read_status = $row['department_read_status'];
+                            $admin_read_status = $row['admin_read_status'];
                             $date = date('Y-m-d');
 
-                            $unreadClass = $read_status ? '' : 'unread';
+                            $unreadClass = $admin_read_status ? '' : 'unread';
+                            if ($admin_read_status == 1) {
+                                $read_status = 'Read';
+                            } else {
+                                $read_status = 'Unread';
+                            }
 
                             echo "<div class='notification-items $unreadClass' id='notification_$leave_id'>";
                             echo "<div class='notification-content-text'>";
                             echo "<h2>Request for $leave_type</h2>";
-                            echo "<span>$date_applied</span>";
+                            echo "<h5><i>$read_status</i></h5>";
                             echo "<div class='notification-text'>";
                             echo "<p>$employee_name request for $leave_type from $start_date to $end_date</p>";
+                            echo "<span>$date_applied</span>";
 
                             echo "<button type='button' class='btn btn-primary' 
                             data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date' data-total='$total_days'></button>";
-                            echo "<a class='delete-btn' href='#' data-leave-id='$leave_id'>Delete</a>";
                             echo "<div class='additional-container' data-leave-id='$leave_id'>";
                             echo "<div class='additional-content' data-employee-id='$employee_id'>";
                             echo "<p>Employee ID: $leave_id</p>";

@@ -5,15 +5,13 @@ session_name('adminSession');
 session_start();
 $currentDate = date('Y-m-d');
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-    // Redirect to login page
     header('Location: login.php');
-    exit(); // Stop further execution of the script
+    exit();
 } elseif (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
 }
-
 $active = "dashboard"
 ?>
 <!DOCTYPE html>
@@ -25,6 +23,7 @@ $active = "dashboard"
     <title>Southland College</title>
     <!-- Styles -->
     <link rel="stylesheet" href="styles/nav.css" />
+    <link rel="icon" href="images/sc-icon-svg.svg" />
     <link rel="stylesheet" href="styles/index.css" />
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
@@ -52,6 +51,44 @@ $active = "dashboard"
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
+        <div class="dashboard-table">
+            <table>
+                <div class="table-title">
+                    <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
+                </div>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Leave Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+
+                    $query = mysqli_query($conn, "SELECT * FROM `leave_tbl` WHERE application_status = 'APPROVED' AND '$currentDate' BETWEEN `from_date` AND `to_date`");
+                    while ($row = mysqli_fetch_array($query)) {
+                    ?>
+                        <tr>
+                            <td><label><?php echo $row['employee_id']; ?></label></td>
+                            <td><label><?php echo $row['employee_name']; ?></label></td>
+                            <td><label><?php echo $row['department']; ?></label></td>
+                            <td><label><?php echo $row['leave_type']; ?></label></td>
+                            <td><label><?php echo $row['from_date']; ?></label></td>
+                            <td><label><?php echo $row['to_date']; ?></label></td>
+                            <td><label><?php echo $row['total_days_leave']; ?></label></td>
+
+                        </tr>
+                    <?php }
+                    ?>
+
+                </tbody>
+            </table>
+        </div>
         <div class="dashboard-boxes">
             <div class="box employee">
                 <div class="box-img">
@@ -151,48 +188,51 @@ $active = "dashboard"
             </div>
         </div>
 
-        <div class="dashboard-table">
-            <table>
-                <div class="table-title">
-                    <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
-                </div>
-                <thead>
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Leave Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Total Days</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
 
-                    $query = mysqli_query($conn, "SELECT * FROM `leave_tbl` WHERE application_status = 'APPROVED' AND '$currentDate' BETWEEN `from_date` AND `to_date`");
-                    while ($row = mysqli_fetch_array($query)) {
-                    ?>
-                        <tr>
-                            <td><label><?php echo $row['employee_id']; ?></label></td>
-                            <td><label><?php echo $row['employee_name']; ?></label></td>
-                            <td><label><?php echo $row['department']; ?></label></td>
-                            <td><label><?php echo $row['leave_type']; ?></label></td>
-                            <td><label><?php echo $row['from_date']; ?></label></td>
-                            <td><label><?php echo $row['to_date']; ?></label></td>
-                            <td><label><?php echo $row['total_days_leave']; ?></label></td>
-
-                        </tr>
-                    <?php }
-                    ?>
-
-                </tbody>
-            </table>
-        </div>
     </section>
     <!-- Mobile Section -->
     <main class="m-main">
+
         <!-- ONLY CHANGE THIS -->
+        <div class="dashboard-table">
+            <div class="table-title">
+                <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Leave Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Total Days</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        $query = mysqli_query($conn, "SELECT * FROM `leave_tbl` WHERE application_status = 'APPROVED' AND '$currentDate' BETWEEN `from_date` AND `to_date`");
+                        while ($row = mysqli_fetch_array($query)) {
+                        ?>
+                            <tr>
+                                <td><label><?php echo $row['employee_id']; ?></label></td>
+                                <td><label><?php echo $row['employee_name']; ?></label></td>
+                                <td><label><?php echo $row['department']; ?></label></td>
+                                <td><label><?php echo $row['leave_type']; ?></label></td>
+                                <td><label><?php echo $row['from_date']; ?></label></td>
+                                <td><label><?php echo $row['to_date']; ?></label></td>
+                                <td><label><?php echo $row['total_days_leave']; ?></label></td>
+
+                            </tr>
+                        <?php }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="m-content">
             <h1>Dashboard</h1>
 
@@ -272,57 +312,7 @@ $active = "dashboard"
         </div>
 
         <!-- Mobile Table -->
-        <div class="dashboard-table">
-            <div class="table-title">
-                <h1>Faculty List</h1>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Contact no.</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Joining Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $query = mysqli_query($conn, "select * from `faculty_tbl`");
-                        while ($row = mysqli_fetch_array($query)) {
-                        ?>
-                            <tr>
-                                <td><label>
-                                        <?php echo $row['faculty_id']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['lname']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['contact_number']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['email']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['permanent_address']; ?>
-                                    </label></td>
-                                <td><label>
-                                        <?php echo $row['date_of_birth']; ?>
-                                    </label></td>
-                            </tr>
-                        <?php }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+
     </main>
 </body>
 
