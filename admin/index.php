@@ -52,149 +52,6 @@ $active = "dashboard"
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->
         <div class="dashboard-table">
-            <table>
-                <div class="table-title">
-                    <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
-                </div>
-                <thead>
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Leave Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Total Day/s</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-
-                    $query = mysqli_query($conn, "SELECT * FROM `leave_tbl` WHERE application_status = 'APPROVED' AND '$currentDate' BETWEEN `from_date` AND `to_date`");
-                    while ($row = mysqli_fetch_array($query)) {
-                    ?>
-                        <tr>
-                            <td><label><?php echo $row['employee_id']; ?></label></td>
-                            <td><label><?php echo $row['employee_name']; ?></label></td>
-                            <td><label><?php echo $row['department']; ?></label></td>
-                            <td><label><?php echo $row['leave_type']; ?></label></td>
-                            <td><label><?php echo $row['from_date']; ?></label></td>
-                            <td><label><?php echo $row['to_date']; ?></label></td>
-                            <td><label><?php echo $row['total_days_leave']; ?></label></td>
-
-                        </tr>
-                    <?php }
-                    ?>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="dashboard-boxes">
-            <div class="box employee">
-                <div class="box-img">
-                    <img src="images/box (1).svg" alt="" />
-                </div>
-                <div class="box-info">
-                    <h1>Total Employee</h1>
-                    <?php
-                    $sql1 = "SELECT COUNT(*) as count FROM employee_tbl";
-                    $sql2 = "SELECT COUNT(*) as count FROM faculty_tbl";
-                    $result1 = mysqli_query($conn, $sql1);
-                    $result2 = mysqli_query($conn, $sql2);
-                    $row1 = mysqli_fetch_assoc($result1);
-                    $row2 = mysqli_fetch_assoc($result2);
-                    $total = $row1['count'] + $row2['count'];
-                    echo '<h2>' . $total . '</h2>';
-                    ?>
-                    <div class="percentage">
-                        <div></div>
-                    </div>
-                    <h3>20% Increase in 1 Year</h3>
-                </div>
-            </div>
-            <div class="box staff">
-                <div class="box-img">
-                    <img src="images/box (2).svg" alt="" />
-                </div>
-                <div class="box-info">
-                    <h1>Total Staff</h1>
-                    <?php
-                    $sql = "SELECT COUNT(*) as count FROM employee_tbl";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    echo '<h2>' . $row['count'] . '</h2>';
-                    ?>
-                    <div class="percentage">
-                        <div></div>
-                    </div>
-                    <h3>20% Increase in 1 Year</h3>
-                </div>
-            </div>
-            <div class="box faculty">
-                <div class="box-img">
-                    <img src="images/box (3).svg" alt="" />
-                </div>
-                <div class="box-info">
-                    <h1>Total Faculty</h1>
-                    <?php
-                    $sql = "SELECT COUNT(*) as count FROM faculty_tbl";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    echo '<h2>' . $row['count'] . '</h2>';
-                    ?>
-                    <div class="percentage">
-                        <div></div>
-                    </div>
-                    <h3>20% Increase in 1 Year</h3>
-                </div>
-            </div>
-            <div class="box fulltime">
-                <div class="box-img">
-                    <img src="images/box (4).svg" alt="" />
-                </div>
-                <div class="box-info">
-                    <h1>Total Leave</h1>
-                    <?php
-                    $sql = "SELECT COUNT(*) as count 
-             FROM leave_tbl 
-             WHERE application_status = 'APPROVED' 
-             AND to_date >= ?";
-
-                    $stmt = mysqli_prepare($conn, $sql);
-
-                    if ($stmt) {
-                        // Bind the current date to the prepared statement
-                        mysqli_stmt_bind_param($stmt, "s", $currentDate);
-                        mysqli_stmt_execute($stmt);
-                        $result = mysqli_stmt_get_result($stmt);
-
-                        if ($row = mysqli_fetch_assoc($result)) {
-                            echo '<h2>' . $row['count'] . '</h2>';
-                        } else {
-                            echo '<h2>0</h2>';
-                        }
-
-                        mysqli_stmt_close($stmt);
-                    } else {
-                        echo "Error in SQL statement: " . mysqli_error($conn);
-                    }
-
-                    ?>
-                    <div class="percentage">
-                        <div></div>
-                    </div>
-                    <h3>20% Increase in 1 Year</h3>
-                </div>
-            </div>
-        </div>
-
-
-    </section>
-    <!-- Mobile Section -->
-    <main class="m-main">
-
-        <!-- ONLY CHANGE THIS -->
-        <div class="dashboard-table">
             <div class="table-title">
                 <h1>On Leave List (As of Today <?php echo $currentDate ?>)</h1>
             </div>
@@ -234,8 +91,6 @@ $active = "dashboard"
             </div>
         </div>
         <div class="m-content">
-            <h1>Dashboard</h1>
-
             <div class="dashboard-boxes">
                 <div class="box employee">
                     <div class="box-img">
@@ -310,10 +165,7 @@ $active = "dashboard"
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Table -->
-
-    </main>
+    </section>
 </body>
 
 </html>
