@@ -85,40 +85,7 @@ if (isset($_SESSION['admin_id'])) {
                         <p>Hello I am <?php echo "$fname $lname" ?></p>
                     </div>
                 </div>
-            </div>
-            <div class="about">
-                <div class="about-me">
-                    <button>About Me</button>
-
-                    <div class="status-modal">
-                        <form method="POST" class="status-form">
-                            <div class="status-header">
-                                <h1>Status:</h1>
-                                <button type="button" class="close-btn">
-                                    <img src="images/close.svg" alt="x">
-                                </button>
-                            </div>
-                            <div class="status-input">
-                                <select name="status" id="status">
-                                    <option value="ACTIVE">Active</option>
-                                    <option value="PENDING">Pending</option>
-                                    <option value="NON_ACTIVE">Non-active</option>
-                                </select>
-                                <button id="submit" name="submit">Update</button>
-                            </div>
-                            <?php
-                            if (isset($_POST['submit'])) {
-                                $newData = [
-                                    'status' => $_POST['status']
-                                ];
-
-                                updateDataFaculty($conn, $id, $newData);
-                            }
-                            ?>
-                        </form>
-                    </div>
-                </div>
-                <div class="info">
+                <div class="admin_info">
                     <div>
                         <h3>Fullname</h3>
                         <?php echo "<p>$fname $lname</p>"; ?>

@@ -105,39 +105,38 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                 </a>
                 <?= @$privilage === "super_admin" ?
                     '<a href="admin_privilages.php ">
-                    <div>
-                        <img src="images/key.svg" alt="" />
-                        <span>Admin Privilages</span>
-                    </div>
-                </a>' : ""
+                        <div>
+                            <img src="images/key.svg" alt="" />
+                            <span>Admin Privilages</span>
+                        </div>
+                    </a>' : ""
                 ?>
-                <a href="admin_privilages.php">
-                    <?= @$privilage === "super_admin" ?
-                        '<a href="department_sect.php ">
+                <?= @$privilage === "super_admin" ?
+                    '<a href="department_sect.php ">
+                        <div>
+                            <img src="images/department.svg" alt="" />
+                            <span>Department</span>
+                        </div>
+                    </a>' : ""
+                ?>
+                <a href="#">
                     <div>
-                        <img src="images/department.svg" alt="" />
-                        <span>Department</span>
+                        <img src="images/5.svg" alt="" />
+                        <span>Setting</span>
                     </div>
-                </a>' : ""
-                    ?>
-                    <a href="department_sect.php">
-                        <div>
-                            <img src="images/5.svg" alt="" />
-                            <span>Setting</span>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div>
-                            <img src="images/3.svg" alt="" />
-                            <span>Help</span>
-                        </div>
-                    </a>
-                    <a href="./includes/logout.php">
-                        <div>
-                            <img src="images/arrow.svg" alt="" />
-                            <span>Logout</span>
-                        </div>
-                    </a>
+                </a>
+                <a href="#">
+                    <div>
+                        <img src="images/3.svg" alt="" />
+                        <span>Help</span>
+                    </div>
+                </a>
+                <a href="./includes/logout.php">
+                    <div>
+                        <img src="images/arrow.svg" alt="" />
+                        <span>Logout</span>
+                    </div>
+                </a>
             </div>
         </button>
     </div>
@@ -298,13 +297,29 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                     <span>Profile</span>
                 </div>
             </a>
-            <a href="about_faculty.php?admin_id">
+            <?= @$privilage === "super_admin" ?
+                '<a href="admin_privilages.php ">
+                        <div>
+                            <img src="images/key.svg" alt="" />
+                            <span>Admin Privilages</span>
+                        </div>
+                    </a>' : ""
+            ?>
+            <?= @$privilage === "super_admin" ?
+                '<a href="department_sect.php ">
+                        <div>
+                            <img src="images/department.svg" alt="" />
+                            <span>Department</span>
+                        </div>
+                    </a>' : ""
+            ?>
+            <a href="#">
                 <div>
                     <img src="images/5.svg" alt="" />
                     <span>Setting</span>
                 </div>
             </a>
-            <a href="">
+            <a href="#">
                 <div>
                     <img src="images/3.svg" alt="" />
                     <span>Help</span>

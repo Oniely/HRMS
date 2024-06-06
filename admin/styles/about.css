@@ -18,7 +18,7 @@ body {
 
 .about-profile {
   width: 25rem;
-  height: var(--profile-height);
+  min-height: var(--profile-height);
 
   display: flex;
   flex-direction: column;
@@ -172,6 +172,39 @@ body {
 
 .about-me .status-btn:active {
   opacity: 0.8;
+}
+
+.admin_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-overflow: ellipsis;
+  gap: 10px;
+  padding-top: 2rem;
+}
+
+.admin_info div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.admin_info div h3 {
+  font-size: 1rem;
+}
+
+.admin_info div p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #9d9d9d;
+}
+
+@media screen and (max-width: 786px){
+  .admin_info {
+    flex-direction: column;
+  }
 }
 
 .about .info {
