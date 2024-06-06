@@ -91,7 +91,7 @@ $active = "dashboard";
                         <th>Leave Type</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Total Days</th>
+                        <th>Total Day/s</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -208,6 +208,7 @@ $active = "dashboard";
             </div>
         </div>
     </section>
+
 
 </body>
 
