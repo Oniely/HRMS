@@ -24,6 +24,11 @@ if (isset($_GET['faculty_id'])) {
         $f_photo_path = $row['photo_path'];
         $status = $row['status'];
         $department = $row['department'];
+        $tin_id = $row['tin_id'];
+        $sss_no = $row['sss_no'];
+        $pagibig_no = $row['pagibig_no'];
+        $philhealth_no = $row['philhealth_no'];
+        $designation = 'Faculty';
     }
     $query = "SELECT * FROM elementary_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
@@ -149,6 +154,10 @@ $active = "about faculty";
                         <h3>Department</h3>
                         <span><?php echo $department ?></span>
                     </div>
+                    <div class="bordered-info">
+                        <h3>Designation</h3>
+                        <span><?php echo $designation ?></span>
+                    </div>
                 </div>
             </div>
             <div class="about">
@@ -203,6 +212,24 @@ $active = "about faculty";
                     <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Location</h3>
                         <?php echo "<p>$permanent_address</p>"; ?>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>Pag-ibig</h3>
+                        <?php echo "<p>$pagibig_no</p>"; ?>
+                    </div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>SSS</h3>
+                        <?php echo "<p>$sss_no</p>"; ?>
+                    </div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>PhilHealth</h3>
+                        <?php echo "<p>$philhealth_no</p>"; ?>
+                    </div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>Tin ID</h3>
+                        <?php echo "<p>$tin_id</p>"; ?>
                     </div>
                 </div>
                 <div class="desc">

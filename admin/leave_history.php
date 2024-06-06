@@ -31,6 +31,9 @@ if (isset($_GET['id'])) {
         $photo_path = $row['photo_path'];
         $status = $row['status'];
         $department = $row['department'];
+
+        $_SESSION['department'] = $department;
+
     } else {
         // If the ID is not found in employee_tbl, check faculty_tbl
         $query = "SELECT * FROM faculty_tbl WHERE faculty_id = $id";
@@ -47,6 +50,9 @@ if (isset($_GET['id'])) {
             $photo_path = $row['photo_path'];
             $status = $row['status'];
             $department = $row['department'];
+
+            $_SESSION['department'] = $department;
+
         } else {
             echo "ID not found in employee_tbl or faculty_tbl";
             exit();
@@ -105,14 +111,18 @@ $active = "about staff";
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         $leaveId = $row['leave_id'];
+                                        $employee_name = $row['employee_name'];
                                         $leaveType = $row['leave_type'];
                                         $fromDate = $row['from_date'];
                                         $toDate = $row['to_date'];
+                                        $date_applied = $row['date_applied'];
+                                        $reason = $row['reason'];
                                         $accompany = $row['accompany_with'];
                                         $status = $row['application_status'];
                                         $destination = $row['destination'];
                                         $total_days = $row['total_days_leave'];
-                                        echo "<option value='$leaveId' data-leave-type='$leaveType' data-from-date='$fromDate' data-to-date='$toDate' data-status='$status' data-accompany='$accompany' data-destination='$destination' data-total='$total_days'>$leaveType - $fromDate to $toDate</option>";
+                                        $balance = $row['balance_days'];
+                                        echo "<option value='$leaveId' data-leave-type='$leaveType' data-employee-name='$employee_name' data-from-date='$fromDate' data-to-date='$toDate' data-date-applied='$date_applied' data-reason='$reason' data-status='$status' data-accompany='$accompany' data-destination='$destination' data-total='$total_days' data-balance='$balance'>$leaveType - $fromDate to $toDate</option>";
                                     }
                                 } else {
                                     echo "<option>No leave history found</option>";
@@ -121,8 +131,8 @@ $active = "about staff";
                             ?>
                         </select>
                         <div class="print-btn">
-                            <button>Print</button>
-                        </div>
+                            <button onclick="submitPrintForm()">Print</button>
+                        </div>  
                     </div>
                 </div>
 
@@ -156,6 +166,18 @@ $active = "about staff";
                     <div class="p-info">
                         <h2>Total Days of Leave</h2>
                         <p id="total">-</p>
+                    </div>
+                    <div class="p-info">
+                        <h2>Balance</h2>
+                        <p id="balance">-</p>
+                    </div>
+                    <div class="p-info">
+                        <h2>Date Applied</h2>
+                        <p id="dateApplied">-</p>
+                    </div>
+                    <div class="p-info">
+                        <h2>Reason</h2>
+                        <p id="reason">-</p>
                     </div>
                 </div>
                 <div class="p-bottom">
@@ -227,23 +249,93 @@ $active = "about staff";
         } else {
             const leaveId = selectedOption.value;
             const leaveType = selectedOption.getAttribute('data-leave-type');
+            const employeeName = selectedOption.getAttribute('data-employee-name');
             const fromDate = selectedOption.getAttribute('data-from-date');
             const toDate = selectedOption.getAttribute('data-to-date');
+            const dateApplied = selectedOption.getAttribute('data-date-applied');
             const status = selectedOption.getAttribute('data-status');
+            const reason = selectedOption.getAttribute('data-reason');
             const accompany = selectedOption.getAttribute('data-accompany');
             const destination = selectedOption.getAttribute('data-destination');
             const total = selectedOption.getAttribute('data-total');
+            const balance = selectedOption.getAttribute('data-balance');
 
             document.getElementById('leaveId').textContent = leaveId || '-';
             document.getElementById('fromDate').textContent = fromDate || '-';
             document.getElementById('toDate').textContent = toDate || '-';
+            document.getElementById('reason').textContent = reason || '-';
             document.getElementById('leaveType').textContent = leaveType || '-';
             document.getElementById('accompany').textContent = accompany || '-';
             document.getElementById('destination').textContent = destination || '-';
             document.getElementById('total').textContent = total || '-';
+            document.getElementById('dateApplied').textContent = dateApplied || '-';
+            document.getElementById('balance').textContent = balance || '-';
 
             updateProgressStatus(status);
         }
+    }
+    window.submitPrintForm = function() {
+        var printForm = document.createElement('form');
+        printForm.method = 'post';
+        printForm.action = 'print.php';
+        printForm.target = '_blank';
+
+        var inputFields = [{
+                name: 'employee_id',
+                value: <?php echo json_encode($employee_id); ?>
+            },
+            {
+                name: 'name',
+                value: <?php echo json_encode($fname . " " . $lname); ?>
+            },
+            {
+                name: 'from_date',
+                value: document.getElementById('fromDate').innerText
+            },
+            {
+                name: 'to_date',
+                value: document.getElementById('toDate').innerText
+            },
+            {
+                name: 'status',
+                value: document.getElementById('leaveType').innerText
+            },
+            {
+                name: 'destination',
+                value: document.getElementById('destination').innerText
+            },
+            {
+                name: 'accompany',
+                value: document.getElementById('accompany').innerText
+            },
+            {
+                name: 'reason',
+                value: document.getElementById('reason').innerText
+            }, // Add if needed
+            {
+                name: 'total_days',
+                value: document.getElementById('total').innerText
+            },
+            {
+                name: 'leave_balance',
+                value: document.getElementById('balance').innerText
+            }, // Add if needed
+            {
+                name: 'date_applied',
+                value: document.getElementById('dateApplied').innerText
+            }, // Add if needed
+        ];
+
+        inputFields.forEach(field => {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = field.name;
+            input.value = field.value;
+            printForm.appendChild(input);
+        });
+
+        document.body.appendChild(printForm);
+        printForm.submit();
     }
 
     function clearAllActiveClasses() {

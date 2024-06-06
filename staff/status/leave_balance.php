@@ -19,7 +19,7 @@ if ($row = mysqli_fetch_assoc($query_res)) {
 }
 
 $xValues = ["Annual Leave", "Sick Leave","Vacational Leave", "Unpaid Leave", "Marriage Leave", "Bereavement Leave", "Others"];
-$yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave, $bereavement_leave, $marriage_leave, $other_leave];
+$yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave, $marriage_leave, $bereavement_leave, $other_leave];
 
 ?>
 
