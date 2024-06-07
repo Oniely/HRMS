@@ -155,13 +155,33 @@ $active = "dashboard"
                         <img src="images/box (4).svg" alt="" />
                     </div>
                     <div class="box-info">
-                        <h1>Total Fulltime</h1>
-                        <h2>250</h2>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
+                    <h1>Total Leave</h1>
+
+                    <?php
+                    $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED' and to_date >= ?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    if ($stmt) {
+                        mysqli_stmt_bind_param($stmt, "s", $currentDate);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+
+                        if ($row = mysqli_fetch_assoc($result)) {
+                            echo '<h2>' . $row['count'] . '</h2>';
+                        } else {
+                            echo '<h2>0</h2>';
+                        }
+
+                        mysqli_stmt_close($stmt);
+                    } else {
+                        echo "Error in SQL statement: " . mysqli_error($conn);
+                    }
+
+                    ?>
+                    <div class="percentage">
+                        <div></div>
                     </div>
+                    <h3>20% Increase in 1 Year</h3>
+                </div>
                 </div>
             </div>
         </div>

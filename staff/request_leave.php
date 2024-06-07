@@ -216,11 +216,25 @@ $active = "leave application";
                             endDateInput.disabled = false;
                             warningMessage.style.display = 'none';
                      }
+                     if (leaveType === 'Vacational Leave') {
+                            setMinStartDate(3);
+                     } else {
+                            setMinStartDate(0);
+                     }
+
               });
 
+              function setMinStartDate(daysToAdd) {
+                     var today = new Date();
+                     today.setDate(today.getDate() + daysToAdd);
+                     var minDate = today.toISOString().split('T')[0];
+                     startDateInput.setAttribute('min', minDate);
+              }
+              
               var today = new Date().toISOString().split('T')[0];
               startDateInput.setAttribute('min', today);
               endDateInput.setAttribute('min', today);
+
 
               startDateInput.addEventListener('change', function() {
                      endDateInput.setAttribute('min', this.value);
