@@ -57,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Southland College</title>
     <link rel="stylesheet" href="styles/print.css" />
+    <link rel="icon" href="images/southland-icon.png" sizes="16x16 32x32" type="image/png" />
 </head>
 
 <body>

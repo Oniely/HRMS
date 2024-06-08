@@ -56,7 +56,7 @@ include('./includes/connection.php');
             <span> <?= @$fname ?? "USER" ?> </span>
             <!-- Popup Menu -->
             <div class="profile-menu">
-                <a href="index.php">
+                <a href="about_department.php">
                     <div>
                         <img src="images/1.svg" alt="" />
                         <span>Profile</span>
@@ -173,6 +173,17 @@ include('./includes/connection.php');
                     <a class="<?= str_contains($active, "faculty") ? "active" : "" ?>" href="department_faculty.php">Faculty</a>
                     <a class="<?= str_contains($active, "notification") ? "active" : "" ?>" href="./notifications.php">Notifications</a>
                 </div>
+            </li>
+            <li>
+                <a class="s-link <?= $active == "leave" ? "active" : "" ?>" href="all_leave.php">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-x">
+                        <path d="M2 21a8 8 0 0 1 11.873-7" />
+                        <circle cx="10" cy="8" r="5" />
+                        <path d="m17 17 5 5" />
+                        <path d="m22 17-5 5" />
+                    </svg>
+                    <span class="link-name <?= $active == "leave" ? "active" : "" ?>">Leave</span>
+                </a>
             </li>
             <li>
                 <a class="s-link" href="#">

@@ -26,6 +26,7 @@ $active = "leave notification";
     <link rel="stylesheet" href="styles/nav.css" />
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/notification.css" />
+    <link rel="icon" href="images/southland-icon.png" sizes="16x16 32x32" type="image/png" />
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>

@@ -3,7 +3,9 @@
 include('includes/connection.php');
 session_name('adminSession');
 session_start();
+
 $currentDate = date('Y-m-d');
+
 if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit();
@@ -23,7 +25,7 @@ $active = "dashboard"
     <title>Southland College</title>
     <!-- Styles -->
     <link rel="stylesheet" href="styles/nav.css" />
-    <link rel="icon" href="images/sc-icon-svg.svg" />
+    <link rel="icon" href="images/southland-icon.png" sizes="16x16 32x32" type="image/png" />
     <link rel="stylesheet" href="styles/index.css" />
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>

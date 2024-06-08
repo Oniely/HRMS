@@ -3,7 +3,6 @@
 session_name('adminSession');
 session_start();
 
-
 require_once "includes/auth.php";
 include 'includes/connection.php';
 
@@ -15,6 +14,7 @@ include 'includes/connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="icon" href="images/southland-icon.png" sizes="16x16 32x32" type="image/png" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

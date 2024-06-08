@@ -36,6 +36,7 @@ $active = "data department staff";
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
+    <link rel="icon" href="images/southland-icon.png" sizes="16x16 32x32" type="image/png" />
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
