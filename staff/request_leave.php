@@ -68,8 +68,6 @@ $active = "leave application";
                                    <div class="relative z-0">
                                           <select name="status" id="status" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
                                                  <option value="Sick Leave">Sick Leave</option>
-                                                 <option value="Annual Leave">Annual Leave</option>
-                                                 <option value="Unpaid Leave">Unpaid Leave</option>
                                                  <option value="Vacational Leave">Vacational Leave</option>
                                                  <option value="Bereavement Leave">Bereavement Leave</option>
                                                  <option value="Marriage Leave">Marriage Leave</option>
@@ -135,27 +133,9 @@ $active = "leave application";
 
                                           if ($initialLeaveBalanceResult && mysqli_num_rows($initialLeaveBalanceResult) > 0) {
                                                  $row = mysqli_fetch_assoc($initialLeaveBalanceResult);
-                                                 $initialSickLeaveBalance = $row['sick_leave'];
                                                  $initialAnnualLeaveBalance = $row['annual_leave'];
-                                                 $initialUnpaidLeaveBalance = $row['unpaid_leave'];
+                                                 $initialVacationalLeaveBalance = $row['vacational_leave'];
                                                  $initialBalance = $row['unpaid_leave'];
-                                                 // } else {
-                                                 //        echo "Error: Unable to retrieve initial leave balance.";
-                                                 //        exit; // Exit the script
-                                                 // }
-                                                 // if ($_POST['status'] === 'Sick Leave') {
-                                                 //        $initialLeaveBalance = $initialSickLeaveBalance;
-                                                 //        $leaveType = 'sick_leave';
-                                                 // } elseif ($_POST['status'] === 'Annual Leave') {
-                                                 //        $initialLeaveBalance = $initialAnnualLeaveBalance;
-                                                 //        $leaveType = 'annual_leave';
-                                                 // } elseif ($_POST['status'] === 'Unpaid Leave') {
-                                                 //        $initialLeaveBalance = $initialUnpaidLeaveBalance;
-                                                 //        $leaveType = 'unpaid_leave';
-                                                 // } else {
-                                                 //        echo "Error: Unknown leave category selected.";
-                                                 //        exit; // Exit the script
-                                                 // }
                                           }
 
                                           $balanceDays = $initialBalance - $totalDaysLeave;

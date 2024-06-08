@@ -92,7 +92,7 @@ $active = "data leave notification";
             <div class="notification-content">
                 <div class="notification-content-desc">
                     <?php
-                    $sql = "SELECT * FROM leave_tbl WHERE department = '$department'";
+                    $sql = "SELECT * FROM leave_tbl WHERE department = '$department' ORDER BY date_applied DESC";
                     $result = mysqli_query($conn, $sql);
                     if ($result && mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -191,7 +191,7 @@ $active = "data leave notification";
                 document.getElementById('rejectBtn').setAttribute('data-leave-id', leaveId);
                 document.getElementById('rejectBtn').setAttribute('data-employee-id', employeeId);
 
-                if (applicationStatus === 'APPROVED' || applicationStatus === 'REJECTED') {
+                if (applicationStatus === 'DEPARTMENT APPROVED' || applicationStatus === 'REJECTED' || applicationStatus === 'APPROVED') {
                     document.getElementById('confirmBtn').disabled = true;
                     document.getElementById('rejectBtn').disabled = true;
                 } else {
@@ -228,6 +228,7 @@ $active = "data leave notification";
             var employee_id = $(this).data('employee-id');
             var leave_type = $(this).data('leave');
             var requested_days = $(this).data('total');
+            console.log("Leave ID:", leave_id, "Employee ID:", employee_id, "Leave Type:", leave_type, "Requested Days:", requested_days);
             if (confirm("Are you sure you want to approve this leave request?")) {
                 updateLeaveStatus(leave_id, employee_id, 'DEPARTMENT APPROVED', leave_type, requested_days);
             }
@@ -256,6 +257,7 @@ $active = "data leave notification";
                 success: function(result) {
                     if (status === 'APPROVED') {
                         alert("Request Approved Successfully");
+                        window.location.href = './notifications.php';
                         updateLeaveBalance(employee_id, leave_type, requested_days);
                     } else if (status === 'REJECTED') {
                         alert("Request Rejected Successfully");

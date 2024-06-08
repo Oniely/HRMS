@@ -159,10 +159,8 @@ function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
 
     // Determine if the leave type affects the balance
     switch ($leave_type) {
-        case 'Sick Leave':
         case 'Annual Leave':
         case 'Vacational Leave':
-        case 'Unpaid Leave':
             $leave_balance_column = strtolower(str_replace(' ', '_', $leave_type));
             $isBalanceLeave = true;
             break;

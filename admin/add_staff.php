@@ -159,20 +159,17 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
               insertDataColumns($conn, 'graduate_tbl', $graduate_array);
 
 
-              $annual_leave_balance = 15; 
               $sick_leave_balance = 15; 
-              $unpaid_leave_balance = 15; 
+              $vacational_leave_balance = 15; 
 
               // Calculate the total balance
-              $total_balance = $annual_leave_balance + $sick_leave_balance + $unpaid_leave_balance;
+              $total_balance = $sick_leave_balance + $vacational_leave_balance;
 
               $leave_balance_array = [
                      'employee_id' => $form['employee_id'],
-                     'annual_leave' => $annual_leave_balance,
                      'sick_leave' => $sick_leave_balance,
-                     'unpaid_leave' => $unpaid_leave_balance,
-                     'balance' => $total_balance, // Set the total balance
-              ];
+                     'vacational_leave' => $unpaid_leave_balance,
+                     'balance' => $total_balance,               ];
               insertDataColumns($conn, 'leave_balance_tbl', $leave_balance_array);
 
               echo '<script>alert("Employee Added")</script>';

@@ -84,18 +84,16 @@ if (isset($_SESSION['employee_id'])) {
     $query = "SELECT * from leave_balance_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
     if ($row = mysqli_fetch_assoc($query_res)) {
-        $annual_leave = $row['annual_leave'];
         $sick_leave = $row['sick_leave'];
-        $unpaid_leave = $row['unpaid_leave'];
+        $vacational_leave = $row['vacational_leave'];
         $balance = $row['balance'];
     }
 
     $query = "SELECT * from leave_balance_tbl WHERE employee_id = $id";
     $query_res = mysqli_query($conn, $query);
     if ($row = mysqli_fetch_assoc($query_res)) {
-        $annual_leave = $row['annual_leave'];
         $sick_leave = $row['sick_leave'];
-        $unpaid_leave = $row['unpaid_leave'];
+        $vacational_leave = $row['vacational_leave'];
         $balance = $row['balance'];
     }
 }

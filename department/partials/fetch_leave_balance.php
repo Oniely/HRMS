@@ -8,14 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $leave_balance_column = '';
     switch ($leave_type) {
-        case 'Sick Leave':
-            $leave_balance_column = 'sick_leave';
-            break;
         case 'Annual Leave':
             $leave_balance_column = 'annual_leave';
             break;
-        case 'Unpaid Leave':
-            $leave_balance_column = 'unpaid_leave';
+        case 'Vacational Leave':
+            $leave_balance_column = 'vacational_leave';
             break;
         default:
             echo json_encode(['balance' => 0]);

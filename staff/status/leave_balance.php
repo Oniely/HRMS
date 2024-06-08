@@ -8,9 +8,7 @@ $employee_id = $_SESSION['employee_id'];
 $query = "SELECT * from leave_balance_tbl WHERE employee_id = $employee_id";
 $query_res = mysqli_query($conn, $query);
 if ($row = mysqli_fetch_assoc($query_res)) {
-    $annual_leave = $row['annual_leave'];
     $sick_leave = $row['sick_leave'];
-    $unpaid_leave = $row['unpaid_leave'];
     $vacational_leave = $row['vacational_leave'];
     $marriage_leave = $row['marriage_leave'];
     $bereavement_leave = $row['bereavement_leave'];
@@ -18,8 +16,9 @@ if ($row = mysqli_fetch_assoc($query_res)) {
     $balance = $row['balance'];
 }
 
-$xValues = ["Annual Leave", "Sick Leave","Vacational Leave", "Unpaid Leave", "Marriage Leave", "Bereavement Leave", "Others"];
-$yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave, $marriage_leave, $bereavement_leave, $other_leave];
+
+$xValues = ["Sick Leave","Vacational Leave", "Marriage Leave", "Bereavement Leave", "Others"];
+$yValues = [$sick_leave, $vacational_leave, $marriage_leave, $bereavement_leave, $other_leave];
 
 ?>
 
@@ -39,10 +38,7 @@ $yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave, $marri
                     <th class="leave-th">Leave Type</th>
                     <th class="leave-th">Remaining Days</th>
                 </tr>
-                <tr>
-                    <td class="leave-td" id="td-bg">Annual Leave</td>
-                    <td class="leave-td"><?php echo $annual_leave ?></td>
-                </tr>
+              
                 <tr>
                     <td class="leave-td" id="td-bg">Sick Leave</td>
                     <td class="leave-td"><?php echo $sick_leave ?></td>
@@ -51,10 +47,7 @@ $yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave, $marri
                     <td class="leave-td" id="td-bg">Vacational Leave</td>
                     <td class="leave-td"><?php echo $vacational_leave ?></td>
                 </tr>
-                <tr>
-                    <td class="leave-td" id="td-bg">Unpaid Leave</td>
-                    <td class="leave-td"><?php echo $unpaid_leave ?></td>
-                </tr>
+          
                 <tr>
                     <td class="leave-td" id="td-bg">Bereavement Leave</td>
                     <td class="leave-td"><?php echo $bereavement_leave ?></td>
@@ -81,8 +74,7 @@ $yValues = [$annual_leave, $sick_leave, $vacational_leave, $unpaid_leave, $marri
         "#32ab01",
         "#2b5797",
         "#01b021",
-        "#a980b2",
-        "#b9a0a3",
+  
     ];
 
     new Chart("myChart", {
