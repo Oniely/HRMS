@@ -2,6 +2,7 @@
 
 global $active;
 global $fname;
+global $breadcrumbs;
 
 if (isset($_SESSION['employee_id']) && (!isset($_SESSION['admin_id']))) {
     $id = $_SESSION['employee_id'];
@@ -121,6 +122,18 @@ include('./includes/connection.php');
     </div>
 
     <div class="m-burger-menu">
+        <div class="m-breadcrumbs">
+            <?php
+            if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                foreach ($breadcrumbs as $key => $value) {
+                    echo "<a href='$value'>$key</a>";
+                }
+            } else {
+                echo "<a href='/HRMS/staff/'>Home</a>";
+            }
+            ?>
+        </div>
+
         <div class="m-search-container">
             <input type="text" placeholder="Search" />
             <button>
@@ -211,7 +224,7 @@ include('./includes/connection.php');
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 document.querySelectorAll('.notification-count').forEach((element) => {
-                        element.innerHTML = this.responseText;
+                    element.innerHTML = this.responseText;
                 });
             };
             xhttp.open("GET", "partials/notification_count.php", true);

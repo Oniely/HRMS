@@ -3,8 +3,7 @@
 global $admin_fname;
 global $active;
 global $privilage;
-
-
+global $breadcrumbs;
 
 // if (!isset($_SESSION['admin_id'])) {
 //     header('location: ../login.php');
@@ -165,8 +164,15 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
     <div class="m-burger-menu">
         <div class="m-breadcrumbs">
-            <a href="/HRMS/admin/">Home</a>
-            <a href="#">Dashboard</a>
+            <?php
+            if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                foreach ($breadcrumbs as $key => $value) {
+                    echo "<a href='$value'>$key</a>";
+                }
+            } else {
+                echo "<a href='/HRMS/admin/'>Home</a>";
+            }
+            ?>
         </div>
 
         <div class="m-search-container">
@@ -249,7 +255,12 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
             </li>
             <li>
                 <a class="s-link <?= $active == "leave" ? "active" : "" ?>" href="all_leave.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-x"><path d="M2 21a8 8 0 0 1 11.873-7"/><circle cx="10" cy="8" r="5"/><path d="m17 17 5 5"/><path d="m22 17-5 5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-x">
+                        <path d="M2 21a8 8 0 0 1 11.873-7" />
+                        <circle cx="10" cy="8" r="5" />
+                        <path d="m17 17 5 5" />
+                        <path d="m22 17-5 5" />
+                    </svg>
                     <span class="link-name <?= $active == "leave" ? "active" : "" ?>">Leave</span>
                 </a>
             </li>
@@ -341,8 +352,15 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
     </button>
 
     <div class="breadcrumbs">
-        <a href="/hrms/admin/">Home</a>
-        <a href="#">Dashboard</a>
+        <?php
+        if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+            foreach ($breadcrumbs as $key => $value) {
+                echo "<a href='$value'>$key</a>";
+            }
+        } else {
+            echo "<a href='/HRMS/admin/'>Home</a>";
+        }
+        ?>
     </div>
 </div>
 

@@ -30,6 +30,12 @@ if (isset($_SESSION['department_id'])) {
 
 
 $active = "data leave notification";
+$breadcrumbs = [
+    'Home' => '/hrms/department/',
+    "Dashboard" => '/hrms/department/',
+    "Notifications" => '#',
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +67,17 @@ $active = "data leave notification";
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Notifications</h1>
+            <div class="breadcrumbs">
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
+            </div>
         </div>
 
         <!-- Modal Structure -->

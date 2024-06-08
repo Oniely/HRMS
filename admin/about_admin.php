@@ -25,6 +25,11 @@ if (isset($_SESSION['admin_id'])) {
     }
 }
 
+$breadcrumbs = [
+    'Home' => '/hrms/admin/',
+    'Admin' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,8 +62,15 @@ if (isset($_SESSION['admin_id'])) {
         <div class="section-title">
             <h1>Admin</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/admin/">Home</a>
-                <a href="#">Admin</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

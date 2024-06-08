@@ -20,6 +20,11 @@ $sql = "SELECT * FROM department_tbl";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$breadcrumbs = [
+    'Dashboard' => '/hrms/admin/',
+    'Department' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,8 +59,15 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="section-title">
             <h1>Department</h1>
             <div class="breadcrumbs">
-                <a href="./index.php">Dashboard</a>
-                <a href="./department_sect.php">Department</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

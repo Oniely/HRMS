@@ -201,11 +201,6 @@ body {
         gap: 1.5rem;
     }
 
-    .dashboard-table {
-        padding: 0 1rem;
-        margin-top: 2rem;
-    }
-
     .dashboard-table .table-container {
         overflow-x: auto;
         border-left: 1px solid black;

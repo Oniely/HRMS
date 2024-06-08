@@ -74,7 +74,14 @@ if (isset($_GET['id'])) {
 }
 
 require_once './includes/query.php';
+
 $active = "about staff";
+$breadcrumbs = [
+    'Home' => '/hrms/admin/',
+    'Staff' => '/hrms/admin/all_faculty.php',
+    'Staff Profile' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,9 +116,15 @@ $active = "about staff";
         <div class="section-title">
             <h1>About Staff</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/admin/">Home</a>
-                <a href="/hrms/admin/all_staff.php">All Staff</a>
-                <a href="#">Staff</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

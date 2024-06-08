@@ -14,6 +14,11 @@ if (isset($_SESSION['admin_id'])) {
 }
 
 $active = "leave";
+$breadcrumbs = [
+    'Home' => '/hrms/admin/',
+    'Employee On Leave' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,9 +51,15 @@ $active = "leave";
         <div class="section-title">
             <h1>All Faculty</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/admin/">Home</a>
-                <a href="/hrms/admin/all_faculty.php">Faculty</a>
-                <a href="#">All Faculty</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

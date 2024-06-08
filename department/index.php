@@ -39,7 +39,13 @@ if ($department == 'SECSA') {
 }
 
 require_once './includes/query.php';
+
 $active = "dashboard";
+$breadcrumbs = [
+    "Home" => "/hrms/department/",
+    "Dashboard" => "#",
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,8 +78,15 @@ $active = "dashboard";
         <div class="section-title">
             <h1><?php echo $department . " Dashboard" ?></h1>
             <div class="breadcrumbs">
-                <a href="/hrms/department/">Home</a>
-                <a href="#">Dashboard</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/department/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

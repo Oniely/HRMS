@@ -13,6 +13,11 @@ include('includes/connection.php');
 require_once './includes/query.php';
 
 $active = "leave notification";
+$breadcrumbs = [
+    'Home' => '/hrms/department/',
+    "Notifications" => "#"
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +49,17 @@ $active = "leave notification";
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Notifications</h1>
+            <div class="breadcrumbs">
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/staff/'>Home</a>";
+                }
+                ?>
+            </div>
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->

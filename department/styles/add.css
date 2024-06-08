@@ -103,6 +103,7 @@ label {
     color: black;
     border: 1px solid #000;
 }
+
 .print-btn {
     padding: 0.5rem 1rem;
     background-color: #FA5858;
@@ -110,7 +111,8 @@ label {
     color: white;
     width: 100px;
     text-align: center;
-  }
+}
+
 .btns a:hover {
     background: #eee;
 }
@@ -151,6 +153,10 @@ label {
         flex-direction: column;
     }
 
+    .section-title h1 {
+        margin-top: 3rem;
+    }
+
     .dashboard-container {
         width: 100%;
         margin: 0;
@@ -166,7 +172,7 @@ label {
         grid-template-columns: 1fr;
     }
 
-    .f-inputs > div {
+    .f-inputs>div {
         grid-column: 1 / -1;
     }
 }

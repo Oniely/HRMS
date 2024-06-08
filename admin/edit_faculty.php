@@ -49,6 +49,12 @@ while ($row = mysqli_fetch_assoc($query)) {
 
 
 $active = "edit faculty";
+$breadcrumbs = [
+       'Home' => '/hrms/admin/',
+       'Faculty' => '/hrms/admin/all_faculty.php',
+       'Edit Profile' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,8 +82,19 @@ $active = "edit faculty";
        <?php require 'partials/nav.php' ?>
        <!-- Dashboard -->
        <section class="dashboard-container">
-              <div class="content-title">
-                     <h3>Edit Faculty Details</h3>
+              <div class="section-title">
+                     <h1>Edit Faculty</h1>
+                     <div class="breadcrumbs">
+                            <?php
+                            if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                                   foreach ($breadcrumbs as $key => $value) {
+                                          echo "<a href='$value'>$key</a>";
+                                   }
+                            } else {
+                                   echo "<a href='/HRMS/admin/'>Home</a>";
+                            }
+                            ?>
+                     </div>
               </div>
               <form class="f-container" method="post" action="functions/faculty/update.php?faculty=true&faculty_id=<?php echo $faculty_id; ?>" enctype="multipart/form-data">
                      <div class="f-section">

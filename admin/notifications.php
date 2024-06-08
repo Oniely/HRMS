@@ -11,6 +11,12 @@ if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {
 include('includes/connection.php');
 require_once './includes/query.php';
 
+$breadcrumbs = [
+    'Home' => '/hrms/admin/',
+    'Dashboard' => '/hrms/admin/',
+    'Notifications' => '#',
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +48,17 @@ require_once './includes/query.php';
         <!-- DEFAULT TITLE -->
         <div class="section-title">
             <h1>Notifications</h1>
+            <div class="breadcrumbs">
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
+            </div>
         </div>
         <!-- END DEFAULT -->
         <!-- NEW THINGS -->

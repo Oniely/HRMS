@@ -11,6 +11,12 @@ require 'includes/connection.php';
 require 'includes/query.php';
 
 $active = "leave application";
+$breadcrumbs = [
+       'Home' => '/hrms/department/',
+       "Leave" => "#",
+       "Application" => "#"
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +46,19 @@ $active = "leave application";
        <?php require 'partials/nav.php' ?>
        <!-- Dashboard -->
        <section class="dashboard-container">
-              <div class="content-title">
-                     <h3>Application Form</h3>
+              <div class="section-title">
+                     <h1>Request Leave</h1>
+                     <div class="breadcrumbs">
+                            <?php
+                            if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                                   foreach ($breadcrumbs as $key => $value) {
+                                          echo "<a href='$value'>$key</a>";
+                                   }
+                            } else {
+                                   echo "<a href='/HRMS/staff/'>Home</a>";
+                            }
+                            ?>
+                     </div>
               </div>
               <form class="f-container" method="post" enctype="multipart/form-data">
                      <div class="f-section">
@@ -211,7 +228,7 @@ $active = "leave application";
                      var minDate = today.toISOString().split('T')[0];
                      startDateInput.setAttribute('min', minDate);
               }
-              
+
               var today = new Date().toISOString().split('T')[0];
               startDateInput.setAttribute('min', today);
               endDateInput.setAttribute('min', today);

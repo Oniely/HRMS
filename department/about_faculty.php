@@ -83,6 +83,12 @@ if (isset($_GET['faculty_id'])) {
 }
 
 $active = "about faculty";
+$breadcrumbs = [
+    "Home" => "/hrms/department/",
+    "Faculty" => "/hrms/department/department_faculty.php",
+    "Faculty Profile" => "#",
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,9 +122,15 @@ $active = "about faculty";
         <div class="section-title">
             <h1>About Employee</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a>
-                <a href="#">Other Faculty</a>
-                <a href="#">Faculty</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/department/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

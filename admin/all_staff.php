@@ -14,6 +14,12 @@ if (isset($_SESSION['admin_id'])) {
 }
 
 $active = "all staff";
+$breadcrumbs = [
+    'Home' => '/hrms/admin/',
+    'Staff' => '#',
+    'All Staff' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,9 +52,15 @@ $active = "all staff";
         <div class="section-title">
             <h1>All Staff</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/admin/">Home</a>
-                <a href="/hrms/admin/all_staff.php">Staff</a>
-                <a href="#">All Staff</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->
@@ -119,7 +131,7 @@ $active = "all staff";
                                 } else {
                                     // echo "Failed to update employee statuses.";
                                 }
-                                
+
                                 $query = mysqli_query($conn, "SELECT * FROM `employee_tbl`");
                                 while ($row = mysqli_fetch_array($query)) {
                                 ?>

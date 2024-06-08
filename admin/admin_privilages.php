@@ -24,6 +24,11 @@ $sql = "SELECT * FROM admin_tbl WHERE privilage != 'super_admin'";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$breadcrumbs = [
+    'Dashboard' => '/hrms/admin/',
+    'Admin Privileges' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,8 +63,15 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="section-title">
             <h1>Admin Privilages</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/admin/">Dashboard</a>
-                <a href="#">Admin Privilages</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

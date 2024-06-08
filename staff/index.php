@@ -209,6 +209,11 @@ if (isset($_SESSION['employee_id'])) {
 
 require_once './includes/query.php';
 $active = "profile";
+$breadcrumbs = [
+    'Home' => '/hrms/department/',
+    "Your Profile" => "#"
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -239,10 +244,17 @@ $active = "profile";
     <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
-            <h1>About Employee</h1>
+            <h1>Your Profile</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/staff/">Home</a>
-                <a href="#">Staff</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/staff/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->

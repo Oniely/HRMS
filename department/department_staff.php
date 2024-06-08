@@ -22,6 +22,12 @@ if (isset($_SESSION['department_id'])) {
     }
 }
 $active = "data department staff";
+$breadcrumbs = [
+    'Home' => '/hrms/department/',
+    'Data' => '#',
+    'Staffs' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,9 +60,15 @@ $active = "data department staff";
         <div class="section-title">
             <h1>All Staff</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/department/">Home</a>
-                <a href="/hrms/department/department_staff.php">Staff</a>
-                <a href="#">All Staff</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/department/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->
@@ -134,8 +146,8 @@ $active = "data department staff";
                                                     <img src="images/eyes.svg" alt="View">
                                                 </div>
                                             </a>
-                                       
-                                       
+
+
                                         </td>
                                     </tr>
                                 <?php } ?>

@@ -159,8 +159,8 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
               ];
               insertDataColumns($conn, 'graduate_tbl', $graduate_array);
 
-              $sick_leave_balance = 15; 
-              $vacational_leave_balance = 15; 
+              $sick_leave_balance = 15;
+              $vacational_leave_balance = 15;
 
               // Calculate the total balance
               $total_balance = $sick_leave_balance + $vacational_leave_balance;
@@ -182,6 +182,12 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 }
 
 $active = "add faculty";
+$breadcrumbs = [
+       "Home" => "/HRMS/admin/",
+       "Faculty" => "/HRMS/admin/all_faculty.php",
+       "Add Faculty" => "#",
+]
+
 ?>
 
 <!DOCTYPE html>
@@ -211,8 +217,19 @@ $active = "add faculty";
        <?php require 'partials/nav.php' ?>
        <!-- Dashboard -->
        <section class="dashboard-container">
-              <div class="content-title">
-                     <h3>Add Faculty</h3>
+              <div class="section-title">
+                     <h1>Add Faculty</h1>
+                     <div class="breadcrumbs">
+                            <?php
+                            if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                                   foreach ($breadcrumbs as $key => $value) {
+                                          echo "<a href='$value'>$key</a>";
+                                   }
+                            } else {
+                                   echo "<a href='/HRMS/admin/'>Home</a>";
+                            }
+                            ?>
+                     </div>
               </div>
               <form class="f-container" method="post" enctype="multipart/form-data">
                      <div class="f-section">

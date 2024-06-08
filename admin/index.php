@@ -14,7 +14,12 @@ if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
 }
-$active = "dashboard"
+$active = "dashboard";
+$breadcrumbs = [
+    'Home' => '/hrms/admin/',
+    'Dashboard' => '#'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +52,15 @@ $active = "dashboard"
         <div class="section-title">
             <h1>Dashboard</h1>
             <div class="breadcrumbs">
-                <a href="/hrms/admin/">Home</a>
-                <a href="#">Dashboard</a>
+                <?php
+                if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                    foreach ($breadcrumbs as $key => $value) {
+                        echo "<a href='$value'>$key</a>";
+                    }
+                } else {
+                    echo "<a href='/HRMS/admin/'>Home</a>";
+                }
+                ?>
             </div>
         </div>
         <!-- END DEFAULT -->
@@ -157,33 +169,33 @@ $active = "dashboard"
                         <img src="images/box (4).svg" alt="" />
                     </div>
                     <div class="box-info">
-                    <h1>Total Leave</h1>
+                        <h1>Total Leave</h1>
 
-                    <?php
-                    $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED' and to_date >= ?";
-                    $stmt = mysqli_prepare($conn, $sql);
-                    if ($stmt) {
-                        mysqli_stmt_bind_param($stmt, "s", $currentDate);
-                        mysqli_stmt_execute($stmt);
-                        $result = mysqli_stmt_get_result($stmt);
+                        <?php
+                        $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED' and to_date >= ?";
+                        $stmt = mysqli_prepare($conn, $sql);
+                        if ($stmt) {
+                            mysqli_stmt_bind_param($stmt, "s", $currentDate);
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
 
-                        if ($row = mysqli_fetch_assoc($result)) {
-                            echo '<h2>' . $row['count'] . '</h2>';
+                            if ($row = mysqli_fetch_assoc($result)) {
+                                echo '<h2>' . $row['count'] . '</h2>';
+                            } else {
+                                echo '<h2>0</h2>';
+                            }
+
+                            mysqli_stmt_close($stmt);
                         } else {
-                            echo '<h2>0</h2>';
+                            echo "Error in SQL statement: " . mysqli_error($conn);
                         }
 
-                        mysqli_stmt_close($stmt);
-                    } else {
-                        echo "Error in SQL statement: " . mysqli_error($conn);
-                    }
-
-                    ?>
-                    <div class="percentage">
-                        <div></div>
+                        ?>
+                        <div class="percentage">
+                            <div></div>
+                        </div>
+                        <h3>20% Increase in 1 Year</h3>
                     </div>
-                    <h3>20% Increase in 1 Year</h3>
-                </div>
                 </div>
             </div>
         </div>

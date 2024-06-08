@@ -2,6 +2,7 @@
 
 global $active;
 global $fname;
+global $breadcrumbs;
 
 if (isset($_SESSION['department_id'])) {
     $id = $_SESSION['department_id'];
@@ -106,6 +107,18 @@ include('./includes/connection.php');
     </div>
 
     <div class="m-burger-menu">
+        <div class="m-breadcrumbs">
+            <?php
+            if (isset($breadcrumbs) && is_array($breadcrumbs)) {
+                foreach ($breadcrumbs as $key => $value) {
+                    echo "<a href='$value'>$key</a>";
+                }
+            } else {
+                echo "<a href='/HRMS/department/'>Home</a>";
+            }
+            ?>
+        </div>
+
         <div class="m-search-container">
             <input type="text" placeholder="Search" />
             <button>
