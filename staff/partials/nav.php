@@ -210,9 +210,9 @@ include('./includes/connection.php');
         setInterval(function() {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("notificationCount").innerText = this.responseText;
-                }
+                document.querySelectorAll('.notification-count').forEach((element) => {
+                        element.innerHTML = this.responseText;
+                });
             };
             xhttp.open("GET", "partials/notification_count.php", true);
             xhttp.send();
