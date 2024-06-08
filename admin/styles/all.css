@@ -158,7 +158,9 @@ body {
 }
 
 .filter select {
-    width: 70px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 3px;
     font-size: 1rem;
 }
 
