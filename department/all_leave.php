@@ -63,7 +63,7 @@ $breadcrumbs = [
     <section class="section">
         <!-- DEFAULT TITLE -->
         <div class="section-title">
-            <h1>All Faculty</h1>
+            <h1>All Leave</h1>
             <div class="breadcrumbs">
                 <?php
                 if (isset($breadcrumbs) && is_array($breadcrumbs)) {
