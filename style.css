@@ -42,6 +42,8 @@ main {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+
+    overflow: hidden;
 }
 
 a {
