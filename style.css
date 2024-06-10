@@ -19,6 +19,9 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding: 1.5rem;
+    background: url('admin/images/southland-icon.png') no-repeat center center/contain;
 }
 
 .center {
