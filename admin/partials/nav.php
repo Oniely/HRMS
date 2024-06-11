@@ -21,6 +21,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 ?>
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="/hrms/admin/script/search.js" defer></script>
 
 <!-- DESKTOP SECTION -->
 <nav class="navbar" id="navbar">
@@ -29,10 +30,12 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
             <img src="images/burger.svg" alt="" />
         </button>
         <div class="search-container">
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" id="search-input" />
             <button>
                 <img src="images/search.svg" alt="" />
             </button>
+            <div class="absolute top-[2.3rem] left-0 w-[15rem] bg-white min-h-10 max-h-52 rounded-md hidden flex-col py-3 px-2 gap-2 overflow-y-auto overflow-x-hidden shadow-md" id="search-result-container">
+            </div>
         </div>
     </div>
     <div class="right-nav">
@@ -75,7 +78,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
                                 echo "<div class='notification-item $unreadClass' data-employee-id='$employee_id'>";
                                 echo "<strong> $employee_name </strong> requested to $leave_type due to ";
-                                echo "<button type='button' id='viewDetailsButton' class='btn btn-primary underline view-details' 
+                                echo "<button type='button' id='viewDetailsButton' class='underline btn btn-primary view-details' 
                                 data-leave_id='$leave_id' data-employee_id='$employee_id' data-employee='$employee_name' data-reason='$reason' data-leave='$leave_type' data-start='$start_date' data-end='$end_date'>View Details</button>";
                                 echo "<span>$date</span>";
                                 echo "</div>";
