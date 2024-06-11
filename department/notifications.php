@@ -273,7 +273,7 @@ $breadcrumbs = [
                     requested_days: requested_days
                 },
                 success: function(result) {
-                    if (status === 'APPROVED') {
+                    if (status === 'DEPARTMENT APPROVED') {
                         alert("Request Approved Successfully");
                         window.location.href = './notifications.php';
                         updateLeaveBalance(employee_id, leave_type, requested_days);
@@ -281,26 +281,6 @@ $breadcrumbs = [
                         alert("Request Rejected Successfully");
                         window.location.href = './notifications.php';
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error: " + error);
-                    console.log("Response: " + xhr.responseText);
-                }
-            });
-        }
-
-        function updateLeaveBalance(employee_id, leave_type, requested_days) {
-            $.ajax({
-                url: "includes/leave_request.php",
-                type: "post",
-                data: {
-                    functionname: 'updateLeaveBalance',
-                    employee_id: employee_id,
-                    leave_type: leave_type,
-                    requested_days: requested_days
-                },
-                success: function(result) {
-                    window.location.href = './notifications.php';
                 },
                 error: function(xhr, status, error) {
                     console.error("Error: " + error);

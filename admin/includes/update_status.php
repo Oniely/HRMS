@@ -2,6 +2,7 @@
 function updateEmployeeStatus($conn) {
     // Get the current date
     $currentDate = date('Y-m-d');
+    error_log("Current Date: $currentDate");
 
     // Query to select all employees and faculty with leave end date less than the current date
     $sql = "
@@ -24,6 +25,7 @@ function updateEmployeeStatus($conn) {
         return false;
     }
 
+    // Bind the current date to the placeholder
     mysqli_stmt_bind_param($stmt, "ss", $currentDate, $currentDate);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -38,6 +40,7 @@ function updateEmployeeStatus($conn) {
     while ($row = mysqli_fetch_assoc($result)) {
         $employee_id = $row['employee_id'];
         $table_type = $row['table_type'];
+        error_log("Updating $table_type with ID $employee_id to ACTIVE");
 
         if ($table_type == 'employee') {
             $updateSql = "UPDATE employee_tbl SET status = 'ACTIVE' WHERE employee_id = ?";
@@ -68,5 +71,4 @@ function updateEmployeeStatus($conn) {
     mysqli_stmt_close($stmt);
     return true;
 }
-
 ?>

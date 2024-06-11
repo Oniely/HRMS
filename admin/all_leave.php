@@ -115,6 +115,7 @@ $breadcrumbs = [
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Total Day/s</th>
+                                <th>Status</th>
                             </thead>
                             <tbody id="staff-table-body">
                                 <?php
@@ -135,6 +136,7 @@ $breadcrumbs = [
                                         <td><label><?php echo $row['from_date']; ?></label></td>
                                         <td><label><?php echo $row['to_date']; ?></label></td>
                                         <td><label><?php echo $row['total_days_leave']; ?></label></td>
+                                        <td><label><?php echo $row['application_status']; ?></label></td>
                                     </tr>
                                 <?php }
                                 ?>

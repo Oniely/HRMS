@@ -3,6 +3,7 @@
 global $conn;
 
 include('includes/connection.php');
+include('includes/query.php');
 session_name('adminSession');
 session_start();
 if (!isset($_SESSION['admin_id']) || (trim($_SESSION['admin_id']) == '')) {

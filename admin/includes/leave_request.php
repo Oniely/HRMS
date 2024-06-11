@@ -56,100 +56,160 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function updateApplicationStatus($conn, $leave_id, $employee_id, $application_status)
 {
-    // Update the leave application status
-    $sqlUpdateLeave = "UPDATE leave_tbl SET application_status = ? WHERE leave_id = ?";
-    $stmtLeave = mysqli_prepare($conn, $sqlUpdateLeave);
-    if (!$stmtLeave) {
-        error_log("Error preparing statement for updating leave: " . mysqli_error($conn));
-        return false;
-    }
-    mysqli_stmt_bind_param($stmtLeave, "si", $application_status, $leave_id);
-    $resultUpdateLeave = mysqli_stmt_execute($stmtLeave);
-    mysqli_stmt_close($stmtLeave);
-
-    if (!$resultUpdateLeave) {
-        error_log("Error executing statement for updating leave: " . mysqli_error($conn));
-        return false;
-    }
-
-    // Check if the employee is a faculty member
     $sqlCheckFaculty = "SELECT * FROM faculty_tbl WHERE faculty_id = ?";
     $stmtCheckFaculty = mysqli_prepare($conn, $sqlCheckFaculty);
-    if (!$stmtCheckFaculty) {
-        error_log("Error preparing statement for checking faculty: " . mysqli_error($conn));
-        return false;
-    }
     mysqli_stmt_bind_param($stmtCheckFaculty, "i", $employee_id);
     mysqli_stmt_execute($stmtCheckFaculty);
     $resultCheckFaculty = mysqli_stmt_get_result($stmtCheckFaculty);
     $isFaculty = mysqli_num_rows($resultCheckFaculty) > 0;
-    mysqli_stmt_close($stmtCheckFaculty);
 
-    // Default status
-    $status = ($application_status === 'APPROVED') ? 'INACTIVE' : 'ACTIVE';
+    // Select the leave details to get the from_date and to_date
+    $sqlSelectLeave = "SELECT from_date, to_date FROM leave_tbl WHERE leave_id = ?";
+    $stmtSelectLeave = mysqli_prepare($conn, $sqlSelectLeave);
+    mysqli_stmt_bind_param($stmtSelectLeave, "i", $leave_id);
+    mysqli_stmt_execute($stmtSelectLeave);
+    $resultLeave = mysqli_stmt_get_result($stmtSelectLeave);
+    $rowLeave = mysqli_fetch_assoc($resultLeave);
+
+    $from_date = $rowLeave['from_date'];
+    $to_date = $rowLeave['to_date'];
+    $current_date = date('Y-m-d');
 
     if ($application_status === 'APPROVED') {
-        // Check the leave end date
-        $sqlLeaveEndDate = "SELECT to_date FROM leave_tbl WHERE leave_id = ?";
-        $stmtLeaveEndDate = mysqli_prepare($conn, $sqlLeaveEndDate);
-        if (!$stmtLeaveEndDate) {
-            error_log("Error preparing statement for fetching leave end date: " . mysqli_error($conn));
-            return false;
-        }
-        mysqli_stmt_bind_param($stmtLeaveEndDate, "i", $leave_id);
-        mysqli_stmt_execute($stmtLeaveEndDate);
-        $resultLeaveEndDate = mysqli_stmt_get_result($stmtLeaveEndDate);
-        $leaveRow = mysqli_fetch_assoc($resultLeaveEndDate);
-        mysqli_stmt_close($stmtLeaveEndDate);
-
-        if (!$leaveRow) {
-            error_log("Error fetching leave end date: No rows returned");
-            return false;
-        }
-
-        $currentDate = new DateTime();
-        $to_date = new DateTime($leaveRow['to_date']);
-
-        // Log date comparison
-        error_log("Current date: " . $currentDate->format('Y-m-d'));
-        error_log("Leave end date: " . $to_date->format('Y-m-d'));
-
-        // If the current date is past the leave end date, set the status to ACTIVE
-        if ($currentDate > $to_date) {
+        if ($current_date >= $from_date && $current_date <= $to_date) {
+            $status = 'INACTIVE';
+        } else {
             $status = 'ACTIVE';
         }
+    } else {
+        $status = 'ACTIVE';
     }
 
-    // Update the status in the appropriate table
     if ($isFaculty) {
         $sqlUpdateFaculty = "UPDATE faculty_tbl SET status = ? WHERE faculty_id = ?";
         $stmtUpdateFaculty = mysqli_prepare($conn, $sqlUpdateFaculty);
-        if (!$stmtUpdateFaculty) {
-            error_log("Error preparing statement for updating faculty status: " . mysqli_error($conn));
-            return false;
-        }
         mysqli_stmt_bind_param($stmtUpdateFaculty, "si", $status, $employee_id);
         $resultUpdate = mysqli_stmt_execute($stmtUpdateFaculty);
-        mysqli_stmt_close($stmtUpdateFaculty);
     } else {
         $sqlUpdateEmployee = "UPDATE employee_tbl SET status = ? WHERE employee_id = ?";
         $stmtUpdateEmployee = mysqli_prepare($conn, $sqlUpdateEmployee);
-        if (!$stmtUpdateEmployee) {
-            error_log("Error preparing statement for updating employee status: " . mysqli_error($conn));
-            return false;
-        }
         mysqli_stmt_bind_param($stmtUpdateEmployee, "si", $status, $employee_id);
         $resultUpdate = mysqli_stmt_execute($stmtUpdateEmployee);
-        mysqli_stmt_close($stmtUpdateEmployee);
     }
 
-    if (!$resultUpdate) {
-        error_log("Error executing statement for updating status: " . mysqli_error($conn));
+    if ($resultUpdate) {
+        $sqlUpdateLeave = "UPDATE leave_tbl SET application_status = ? WHERE leave_id = ?";
+        $stmtLeave = mysqli_prepare($conn, $sqlUpdateLeave);
+        mysqli_stmt_bind_param($stmtLeave, "si", $application_status, $leave_id);
+        $resultUpdateLeave = mysqli_stmt_execute($stmtLeave);
+
+        if ($resultUpdateLeave) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
         return false;
     }
-
-    return true;
 }
+
+
+// $sqlUpdateLeave = "UPDATE leave_tbl SET application_status = ? WHERE leave_id = ?";
+// $stmtLeave = mysqli_prepare($conn, $sqlUpdateLeave);
+// if (!$stmtLeave) {
+//     error_log("Error preparing statement for updating leave: " . mysqli_error($conn));
+//     return false;
+// }
+// mysqli_stmt_bind_param($stmtLeave, "si", $application_status, $leave_id);
+// $resultUpdateLeave = mysqli_stmt_execute($stmtLeave);
+// mysqli_stmt_close($stmtLeave);
+
+// if (!$resultUpdateLeave) {
+//     error_log("Error executing statement for updating leave: " . mysqli_error($conn));
+//     return false;
+// }
+
+// // Check if the employee is a faculty member
+// $sqlCheckFaculty = "SELECT * FROM faculty_tbl WHERE faculty_id = ?";
+// $stmtCheckFaculty = mysqli_prepare($conn, $sqlCheckFaculty);
+// if (!$stmtCheckFaculty) {
+//     error_log("Error preparing statement for checking faculty: " . mysqli_error($conn));
+//     return false;
+// }
+// mysqli_stmt_bind_param($stmtCheckFaculty, "i", $employee_id);
+// mysqli_stmt_execute($stmtCheckFaculty);
+// $resultCheckFaculty = mysqli_stmt_get_result($stmtCheckFaculty);
+// $isFaculty = mysqli_num_rows($resultCheckFaculty) > 0;
+// mysqli_stmt_close($stmtCheckFaculty);
+
+// $status = 'ACTIVE'; // Default status
+
+// if ($application_status === 'APPROVED') {
+//     // Check the leave dates
+//     $sqlLeaveDates = "SELECT from_date, to_date FROM leave_tbl WHERE leave_id = ?";
+//     $stmtLeaveDates = mysqli_prepare($conn, $sqlLeaveDates);
+//     if (!$stmtLeaveDates) {
+//         error_log("Error preparing statement for fetching leave dates: " . mysqli_error($conn));
+//         return false;
+//     }
+//     mysqli_stmt_bind_param($stmtLeaveDates, "i", $leave_id);
+//     mysqli_stmt_execute($stmtLeaveDates);
+//     $resultLeaveDates = mysqli_stmt_get_result($stmtLeaveDates);
+//     $leaveRow = mysqli_fetch_assoc($resultLeaveDates);
+//     mysqli_stmt_close($stmtLeaveDates);
+
+//     if (!$leaveRow) {
+//         error_log("Error fetching leave dates: No rows returned");
+//         return false;
+//     }
+
+//     // Convert to date only, ignoring the time part
+//     $currentDate = new DateTime('today');
+//     $from_date = DateTime::createFromFormat('Y-m-d', $leaveRow['from_date']);
+//     $to_date = DateTime::createFromFormat('Y-m-d', $leaveRow['to_date']);
+
+//     // Log date comparison
+//     error_log("Current date: " . $currentDate->format('Y-m-d'));
+//     error_log("Leave start date: " . $from_date->format('Y-m-d'));
+//     error_log("Leave end date: " . $to_date->format('Y-m-d'));
+
+//     // Set the status to INACTIVE if the leave is currently ongoing
+//     if ($currentDate >= $from_date && $currentDate <= $to_date) {
+//         $status = 'INACTIVE';
+//     }
+// }
+
+// // Update the status in the appropriate table
+// if ($isFaculty) {
+//     $sqlUpdateFaculty = "UPDATE faculty_tbl SET status = ? WHERE faculty_id = ?";
+//     $stmtUpdateFaculty = mysqli_prepare($conn, $sqlUpdateFaculty);
+//     if (!$stmtUpdateFaculty) {
+//         error_log("Error preparing statement for updating faculty status: " . mysqli_error($conn));
+//         return false;
+//     }
+//     mysqli_stmt_bind_param($stmtUpdateFaculty, "si", $status, $employee_id);
+//     $resultUpdate = mysqli_stmt_execute($stmtUpdateFaculty);
+//     mysqli_stmt_close($stmtUpdateFaculty);
+// } else {
+//     $sqlUpdateEmployee = "UPDATE employee_tbl SET status = ? WHERE employee_id = ?";
+//     $stmtUpdateEmployee = mysqli_prepare($conn, $sqlUpdateEmployee);
+//     if (!$stmtUpdateEmployee) {
+//         error_log("Error preparing statement for updating employee status: " . mysqli_error($conn));
+//         return false;
+//     }
+//     mysqli_stmt_bind_param($stmtUpdateEmployee, "si", $status, $employee_id);
+//     $resultUpdate = mysqli_stmt_execute($stmtUpdateEmployee);
+//     mysqli_stmt_close($stmtUpdateEmployee);
+// }
+
+// if (!$resultUpdate) {
+//     error_log("Error executing statement for updating status: " . mysqli_error($conn));
+//     return false;
+// }
+
+// return true;
+
+
 
 
 function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
@@ -157,9 +217,8 @@ function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
     $leave_balance_column = '';
     $isBalanceLeave = false;
 
-    // Determine if the leave type affects the balance
     switch ($leave_type) {
-        case 'Annual Leave':
+        case 'Sick Leave':
         case 'Vacational Leave':
             $leave_balance_column = strtolower(str_replace(' ', '_', $leave_type));
             $isBalanceLeave = true;
@@ -249,5 +308,3 @@ function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
 
     return true;
 }
-
-?>

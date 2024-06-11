@@ -60,8 +60,53 @@ $breadcrumbs = [
                             ?>
                      </div>
               </div>
+              <?php
+              // Function to check for pending leave requests
+              function checkPendingLeaveRequest($conn, $employee_id)
+              {
+                     $sql = "SELECT COUNT(*) AS pending_count FROM leave_tbl WHERE employee_id = ? AND application_status = 'PENDING'";
+                     $stmt = mysqli_prepare($conn, $sql);
+                     if (!$stmt) {
+                            error_log("Error preparing statement: " . mysqli_error($conn));
+                            return false;
+                     }
+
+                     mysqli_stmt_bind_param($stmt, "i", $employee_id);
+                     mysqli_stmt_execute($stmt);
+                     $result = mysqli_stmt_get_result($stmt);
+
+                     if (!$result) {
+                            error_log("Error executing statement: " . mysqli_error($conn));
+                            mysqli_stmt_close($stmt);
+                            return false;
+                     }
+
+                     $row = mysqli_fetch_assoc($result);
+                     $pendingCount = $row['pending_count'];
+                     mysqli_stmt_close($stmt);
+
+                     return $pendingCount > 0;
+              }
+
+              // Check if there are any pending leave requests
+              $employee_id = $employee_id; // Assuming $employee_id is defined earlier
+              $hasPendingRequest = checkPendingLeaveRequest($conn, $employee_id);
+
+              // Set a variable to control input disabling
+              $inputsDisabled = $hasPendingRequest ? 'disabled' : '';
+
+              ?>
               <form class="f-container" method="post" enctype="multipart/form-data">
                      <div class="f-section">
+                            <?php
+                            if ($hasPendingRequest) {
+                                   echo "<div id='pendingMessage' style='color: red;'>Your last request is still pending.</div>";
+                            } else {
+                            }
+                            ?>
+
+
+
                             <div class="f-inputs px-0">
                                    <div class="relative z-0">
                                           <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " disabled value="<?php echo "$employee_id" ?>" />
@@ -74,17 +119,17 @@ $breadcrumbs = [
                                                  Name</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="date" name="from_date" id="from_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " require />
+                                          <input type="date" name="from_date" id="from_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " require <?php echo $inputsDisabled ?> />
                                           <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
                                                  Start Date</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="date" name="to_date" id="to_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " require />
+                                          <input type="date" name="to_date" id="to_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " require <?php echo $inputsDisabled ?> />
                                           <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
                                                  End Date</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <select name="status" id="status" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" ">
+                                          <select name="status" id="status" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder="Type of Laeve" <?php echo $inputsDisabled ?>>
                                                  <option value="Sick Leave">Sick Leave</option>
                                                  <option value="Vacational Leave">Vacational Leave</option>
                                                  <option value="Bereavement Leave">Bereavement Leave</option>
@@ -97,15 +142,15 @@ $breadcrumbs = [
                                           <label for="status" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Type of Leave</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="destination" id="destination" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="text" name="destination" id="destination" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " <?php echo $inputsDisabled ?> />
                                           <label for="dob" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Destination</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <textarea name="accompany" id="accompany" class="block py-2.5 px-0 w-full text-sm bg-transparent border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer h-[45px]" placeholder=" "></textarea>
+                                          <textarea name="accompany" id="accompany" class="block py-2.5 px-0 w-full text-sm bg-transparent border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer h-[45px]" placeholder=" " <?php echo $inputsDisabled ?>></textarea>
                                           <label for="accompany" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-7 scale-75 -top-3 -left-3 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-7 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Accompany</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <textarea name="reason" id="reason" class="block py-2.5 px-0 w-full text-sm bg-transparent border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer h-[45px]" placeholder=" "></textarea>
+                                          <textarea name="reason" id="reason" class="block py-2.5 px-0 w-full text-sm bg-transparent border border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer h-[45px]" placeholder=" " <?php echo $inputsDisabled ?>></textarea>
                                           <label for="reason" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-7 scale-75 -top-3 -left-3 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-7 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Reason</label>
                                    </div>
                                    <div class="relative z-0">
@@ -124,59 +169,59 @@ $breadcrumbs = [
                                           <button type="button" onclick="submitPrintForm()">Print</button>
                                    </div>
                                    <div class="btns bg-[#6d85db] text-white px-4 py-3 w-1/3 flex items-center justify-center rounded-md col-span-2 place-self-end cursor-pointer">
-                                          <button id="submit" name="submit" class="font-bold">APPLY LEAVE</button>
+                                          <button id="submit" name="submit" class="font-bold" <?php echo $inputsDisabled ?>>APPLY LEAVE</button>
                                    </div>
                                    <?php
                                    if (isset($_POST['submit'])) {
+                                          if (!$hasPendingRequest) {
+                                                 $numberOfDigits = 6;
+                                                 $min = pow(10, $numberOfDigits - 1);
+                                                 $max = pow(10, $numberOfDigits) - 1;
 
-                                          $numberOfDigits = 6;
-                                          $min = pow(10, $numberOfDigits - 1);
-                                          $max = pow(10, $numberOfDigits) - 1;
+                                                 $leave_id = rand($min, $max);
+                                                 $name = $fname . " " . $lname;
 
-                                          $leave_id = rand($min, $max);
-                                          $name = $fname . " " . $lname;
+                                                 $fromDate = $_POST['from_date'];
+                                                 $toDate = $_POST['to_date'];
 
-                                          $fromDate = $_POST['from_date'];
-                                          $toDate = $_POST['to_date'];
+                                                 $fromDateTime = new DateTime($fromDate);
+                                                 $toDateTime = new DateTime($toDate);
 
-                                          $fromDateTime = new DateTime($fromDate);
-                                          $toDateTime = new DateTime($toDate);
+                                                 $interval = $fromDateTime->diff($toDateTime);
 
-                                          $interval = $fromDateTime->diff($toDateTime);
+                                                 $totalDaysLeave = $interval->days + 1;
 
-                                          $totalDaysLeave = $interval->days + 1;
+                                                 $initialLeaveBalanceQuery = "SELECT * FROM leave_balance_tbl WHERE employee_id = $employee_id";
+                                                 $initialLeaveBalanceResult = mysqli_query($conn, $initialLeaveBalanceQuery);
 
-                                          $initialLeaveBalanceQuery = "SELECT * FROM leave_balance_tbl WHERE employee_id = $employee_id";
-                                          $initialLeaveBalanceResult = mysqli_query($conn, $initialLeaveBalanceQuery);
+                                                 if ($initialLeaveBalanceResult && mysqli_num_rows($initialLeaveBalanceResult) > 0) {
+                                                        $row = mysqli_fetch_assoc($initialLeaveBalanceResult);
+                                                        $initialAnnualLeaveBalance = $row['annual_leave'];
+                                                        $initialVacationalLeaveBalance = $row['vacational_leave'];
+                                                        $initialBalance = $row['unpaid_leave'];
+                                                 }
 
-                                          if ($initialLeaveBalanceResult && mysqli_num_rows($initialLeaveBalanceResult) > 0) {
-                                                 $row = mysqli_fetch_assoc($initialLeaveBalanceResult);
-                                                 $initialAnnualLeaveBalance = $row['annual_leave'];
-                                                 $initialVacationalLeaveBalance = $row['vacational_leave'];
-                                                 $initialBalance = $row['unpaid_leave'];
+                                                 $balanceDays = $initialBalance - $totalDaysLeave;
+                                                 $insertData = [
+                                                        'leave_id' => $leave_id,
+                                                        'employee_id' => $employee_id,
+                                                        'employee_name' => $name,
+                                                        'department' => $department,
+                                                        'leave_type' => $_POST['status'],
+                                                        'date_applied' => date('Y-m-d'),
+                                                        'reason' => $_POST['reason'],
+                                                        'from_date' => $fromDate,
+                                                        'to_date' => $toDate,
+                                                        'total_days_leave' => $totalDaysLeave,
+                                                        'application_status' => 'PENDING',
+                                                        'destination' => $_POST['destination'],
+                                                        'accompany_with' => $_POST['accompany'],
+                                                        'balance_days' => $balanceDays
+                                                 ];
+
+                                                 insertLeaveEmployee($conn, 'leave_tbl', $insertData);
                                           }
-
-                                          $balanceDays = $initialBalance - $totalDaysLeave;
-                                          $insertData = [
-                                                 'leave_id' => $leave_id,
-                                                 'employee_id' => $employee_id,
-                                                 'employee_name' => $name,
-                                                 'department' => $department,
-                                                 'leave_type' => $_POST['status'],
-                                                 'date_applied' => date('Y-m-d'),
-                                                 'reason' => $_POST['reason'],
-                                                 'from_date' => $fromDate,
-                                                 'to_date' => $toDate,
-                                                 'total_days_leave' => $totalDaysLeave,
-                                                 'application_status' => 'PENDING',
-                                                 'destination' => $_POST['destination'],
-                                                 'accompany_with' => $_POST['accompany'],
-                                                 'balance_days' => $balanceDays
-                                          ];
-
-                                          insertLeaveEmployee($conn, 'leave_tbl', $insertData);
                                    }
-
                                    ?>
               </form>
        </section>
@@ -193,6 +238,7 @@ $breadcrumbs = [
               var endDateInput = document.getElementById('to_date');
               var totalDaysInput = document.getElementById('total_days');
               var warningMessage = document.getElementById('warningMessage');
+              var pendingMessage = document.getElementById('pendingMessage');
               var submitBtn = document.getElementById('submitBtn');
               const otherTextInput = document.getElementById('other-text');
 
