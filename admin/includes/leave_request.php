@@ -76,7 +76,7 @@ function updateApplicationStatus($conn, $leave_id, $employee_id, $application_st
     $current_date = date('Y-m-d');
 
     if ($application_status === 'APPROVED') {
-        if ($current_date >= $from_date && $current_date <= $to_date) {
+        if ($current_date == $from_date && $current_date <= $to_date) {
             $status = 'INACTIVE';
         } else {
             $status = 'ACTIVE';

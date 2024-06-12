@@ -41,6 +41,10 @@ if (isset($_SESSION['employee_id'])) {
             $contact = $row['contact_number'];
             $permanent_address = $row['permanent_address'];
             $status = $row['status'];
+            $tin_id = $row['tin_id'];
+            $sss_no = $row['sss_no'];
+            $pagibig_no = $row['pagibig_no'];
+            $philhealth_no = $row['philhealth_no'];
             $photo_path = $row['photo_path'];
             if (empty($photo_path)) {
                 $photo_path = "images/profile-black.svg"; // Change this to your default image path
@@ -176,21 +180,39 @@ $breadcrumbs = [
 
                 </div>
                 <div class="info">
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Fullname</h3>
                         <?php echo "<p>$fname $lname</p>"; ?>
                     </div>
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Mobile</h3>
                         <?php echo "<p>$contact</p>"; ?>
                     </div>
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Email</h3>
                         <?php echo "<p>$email</p>"; ?>
                     </div>
-                    <div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
                         <h3>Location</h3>
                         <?php echo "<p>$permanent_address</p>"; ?>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>Pag-ibig</h3>
+                        <?php echo "<p>$pagibig_no</p>"; ?>
+                    </div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>SSS</h3>
+                        <?php echo "<p>$sss_no</p>"; ?>
+                    </div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>PhilHealth</h3>
+                        <?php echo "<p>$philhealth_no</p>"; ?>
+                    </div>
+                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                        <h3>Tin ID</h3>
+                        <?php echo "<p>$tin_id</p>"; ?>
                     </div>
                 </div>
                 <div class="desc">
