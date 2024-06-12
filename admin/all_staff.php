@@ -203,6 +203,7 @@ $breadcrumbs = [
         function showSuggestions(query) {
             suggestionsContainer.innerHTML = '';
             if (query.length < 1) {
+                suggestionsContainer.style.display = 'none';
                 return;
             }
 
@@ -218,22 +219,29 @@ $breadcrumbs = [
                 }
             }
 
-            suggestions.forEach(name => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.classList.add('suggestion-item');
-                suggestionItem.textContent = name;
-                suggestionItem.addEventListener('click', function() {
-                    searchInput.value = name;
-                    filterTable(name.toLowerCase());
-                    suggestionsContainer.innerHTML = '';
-                });
-                suggestionsContainer.appendChild(suggestionItem);
-            });
-        }
+            if (suggestions.size > 0) {
+                    suggestions.forEach(name => {
+                        const suggestionItem = document.createElement('div');
+                        suggestionItem.classList.add('suggestion-item');
+                        suggestionItem.textContent = name;
+                        suggestionItem.addEventListener('click', function() {
+                            searchInput.value = name;
+                            filterTable(name.toLowerCase());
+                            suggestionsContainer.innerHTML = '';
+                            suggestionsContainer.style.display = 'none';
+                        });
+                        suggestionsContainer.appendChild(suggestionItem);
+                    });
+                    suggestionsContainer.style.display = 'flex';
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            }
 
         document.addEventListener('click', function(event) {
             if (!suggestionsContainer.contains(event.target) && event.target !== searchInput) {
                 suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
             }
         });
     });
