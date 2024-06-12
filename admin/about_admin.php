@@ -78,7 +78,7 @@ $breadcrumbs = [
         <div class="about-container">
             <div class="about-profile">
                 <div class="prof-img">
-                    <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
+                    <img src="<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile"> 
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">

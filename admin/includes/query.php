@@ -102,40 +102,29 @@ function redirect($url)
 
 function saveProfileImage($photoFieldName = 'photo', $targetDirectory = 'images/profiles')
 {
-    // Ensure the target directory exists and is writable.
     if (!file_exists($targetDirectory)) {
         mkdir($targetDirectory, 0755, true);
     }
 
-    // Check if the photo is uploaded with no error.
     if (isset($_FILES[$photoFieldName]) && $_FILES[$photoFieldName]['error'] == 0) {
         $imageFile = $_FILES[$photoFieldName];
 
-        // Security measure: generate a new filename.
-        // Here, using a combination of a unique ID and the original file extension.
         $fileExtension = pathinfo($imageFile['name'], PATHINFO_EXTENSION);
         $filename = uniqid('photo_', true) . '.' . $fileExtension;
 
-        // Complete path for the image to be saved.
         $targetFilePath = $targetDirectory . '/' . $filename;
 
-        // Validate the file is an image.
         $check = getimagesize($imageFile['tmp_name']);
         if ($check !== false) {
-            // Move the uploaded file to the target directory.
             if (move_uploaded_file($imageFile['tmp_name'], $targetFilePath)) {
-                // Return the full path of the saved image.
-                return $targetFilePath;
+                return "/hrms/admin/" . $targetFilePath;
             } else {
-                // "There was an error uploading the file."
                 return false;
             }
         } else {
-            //  "The file is not an image."
             return false;
         }
     } else {
-        //  "No file was uploaded or an upload error occurred."
         return false;
     }
 }

@@ -84,8 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['employee_id'])) {
 
         if (!is_dir($target_dir)) {
             mkdir($target_dir, 0755, true);
-        } else {
-            echo "<script>alert('DIRECTORY EXISTS')</script>";
         }
 
         $target_file = $target_dir . basename($_FILES['photo']['name']);
