@@ -25,7 +25,7 @@ $('#search-input').on('focusout', () => {
     setTimeout(() => {
         $('#search-result-container').removeClass('flex');
         $('#search-result-container').addClass('hidden');
-    }, 100);
+    }, 200);
 });
 
 
