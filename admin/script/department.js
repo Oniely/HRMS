@@ -14,37 +14,27 @@ modalBtn.on("click", function () {
 
 // Event listener for opening the edit department modal
 editDepartmentBtn.on("click", function (e) {
-	editModal.removeClass("hidden").addClass("flex");
-	let department_id = $(e.target).attr("data-department-id");
-	console.log(department_id);
-	$("#editAccountBtnDept").attr("data-department-id", department_id);
-	$("#editAccountForm").attr("data-department-id", department_id);
+	showPasswordModal.removeClass("hidden").addClass("flex");
 
-	$.ajax({
-		url: "/HRMS/admin/functions/department/get_department_account.php",
-		method: "GET",
-		data: {
-			department_id,
-		},
-		success: function (res) {
-			let data = JSON.parse(res);
-			$("#dept_username").val(data["username"]);
-			$("#dept_password").val(data["password"]);
-		},
-		error: function (xhr, status, error) {
-			console.error("Error:", error);
-		},
-	});
+	let department_id = $(e.target).attr("data-department-id");
+
+	$("#showPassword").attr("data-department-id", department_id);
+	$("#showPasswordForm").attr("data-department-id", department_id);
+	$("#showPasswordForm").attr("data-wherefrom-id", "edit_department");
+	$("#admin_password").focus();
+	$("#showPassword").show();
 });
 
 // Event listener for opening the show password modal
 showPasswordBtn.on("click", function (e) {
 	showPasswordModal.removeClass("hidden").addClass("flex");
+
 	let department_id = $(e.target).attr("data-department-id");
-	console.log(department_id);
+
 	$("#showPassword").attr("data-department-id", department_id);
 	$("#showPasswordForm").attr("data-department-id", department_id);
-	$("#admin_password").focus(); // Changed id to 'admin_password'
+	$("#showPasswordForm").attr("data-wherefrom-id", "show_password");
+	$("#admin_password").focus();
 	$("#showPassword").show();
 });
 
@@ -54,6 +44,7 @@ $("#showPasswordForm").on("submit", function (e) {
 
 	const department_id = $("#showPasswordForm").attr("data-department-id");
 	const password = $("#admin_password").val();
+	const wherefrom = $("#showPasswordForm").attr("data-wherefrom-id");
 
 	$.ajax({
 		url: "/HRMS/admin/functions/department/show_password.php",
@@ -72,26 +63,51 @@ $("#showPasswordForm").on("submit", function (e) {
 				return;
 			}
 
-			$("#showed_username").text(data["username"]);
-			$("#showed_password").text(data["password"]);
+			if (wherefrom === "show_password") {
+				$("#showed_username").text(data["username"]);
+				$("#showed_password").text(data["password"]);
 
-			$("#showPassword").hide();
-			$("#passwordContainer").show();
-			$("#inputContainer").hide();
+				$("#showPassword").hide();
+				$("#passwordContainer").show();
+				$("#inputContainer").hide();
 
-			let count = 10;
-			const timer = setInterval(() => {
-				$("#timer").text(count--);
-			}, 1000);
+				let count = 10;
+				const timer = setInterval(() => {
+					$("#timer").text(count--);
+				}, 1000);
 
-			setTimeout(() => {
-				showPasswordModal.addClass("hidden").removeClass("flex");
-				$("#inputContainer").show();
-				$("#admin_password").val("");
-				$("#passwordContainer").hide();
-				$("#timer").text("10");
-				clearInterval(timer);
-			}, 10500);
+				setTimeout(() => {
+					showPasswordModal.addClass("hidden").removeClass("flex");
+					$("#inputContainer").show();
+					$("#admin_password").val("");
+					$("#passwordContainer").hide();
+					$("#timer").text("10");
+					clearInterval(timer);
+				}, 10500);
+			} else if (wherefrom === "edit_department") {
+				editModal.removeClass("hidden").addClass("flex");
+
+				let department_id = $(e.target).attr("data-department-id");
+
+				$("#editAccountBtnDept").attr(
+					"data-department-id",
+					department_id
+				);
+				$("#editAccountForm").attr("data-department-id", department_id);
+
+				$.ajax({
+					url: "/HRMS/admin/functions/department/get_department_account.php",
+					method: "GET",
+					data: {
+						department_id,
+					},
+					success: function (res) {
+						let data = JSON.parse(res);
+						$("#dept_username").val(data["username"]);
+						$("#dept_password").val(data["password"]);
+					}
+				});
+			}
 		},
 		error: (xhr, status, error) => {
 			alert("An error occurred while processing your request.");
@@ -142,7 +158,7 @@ $("#editAccountForm").on("submit", (e) => {
 			if (res === "SUCCESS") {
 				location.reload();
 			} else if (res === "EXIST") {
-				alert("Username already exists.")
+				alert("Username already exists.");
 			} else if (res === "FAILED") {
 				alert("Updating Department Account has failed.");
 			}
