@@ -134,7 +134,7 @@ $breadcrumbs = [
                                                  <option value="Vacational Leave">Vacational Leave</option>
                                                  <option value="Bereavement Leave">Bereavement Leave</option>
                                                  <option value="Marriage Leave">Marriage Leave</option>
-                                                 <option value="Others">Others</option>
+                                                 <option value="Other Leave">Others</option>
                                           </select>
                                           <div class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 appearance-none text-black focus:outline-none focus:ring-0 peer">
                                                  <input type="text" id="other-text" name="otherText" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" Please specify" disabled>
@@ -243,7 +243,7 @@ $breadcrumbs = [
               const otherTextInput = document.getElementById('other-text');
 
               leaveTypeInput.addEventListener('change', function() {
-                     if (leaveTypeInput.value === 'Others') {
+                     if (leaveTypeInput.value === 'Other Leave') {
                             otherTextInput.disabled = false;
                             otherTextInput.focus();
                      } else {
