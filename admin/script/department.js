@@ -65,8 +65,6 @@ $("#showPasswordForm").on("submit", function (e) {
 		success: (res) => {
 			let data = JSON.parse(res);
 
-			console.log(department_id, password);
-
 			if (data["status"] === "error") {
 				$("#admin_password").val("");
 				$(".close_btn").click();
