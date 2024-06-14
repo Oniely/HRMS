@@ -26,7 +26,7 @@ if (!$result) {
 
 $row = mysqli_fetch_assoc($result);
 
-if (loginAuth($row['username'], $row['password'])) {
+if (loginAuth($row['username'], $password)) {
     $sql = "SELECT username, password FROM department_tbl WHERE department_id = '$department_id'";
     $result = mysqli_query($conn, $sql);
 

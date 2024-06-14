@@ -22,6 +22,8 @@ if (isset($_SESSION['admin_id'])) {
         $lname = $row['lname'];
         $position = $row['position'];
         $contact = $row['contact'];
+        $photo_path = $row['photo_path'];
+        $privilege = $row['privilage'];
     }
 }
 
@@ -45,7 +47,7 @@ $breadcrumbs = [
     <!-- Scripts -->
     <script src="script/burger.js" defer></script>
     <script src="script/dropdown.js" defer></script>
-    <script src="script/status-modal.js" defer></script>
+    <script src="script/admin_profile.js" defer></script>
     <!-- CDN's -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
@@ -77,8 +79,16 @@ $breadcrumbs = [
         <!-- NEW THINGS -->
         <div class="about-container">
             <div class="about-profile">
-                <div class="prof-img">
-                    <img src="<?= $photo_path ?? './images/profile-black.svg' ?>" alt="profile">
+                <div class="relative prof-img">
+                    <img src="<?= $photo_path ?? 'images/profile-black.svg' ?>" alt="profile" class="object-contain object-center w-full h-full">
+                    <!-- super_admin edit profile btn -->
+                    <?php if ($privilege === 'super_admin') : ?>
+                        <button class="absolute top-0 right-0 rounded-md hover:bg-white p-0.5" id="showPasswordBtn" data-admin-id="<?= $admin_id ?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                            </svg>
+                        </button>
+                    <?php endif; ?>
                 </div>
                 <div class="profile-desc">
                     <div class="profile-name">
@@ -134,6 +144,9 @@ $breadcrumbs = [
             </div>
         </div>
     </section>
+    <!-- MODALs -->
+    <?php include_once "modals/show_password.modal.php" ?>
+    <?php include_once "modals/admin_profile_change.php" ?>
 </body>
 
 </html>

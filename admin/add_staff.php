@@ -237,7 +237,7 @@ $breadcrumbs = [
                                    <h1>Personal Information</h1>
                                    <div class="hr"></div>
                             </div>
-                            <div class="f-inputs px-0">
+                            <div class="px-0 f-inputs">
                                    <div class="relative z-0">
                                           <input type="text" name="employee_id" id="employee_id" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="employee_id" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Employee
@@ -274,7 +274,11 @@ $breadcrumbs = [
                                                  Address</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="contactnumber" id="contactnumber" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
+                                          <input type="tel"
+                                          pattern="09[0-9]{9}"
+                                          maxlength="11"
+                                          oninput="validatePhoneNumber(this)"
+                                           name="contactnumber" id="contactnumber" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="contactnumber" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone
                                                  Number</label>
                                    </div>
@@ -309,12 +313,12 @@ $breadcrumbs = [
                                           <label for="citizenship" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Citizenship</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="height" id="height" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
+                                          <input type="number" name="height" id="height" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="height" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Height
                                                  (cm)</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="weight" id="weight" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
+                                          <input type="number" name="weight" id="weight" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="weight" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Weight
                                                  (kg)</label>
                                    </div>
@@ -343,10 +347,10 @@ $breadcrumbs = [
                                                  No.</label>
                                    </div>
                                    <div class="relative z-0 -mt-1">
-                                          <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " accept=".jpg, .jpeg, .png" required />
                                           <label for="photo" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Photo</label>
                                    </div>
-                                   <div class="text-xl col-span-2">
+                                   <div class="col-span-2 text-xl">
                                           Place of Birth :
                                    </div>
                                    <div class="relative z-0">
@@ -362,7 +366,7 @@ $breadcrumbs = [
                                           <label for="pob_province" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Province</label>
                                    </div>
 
-                                   <div class="text-xl col-span-2">
+                                   <div class="col-span-2 text-xl">
                                           Residential Address :
                                    </div>
                                    <div class="relative z-0">
@@ -378,7 +382,7 @@ $breadcrumbs = [
                                           <label for="res_province" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Province</label>
                                    </div>
 
-                                   <div class="text-xl col-span-2">
+                                   <div class="col-span-2 text-xl">
                                           Permanent Address :
                                    </div>
                                    <div class="relative z-0">
@@ -395,13 +399,13 @@ $breadcrumbs = [
                                    </div>
                             </div>
                      </div>
-                     <div class="f-section mt-20">
+                     <div class="mt-20 f-section">
                             <div class="f-title">
                                    <h1>Family Background</h1>
                                    <div class="hr"></div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="ml-1 text-lg col-span-2">Father:</div>
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 ml-1 text-lg">Father:</div>
                                    <div class="relative z-0">
                                           <input type="text" name="father_fname" id="father_fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="father_fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Father's
@@ -418,8 +422,8 @@ $breadcrumbs = [
                                                  Last Name</label>
                                    </div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="ml-1 text-lg col-span-2">Mother:</div>
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 ml-1 text-lg">Mother:</div>
                                    <div class="relative z-0">
                                           <input type="text" name="mother_fname" id="mother_fname" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " required />
                                           <label for="mother_fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Mother's
@@ -437,13 +441,13 @@ $breadcrumbs = [
                                    </div>
                             </div>
                      </div>
-                     <div class="f-section mt-20">
+                     <div class="mt-20 f-section">
                             <div class="f-title">
                                    <h1>Educational Background</h1>
                                    <div class="hr"></div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="text-xl col-span-2">
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 text-xl">
                                           Elementary :
                                    </div>
                                    <div class="relative z-0">
@@ -461,8 +465,8 @@ $breadcrumbs = [
                                                  Graduate</label>
                                    </div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="text-xl col-span-2">
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 text-xl">
                                           High School :
                                    </div>
                                    <div class="relative z-0">
@@ -484,8 +488,8 @@ $breadcrumbs = [
                                                  Graduate</label>
                                    </div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="text-xl col-span-2">
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 text-xl">
                                           Vocational :
                                    </div>
                                    <div class="relative z-0">
@@ -507,8 +511,8 @@ $breadcrumbs = [
                                                  Graduate</label>
                                    </div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="text-xl col-span-2">
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 text-xl">
                                           College :
                                    </div>
                                    <div class="relative z-0">
@@ -530,8 +534,8 @@ $breadcrumbs = [
                                                  Graduate</label>
                                    </div>
                             </div>
-                            <div class="f-inputs px-0">
-                                   <div class="text-xl col-span-2">
+                            <div class="px-0 f-inputs">
+                                   <div class="col-span-2 text-xl">
                                           Graduate School :
                                    </div>
                                    <div class="relative z-0">
@@ -560,7 +564,18 @@ $breadcrumbs = [
                      </div>
               </form>
        </section>
-</body>
+<script>
+       function validatePhoneNumber(input) {
+            const value = input.value;
+            const sanitizedValue = value.replace(/[^0-9]/g, '');
+            if (sanitizedValue.length <= 11) {
+                input.value = sanitizedValue;
+            } else {
+                input.value = sanitizedValue.slice(0, 11);
+            }
+        }
+</script>
 <?php include "includes/form_reset.php" ?>
+</body>
 
 </html>

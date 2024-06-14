@@ -19,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
     if (loginAuth($current_admin_username, $password)) {
 
-        $sql = "SELECT username, password FROM admin_tbl WHERE admin_id = ?";
+        $sql = "SELECT username, password, fname, lname, contact, photo_path FROM admin_tbl WHERE admin_id = ?";
         $query = $conn->prepare($sql);
         $query->bind_param('i', $admin_id);
         $query->execute();
         $result = $query->get_result();
         if ($result) {
             $row = $result->fetch_assoc();
-            $data = json_encode([$row['username'], $row['password']]);
+            $data = json_encode([$row['username'], $row['password'], $row['fname'], $row['lname'], $row['contact'], $row['photo_path']]);
             echo $data;
         } else {
             echo "FETCH FAILED";

@@ -13,9 +13,9 @@ include './includes/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Department Login</title>
     <link rel="icon" href="images/southland-icon.png" sizes="16x16 32x32" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>

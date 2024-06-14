@@ -175,7 +175,7 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 
 
               echo '<script>alert("Employee Added")</script>';
-              redirect('/hrms/admin/add_faculty.php');
+              redirect('/hrms/admin/all_faculty.php');
        }
        resetForm();
        $conn->close();
@@ -274,7 +274,10 @@ $breadcrumbs = [
                                                  Address</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="contactnumber" id="contactnumber" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="tel"
+                                          pattern="09[0-9]{9}"
+                                          maxlength="11"
+                                          oninput="validatePhoneNumber(this)" name="contactnumber" id="contactnumber" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                                           <label for="contactnumber" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone
                                                  Number</label>
                                    </div>
@@ -309,12 +312,12 @@ $breadcrumbs = [
                                           <label for="citizenship" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Citizenship</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="height" id="height" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="number" name="height" id="height" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                                           <label for="height" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Height
                                                  (cm)</label>
                                    </div>
                                    <div class="relative z-0">
-                                          <input type="text" name="weight" id="weight" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="number" name="weight" id="weight" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
                                           <label for="weight" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Weight
                                                  (kg)</label>
                                    </div>
@@ -343,7 +346,7 @@ $breadcrumbs = [
                                                  No.</label>
                                    </div>
                                    <div class="relative z-0 -mt-1">
-                                          <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " />
+                                          <input type="file" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " accept=".jpg, .jpeg, .png" required />
                                           <label for="photo" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Photo</label>
                                    </div>
                                    <div class="text-xl col-span-2">
@@ -560,7 +563,18 @@ $breadcrumbs = [
                      </div>
               </form>
        </section>
-</body>
+<script>
+       function validatePhoneNumber(input) {
+            const value = input.value;
+            const sanitizedValue = value.replace(/[^0-9]/g, '');
+            if (sanitizedValue.length <= 11) {
+                input.value = sanitizedValue;
+            } else {
+                input.value = sanitizedValue.slice(0, 11);
+            }
+        }
+</script>
 <?php include "includes/form_reset.php" ?>
+</body>
 
 </html>

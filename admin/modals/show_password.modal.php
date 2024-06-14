@@ -5,7 +5,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                 <h3 class="text-lg font-semibold text-gray-900 whitespace-nowrap">
-                    Enter Your Password To Show Password
+                    Enter Your Password To Proceed
                 </h3>
                 <button id="close_btn" class="close_btn hover:bg-neutral-200 rounded-full p-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#999" class="w-6 h-6">
