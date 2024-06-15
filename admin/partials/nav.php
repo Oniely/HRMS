@@ -145,10 +145,26 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 </nav>
 
 <header class="m-header">
-    <div class="m-logo">
-        <a href="/HRMS/admin/">
-            <img src="images/sc-logo.svg" alt="sc-logo">
-        </a>
+    <div class="m-left-nav">
+        <div class="m-logo flex-shrink-0">
+            <a href="/HRMS/admin/">
+                <img src="images/sc-logo.svg" alt="sc-logo">
+            </a>
+        </div>
+        <div class="mnav-search-container">
+            <button id="mnav-search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFFFFF">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+            </button>
+            
+            <div class="absolute top-[4rem] left-0 right-0 hidden flex-col" id="mnav-form-container">
+                <input class="py-4 px-5 outline-none border-b z-10" type="text" id="mnav-search-input" placeholder="Search your employees here..." />
+                <div class="bg-white w-full min-h-[4rem] max-h-[30rem] overflow-y-auto overflow-x-hidden py-4 px-5 hidden flex-col border-b border-b-neutral-600 gap-4" id="mnav-search-result">
+                    <a href="#" class="mnav-search-result-link">Aiah Mariah Careh - 20202</a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="m-right-nav">
         <a class="notification-btn" href="./notifications.php">
@@ -156,7 +172,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
                 <img src="images/notification-bell.svg" alt="" class="white-svg" />
             </div>
             <div class="notification-count" id="notificationCount">
-
+                
             </div>
         </a>
         <button id="m-burger" class="m-burger">
@@ -178,14 +194,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
             ?>
         </div>
 
-        <div class="m-search-container">
-            <input type="text" placeholder="Search" />
-            <button>
-                <img src="images/search.svg" alt="" />
-            </button>
-        </div>
-
-        <div class="m-profile" id="profile">
+        <div class="m-profile mt-10" id="profile">
             <div class="profile-img-container">
                 <a href="index.php"><img src="images/1.svg" alt="icon" /></a>
             </div>

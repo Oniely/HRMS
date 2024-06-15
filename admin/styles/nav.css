@@ -329,6 +329,16 @@
   color: #4763ca;
 }
 
+.mnav-search-result-link {
+  text-decoration: underline;
+  font-size: 17px;
+  padding: 3px;
+}
+
+.mnav-search-result-link:hover {
+  color: #4763ca;
+}
+
 .navbar .right-nav {
   display: flex;
   justify-content: center;
@@ -611,6 +621,29 @@
     top: 0;
 
     z-index: 1000;
+  }
+
+  .m-header .m-left-nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mnav-search-container {
+    display: flex;
+
+    width: 45px;
+    height: 100%;
+  }
+
+  .mnav-search-container button  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 8px;
   }
 
   .m-header .m-logo {
