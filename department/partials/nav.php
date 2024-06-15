@@ -27,7 +27,7 @@ include('./includes/connection.php');
 ?>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
+<script src="/hrms/admin/script/search.js" defer></script>
 
 <nav class="navbar" id="navbar">
     <div class="left-nav">
@@ -35,10 +35,12 @@ include('./includes/connection.php');
             <img src="images/burger.svg" alt="" />
         </button>
         <div class="search-container">
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" id="search-input" />
             <button>
                 <img src="images/search.svg" alt="" />
             </button>
+            <div class="absolute top-[2.3rem] left-0 w-[15rem] bg-white min-h-10 max-h-52 rounded-md hidden flex-col py-3 px-2 gap-2 overflow-y-auto overflow-x-hidden shadow-md" id="search-result-container">
+            </div>
         </div>
     </div>
     <div class="right-nav">
@@ -182,8 +184,8 @@ include('./includes/connection.php');
                     <img class=" arrow" src="images/arrow.svg" alt=">" />
                 </button>
                 <div class="dropdown-menu">
-                    <a class="<?= str_contains($active, "staff") ? "active" : "" ?>" href="department_staff.php">Employee</a>
-                    <a class="<?= str_contains($active, "faculty") ? "active" : "" ?>" href="department_faculty.php">Faculty</a>
+                    <a class="<?= str_contains($active, "department staff") ? "active" : "" ?>" href="department_staff.php">Employee</a>
+                    <a class="<?= str_contains($active, "department faculty") ? "active" : "" ?>" href="department_faculty.php">Faculty</a>
                     <a class="<?= str_contains($active, "notification") ? "active" : "" ?>" href="./notifications.php">Notifications</a>
                 </div>
             </li>
