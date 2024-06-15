@@ -1,6 +1,7 @@
 <?php
 
 include('includes/connection.php');
+include('includes/update_status.php');
 session_name('adminSession');
 session_start();
 
@@ -19,6 +20,7 @@ $breadcrumbs = [
     'Home' => '/hrms/admin/',
     'Dashboard' => '#'
 ];
+
 
 ?>
 <!DOCTYPE html>

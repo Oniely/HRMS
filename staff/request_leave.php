@@ -96,6 +96,7 @@ $breadcrumbs = [
               $inputsDisabled = $hasPendingRequest ? 'disabled' : '';
 
               ?>
+              
               <form class="f-container" method="post" enctype="multipart/form-data">
                      <div class="f-section">
                             <?php
