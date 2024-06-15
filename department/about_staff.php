@@ -196,19 +196,19 @@ $breadcrumbs = [
                     </div>
                 </div>
                 <div class="info">
-                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                    <div class="flex-1 w-full  overflow-hidden text-ellipsis">
                         <h3>Fullname</h3>
                         <?php echo "<p>$fname $lname</p>"; ?>
                     </div>
-                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                    <div class="flex-1 w-full  overflow-hidden text-ellipsis">
                         <h3>Mobile</h3>
                         <?php echo "<p>$contact_num</p>"; ?>
                     </div>
-                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                    <div class="flex-1 w-full  overflow-hidden text-ellipsis">
                         <h3>Email</h3>
                         <?php echo "<p>$email</p>"; ?>
                     </div>
-                    <div class="flex-1 w-1/4 overflow-hidden text-ellipsis">
+                    <div class="flex-1 w-full overflow-hidden text-ellipsis">
                         <h3>Location</h3>
                         <?php echo "<p>$permanent_address</p>"; ?>
                     </div>
