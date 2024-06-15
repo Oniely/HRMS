@@ -323,6 +323,18 @@
   cursor: pointer;
 }
 
+.search-result-link {
+  flex: 1;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 14px;
+  padding: 3px;
+}
+
+.search-result-link:hover {
+  color: #4763ca;
+}
+
 .navbar .right-nav {
   display: flex;
   justify-content: center;

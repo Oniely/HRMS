@@ -49,12 +49,6 @@ include('./includes/connection.php');
         <button id="burger" class="burger">
             <img src="images/burger.svg" alt="" />
         </button>
-        <div class="search-container">
-            <input type="text" placeholder="Search" />
-            <button>
-                <img src="images/search.svg" alt="" />
-            </button>
-        </div>
     </div>
     <div class="right-nav">
         <a class="notification-btn" href="./notifications.php">
@@ -134,14 +128,7 @@ include('./includes/connection.php');
             ?>
         </div>
 
-        <div class="m-search-container">
-            <input type="text" placeholder="Search" />
-            <button>
-                <img src="images/search.svg" alt="" />
-            </button>
-        </div>
-
-        <div class="m-profile" id="profile">
+        <div class="m-profile mt-10" id="profile">
             <div class="profile-img-container">
                 <a href="index.php"><img src="images/1.svg" alt="icon" /></a>
             </div>

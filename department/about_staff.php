@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
 }
 
 require_once './includes/query.php';
-$active = "about staff";
+$active = "data about department staff";
 $breadcrumbs = [
     "Home" => "/hrms/department/",
     "Staff" => "/hrms/department/department_staff.php",

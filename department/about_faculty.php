@@ -82,7 +82,7 @@ if (isset($_GET['faculty_id'])) {
     }
 }
 
-$active = "about faculty";
+$active = "data about department faculty";
 $breadcrumbs = [
     "Home" => "/hrms/department/",
     "Faculty" => "/hrms/department/department_faculty.php",
