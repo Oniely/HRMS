@@ -14,6 +14,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
+    $profile_photo = $_SESSION['profile_photo'] ?: "";
 }
 
 $privilage = $_SESSION['admin_privilage'] ?: "";
@@ -94,7 +95,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
         <button class="profile-btn">
             <div class="profile-img-container">
-                <img src="images/profile.svg" alt="" />
+                <img src="<?= $profile_photo ?? "images/profile.svg" ?>" alt="" class="object-contain object-center rounded-full" />
             </div>
             <span> <?= @$admin_fname ?? "ADMIN" ?> </span>
             <!-- Popup Menu -->
@@ -152,7 +153,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
             </a>
         </div>
         <div class="mnav-search-container">
-            <button id="mnav-search-btn">
+            <button id="mnav-search-btn" class="z-50">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFFFFF">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
@@ -161,7 +162,6 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
             <div class="absolute top-[4rem] left-0 right-0 hidden flex-col" id="mnav-form-container">
                 <input class="py-4 px-5 outline-none border-b z-10" type="text" id="mnav-search-input" placeholder="Search your employees here..." />
                 <div class="bg-white w-full min-h-[4rem] max-h-[30rem] overflow-y-auto overflow-x-hidden py-4 px-5 hidden flex-col border-b border-b-neutral-600 gap-4" id="mnav-search-result">
-                    <a href="#" class="mnav-search-result-link">Aiah Mariah Careh - 20202</a>
                 </div>
             </div>
         </div>
@@ -196,7 +196,9 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
         <div class="m-profile mt-10" id="profile">
             <div class="profile-img-container">
-                <a href="index.php"><img src="images/1.svg" alt="icon" /></a>
+                <a href="index.php">
+                    <img src="<?= $profile_photo ?? "images/1.svg" ?>" alt="icon" class="object-cover object-center" />
+                </a>
             </div>
             <div class="profile-info">
                 <span> <?= @$admin_fname . " " . $admin_lname ?? "ADMIN" ?> </span>
@@ -316,9 +318,9 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
 <div class="m-top">
     <button class="m-profile-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
-            <path d="M 187.496094 242.777344 C 139.324219 242.777344 100.132812 203.585938 100.132812 155.410156 C 100.132812 107.238281 139.324219 68.046875 187.496094 68.046875 C 235.667969 68.046875 274.863281 107.238281 274.863281 155.410156 C 274.863281 203.585938 235.667969 242.777344 187.496094 242.777344 Z M 187.496094 80.078125 C 145.957031 80.078125 112.164062 113.871094 112.164062 155.410156 C 112.164062 196.949219 145.957031 230.746094 187.496094 230.746094 C 229.035156 230.746094 262.828125 196.949219 262.828125 155.410156 C 262.828125 113.871094 229.035156 80.078125 187.496094 80.078125 Z M 320.078125 54.917969 C 284.664062 19.503906 237.578125 0 187.496094 0 C 137.414062 0 90.328125 19.503906 54.917969 54.917969 C 19.503906 90.328125 0 137.414062 0 187.496094 C 0 237.578125 19.503906 284.664062 54.917969 320.078125 C 90.328125 355.492188 137.414062 374.992188 187.496094 374.992188 C 237.578125 374.992188 284.664062 355.492188 320.078125 320.078125 C 355.492188 284.664062 374.992188 237.578125 374.992188 187.496094 C 374.992188 137.414062 355.492188 90.328125 320.078125 54.917969 Z M 63.425781 63.425781 C 96.566406 30.285156 140.628906 12.03125 187.496094 12.03125 C 234.363281 12.03125 278.429688 30.285156 311.570312 63.425781 C 344.710938 96.566406 362.960938 140.628906 362.960938 187.496094 C 362.960938 226.457031 350.335938 263.476562 327.042969 293.894531 C 308.503906 267.976562 278.902344 252.660156 246.753906 252.660156 L 128.238281 252.660156 C 96.089844 252.660156 66.488281 267.976562 47.949219 293.894531 C 24.65625 263.472656 12.03125 226.457031 12.03125 187.496094 C 12.03125 140.628906 30.285156 96.566406 63.425781 63.425781 Z M 187.496094 362.960938 C 140.628906 362.960938 96.566406 344.710938 63.425781 311.570312 C 60.824219 308.96875 58.324219 306.289062 55.90625 303.558594 C 72.027344 279.191406 98.925781 264.691406 128.238281 264.691406 L 246.753906 264.691406 C 276.066406 264.691406 302.964844 279.191406 319.085938 303.558594 C 316.671875 306.289062 314.171875 308.96875 311.570312 311.570312 C 278.429688 344.710938 234.363281 362.960938 187.496094 362.960938 Z M 187.496094 362.960938 " fill-opacity="1" fill-rule="nonzero" />
-        </svg>
+
+        <img src="images/profile-black.svg" class="object-contain size-8 rounded-full" /> 
+
         <div class="m-profile-menu">
             <a href="about_admin.php?admin_id">
                 <div>
