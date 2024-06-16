@@ -235,7 +235,7 @@ function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
 
     if ($isBalanceLeave) {
         // Fetch the current leave balances
-        $sqlSelectLeaveBalance = "SELECT $leave_balance_column FROM leave_balance_tbl WHERE employee_id = ?";
+        $sqlSelectLeaveBalance = "SELECT $leave_balance_column, balance FROM leave_balance_tbl WHERE employee_id = ?";
         $stmtSelectLeaveBalance = mysqli_prepare($conn, $sqlSelectLeaveBalance);
         if (!$stmtSelectLeaveBalance) {
             error_log("Error preparing statement for fetching leave balances: " . mysqli_error($conn));
@@ -252,22 +252,24 @@ function updateLeaveBalance($conn, $employee_id, $leave_type, $requested_days)
         }
 
         $leave_balance = $row[$leave_balance_column];
+        $balance = $row['balance'];
 
         // Update the leave balance based on the leave type
         if ($leave_balance >= $requested_days) {
             $leave_balance -= $requested_days;
+            $balance -= $requested_days;
         } else {
             return false;
         }
 
         // Update the leave balances in the database
-        $sqlUpdateLeaveBalance = "UPDATE leave_balance_tbl SET $leave_balance_column = ? WHERE employee_id = ?";
+        $sqlUpdateLeaveBalance = "UPDATE leave_balance_tbl SET $leave_balance_column = ?, balance = ? WHERE employee_id = ?";
         $stmtUpdateLeaveBalance = mysqli_prepare($conn, $sqlUpdateLeaveBalance);
         if (!$stmtUpdateLeaveBalance) {
             error_log("Error preparing statement for updating leave balance: " . mysqli_error($conn));
             return false;
         }
-        mysqli_stmt_bind_param($stmtUpdateLeaveBalance, "ii", $leave_balance, $employee_id);
+        mysqli_stmt_bind_param($stmtUpdateLeaveBalance, "iii", $leave_balance, $balance, $employee_id);
         $resultUpdateLeaveBalance = mysqli_stmt_execute($stmtUpdateLeaveBalance);
     } else {
         // Fetch the current leave balance for the non-balance affecting leave types

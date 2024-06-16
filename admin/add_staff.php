@@ -168,7 +168,7 @@ if (isset($_POST['add']) && $_SERVER['REQUEST_METHOD'] === "POST") {
               $leave_balance_array = [
                      'employee_id' => $form['employee_id'],
                      'sick_leave' => $sick_leave_balance,
-                     'vacational_leave' => $unpaid_leave_balance,
+                     'vacational_leave' => $vacational_leave_balance,
                      'balance' => $total_balance,
               ];
               insertDataColumns($conn, 'leave_balance_tbl', $leave_balance_array);

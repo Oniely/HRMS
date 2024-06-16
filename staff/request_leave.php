@@ -96,8 +96,8 @@ $breadcrumbs = [
               $inputsDisabled = $hasPendingRequest ? 'disabled' : '';
 
               ?>
-              
-              <form class="f-container" method="post" enctype="multipart/form-data">
+
+              <form class="f-container" id="leaveForm" method="post" enctype="multipart/form-data">
                      <div class="f-section">
                             <?php
                             if ($hasPendingRequest) {
@@ -123,11 +123,14 @@ $breadcrumbs = [
                                           <input type="date" name="from_date" id="from_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " require <?php echo $inputsDisabled ?> />
                                           <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
                                                  Start Date</label>
+                                          <div id="dateWarningMessage" style="display:none; color: red;"></div>
                                    </div>
                                    <div class="relative z-0">
                                           <input type="date" name="to_date" id="to_date" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder=" " require <?php echo $inputsDisabled ?> />
                                           <label for="fname" class="absolute text-[#9d9d9d] font-medium duration-300 transform -translate-y-6 scale-75 -top-3 -left-4 -z-10 origin-[0] peer-focus:-left-4 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-95 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
                                                  End Date</label>
+                                          <div id="dateWarningMessage" style="display:none; color: red;"></div>
+
                                    </div>
                                    <div class="relative z-0">
                                           <select name="status" id="status" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] appearance-none text-black focus:outline-none focus:ring-0 peer" placeholder="Type of Laeve" <?php echo $inputsDisabled ?>>
@@ -197,18 +200,44 @@ $breadcrumbs = [
 
                                                  if ($initialLeaveBalanceResult && mysqli_num_rows($initialLeaveBalanceResult) > 0) {
                                                         $row = mysqli_fetch_assoc($initialLeaveBalanceResult);
-                                                        $initialAnnualLeaveBalance = $row['annual_leave'];
+                                                        $initialSickLeaveBalance = $row['sick_leave'];
                                                         $initialVacationalLeaveBalance = $row['vacational_leave'];
-                                                        $initialBalance = $row['unpaid_leave'];
+                                                        $initialBereavementLeaveBalance = $row['bereavement_leave'];
+                                                        $initialMarriageLeaveBalance = $row['marriage_leave'];
+                                                        $initialOtherLeaveBalance = $row['other_leave'];
+                                                        $initialBalance = $row['balance'];
                                                  }
 
-                                                 $balanceDays = $initialBalance - $totalDaysLeave;
+                                                 $leaveType = $_POST['status'];
+                                                 $newBalance = 0;
+
+
+                                                 switch ($leaveType) {
+                                                        case 'Sick Leave':
+                                                               $newBalance = $initialSickLeaveBalance - $totalDaysLeave;
+                                                               break;
+                                                        case 'Vacational Leave':
+                                                               $newBalance = $initialVacationalLeaveBalance -= $totalDaysLeave;
+                                                               break;
+                                                        case 'Bereavement Leave':
+                                                               $newBalance = $initialBereavementLeaveBalance += $totalDaysLeave;
+                                                               break;
+                                                        case 'Marriage Leave':
+                                                               $newBalance = $initialMarriageLeaveBalance += $totalDaysLeave;
+                                                               break;
+                                                        case 'Other Leave':
+                                                               $newBalance = $initialOtherLeaveBalance += $totalDaysLeave;
+                                                               break;
+                                                        default:
+                                                               break;
+                                                 }
+
                                                  $insertData = [
                                                         'leave_id' => $leave_id,
                                                         'employee_id' => $employee_id,
                                                         'employee_name' => $name,
                                                         'department' => $department,
-                                                        'leave_type' => $_POST['status'],
+                                                        'leave_type' => $leaveType,
                                                         'date_applied' => date('Y-m-d'),
                                                         'reason' => $_POST['reason'],
                                                         'from_date' => $fromDate,
@@ -217,7 +246,7 @@ $breadcrumbs = [
                                                         'application_status' => 'PENDING',
                                                         'destination' => $_POST['destination'],
                                                         'accompany_with' => $_POST['accompany'],
-                                                        'balance_days' => $balanceDays
+                                                        'balance_days' => $newBalance
                                                  ];
 
                                                  insertLeaveEmployee($conn, 'leave_tbl', $insertData);
@@ -227,7 +256,6 @@ $breadcrumbs = [
               </form>
        </section>
 </body>
-<?php include "includes/form_reset.php" ?>
 
 </html>
 <script>
@@ -239,9 +267,64 @@ $breadcrumbs = [
               var endDateInput = document.getElementById('to_date');
               var totalDaysInput = document.getElementById('total_days');
               var warningMessage = document.getElementById('warningMessage');
+              var dateWarningMessage = document.getElementById('dateWarningMessage');
               var pendingMessage = document.getElementById('pendingMessage');
               var submitBtn = document.getElementById('submitBtn');
               const otherTextInput = document.getElementById('other-text');
+
+              function checkAvailability() {
+                     var employee_id = $('#employee_id').val();
+                     var from_date = $('#from_date').val();
+                     var to_date = $('#to_date').val();
+
+                     if (from_date && to_date) {
+                            $.ajax({
+                                   url: 'includes/check_availability.php',
+                                   method: 'POST',
+                                   data: {
+                                          check_dates: true,
+                                          employee_id: employee_id,
+                                          from_date: from_date,
+                                          to_date: to_date
+                                   },
+                                   success: function(response) {
+                                          try {
+                                                 var data = JSON.parse(response);
+                                                 if (Array.isArray(data)) {
+                                                        var overlap = data.some(function(leave) {
+                                                               var leaveFrom = new Date(leave.from_date);
+                                                               var leaveTo = new Date(leave.to_date);
+                                                               var selectedFrom = new Date(from_date);
+                                                               var selectedTo = new Date(to_date);
+                                                               return (selectedFrom >= leaveFrom && selectedFrom <= leaveTo) ||
+                                                                      (selectedTo >= leaveFrom && selectedTo <= leaveTo) ||
+                                                                      (selectedFrom <= leaveFrom && selectedTo >= leaveTo);
+                                                        });
+
+                                                        if (overlap) {
+                                                               $('#dateWarningMessage').text('Selected dates overlap with a previous leave request.').show();
+                                                               document.getElementById('submit').disabled = true;
+                                                        } else {
+                                                               $('#dateWarningMessage').hide();
+                                                               document.getElementById('submit').disabled = false;
+                                                        }
+                                                 } else {
+                                                        $('#dateWarningMessage').hide();
+                                                 }
+                                          } catch (e) {
+                                                 console.error("Error parsing response:", e);
+                                                 $('#dateWarningMessage').hide();
+                                          }
+                                   },
+                                   error: function(xhr, status, error) {
+                                          console.error("AJAX Error:", status, error);
+                                   }
+                            });
+                     }
+              }
+
+              $('#from_date, #to_date').change(checkAvailability);
+
 
               leaveTypeInput.addEventListener('change', function() {
                      if (leaveTypeInput.value === 'Other Leave') {
@@ -379,5 +462,3 @@ $breadcrumbs = [
               printForm.submit();
        }
 </script>
-
-              

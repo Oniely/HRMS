@@ -13,7 +13,7 @@ session_start();
                 } else {
                     $employee_id = $_SESSION['employee_id'];
 
-                    $sql = "SELECT * FROM leave_tbl WHERE employee_id = ?";
+                    $sql = "SELECT * FROM leave_tbl WHERE employee_id = ? ORDER BY date_applied DESC";
                     $stmt = mysqli_prepare($conn, $sql);
                     if (!$stmt) {
                         echo "<option>Error: Failed to prepare SQL statement</option>";
@@ -49,9 +49,6 @@ session_start();
                 }
                 ?>
             </select>
-            <div class="print-btn">
-                <button>Print</button>
-            </div>
         </div>
     </div>
 
