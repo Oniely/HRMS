@@ -41,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if ($photo_path && $photo_path !== "") {
         $sql = "UPDATE admin_tbl SET username = '$username', password = '$password', fname = '$fname', lname = '$lname', contact = '$contact', photo_path = '$photo_path' WHERE admin_id = $admin_id";
+
+        $_SESSION['profile_photo'] = $photo_path;
     } else {
         $sql = "UPDATE admin_tbl SET username = '$username', password = '$password', fname = '$fname', lname = '$lname', contact = '$contact' WHERE admin_id = $admin_id";
     }

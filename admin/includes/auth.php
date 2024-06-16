@@ -27,6 +27,7 @@ function loginAuth($username, $password)
             $_SESSION['lname'] = $row['lname'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['admin_privilage'] = $row['privilage'];
+            $_SESSION['profile_photo'] = $row['photo_path'];
             return true;
         } else {
             return false;

@@ -96,6 +96,10 @@
   padding: 1rem;
   border: 1px solid black;
   border-radius: 15%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile .profile-img img {
@@ -326,6 +330,16 @@
 }
 
 .search-result-link:hover {
+  color: #4763ca;
+}
+
+.mnav-search-result-link {
+  text-decoration: underline;
+  font-size: 17px;
+  padding: 3px;
+}
+
+.mnav-search-result-link:hover {
   color: #4763ca;
 }
 
@@ -613,6 +627,29 @@
     z-index: 1000;
   }
 
+  .m-header .m-left-nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mnav-search-container {
+    display: flex;
+
+    width: 45px;
+    height: 100%;
+  }
+
+  .mnav-search-container button  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 8px;
+  }
+
   .m-header .m-logo {
     width: 45px;
     height: 100%;
@@ -773,6 +810,10 @@
     padding: 1rem;
     border: 1px solid black;
     border-radius: 15%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .m-profile .profile-img img {
@@ -924,15 +965,15 @@
     color: black;
   }
 
- f .m-profile-menu div img {
+  .m-profile-menu div img {
     width: 25px;
     height: 25px;
     object-fit: cover;
   }
 
   .m-profile-menu div span {
-    font-size: 1.1rem;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 400;
 
     color: #101010;
   }
