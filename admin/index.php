@@ -108,97 +108,106 @@ $breadcrumbs = [
         </div>
         <div class="m-content">
             <div class="dashboard-boxes">
-                <div class="box employee">
-                    <div class="box-img">
-                        <img src="images/box (1).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Employee</h1>
-                        <?php
-                        $sql1 = "SELECT COUNT(*) as count FROM employee_tbl";
-                        $sql2 = "SELECT COUNT(*) as count FROM faculty_tbl";
-                        $result1 = mysqli_query($conn, $sql1);
-                        $result2 = mysqli_query($conn, $sql2);
-                        $row1 = mysqli_fetch_assoc($result1);
-                        $row2 = mysqli_fetch_assoc($result2);
-                        $total = $row1['count'] + $row2['count'];
-                        echo '<h2>' . $total . '</h2>';
-                        ?>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-                <div class="box staff">
-                    <div class="box-img">
-                        <img src="images/box (2).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Staff</h1>
-                        <?php
-                        $sql = "SELECT COUNT(*) as count FROM employee_tbl";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        echo '<h2>' . $row['count'] . '</h2>';
-                        ?>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-                <div class="box faculty">
-                    <div class="box-img">
-                        <img src="images/box (3).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Faculty</h1>
-                        <?php
-                        $sql = "SELECT COUNT(*) as count FROM faculty_tbl";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        echo '<h2>' . $row['count'] . '</h2>';
-                        ?>
-                        <div class="percentage">
-                            <div></div>
-                        </div>
-                        <h3>20% Increase in 1 Year</h3>
-                    </div>
-                </div>
-                <div class="box fulltime">
-                    <div class="box-img">
-                        <img src="images/box (4).svg" alt="" />
-                    </div>
-                    <div class="box-info">
-                        <h1>Total Leave</h1>
 
-                        <?php
-                        $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED' and to_date >= ?";
-                        $stmt = mysqli_prepare($conn, $sql);
-                        if ($stmt) {
-                            mysqli_stmt_bind_param($stmt, "s", $currentDate);
-                            mysqli_stmt_execute($stmt);
-                            $result = mysqli_stmt_get_result($stmt);
+                <a href="#" class="box-link">
+                    <div class="box employee">
+                        <div class="box-img">
+                            <img src="images/box (1).svg" alt="" />
+                        </div>
+                        <div class="box-info">
+                            <h1>Total Employee</h1>
+                            <?php
+                            $sql1 = "SELECT COUNT(*) as count FROM employee_tbl";
+                            $sql2 = "SELECT COUNT(*) as count FROM faculty_tbl";
+                            $result1 = mysqli_query($conn, $sql1);
+                            $result2 = mysqli_query($conn, $sql2);
+                            $row1 = mysqli_fetch_assoc($result1);
+                            $row2 = mysqli_fetch_assoc($result2);
+                            $total = $row1['count'] + $row2['count'];
+                            echo '<h2>' . $total . '</h2>';
+                            ?>
+                            <div class="percentage">
+                                <div></div>
+                            </div>
+                            <h3>20% Increase in 1 Year</h3>
+                        </div>
+                    </div>
+                </a>
 
-                            if ($row = mysqli_fetch_assoc($result)) {
-                                echo '<h2>' . $row['count'] . '</h2>';
+                <a href="all_staff.php" class="box-link">
+                    <div class="box staff">
+                        <div class="box-img">
+                            <img src="images/box (2).svg" alt="" />
+                        </div>
+                        <div class="box-info">
+                            <h1>Total Staff</h1>
+                            <?php
+                            $sql = "SELECT COUNT(*) as count FROM employee_tbl";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($result);
+                            echo '<h2>' . $row['count'] . '</h2>';
+                            ?>
+                            <div class="percentage">
+                                <div></div>
+                            </div>
+                            <h3>20% Increase in 1 Year</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="all_faculty.php" class="box-link">
+                    <div class="box faculty">
+                        <div class="box-img">
+                            <img src="images/box (3).svg" alt="" />
+                        </div>
+                        <div class="box-info">
+                            <h1>Total Faculty</h1>
+                            <?php
+                            $sql = "SELECT COUNT(*) as count FROM faculty_tbl";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($result);
+                            echo '<h2>' . $row['count'] . '</h2>';
+                            ?>
+                            <div class="percentage">
+                                <div></div>
+                            </div>
+                            <h3>20% Increase in 1 Year</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="all_leave.php" class="box-link">
+                    <div class="box fulltime">
+                        <div class="box-img">
+                            <img src="images/box (4).svg" alt="" />
+                        </div>
+                        <div class="box-info">
+                            <h1>Total Leave</h1>
+                            <?php
+                            $sql = "SELECT COUNT(*) as count FROM leave_tbl WHERE application_status = 'APPROVED' and to_date >= ?";
+                            $stmt = mysqli_prepare($conn, $sql);
+                            if ($stmt) {
+                                mysqli_stmt_bind_param($stmt, "s", $currentDate);
+                                mysqli_stmt_execute($stmt);
+                                $result = mysqli_stmt_get_result($stmt);
+                                if ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<h2>' . $row['count'] . '</h2>';
+                                } else {
+                                    echo '<h2>0</h2>';
+                                }
+                                mysqli_stmt_close($stmt);
                             } else {
-                                echo '<h2>0</h2>';
+                                echo "Error in SQL statement: " . mysqli_error($conn);
                             }
-
-                            mysqli_stmt_close($stmt);
-                        } else {
-                            echo "Error in SQL statement: " . mysqli_error($conn);
-                        }
-
-                        ?>
-                        <div class="percentage">
-                            <div></div>
+                            ?>
+                            <div class="percentage">
+                                <div></div>
+                            </div>
+                            <h3>20% Increase in 1 Year</h3>
                         </div>
-                        <h3>20% Increase in 1 Year</h3>
                     </div>
-                </div>
+                </a>
+                
             </div>
         </div>
     </section>
