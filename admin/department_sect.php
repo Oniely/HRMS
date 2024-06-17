@@ -16,6 +16,11 @@ if (isset($_SESSION['admin_id'])) {
     $admin_lname = $_SESSION['lname'];
 }
 
+if ($_SESSION['admin_privilage'] !== "super_admin") {
+    header('location: index.php');
+    exit();
+}
+
 $sql = "SELECT * FROM department_tbl";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
