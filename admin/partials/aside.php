@@ -27,7 +27,7 @@ if (isset($_SESSION['admin_id'])) {
         <div class="profile" id="profile">
             <div class="profile-img-container">
                 <a href="/HRMS/admin/about_admin.php?admin_id">
-                    <img src="<?= $profile_photo ?? "images/1.svg" ?>" alt="icon" />
+                    <img src="images/1.svg" alt="icon" />
                 </a>
             </div>
             <div class="profile-info">

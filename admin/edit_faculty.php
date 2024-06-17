@@ -110,6 +110,7 @@ $breadcrumbs = [
                                    </div>
                                    <div class="relative z-0">
                                           <select type="text" name="department" id="department" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" " required value="<?php echo $department ?>">
+                                                 <option value="<?php echo $department ?>" selected hidden><?php echo $department ?></option>
                                                  <option value="SECSA">SECSA</option>
                                                  <option value="SEAS">SEAS</option>
                                                  <option value="SBA">SBA</option>
@@ -149,6 +150,7 @@ $breadcrumbs = [
                                    </div>
                                    <div class="relative z-0">
                                           <select type="text" name="sex" id="sex" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-[#9d9d9d] text-black focus:outline-none focus:ring-0 peer" placeholder=" " value="<?php echo $sex ?>">
+                                                 <option value="<?php echo $sex ?>" selected hidden><?php echo $sex ?></option>
                                                  <option value="Male">Male</option>
                                                  <option value="Female">Female</option>
                                                  <option value="Others">Others</option>

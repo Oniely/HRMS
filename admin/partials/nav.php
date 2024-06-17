@@ -95,7 +95,7 @@ $privilage = $_SESSION['admin_privilage'] ?: "";
 
         <button class="profile-btn">
             <div class="profile-img-container">
-                <img src="<?= $profile_photo ?? "images/profile.svg" ?>" alt="" class="object-contain object-center rounded-full" />
+                <img src= "images/profile.svg" alt="" class="object-contain object-center rounded-full" />
             </div>
             <span> <?= @$admin_fname ?? "ADMIN" ?> </span>
             <!-- Popup Menu -->

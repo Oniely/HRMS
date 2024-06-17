@@ -44,15 +44,16 @@ function updateEmployeeStatus($conn)
         $table_type = $row['table_type'];
         $from_date = $row['from_date'];
         $to_date = $row['to_date'];
+        $application_status = $row['application_status'];
 
-        if ($currentDate >= $from_date && $currentDate <= $to_date) {
+        if ($currentDate >= $from_date && $currentDate <= $to_date && $application_status == 'APPROVED') {
             // If the current date is within the leave period, set status to INACTIVE
             if ($table_type == 'employee') {
                 $updateSql = "UPDATE employee_tbl SET status = 'INACTIVE' WHERE employee_id = ?";
             } else {
                 $updateSql = "UPDATE faculty_tbl SET status = 'INACTIVE' WHERE faculty_id = ?";
             }
-        } elseif ($currentDate > $to_date) {
+        } elseif ($currentDate > $to_date && $application_status == 'APPROVED') {
             // If the current date is after the to_date, set status to ACTIVE
             if ($table_type == 'employee') {
                 $updateSql = "UPDATE employee_tbl SET status = 'ACTIVE' WHERE employee_id = ?";

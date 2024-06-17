@@ -103,7 +103,7 @@ $active = "about staff";
                         <select id="leave-history-select" class="leave-history-select" onchange="updateLeaveDetails()">
                             <option value="">Select Leave</option>
                             <?php
-                            $sql = "SELECT * FROM leave_tbl WHERE employee_id = $id";
+                            $sql = "SELECT * FROM leave_tbl WHERE employee_id = $id ORDER BY date_applied DESC";
                             $result = mysqli_query($conn, $sql);
 
                             if (!$result) {

@@ -201,7 +201,7 @@ body {
   color: #9d9d9d;
 }
 
-@media screen and (max-width: 786px){
+@media screen and (max-width: 786px) {
   .admin_info {
     flex-direction: column;
   }
@@ -339,6 +339,7 @@ body {
   inset: 0;
   backdrop-filter: blur(3px);
   z-index: 100;
+  padding: 1rem;
 
   display: none;
   align-items: center;
@@ -350,18 +351,36 @@ body {
 }
 
 .status-modal form {
-  width: 30rem;
-  height: 9rem;
+  width: 45rem;
+  height: 100%;
   background: white;
   border-radius: 1rem;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
 
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: center;
   gap: 1rem;
   border: 1px solid #101010;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.relative.z-0 {
+  position: relative;
+}
+
+.relative.z-0 label,
+.relative.z-0 input,
+.relative.z-0 select,
+.relative.z-0 textarea {
+  width: 100%;
+}
+
+#expandStatus {
+  display: none;
 }
 
 .status-modal form .status-header {
@@ -369,7 +388,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  flex: 1 1 0;
+  height: 3rem;
 }
 
 .status-modal form .status-header .close-btn {
@@ -387,11 +406,13 @@ body {
 }
 
 .status-modal form .status-input {
-  display: flex;
+  display: grid;
+  flex-direction: column;
   align-items: center;
   gap: 5px;
   flex: 1 1 0;
   width: 100%;
+  height: 5rem;
 }
 
 .status-modal form .status-input select {

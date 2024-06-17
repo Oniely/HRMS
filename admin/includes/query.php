@@ -48,6 +48,26 @@ function updateAdmin($conn, $table, $id, $newData)
     return $result;
 }
 
+function insertLeaveEmployee($conn, $table, $insertdata) {
+    $keys = implode(", ", array_keys($insertdata));
+    $placeholders = implode(", ", array_fill(0, count($insertdata), "?"));
+
+    $values = array_values($insertdata);
+
+    $stmt = $conn->prepare("INSERT INTO $table ($keys) VALUES ($placeholders)");
+    $stmt->bind_param(str_repeat("s", count($values)), ...$values);
+
+    $result = $stmt->execute();
+
+    $stmt->close();
+
+    if ($result) {
+        echo "<script>alert('Leave Applied')</script>";
+        echo '<script>window.location.href = window.location.href;</script>';
+    }
+
+    return $result;
+}
 function updateDataEmployee($conn, $id, $newData)
 {
     $setClause = "";
@@ -57,7 +77,6 @@ function updateDataEmployee($conn, $id, $newData)
 
     $setClause = rtrim($setClause, ', ');
     $sql = "UPDATE employee_tbl SET $setClause WHERE employee_id = $id";
-
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     return $result;
