@@ -14,7 +14,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
-    $profile_photo = $_SESSION['profile_photo'] ?: "";
+    $profile_photo = $_SESSION['profile_photo'];
 }
 
 $privilage = $_SESSION['admin_privilage'] ?: "";
