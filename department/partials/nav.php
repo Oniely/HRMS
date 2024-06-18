@@ -142,8 +142,8 @@ include('./includes/connection.php');
                 <a href="index.php"><img src="images/1.svg" alt="icon" /></a>
             </div>
             <div class="profile-info">
-                <h1>Hello World!</h1>
-                <h3>Administrator</h3>
+                <h1><?= $fname . " " . $lname ?></h1>
+                <h3><?= $position ?></h3>
             </div>
         </div>
 
