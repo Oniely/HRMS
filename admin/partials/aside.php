@@ -9,7 +9,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin_id = $_SESSION['admin_id'];
     $admin_fname = $_SESSION['fname'];
     $admin_lname = $_SESSION['lname'];
-    $profile_photo = $_SESSION['profile_photo'] ?: "";
+    $profile_photo = $_SESSION['profile_photo'];
 }
 
 ?>
@@ -27,7 +27,7 @@ if (isset($_SESSION['admin_id'])) {
         <div class="profile" id="profile">
             <div class="profile-img-container">
                 <a href="/HRMS/admin/about_admin.php?admin_id">
-                    <img src="images/1.svg" alt="icon" />
+                    <img src="<?= $profile_photo ?: 'images/1.svg' ?>" alt="profile icon" />
                 </a>
             </div>
             <div class="profile-info">
